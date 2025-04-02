@@ -7,7 +7,7 @@ export default function ContactPage() {
       <section className="w-full py-20 bg-gradient-to-r from-blue-800 to-blue-950 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">İletişim</h1>
+            <h1 className="text-5xl font-bold mb-6 text-white">İletişim</h1>
             <p className="text-xl">
               Dijital dönüşüm yolculuğunuza başlamak için bizimle iletişime geçin
             </p>

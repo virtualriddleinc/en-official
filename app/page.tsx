@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import KanbanBoard from './components/KanbanBoard';
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -66,22 +67,19 @@ export default function Home() {
                   </div>
 
                   {/* CTA Butonları */}
-                  <div className="flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start">
-                    <a href="/contact" 
-                      className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-[#0052CC] rounded-xl font-semibold hover:bg-white/90 transition-all w-full sm:w-auto justify-center text-lg">
-                      <span>Ücretsiz Keşif</span>
-                      <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </a>
-                    
-                    <a href="/about" 
-                      className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white/10 text-white rounded-xl font-medium hover:bg-white/20 transition-all w-full sm:w-auto justify-center backdrop-blur-sm text-lg">
-                      <span>Hakkımızda</span>
-                      <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </a>
+                  <div className="flex flex-col md:flex-row gap-4 mt-8">
+                    <Link
+                      href="/contact"
+                      className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-xl font-semibold transition-all text-center"
+                    >
+                      İletişime Geç
+                    </Link>
+                    <Link
+                      href="/free-discovery"
+                      className="bg-transparent border border-white/30 backdrop-blur-sm text-white hover:bg-white/10 px-8 py-4 rounded-xl font-semibold transition-all text-center"
+                    >
+                      Ücretsiz Keşif
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -286,7 +284,7 @@ export default function Home() {
                   </ul>
                   <div className="bg-[#0052CC]/5 rounded-xl p-4 mt-4 border border-[#0052CC]/10">
                     <p className="text-sm text-gray-600">
-                      <span className="font-semibold">Yeni:</span> Atlassian metodolojileri ile proje yönetimi
+                      Atlassian metodolojileri ile proje yönetimi
                     </p>
                   </div>
                 </div>

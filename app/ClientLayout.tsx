@@ -270,6 +270,19 @@ export default function ClientLayout({
                           <p className="text-[14px] text-gray-300 leading-snug">Atlassian ürün eğitimleri</p>
                         </div>
                       </Link>
+
+                      <Link href="/free-discovery" className="group/item flex items-start p-2.5 rounded-2xl hover:bg-white/5 transition-all">
+                        <div className="shrink-0 w-11 h-11 bg-gradient-to-br from-teal-500/20 to-teal-600/20 rounded-2xl flex items-center justify-center border border-teal-500/20 group-hover/item:scale-95 transition-transform">
+                          <svg className="w-6 h-6 text-teal-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.98 10.79V14.79C17.98 15.05 17.97 15.3 17.94 15.54C17.71 18.24 16.12 19.58 13.19 19.58H12.79C12.54 19.58 12.3 19.7 12.15 19.9L10.95 21.5C10.42 22.21 9.56 22.21 9.03 21.5L7.82999 19.9C7.69999 19.73 7.41 19.58 7.19 19.58H6.79001C3.60001 19.58 2 18.79 2 14.79V10.79C2 7.86001 3.35001 6.27001 6.04001 6.04001C6.28001 6.01001 6.53001 6 6.79001 6H13.19C16.38 6 17.98 7.60001 17.98 10.79Z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M21.98 6.79001V10.79C21.98 13.73 20.63 15.31 17.94 15.54C17.97 15.3 17.98 15.05 17.98 14.79V10.79C17.98 7.60001 16.38 6 13.19 6H6.79004C6.53004 6 6.28004 6.01001 6.04004 6.04001C6.27004 3.35001 7.86004 2 10.79 2H17.19C20.38 2 21.98 3.60001 21.98 6.79001Z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                        <div className="ml-3">
+                          <h5 className="font-semibold text-white group-hover/item:text-teal-300 text-[16px] mb-1 transition-colors">Ücretsiz Keşif</h5>
+                          <p className="text-[14px] text-gray-300 leading-snug">Dijital dönüşüm ön analizi</p>
+                        </div>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -370,36 +383,40 @@ export default function ClientLayout({
 
               {/* Mobile Menu Items */}
               <div className="px-2 space-y-4">
-                <div className="space-y-1">
-                  <h5 className="px-3 text-xs font-medium text-gray-400">Planlama & Takip</h5>
-                  <Link href="/products/jira-software" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50">
-                    <img src="/icons/jira-software.svg" alt="Jira Software" className="w-6 h-6 mr-2" />
+                <Link href="/about" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50">
+                  Hakkımızda
+                </Link>
+                
+                <div className="space-y-2">
+                  <p className="px-3 text-sm font-semibold text-gray-900">Ürünler</p>
+                  <Link href="/products/jira-software" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50 ml-4">
                     Jira Software
                   </Link>
-                  <Link href="/products/jira-service-management" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50">
-                    <img src="/icons/jira-service-management.svg" alt="Jira Service Management" className="w-6 h-6 mr-2" />
+                  <Link href="/products/jira-service-management" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50 ml-4">
                     Jira Service Management
                   </Link>
-                  <Link href="/products/jira-work-management" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50">
-                    <img src="/icons/jira-work-management.svg" alt="Jira Work Management" className="w-6 h-6 mr-2" />
-                    Jira Work Management
+                  <Link href="/products/confluence" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50 ml-4">
+                    Confluence
+                  </Link>
+                  <Link href="/products/bitbucket" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50 ml-4">
+                    Bitbucket
                   </Link>
                 </div>
-                <div className="mt-6 space-y-4">
-                  <div>
-                    <h4 className="px-3 text-sm font-semibold text-gray-400">İş Birliği & Güvenlik</h4>
-                    <Link href="/products/confluence" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50">
-                      <img src="/icons/confluence.svg" alt="Confluence" className="w-6 h-6 mr-2" />
-                      Confluence
-                    </Link>
-                    <div className="mt-3 border-l-2 border-gray-100 ml-4">
-                      <h5 className="px-3 text-sm font-medium text-gray-400">Kod Yönetimi</h5>
-                      <Link href="/products/bitbucket" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50">
-                        <img src="/icons/bitbucket.svg" alt="Bitbucket" className="w-6 h-6 mr-2" />
-                        Bitbucket
-                      </Link>
-                    </div>
-                  </div>
+                
+                <div className="space-y-2">
+                  <p className="px-3 text-sm font-semibold text-gray-900">Çözümler</p>
+                  <Link href="/solutions/consulting" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50 ml-4">
+                    Atlassian Danışmanlığı
+                  </Link>
+                  <Link href="/solutions/cloud-migration" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50 ml-4">
+                    Cloud Migration
+                  </Link>
+                  <Link href="/solutions/training" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50 ml-4">
+                    Eğitim & Sertifikasyon
+                  </Link>
+                  <Link href="/free-discovery" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50 ml-4">
+                    Ücretsiz Keşif
+                  </Link>
                 </div>
               </div>
             </div>
@@ -456,6 +473,9 @@ export default function ClientLayout({
                 <li>
                   <Link href="/solutions/training" className="text-gray-400 hover:text-white transition-colors">Eğitim & Sertifikasyon</Link>
                 </li>
+                <li>
+                  <Link href="/free-discovery" className="text-gray-400 hover:text-white transition-colors">Ücretsiz Keşif</Link>
+                </li>
               </ul>
             </div>
 
@@ -465,6 +485,9 @@ export default function ClientLayout({
               <ul className="space-y-4">
                 <li>
                   <Link href="/about" className="text-gray-400 hover:text-white transition-colors">Hakkımızda</Link>
+                </li>
+                <li>
+                  <Link href="/services" className="text-gray-400 hover:text-white transition-colors">Hizmetler</Link>
                 </li>
                 <li>
                   <Link href="/careers" className="text-gray-400 hover:text-white transition-colors">Kariyer</Link>

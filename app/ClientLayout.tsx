@@ -431,7 +431,7 @@ export default function ClientLayout({
         <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
             {/* Logo ve Sosyal Medya */}
-            <div className="md:col-span-4 space-y-6">
+            <div className="md:col-span-3 space-y-6">
               <Link href="/" className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-white/10 backdrop-blur-lg rounded-2xl flex items-center justify-center">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -460,6 +460,25 @@ export default function ClientLayout({
               </div>
             </div>
 
+            {/* Ürünler */}
+            <div className="md:col-span-2">
+              <h3 className="text-lg font-semibold text-white mb-6">Ürünler</h3>
+              <ul className="space-y-4">
+                <li>
+                  <Link href="/products/jira-software" className="text-gray-400 hover:text-white transition-colors">Jira Software</Link>
+                </li>
+                <li>
+                  <Link href="/products/confluence" className="text-gray-400 hover:text-white transition-colors">Confluence</Link>
+                </li>
+                <li>
+                  <Link href="/products/bitbucket" className="text-gray-400 hover:text-white transition-colors">Bitbucket</Link>
+                </li>
+                <li>
+                  <Link href="/products/jira-service-management" className="text-gray-400 hover:text-white transition-colors">Jira Service Management</Link>
+                </li>
+              </ul>
+            </div>
+            
             {/* Çözümler */}
             <div className="md:col-span-2">
               <h3 className="text-lg font-semibold text-white mb-6">Çözümler</h3>
@@ -502,7 +521,7 @@ export default function ClientLayout({
             </div>
 
             {/* İletişim */}
-            <div className="md:col-span-4">
+            <div className="md:col-span-3">
               <h3 className="text-lg font-semibold text-white mb-6">Bize Ulaşın</h3>
               <div className="space-y-4">
                 <p className="text-gray-400">Sorularınız için bize ulaşın, size yardımcı olmaktan mutluluk duyarız.</p>

@@ -4,34 +4,19 @@ export default function PrivacyPage() {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-800 via-blue-700 to-blue-600 py-24 relative overflow-hidden">
+      <section className="w-full py-20 bg-gradient-to-r from-blue-800 to-blue-950 text-white relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute h-full w-full bg-[url('/noise.png')] opacity-5"></div>
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-radial from-blue-400/20 via-transparent to-transparent opacity-40"></div>
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-radial from-blue-300/20 via-transparent to-transparent opacity-30"></div>
+          <div className="absolute -top-1/4 -right-1/4 w-[800px] h-[800px] bg-gradient-radial from-blue-400/20 via-transparent to-transparent opacity-50"></div>
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-radial from-blue-600/20 via-transparent to-transparent opacity-30"></div>
         </div>
-        <div className="container mx-auto px-6 relative">
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Gizlilik Politikası
-            </h1>
-            <p className="text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">Gizlilik Politikası</h1>
+            <p className="text-xl md:text-2xl text-blue-100">
               Kişisel verilerinizin korunması ve güvenliği önceliğimizdir. Bu politika, verilerinizin nasıl toplandığını, kullanıldığını ve korunduğunu açıklar.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Link
-                href="#kisisel-veriler"
-                className="px-6 py-3 bg-white text-blue-600 font-medium rounded-xl hover:bg-white/90 transition-colors shadow-lg"
-              >
-                Kişisel Veriler
-              </Link>
-              <Link
-                href="#veri-guvenligi"
-                className="px-6 py-3 bg-white/10 text-white font-medium rounded-xl border border-white/30 backdrop-blur-sm hover:bg-white/20 transition-colors"
-              >
-                Veri Güvenliği
-              </Link>
-            </div>
           </div>
         </div>
       </section>
@@ -1019,8 +1004,9 @@ export default function PrivacyPage() {
                   <div className="flex items-center mb-8">
                     <div className="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center mr-5">
                       <svg className="w-7 h-7 text-red-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M12 8.95V12.55" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M12 16.5V16.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M9.05 3.32L3.67 13.5C2.01 16.5 4.17 20 7.59 20H16.41C19.83 20 21.99 16.5 20.33 13.5L14.95 3.32C13.18 0.22 10.83 0.22 9.05 3.32Z" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </div>
                     <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Veri İhlali Bildirimi</h2>
@@ -1028,23 +1014,182 @@ export default function PrivacyPage() {
                   
                   <div className="prose prose-lg max-w-none text-gray-700">
                     <p className="leading-relaxed text-lg">
-                      Virtual Riddle olarak, veri ihlali bildirimi için aşağıdaki adımları izliyoruz:
+                      Virtual Riddle olarak, kişisel verilerinizin güvenliği bizim için son derece önemlidir. 
+                      Olası bir veri ihlali durumunda, şeffaflık ilkemiz doğrultusunda sizleri bilgilendirmek ve 
+                      gerekli önlemleri almak için aşağıdaki süreci takip etmekteyiz.
                     </p>
                     
-                    <ol className="list-decimal pl-6 space-y-3">
-                      <li>
-                        Veri ihlali olayının meydana geldiğini anlayın.
-                      </li>
-                      <li>
-                        Veri ihlali hakkında bilgi toplamak için ilgili kurum veya yetkili kişilere başvurun.
-                      </li>
-                      <li>
-                        Veri ihlali hakkında bilgi topladıktan sonra, veri ihlali bildirimi için ilgili mevzuata uygun şekilde hareket etmek için gerekli adımları atın.
-                      </li>
-                      <li>
-                        Veri ihlali hakkında bilgi topladıktan sonra, veri ihlali bildirimi için ilgili mevzuata uygun şekilde hareket etmek için gerekli adımları atın.
-                      </li>
-                    </ol>
+                    <div className="bg-gradient-to-r from-red-50 to-pink-50 p-6 rounded-xl mt-8 mb-8 border border-red-100">
+                      <h3 className="text-xl font-semibold text-red-800 mb-4 flex items-center">
+                        <svg className="w-5 h-5 mr-2 text-red-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M12 8V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M11.9945 16H12.0035" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        Veri İhlali Nedir?
+                      </h3>
+                      <p className="text-red-800 mb-0">
+                        Veri ihlali, kişisel verilerin kazara veya yasadışı yollarla imha edilmesi, kaybolması, değiştirilmesi, 
+                        yetkisiz şekilde ifşa edilmesi veya bunlara erişim sağlanması durumudur. Veri ihlalleri, siber saldırılar, 
+                        fiziksel güvenlik ihlalleri, insan hatası veya sistem arızaları gibi çeşitli nedenlerden kaynaklanabilir.
+                      </p>
+                    </div>
+                    
+                    {/* Veri İhlali Yönetim Süreci - Görsel Adımlar */}
+                    <h3 className="text-xl font-semibold text-gray-800 mt-10 mb-6 flex items-center">
+                      <svg className="w-5 h-5 text-red-600 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.9998 19.9201L8.47983 13.4001C7.70983 12.6301 7.70983 11.3701 8.47983 10.6001L14.9998 4.08008" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      Veri İhlali Yönetim Süreci
+                    </h3>
+                    
+                    <div className="grid grid-cols-1 gap-y-10 relative mb-10">
+                      {/* Bağlantı çizgisi */}
+                      <div className="absolute left-6 top-10 bottom-0 w-1 bg-gradient-to-b from-red-500 to-orange-400 rounded-full"></div>
+                      
+                      {/* Adım 1 */}
+                      <div className="flex group">
+                        <div className="relative">
+                          <div className="w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center text-lg font-bold z-10 relative transition-all duration-300 group-hover:scale-110 shadow-lg">1</div>
+                          <div className="absolute top-0 left-0 w-12 h-12 bg-red-500 rounded-full animate-ping opacity-20 z-0"></div>
+                        </div>
+                        <div className="ml-6 bg-white p-6 rounded-xl shadow-md border border-gray-100 flex-1 transform transition-all duration-300 group-hover:translate-x-1">
+                          <h4 className="text-lg font-semibold text-gray-900 mb-2 flex items-center">
+                            <svg className="w-5 h-5 text-red-500 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M8.15 17.15L12 21L15.85 17.15" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M12 12V21" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M20.95 13.05C22.15 10.83 22.51 7.86 20.9 5.6C19.96 4.21 18.5 3.28 16.88 2.91C15.26 2.53 13.55 2.74 12.09 3.48L10.97 4.01" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M3.5 10.99C2.55 13.24 2.87 15.9 4.4 17.9C5.33 19.3 6.79 20.23 8.41 20.6C10.03 20.97 11.74 20.77 13.2 20.02L14.04 19.56" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M8.5 8.5L8.5 8.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M15.5 15.5L15.5 15.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            Tespit ve İlk Değerlendirme
+                          </h4>
+                          <p className="text-gray-600">
+                            Olası bir veri ihlali tespit edildiğinde, ilk olarak ihlal kapsamını, etkilenen veri türlerini ve 
+                            etkilenen kişi sayısını belirlemek için hızlı bir değerlendirme yapılır. Bu aşama, veri ihlali 
+                            yönetim sürecinin kritik bir adımıdır.
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Adım 2 */}
+                      <div className="flex group">
+                        <div className="relative">
+                          <div className="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center text-lg font-bold z-10 relative transition-all duration-300 group-hover:scale-110 shadow-lg">2</div>
+                          <div className="absolute top-0 left-0 w-12 h-12 bg-red-600 rounded-full animate-ping opacity-20 z-0 animation-delay-300"></div>
+                        </div>
+                        <div className="ml-6 bg-white p-6 rounded-xl shadow-md border border-gray-100 flex-1 transform transition-all duration-300 group-hover:translate-x-1">
+                          <h4 className="text-lg font-semibold text-gray-900 mb-2 flex items-center">
+                            <svg className="w-5 h-5 text-red-600 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M17.38 10.58V15.31C17.38 16.13 16.99 16.9 16.33 17.44L12.41 20.58C11.33 21.45 9.75999 21.45 8.66999 20.58L4.75999 17.44C4.09999 16.9 3.70999 16.13 3.70999 15.31V10.58C3.70999 9.22 4.63999 7.97 6.01999 7.57V7.57C8.83999 6.81 11.85 6.81 14.67 7.57V7.57C16.05 7.97 17.38 9.22 17.38 10.58Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M12 12V16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M20.29 6.95999L19.42 5.74999C18.86 4.96999 17.75 4.79999 16.99 5.37999L16.57 5.68999C15.41 6.51999 13.87 6.48999 12.75 5.62999L12.6 5.49999C11.48 4.61999 9.95001 4.59999 8.79001 5.44999L8.37001 5.75999C7.60001 6.33999 6.49001 6.16999 5.93001 5.38999L5.06001 4.17999" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M12 16L10 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M12 16L14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            Yetkili Kurumlara Bildirim
+                          </h4>
+                          <p className="text-gray-600">
+                            Kişisel Verileri Koruma Kurumu'na (KVKK) ihlal tespit edildikten sonra en geç 72 saat içinde bildirimde bulunulur. 
+                            Bu bildirimde, ihlal hakkında detaylı bilgiler, muhtemel sonuçlar ve alınan önlemler hakkında bilgiler paylaşılır.
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Adım 3 */}
+                      <div className="flex group">
+                        <div className="relative">
+                          <div className="w-12 h-12 bg-red-700 text-white rounded-full flex items-center justify-center text-lg font-bold z-10 relative transition-all duration-300 group-hover:scale-110 shadow-lg">3</div>
+                          <div className="absolute top-0 left-0 w-12 h-12 bg-red-700 rounded-full animate-ping opacity-20 z-0 animation-delay-600"></div>
+                        </div>
+                        <div className="ml-6 bg-white p-6 rounded-xl shadow-md border border-gray-100 flex-1 transform transition-all duration-300 group-hover:translate-x-1">
+                          <h4 className="text-lg font-semibold text-gray-900 mb-2 flex items-center">
+                            <svg className="w-5 h-5 text-red-700 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M18.4 17.5H5.6C3.6 17.5 2 15.9 2 13.9V7.1C2 5.1 3.6 3.5 5.6 3.5H18.4C20.4 3.5 22 5.1 22 7.1V13.9C22 15.9 20.4 17.5 18.4 17.5Z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M12 17.5V21.5" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M8 21.5H16" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M7.5 10.5H10.5" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M13.5 10.5H16.5" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            Etkilenenlere Bildirim
+                          </h4>
+                          <p className="text-gray-600">
+                            Veri ihlalinden etkilenen kişilere, ihlal hakkında açık ve anlaşılır bir dille bilgi verilir. Bu bildirimde, 
+                            ihlalin niteliği, muhtemel sonuçları ve alınan önlemler hakkında bilgiler yer alır. Bildirim, e-posta, SMS 
+                            veya web sitesi duyurusu gibi uygun kanallar aracılığıyla yapılır.
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Adım 4 */}
+                      <div className="flex group">
+                        <div className="relative">
+                          <div className="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center text-lg font-bold z-10 relative transition-all duration-300 group-hover:scale-110 shadow-lg">4</div>
+                          <div className="absolute top-0 left-0 w-12 h-12 bg-orange-500 rounded-full animate-ping opacity-20 z-0 animation-delay-900"></div>
+                        </div>
+                        <div className="ml-6 bg-white p-6 rounded-xl shadow-md border border-gray-100 flex-1 transform transition-all duration-300 group-hover:translate-x-1">
+                          <h4 className="text-lg font-semibold text-gray-900 mb-2 flex items-center">
+                            <svg className="w-5 h-5 text-orange-500 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M7.75 12.0001L10.58 14.8301L16.25 9.17007" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            İyileştirme ve Önleme
+                          </h4>
+                          <p className="text-gray-600">
+                            Veri ihlalinin nedenini belirlemek için kapsamlı bir inceleme yapılır ve benzer ihlallerin tekrarlanmaması 
+                            için gerekli teknik ve idari önlemler alınır. Güvenlik politikaları gözden geçirilir, personel eğitimleri 
+                            düzenlenir ve gerekli sistem güncellemeleri yapılır.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Veri İhlali Şüphesi Bildirimi */}
+                    <div className="bg-orange-50 p-6 rounded-xl mt-10 border border-orange-100">
+                      <h3 className="text-xl font-semibold text-orange-800 mb-4 flex items-center">
+                        <svg className="w-5 h-5 mr-2 text-orange-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/>
+                        </svg>
+                        Veri İhlali Şüphelerinizi Bildirin
+                      </h3>
+                      <p className="text-orange-800 mb-4">
+                        Kişisel verilerinizle ilgili olası bir ihlal durumundan şüpheleniyorsanız veya güvenlik endişeleriniz varsa, 
+                        lütfen aşağıdaki kanallar aracılığıyla bize bildirin:
+                      </p>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="bg-white p-4 rounded-lg border border-orange-200 flex items-center">
+                          <svg className="w-6 h-6 text-orange-600 mr-3 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <div>
+                            <span className="text-sm font-medium text-orange-900">E-posta ile:</span>
+                            <a href="mailto:security@virtualriddle.com" className="block text-sm hover:underline text-orange-700">security@virtualriddle.com</a>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white p-4 rounded-lg border border-orange-200 flex items-center">
+                          <svg className="w-6 h-6 text-orange-600 mr-3 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7 8H17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7 13H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <div>
+                            <span className="text-sm font-medium text-orange-900">İletişim formu ile:</span>
+                            <a href="/contact" className="block text-sm hover:underline text-orange-700">İletişim sayfamızdan</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <p className="mt-8 text-gray-700">
+                      Virtual Riddle olarak, veri güvenliği konusunda proaktif bir yaklaşım benimsemekteyiz. 
+                      Potansiyel riskleri en aza indirmek ve veri güvenliğinizi en üst düzeyde sağlamak için 
+                      sürekli olarak güvenlik önlemlerimizi gözden geçiriyor ve geliştiriyoruz. Gizlilik ve veri 
+                      güvenliği konularında sorularınız için her zaman yanınızdayız.
+                    </p>
                   </div>
                 </div>
               </section>

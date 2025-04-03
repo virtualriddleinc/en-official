@@ -1,265 +1,422 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function TrainingPage() {
+  // Form durumu için state tanımı
+  const [formData, setFormData] = useState({
+    fullName: "",
+    companyName: "",
+    email: "",
+    phone: "",
+    position: "",
+    interests: {
+      jiraSoftware: false,
+      confluence: false,
+      jiraServiceManagement: false,
+      bitbucket: false,
+      advanced: false
+    },
+    currentExperience: "",
+    message: ""
+  });
+
+  // Eğitim programları
+  const programs = [
+    { id: "jiraSoftware", name: "Jira Software", description: "Proje yönetimi ve Agile metodolojiler" },
+    { id: "confluence", name: "Confluence", description: "İçerik yönetimi ve ekip iş birliği" },
+    { id: "jiraServiceManagement", name: "Jira Service Management", description: "ITSM ve servis masası yönetimi" },
+    { id: "bitbucket", name: "Bitbucket", description: "Git tabanlı kod yönetimi" },
+    { id: "advanced", name: "Advanced Roadmaps", description: "Gelişmiş proje planlama ve portföy yönetimi" }
+  ];
+
+  // Deneyim seviyeleri
+  const experienceLevels = [
+    "Başlangıç",
+    "Orta Seviye",
+    "İleri Seviye",
+    "Henüz deneyimim yok"
+  ];
+
+  // Form gönderim işleme
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form gönderildi:", formData);
+    // API'ye gönderme işlemi burada gerçekleştirilecek
+    alert("Eğitim talebiniz başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz.");
+  };
+
+  // Input değişimlerini yakalama
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Program seçimlerini yakalama
+  const handleProgramChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setFormData({
+      ...formData,
+      interests: {
+        ...formData.interests,
+        [name]: checked
+      }
+    });
+  };
+
   return (
-    <div className="pt-20">
+    <main className="flex min-h-screen flex-col items-center pt-32">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-50 to-white py-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl">
-            <div className="flex items-center gap-4 mb-4">
-              <Image
-                src="/icons/training.svg"
-                alt="Training"
-                width={40}
-                height={40}
-                priority
-                quality={100}
-                loading="eager"
-              />
-              <h1 className="text-4xl md:text-5xl font-bold text-dark">
-                Eğitim & Sertifikasyon
-              </h1>
-            </div>
-            <p className="text-xl text-gray mb-8">
-              Atlassian ürünlerinde uzmanlaşın, sertifika sahibi olun
+      <section className="w-full py-20 bg-gradient-to-r from-blue-800 to-blue-950 text-white">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute h-full w-full bg-[url('/noise.png')] opacity-5"></div>
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-radial from-blue-400/20 via-transparent to-transparent opacity-50"></div>
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-radial from-blue-600/20 via-transparent to-transparent opacity-30"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl font-bold text-white mb-6">Eğitim & Sertifikasyon</h1>
+            <p className="text-xl">
+              Atlassian ürünlerinde uzmanlaşın, kariyerinizi ileriye taşıyın.
+              Profesyonel eğitimlerimizle bilgi ve becerinizi geliştirin, uluslararası geçerliliği olan
+              sertifikalarla uzmanlığınızı belgeleyin.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="#courses"
-                className="px-6 py-3 bg-blue text-white font-medium rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                Eğitimler
-              </Link>
-              <Link
-                href="#certification"
-                className="px-6 py-3 bg-white text-blue font-medium rounded-lg border border-blue hover:bg-blue-50 transition-colors"
-              >
-                Sertifikasyon
-              </Link>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Courses Section */}
-      <section id="courses" className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold text-dark mb-4">
-              Eğitim Programları
-            </h2>
-            <p className="text-gray">
-              Temel seviyeden ileri seviyeye kadar kapsamlı eğitimler
+      {/* Eğitimler Bölümü */}
+      <section className="w-full py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Eğitim Programları</h2>
+            <p className="text-xl text-gray-600">
+              Temel seviyeden ileri seviyeye kadar kapsamlı eğitim programlarımız
             </p>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 bg-white rounded-2xl border border-gray-100 hover:border-blue-100 transition-colors">
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
-                <img src="/icons/jira-software.svg" alt="Jira Software" className="w-6 h-6" />
+            {/* Program 1 */}
+            <div className="bg-blue-50 p-8 rounded-3xl relative group hover:shadow-lg transition-all">
+              <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 8v8m-4-4h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
-              <h3 className="text-xl font-semibold text-dark mb-2">Jira Software</h3>
-              <ul className="space-y-2 text-gray mb-6">
+              <h3 className="text-xl font-semibold text-blue-800 mb-4">Jira Software</h3>
+              <ul className="space-y-2 text-gray-600">
                 <li>• Proje yönetimi temelleri</li>
                 <li>• Agile & Scrum metodolojileri</li>
-                <li>• İş akışı yönetimi</li>
+                <li>• İş akışı yönetimi ve otomasyon</li>
+                <li>• Raporlama ve analitik</li>
               </ul>
-              <Link
-                href="#contact"
-                className="text-blue hover:text-blue-600 font-medium inline-flex items-center"
-              >
-                Detaylı Bilgi
-                <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </Link>
             </div>
 
-            <div className="p-6 bg-white rounded-2xl border border-gray-100 hover:border-blue-100 transition-colors">
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
-                <img src="/icons/confluence.svg" alt="Confluence" className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-semibold text-dark mb-2">Confluence</h3>
-              <ul className="space-y-2 text-gray mb-6">
-                <li>• İçerik yönetimi</li>
-                <li>• Ekip iş birliği</li>
-                <li>• Bilgi yönetimi</li>
-              </ul>
-              <Link
-                href="#contact"
-                className="text-blue hover:text-blue-600 font-medium inline-flex items-center"
-              >
-                Detaylı Bilgi
-                <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            {/* Program 2 */}
+            <div className="bg-blue-50 p-8 rounded-3xl relative group hover:shadow-lg transition-all">
+              <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M7 8H17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M7 12H17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M7 16H13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-              </Link>
+              </div>
+              <h3 className="text-xl font-semibold text-blue-800 mb-4">Confluence</h3>
+              <ul className="space-y-2 text-gray-600">
+                <li>• İçerik yönetimi ve oluşturma</li>
+                <li>• Ekip iş birliği ve bilgi paylaşımı</li>
+                <li>• Şablonlar ve makrolar</li>
+                <li>• Entegrasyonlar ve özelleştirme</li>
+              </ul>
             </div>
 
-            <div className="p-6 bg-white rounded-2xl border border-gray-100 hover:border-blue-100 transition-colors">
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
-                <img src="/icons/jira-service-management.svg" alt="Jira Service Management" className="w-6 h-6" />
+            {/* Program 3 */}
+            <div className="bg-blue-50 p-8 rounded-3xl relative group hover:shadow-lg transition-all">
+              <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M23 21v-2a4 4 0 00-3-3.87" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M16 3.13a4 4 0 010 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
-              <h3 className="text-xl font-semibold text-dark mb-2">Jira Service Management</h3>
-              <ul className="space-y-2 text-gray mb-6">
-                <li>• ITSM temelleri</li>
+              <h3 className="text-xl font-semibold text-blue-800 mb-4">Jira Service Management</h3>
+              <ul className="space-y-2 text-gray-600">
+                <li>• ITSM temelleri ve ITIL uyumu</li>
                 <li>• Servis masası yönetimi</li>
                 <li>• SLA ve raporlama</li>
+                <li>• Müşteri portalı ve otomasyon</li>
               </ul>
-              <Link
-                href="#contact"
-                className="text-blue hover:text-blue-600 font-medium inline-flex items-center"
-              >
-                Detaylı Bilgi
-                <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Certification Section */}
-      <section id="certification" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold text-dark mb-4">
-              Sertifikasyon Programı
-            </h2>
-            <p className="text-gray">
+      {/* Sertifikasyon Süreci */}
+      <section className="w-full py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Sertifikasyon Süreci</h2>
+            <p className="text-xl text-gray-600">
               Atlassian sertifikaları ile uzmanlığınızı belgeleyin
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 bg-white rounded-2xl">
-              <h3 className="text-xl font-semibold text-dark mb-4">Sertifikasyon Süreci</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <div className="w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center mt-1 mr-3">
-                    <span className="text-sm font-bold text-blue">1</span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-dark mb-1">Eğitim</h4>
-                    <p className="text-gray text-sm">Kapsamlı eğitim programı ile hazırlanın</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center mt-1 mr-3">
-                    <span className="text-sm font-bold text-blue">2</span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-dark mb-1">Pratik</h4>
-                    <p className="text-gray text-sm">Gerçek dünya senaryoları ile deneyim kazanın</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center mt-1 mr-3">
-                    <span className="text-sm font-bold text-blue">3</span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-dark mb-1">Sınav</h4>
-                    <p className="text-gray text-sm">Online sertifikasyon sınavına girin</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center mt-1 mr-3">
-                    <span className="text-sm font-bold text-blue">4</span>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-dark mb-1">Sertifika</h4>
-                    <p className="text-gray text-sm">Resmi Atlassian sertifikanızı alın</p>
-                  </div>
-                </li>
-              </ul>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Adım 1 */}
+            <div className="bg-white p-8 rounded-3xl relative group hover:shadow-lg transition-all">
+              <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">1</div>
+              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Eğitim</h3>
+              <p className="text-gray-600">Kapsamlı eğitim programı ile bilgi ve becerilerinizi geliştirin.</p>
             </div>
-            <div className="p-8 bg-white rounded-2xl">
-              <h3 className="text-xl font-semibold text-dark mb-4">Sertifika Avantajları</h3>
-              <ul className="space-y-4">
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-blue mr-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span className="text-gray">Uluslararası geçerlilik</span>
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-blue mr-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span className="text-gray">Kariyer gelişimi</span>
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-blue mr-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span className="text-gray">Rekabet avantajı</span>
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-blue mr-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span className="text-gray">Uzman ağına erişim</span>
-                </li>
-              </ul>
+
+            {/* Adım 2 */}
+            <div className="bg-white p-8 rounded-3xl relative group hover:shadow-lg transition-all">
+              <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">2</div>
+              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Pratik</h3>
+              <p className="text-gray-600">Gerçek dünya senaryoları ile uygulama deneyimi kazanın.</p>
+            </div>
+
+            {/* Adım 3 */}
+            <div className="bg-white p-8 rounded-3xl relative group hover:shadow-lg transition-all">
+              <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">3</div>
+              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Sınav</h3>
+              <p className="text-gray-600">Online veya gözetimli sertifikasyon sınavına girin.</p>
+            </div>
+
+            {/* Adım 4 */}
+            <div className="bg-white p-8 rounded-3xl relative group hover:shadow-lg transition-all">
+              <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">4</div>
+              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Sertifika</h3>
+              <p className="text-gray-600">Resmi Atlassian sertifikanızı alın ve kariyerinizi ileriye taşıyın.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-dark mb-4">
-              Eğitim Talebi
-            </h2>
-            <p className="text-gray mb-8">
-              Size özel eğitim programı için bizimle iletişime geçin
+      {/* Sertifika Avantajları */}
+      <section className="w-full py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Sertifika Avantajları</h2>
+            <p className="text-xl text-gray-600">
+              Atlassian sertifikasyonu ile elde edeceğiniz kazanımlar
             </p>
-            <div className="bg-white p-8 rounded-2xl shadow-sm">
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <input
-                    type="text"
-                    placeholder="Ad Soyad"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue focus:ring-2 focus:ring-blue-100 outline-none transition-colors"
-                  />
-                  <input
-                    type="email"
-                    placeholder="E-posta"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue focus:ring-2 focus:ring-blue-100 outline-none transition-colors"
-                  />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Şirket"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue focus:ring-2 focus:ring-blue-100 outline-none transition-colors"
-                />
-                <select
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue focus:ring-2 focus:ring-blue-100 outline-none transition-colors"
-                >
-                  <option value="">Eğitim Seçin</option>
-                  <option value="jira">Jira Software</option>
-                  <option value="confluence">Confluence</option>
-                  <option value="jsm">Jira Service Management</option>
-                </select>
-                <textarea
-                  placeholder="Mesajınız"
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue focus:ring-2 focus:ring-blue-100 outline-none transition-colors"
-                ></textarea>
-                <button
-                  type="submit"
-                  className="w-full px-8 py-4 bg-blue text-white font-medium rounded-xl hover:bg-blue-600 transition-colors"
-                >
-                  Gönder
-                </button>
-              </form>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Avantaj 1 */}
+            <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Uluslararası Geçerlilik</h3>
+              <p className="text-gray-600">
+                Dünya çapında tanınan Atlassian sertifikaları ile global iş olanaklarına erişim sağlayın.
+              </p>
+            </div>
+
+            {/* Avantaj 2 */}
+            <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Kariyer Gelişimi</h3>
+              <p className="text-gray-600">
+                Sektördeki değerinizi artırın, daha iyi pozisyonlara ve ücretlere erişim kazanın.
+              </p>
+            </div>
+
+            {/* Avantaj 3 */}
+            <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Rekabet Avantajı</h3>
+              <p className="text-gray-600">
+                Diğer adaylardan farklılaşın, işverenlere doğrulanmış uzmanlığınızı gösterin.
+              </p>
             </div>
           </div>
         </div>
       </section>
-    </div>
+
+      {/* Başvuru Formu */}
+      <section className="w-full py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-blue-800 to-blue-950 rounded-3xl shadow-xl overflow-hidden">
+              <div className="p-10 md:p-12">
+                <h2 className="text-3xl font-bold text-white mb-8">Eğitim ve Sertifikasyon Başvuru Formu</h2>
+                <p className="text-white/80 mb-10">
+                  İhtiyaçlarınıza özel eğitim ve sertifikasyon programları için aşağıdaki formu doldurun.
+                  Uzman ekibimiz 24 saat içinde sizinle iletişime geçecektir.
+                </p>
+
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  {/* Kişisel ve Şirket Bilgileri */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="fullName" className="block text-sm font-medium text-white/80 mb-2">
+                        Ad Soyad*
+                      </label>
+                      <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        placeholder="Adınız ve soyadınız"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="companyName" className="block text-sm font-medium text-white/80 mb-2">
+                        Şirket Adı*
+                      </label>
+                      <input
+                        type="text"
+                        id="companyName"
+                        name="companyName"
+                        value={formData.companyName}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        placeholder="Şirketinizin adı"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
+                        E-posta*
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        placeholder="ornek@sirket.com"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
+                        Telefon*
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        placeholder="+90 (___) ___ __ __"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="position" className="block text-sm font-medium text-white/80 mb-2">
+                        Pozisyon
+                      </label>
+                      <input
+                        type="text"
+                        id="position"
+                        name="position"
+                        value={formData.position}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        placeholder="Şirketteki pozisyonunuz"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="currentExperience" className="block text-sm font-medium text-white/80 mb-2">
+                        Atlassian Deneyim Seviyeniz*
+                      </label>
+                      <select
+                        id="currentExperience"
+                        name="currentExperience"
+                        value={formData.currentExperience}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                      >
+                        <option value="" disabled>Deneyim seviyenizi seçin</option>
+                        {experienceLevels.map(level => (
+                          <option key={level} value={level} className="bg-blue-900 text-white">{level}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* İlgilenilen Eğitimler */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-white mb-4">İlgilendiğiniz Eğitim Programları</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {programs.map(program => (
+                        <div key={program.id} className="flex items-start space-x-3 bg-white/5 p-4 rounded-xl hover:bg-white/10 transition-colors">
+                          <input
+                            type="checkbox"
+                            id={program.id}
+                            name={program.id}
+                            checked={formData.interests[program.id as keyof typeof formData.interests]}
+                            onChange={handleProgramChange}
+                            className="mt-1 h-5 w-5 rounded border-white/30 text-blue-500 focus:ring-blue-400"
+                          />
+                          <div>
+                            <label htmlFor={program.id} className="block font-medium text-white cursor-pointer">
+                              {program.name}
+                            </label>
+                            <p className="text-sm text-white/60">{program.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Ek Mesaj */}
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
+                      Ek Bilgiler ve Beklentileriniz
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                      placeholder="Eğitim ve sertifikasyon ihtiyaçlarınız hakkında detaylı bilgi verin"
+                    ></textarea>
+                  </div>
+
+                  {/* Gönder Butonu */}
+                  <div className="flex flex-col sm:flex-row justify-end gap-4">
+                    <button
+                      type="submit"
+                      className="w-full sm:w-auto px-10 py-3 bg-white text-blue-800 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
+                    >
+                      Başvuru Gönder
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 } 

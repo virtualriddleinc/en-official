@@ -7,7 +7,7 @@ export default function ConfluencePage() {
   return (
     <main className="pt-20">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 py-24">
+      <section className="relative bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 py-24 min-h-[500px] flex items-center justify-center">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute h-full w-full bg-[url('/noise.png')] opacity-5"></div>
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-radial from-blue-400/20 via-transparent to-transparent opacity-50"></div>

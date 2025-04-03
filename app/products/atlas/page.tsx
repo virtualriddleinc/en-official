@@ -6,7 +6,7 @@ export default function AtlasPage() {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-50 to-white py-20">
+      <section className="bg-gradient-to-r from-blue-50 to-white py-20 min-h-[500px] flex items-center justify-center">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold text-dark mb-6">

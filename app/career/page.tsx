@@ -7,7 +7,7 @@ export default function CareerPage() {
       <section className="w-full py-20 bg-gradient-to-r from-blue-800 to-blue-950 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">Kariyer</h1>
+            <h1 className="text-5xl font-bold mb-6 text-white">Kariyer</h1>
             <p className="text-xl">
               Geleceğin teknolojilerini bizimle şekillendirin
             </p>
@@ -72,9 +72,11 @@ export default function CareerPage() {
                   </div>
                 </div>
               </div>
-              <button className="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors">
-                Açık Pozisyonlar
-              </button>
+              <div className="mt-8">
+                <a href="#acik-pozisyonlar" className="inline-block px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors">
+                  Açık Pozisyonlar
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -125,7 +127,7 @@ export default function CareerPage() {
       </section>
 
       {/* Açık Pozisyonlar */}
-      <section className="w-full py-20 bg-gray-50">
+      <section id="acik-pozisyonlar" className="w-full py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Açık Pozisyonlar</h2>

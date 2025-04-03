@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import CookieConsent from "./components/CookieConsent";
 
 export default function ClientLayout({
   children,
@@ -556,6 +557,8 @@ export default function ClientLayout({
           </div>
         </div>
       </footer>
+      
+      <CookieConsent />
     </>
   );
 } 

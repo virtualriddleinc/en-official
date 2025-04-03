@@ -226,6 +226,61 @@ export default function PrivacyPage() {
                       Veri Toplama Amacı
                     </h3>
                     
+                    <div className="bg-emerald-50 p-6 rounded-xl mb-6 border border-emerald-100">
+                      <p className="text-emerald-800 mb-4">
+                        Virtual Riddle, kişisel verilerinizi aşağıdaki amaçlar doğrultusunda ancak bunlarla sınırlı olmamak kaydıyla toplar, saklar, kullanır ve işler:
+                      </p>
+                      <ul className="space-y-2 text-emerald-800">
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Hizmetlerimizi sunmak, işletmek, iyileştirmek ve geliştirmek için</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Size özel teklifler, ürünler ve hizmetler sunmak, pazarlama iletişimleri göndermek için</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Kullanıcı davranışlarını analiz etmek, hizmet kullanım istatistiklerini oluşturmak ve yapay zeka / makine öğrenimi modellerini eğitmek için</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>İş ortaklarımız, tedarikçilerimiz ve bağlı kuruluşlarımızla veri paylaşımı yaparak hizmet entegrasyonunu sağlamak için</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Güvenlik, dolandırıcılığı önleme ve risk azaltma amacıyla kullanıcı verilerini işlemek için</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Yasal yükümlülüklerimizi yerine getirmek, şirketimizin haklarını korumak ve yasal süreçlerde kullanmak için</span>
+                        </li>
+                      </ul>
+                      <div className="bg-white p-4 rounded-lg mt-4 shadow-sm">
+                        <p className="text-gray-700 text-sm">
+                          <strong>Önemli Bilgilendirme:</strong> Virtual Riddle, kişisel verilerinizi yukarıda belirtilen amaçlar dışında da kullanma ve işleme hakkını saklı tutar. Platformumuzu kullanmaya devam ettiğiniz sürece, verilerinizin şirketimiz tarafından gerekli görülen her türlü amaç için işlenmesini kabul etmiş sayılırsınız. Veri işleme faaliyetlerimiz, herhangi bir bildirimde bulunmaksızın değiştirilebilir. Bu durumda, değişiklikler web sitemizde yayınlandığı andan itibaren geçerli olacaktır. Hizmetlerimizi kullanmaya devam etmeniz, güncellenmiş koşulları kabul ettiğiniz anlamına gelecektir.
+                        </p>
+                      </div>
+                    </div>
+                    
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                       <div className="flex items-center p-4 bg-emerald-50/50 rounded-xl border border-emerald-100">
                         <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center mr-3 flex-shrink-0">
@@ -514,6 +569,31 @@ export default function PrivacyPage() {
                       ve benzer teknolojileri kullanmaktayız.
                     </p>
                     
+                    <div className="bg-amber-50 p-6 rounded-xl mt-6 mb-6 border border-amber-100">
+                      <h3 className="text-xl font-semibold text-amber-800 mb-4 flex items-center">
+                        <svg className="w-5 h-5 mr-2 text-amber-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M12 8V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M11.9945 16H12.0035" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        Çerez Kullanımı Rızası
+                      </h3>
+                      <p className="text-amber-800 mb-4">
+                        Virtual Riddle web sitesini veya hizmetlerini kullanarak, çerezler ve benzer izleme teknolojileri aracılığıyla veri toplanmasına, işlenmesine ve kullanılmasına onay vermiş sayılırsınız. Bu onay, hizmetlerimizi kullanmak için gereklidir ve çerezleri reddetmeniz durumunda hizmetlerimizin tamamını veya bir kısmını kullanamayabilirsiniz.
+                      </p>
+                      <div className="bg-white p-4 rounded-lg">
+                        <p className="text-amber-800 text-sm flex items-start">
+                          <svg className="w-5 h-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>
+                            Çerezlerin devre dışı bırakılabilmesi için tarayıcı ayarlarınızda değişiklik yapmanız mümkün olsa da, bu değişiklikler web sitemizdeki ve uygulamalarımızdaki temel işlevselliği ciddi şekilde etkileyebilir. Ayrıca bazı çerezlerin devre dışı bırakılmasının sizinle yaptığımız sözleşmelerin yerine getirilmesini imkânsız hale getirebileceğini ve bu durumda hizmet sunumunu sonlandırma hakkımızın saklı olduğunu belirtmek isteriz.
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    
                     <div className="bg-gradient-to-r from-amber-50 to-amber-100/50 p-6 rounded-xl mt-6 mb-8 border border-amber-100">
                       <h3 className="text-xl font-semibold text-amber-800 mb-4 flex items-center">
                         <svg className="w-5 h-5 mr-2 text-amber-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -646,22 +726,22 @@ export default function PrivacyPage() {
                             <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
                           <span><strong>Web İşaretçileri (Beacon):</strong> Bu küçük grafik dosyaları, bir web sayfasının veya e-postanın açılıp açılmadığını takip etmek için kullanılır.</span>
-                        </li>
+                      </li>
                         <li className="flex items-start">
                           <svg className="w-5 h-5 text-amber-500 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                             <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
                           <span><strong>Piksel Etiketleri:</strong> Web sayfalarına gömülen küçük görüntü dosyaları olup, kullanıcı davranışını izlememize yardımcı olur.</span>
-                        </li>
+                      </li>
                         <li className="flex items-start">
                           <svg className="w-5 h-5 text-amber-500 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                             <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
                           <span><strong>Yerel Depolama (Local Storage):</strong> Bu teknoloji, web tarayıcınızın site tercihlerinizi ve diğer bilgileri cihazınızda saklamasına olanak tanır.</span>
-                        </li>
-                      </ul>
+                      </li>
+                    </ul>
                     </div>
                     
                     <h3 className="text-xl font-semibold text-gray-800 mt-8 mb-4 flex items-center">
@@ -748,6 +828,54 @@ export default function PrivacyPage() {
                       Virtual Riddle olarak, kişisel verileriniz üzerinde kontrolünüzün olması gerektiğine inanıyoruz. 
                       <strong className="text-emerald-700"> 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK)</strong> kapsamında aşağıdaki haklara sahipsiniz:
                     </p>
+                    
+                    <div className="bg-amber-50 p-6 rounded-xl mt-6 mb-8 border border-amber-100">
+                      <h3 className="text-xl font-semibold text-amber-800 mb-4 flex items-center">
+                        <svg className="w-5 h-5 mr-2 text-amber-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M12 8V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M11.9945 16H12.0035" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        Hakların Kapsamı ve Sınırlandırmalar
+                      </h3>
+                      <p className="text-amber-800 mb-4">
+                        Aşağıda belirtilen haklarınızı kullanırken, lütfen şu hususları göz önünde bulundurunuz:
+                      </p>
+                      <ul className="space-y-2 text-amber-800">
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M12 8V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M11.9945 16H12.0035" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Virtual Riddle, talep ettiğiniz hakkın kullanımını yasal yükümlülükler, teknik sınırlamalar, ticari sırlar, fikri mülkiyet hakları veya diğer kullanıcıların gizlilik hakları gerekçesiyle kısmen veya tamamen reddedebilir.</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M12 8V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M11.9945 16H12.0035" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Veri silme talepleriniz, yasal saklama sürelerimiz kapsamındaki verileri içeremez ve bu talepler sistem bütünlüğümüzü, hizmet kalitesini veya yasal yükümlülüklerimizi riske atacak şekilde işleme alınamaz.</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M12 8V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M11.9945 16H12.0035" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Haklarınızı kötüye kullanım teşkil edecek şekilde veya kötü niyetle kullanamaz, Virtual Riddle'ın operasyonlarını zorlaştıracak sıklıkta veya sayıda talepte bulunamazsınız.</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M12 8V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M11.9945 16H12.0035" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Virtual Riddle, mevzuata aykırı olmamak kaydıyla, taleplerin değerlendirilmesi ve işleme alınması konusunda takdir hakkını saklı tutar ve bu hakkını kullanıcı menfaatlerini gözetme yükümlülüğü olmaksızın kullanabilir.</span>
+                        </li>
+                      </ul>
+                    </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                       <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow">
@@ -965,7 +1093,7 @@ export default function PrivacyPage() {
                           <li>KVKK kapsamında hangi hakkınızı kullanmak istediğiniz</li>
                           <li>Başvurunuza ilişkin açıklamalar</li>
                           <li>İletişim bilgileriniz</li>
-                        </ul>
+                    </ul>
                         
                         <p className="text-sm">
                           Başvurunuzu aldıktan sonra, talebinizi <strong>en geç 30 gün içinde</strong> ücretsiz olarak 
@@ -1018,6 +1146,50 @@ export default function PrivacyPage() {
                       Olası bir veri ihlali durumunda, şeffaflık ilkemiz doğrultusunda sizleri bilgilendirmek ve 
                       gerekli önlemleri almak için aşağıdaki süreci takip etmekteyiz.
                     </p>
+                    
+                    <div className="bg-red-50 p-6 rounded-xl mt-6 mb-8 border border-red-100">
+                      <h3 className="text-xl font-semibold text-red-800 mb-4 flex items-center">
+                        <svg className="w-5 h-5 mr-2 text-red-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M12 8V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M11.9945 16H12.0035" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        Sorumluluk Sınırlandırması
+                      </h3>
+                      <p className="text-red-800 mb-4">
+                        Virtual Riddle, verilerin korunması için endüstri standardı güvenlik önlemlerini uygulamakla birlikte, herhangi bir veri ihlali durumunda aşağıdaki hususlar geçerlidir:
+                      </p>
+                      <ul className="space-y-2 text-red-800">
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-red-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Virtual Riddle, üçüncü taraf hizmet sağlayıcıları, tedarikçiler, iş ortakları veya bağlı kuruluşlar tarafından gerçekleşen veri ihlallerinden sorumlu tutulamaz.</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-red-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Bildirimler, yalnızca uygulanabilir yasaların zorunlu tuttuğu durumlarda ve kapsamda yapılacaktır. Virtual Riddle, bildirim yapmama kararını gerektiren güvenlik veya hukuki nedenler olması durumunda bildirimi erteleme veya kısıtlama hakkını saklı tutar.</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-red-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Virtual Riddle, veri ihlali sonucunda oluşabilecek doğrudan veya dolaylı hiçbir zarar ve kayıptan (kâr kaybı, itibar kaybı, iş kaybı, fırsat kaybı, gelir kaybı veya diğer ekonomik kayıplar dahil) sorumlu olmayacaktır.</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-5 h-5 text-red-600 mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M7.75 11.9999L10.58 14.8299L16.25 9.16992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>Veri ihlali bildirimi, Virtual Riddle'ın herhangi bir sorumluluğu kabul ettiği anlamına gelmemektedir. Tüm yasal haklarımız ve yasal savunma araçlarımız saklıdır.</span>
+                        </li>
+                      </ul>
+                    </div>
                     
                     <div className="bg-gradient-to-r from-red-50 to-pink-50 p-6 rounded-xl mt-8 mb-8 border border-red-100">
                       <h3 className="text-xl font-semibold text-red-800 mb-4 flex items-center">
@@ -1161,9 +1333,9 @@ export default function PrivacyPage() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="bg-white p-4 rounded-lg border border-orange-200 flex items-center">
                           <svg className="w-6 h-6 text-orange-600 mr-3 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-                            <path d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
+                        <path d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
                           <div>
                             <span className="text-sm font-medium text-orange-900">E-posta ile:</span>
                             <a href="mailto:security@virtualriddle.com" className="block text-sm hover:underline text-orange-700">security@virtualriddle.com</a>

@@ -387,10 +387,6 @@ export default function ClientLayout({
                   Hakkımızda
                 </Link>
                 
-                <Link href="/services" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50">
-                  Hizmetler
-                </Link>
-                
                 <Link href="/career" className="flex items-center px-3 py-2 text-gray-600 hover:text-blue font-medium rounded-xl hover:bg-gray-50">
                   Kariyer
                 </Link>
@@ -516,9 +512,6 @@ export default function ClientLayout({
               <ul className="space-y-4">
                 <li>
                   <Link href="/about" className="text-gray-400 hover:text-white transition-colors">Hakkımızda</Link>
-                </li>
-                <li>
-                  <Link href="/services" className="text-gray-400 hover:text-white transition-colors">Hizmetler</Link>
                 </li>
                 <li>
                   <Link href="/career" className="text-gray-400 hover:text-white transition-colors">Kariyer</Link>

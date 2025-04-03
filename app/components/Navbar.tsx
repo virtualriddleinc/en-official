@@ -94,7 +94,6 @@ export default function Navbar() {
             </Menu>
 
             <a href="/about" className="text-gray-600 hover:text-blue-600 transition-colors">Hakkımızda</a>
-            <a href="/services" className="text-gray-600 hover:text-blue-600 transition-colors">Hizmetler</a>
             <a href="/career" className="text-gray-600 hover:text-blue-600 transition-colors">Kariyer</a>
             <a href="/contact" className="text-gray-600 hover:text-blue-600 transition-colors">İletişim</a>
             <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
@@ -143,7 +142,6 @@ export default function Navbar() {
               </div>
 
               <a href="/about" className="text-gray-600 hover:text-blue-600 transition-colors">Hakkımızda</a>
-              <a href="/services" className="text-gray-600 hover:text-blue-600 transition-colors">Hizmetler</a>
               <a href="/career" className="text-gray-600 hover:text-blue-600 transition-colors">Kariyer</a>
               <a href="/contact" className="text-gray-600 hover:text-blue-600 transition-colors">İletişim</a>
               <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full">

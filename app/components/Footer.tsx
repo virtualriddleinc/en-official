@@ -23,7 +23,6 @@ export default function Footer() {
         <div className="flex justify-center gap-8 mb-12">
           <a href="/" className="text-gray-400 hover:text-white transition-colors">Ana Sayfa</a>
           <a href="/about" className="text-gray-400 hover:text-white transition-colors">Hakkımızda</a>
-          <a href="/services" className="text-gray-400 hover:text-white transition-colors">Hizmetler</a>
           <a href="/career" className="text-gray-400 hover:text-white transition-colors">Kariyer</a>
           <a href="/contact" className="text-gray-400 hover:text-white transition-colors">İletişim</a>
         </div>

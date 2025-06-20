@@ -74,7 +74,7 @@ export default function CareerPage() {
               </div>
               <div className="mt-8">
                 <a href="#acik-pozisyonlar" className="inline-block px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors">
-                  Açık Pozisyonlar
+                Açık Pozisyonlar
                 </a>
               </div>
             </div>

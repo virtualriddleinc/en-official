@@ -160,7 +160,7 @@ export default function Home() {
             <div className="absolute inset-0">
           {/* Ana Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#0052CC]/5 via-transparent to-[#0052CC]/3"></div>
-          
+
           {/* Dekoratif Elementler */}
           <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-gradient-radial from-[#0052CC]/10 via-[#0052CC]/5 to-transparent transform rotate-12"></div>
           <div className="absolute -bottom-40 -left-40 w-[800px] h-[800px] bg-gradient-radial from-[#0052CC]/10 via-[#0052CC]/5 to-transparent transform -rotate-12"></div>

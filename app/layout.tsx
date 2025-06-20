@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import ClientLayout from './ClientLayout'
@@ -11,8 +11,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Virtual Riddle - Modern Yazılım Çözümleri',
-  description: 'Yazılım geliştirme süreçlerinizi modernleştirin. Jira Software, Confluence ve daha fazlası ile ekip çalışmasını güçlendirin.',
+  title: 'Virtual Riddle',
+  description: 'Atlassian Çözüm Ortağınız',
   keywords: 'Jira Software, Confluence, Atlassian, proje yönetimi, yazılım geliştirme, takım iş birliği',
   authors: [{ name: 'Virtual Riddle Team' }],
   viewport: 'width=device-width, initial-scale=1',
@@ -30,6 +30,12 @@ export const metadata: Metadata = {
     title: 'Virtual Riddle - Modern Yazılım Çözümleri',
     description: 'Yazılım geliştirme süreçlerinizi modernleştirin. Jira Software, Confluence ve daha fazlası ile ekip çalışmasını güçlendirin.',
   },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({

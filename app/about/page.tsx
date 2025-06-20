@@ -189,7 +189,7 @@ export default function AboutPage() {
           <div className="absolute h-full w-full bg-[url('/noise.png')] opacity-5"></div>
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-radial from-blue-400/20 via-transparent to-transparent opacity-50"></div>
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-radial from-blue-600/20 via-transparent to-transparent opacity-30"></div>
-        </div>
+              </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">

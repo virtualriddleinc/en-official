@@ -46,7 +46,7 @@ export default function ConsultingPage() {
           <div className="absolute h-full w-full bg-[url('/noise.png')] opacity-5"></div>
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-radial from-blue-400/20 via-transparent to-transparent opacity-50"></div>
           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-radial from-blue-600/20 via-transparent to-transparent opacity-30"></div>
-        </div>
+            </div>
         
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
@@ -157,7 +157,7 @@ export default function ConsultingPage() {
               <h3 className="text-xl font-semibold text-gray-900 mb-4">ROI Maksimizasyonu</h3>
               <p className="text-gray-600">
                 Atlassian araçlarına yaptığınız yatırımdan maksimum geri dönüş sağlayın.
-              </p>
+            </p>
             </div>
           </div>
         </div>
@@ -177,7 +177,7 @@ export default function ConsultingPage() {
 
                 <form onSubmit={handleSubmit} className="space-y-8">
                   {/* Kişisel ve Şirket Bilgileri */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="fullName" className="block text-sm font-medium text-white/80 mb-2">
                         Ad Soyad*
@@ -197,8 +197,8 @@ export default function ConsultingPage() {
                       <label htmlFor="companyName" className="block text-sm font-medium text-white/80 mb-2">
                         Şirket Adı*
                       </label>
-                      <input
-                        type="text"
+                  <input
+                    type="text"
                         id="companyName"
                         name="companyName"
                         value={formData.companyName}
@@ -212,8 +212,8 @@ export default function ConsultingPage() {
                       <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
                         E-posta*
                       </label>
-                      <input
-                        type="email"
+                  <input
+                    type="email"
                         id="email"
                         name="email"
                         value={formData.email}
@@ -236,14 +236,14 @@ export default function ConsultingPage() {
                         required
                         className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
                         placeholder="+90 (___) ___ __ __"
-                      />
-                    </div>
+                  />
+                </div>
                     <div>
                       <label htmlFor="position" className="block text-sm font-medium text-white/80 mb-2">
                         Pozisyon
                       </label>
-                      <input
-                        type="text"
+                <input
+                  type="text"
                         id="position"
                         name="position"
                         value={formData.position}
@@ -277,27 +277,27 @@ export default function ConsultingPage() {
                     <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
                       Danışmanlık İhtiyacınız ve Beklentileriniz
                     </label>
-                    <textarea
+                <textarea
                       id="message"
                       name="message"
-                      rows={4}
+                  rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
                       placeholder="Danışmanlık ihtiyacınız ve projeleriniz hakkında bize daha fazla bilgi verin"
-                    ></textarea>
+                ></textarea>
                   </div>
 
                   {/* Gönder Butonu */}
                   <div className="flex flex-col sm:flex-row justify-end gap-4">
-                    <button
-                      type="submit"
+                <button
+                  type="submit"
                       className="w-full sm:w-auto px-10 py-3 bg-white text-blue-800 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
-                    >
+                >
                       Danışmanlık Talebi Gönder
-                    </button>
+                </button>
                   </div>
-                </form>
+              </form>
               </div>
             </div>
           </div>

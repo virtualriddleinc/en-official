@@ -118,7 +118,7 @@ export default function AgilePage() {
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">Uygulama</h3>
                 <p className="text-gray-600">
                   Pilot projelerle çevik metodolijilerin uygulamaya konması ve süreçlerin yerleştirilmesi
-                </p>
+              </p>
               </div>
             </div>
 
@@ -135,7 +135,7 @@ export default function AgilePage() {
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">Ölçümleme</h3>
                 <p className="text-gray-600">
                   Çevik dönüşümün etkilerinin ölçümlenmesi ve sürekli iyileştirme döngüsü
-                </p>
+              </p>
               </div>
             </div>
           </div>

@@ -23,13 +23,13 @@ export default function PlatformPage() {
               Tüm Atlassian ürünlerini birleştiren güçlü platform ile ekibinizin verimli çalışması için gereken her şey.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link 
+              <Link
                 href="/contact" 
                 className="px-8 py-4 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition-all w-full sm:w-auto text-center"
               >
                 Platformu Keşfet
               </Link>
-              <Link 
+              <Link
                 href="/contact" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
               >
@@ -99,7 +99,7 @@ export default function PlatformPage() {
                   <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M23 21v-2a4 4 0 00-3-3.87" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M16 3.13a4 4 0 010 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                  </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Jira Software</h3>
               <p className="text-gray-700">Çevik proje yönetimi ve yazılım geliştirme süreçleri için tasarlanmış güçlü araç.</p>
@@ -113,7 +113,7 @@ export default function PlatformPage() {
                   <path d="M16 13H8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M16 17H8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M10 9H9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                  </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Confluence</h3>
               <p className="text-gray-700">Belgeler, fikirler ve planlar oluşturmak ve paylaşmak için işbirliği alanı.</p>
@@ -125,7 +125,7 @@ export default function PlatformPage() {
                   <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M3.27 6.96L12 12.01l8.73-5.05" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M12 22.08V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                  </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Bitbucket</h3>
               <p className="text-gray-700">Git kod deposu yönetimi ve CI/CD çözümü ile geliştirme süreçlerinizi hızlandırın.</p>
@@ -139,7 +139,7 @@ export default function PlatformPage() {
                   <path d="M6 1v3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M10 1v3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M14 1v3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                  </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Jira Service Management</h3>
               <p className="text-gray-700">IT hizmet yönetimi ve diğer departmanlar için hızlı ve etkili hizmet yönetimi çözümü.</p>
@@ -190,7 +190,7 @@ export default function PlatformPage() {
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-4xl font-bold text-indigo-600 mb-4">Ekosistem Entegrasyonları</h2>
             <p className="text-xl text-indigo-600/80">Atlassian Platform'un diğer araçlarla entegrasyonu sayesinde kesintisiz iş akışı.</p>
-          </div>
+              </div>
 
           <div className="relative">
             {/* Center Circle */}
@@ -205,7 +205,7 @@ export default function PlatformPage() {
                     <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     <rect x="2" y="9" width="4" height="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     <circle cx="4" cy="4" r="2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                </svg>
                 </div>
                 <h4 className="font-semibold text-gray-900">Microsoft 365</h4>
               </div>
@@ -217,8 +217,8 @@ export default function PlatformPage() {
                   </svg>
                 </div>
                 <h4 className="font-semibold text-gray-900">Google Workspace</h4>
-              </div>
-              
+            </div>
+
               <div className="bg-white rounded-xl p-6 shadow-md text-center">
                 <div className="w-12 h-12 mx-auto bg-indigo-600/20 rounded-lg flex items-center justify-center mb-4">
                   <svg className="w-6 h-6 text-indigo-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -235,7 +235,7 @@ export default function PlatformPage() {
                     <path d="M22 7L12 2 2 7v10l10 5 10-5V7z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M2 7l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M12 12v10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                </svg>
                 </div>
                 <h4 className="font-semibold text-gray-900">AWS</h4>
               </div>
@@ -251,13 +251,13 @@ export default function PlatformPage() {
             <h2 className="text-4xl font-bold text-white mb-6">Atlassian Platform ile işlerinizi dönüştürün</h2>
             <p className="text-xl text-white/80 mb-8">Ekiplerinizin potansiyelini açığa çıkarın ve daha verimli çalışmalarını sağlayın.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link 
+              <Link
                 href="/contact" 
                 className="px-8 py-4 bg-white text-indigo-600 rounded-xl font-semibold hover:bg-white/90 transition-all w-full sm:w-auto text-center"
               >
                 Ücretsiz Deneme
               </Link>
-              <Link 
+              <Link
                 href="/pricing" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
               >

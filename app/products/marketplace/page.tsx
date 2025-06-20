@@ -23,13 +23,13 @@ export default function MarketplacePage() {
               Atlassian Marketplace ile iş akışlarınızı özelleştirin ve uygulamalarınızı genişletin. 5,000+ eklenti ve uygulama ile ihtiyaçlarınıza uygun çözümler bulun.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link 
+              <Link
                 href="/contact" 
                 className="px-8 py-4 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-all w-full sm:w-auto text-center"
               >
                 Uygulamaları Keşfet
               </Link>
-              <Link 
+              <Link
                 href="/contact" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
               >
@@ -289,7 +289,7 @@ export default function MarketplacePage() {
               </Link>
             </div>
           </div>
-        </div>
+    </div>
       </section>
     </main>
   );

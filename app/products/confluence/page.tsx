@@ -23,13 +23,13 @@ export default function ConfluencePage() {
               Confluence ile tüm ekip bilgilerinizi merkezi bir platformda toplayın, düzenleyin ve paylaşın. Yapay zeka destekli bilgi tabanı çözümüyle daha verimli çalışın.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link 
+              <Link
                 href="/contact" 
                 className="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all w-full sm:w-auto text-center"
               >
                 Ücretsiz Dene
               </Link>
-              <Link 
+              <Link
                 href="/contact" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
               >
@@ -136,7 +136,7 @@ export default function ConfluencePage() {
               <div className="space-y-4">
                 <h3 className="text-2xl font-semibold text-blue-600">Yazılım Geliştirme</h3>
                 <p className="text-blue-600/80">Teknik dokümantasyon, mimari kararlar ve geliştirme süreçlerinizi kayıt altına alın. Kod görünümleri ve diyagramlarla zenginleştirin.</p>
-              </div>
+                </div>
 
               <div className="space-y-4">
                 <h3 className="text-2xl font-semibold text-blue-600">İnsan Kaynakları</h3>
@@ -148,7 +148,7 @@ export default function ConfluencePage() {
               <div className="space-y-4">
                 <h3 className="text-2xl font-semibold text-blue-600">Pazarlama</h3>
                 <p className="text-blue-600/80">Pazarlama stratejileri, kampanya planları ve içerik takvimlerinizi yönetin. Ekip üyeleri arasında iş birliğini güçlendirin.</p>
-              </div>
+            </div>
 
               <div className="space-y-4">
                 <h3 className="text-2xl font-semibold text-blue-600">Proje Yönetimi</h3>
@@ -172,12 +172,12 @@ export default function ConfluencePage() {
               >
                 Ücretsiz Başlayın
               </Link>
-              <Link 
+            <Link
                 href="/pricing" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
-              >
+            >
                 Fiyatlandırmayı Görüntüle
-              </Link>
+            </Link>
             </div>
           </div>
         </div>

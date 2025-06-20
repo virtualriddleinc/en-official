@@ -23,13 +23,13 @@ export default function JiraServiceManagementPage() {
               Jira Service Management ile IT ekiplerinizin hızını artırın, sorunu yönetin ve üstün müşteri deneyimi sunun.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link 
+              <Link
                 href="/contact" 
                 className="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all w-full sm:w-auto text-center"
               >
                 Ücretsiz Dene
               </Link>
-              <Link 
+              <Link
                 href="/contact" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
               >
@@ -199,12 +199,12 @@ export default function JiraServiceManagementPage() {
               >
                 Ücretsiz Başlayın
               </Link>
-              <Link 
+            <Link
                 href="/pricing" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
-              >
+            >
                 Fiyatlandırmayı Görüntüle
-              </Link>
+            </Link>
             </div>
           </div>
         </div>

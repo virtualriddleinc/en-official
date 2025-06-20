@@ -64,18 +64,18 @@ export default function JiraSoftwarePage() {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
               Yazılım geliştirmenin geleceği burada
-            </h1>
+              </h1>
             <p className="text-xl text-gray-300 mb-8">
               Yapay zeka destekli planlama ve yönetim araçlarıyla projelerinizi zamanında ve bütçe dahilinde tamamlayın. Modern ekipler için tasarlanmış #1 çevik proje yönetim aracı.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link 
+              <Link
                 href="/contact" 
                 className="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all w-full sm:w-auto text-center"
               >
                 Ücretsiz Dene
               </Link>
-              <Link 
+              <Link
                 href="/contact" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
               >
@@ -99,7 +99,7 @@ export default function JiraSoftwarePage() {
               </div>
               <h3 className="text-2xl font-bold text-blue-600">Çevik Planlama</h3>
               <p className="text-blue-600/80">Scrum, Kanban veya kendi özel iş akışınızla projelerinizi planlayın ve takip edin. Her adımda görselleştirin ve optimize edin.</p>
-            </div>
+                </div>
 
             {/* Feature 2 */}
             <div className="space-y-4">
@@ -109,8 +109,8 @@ export default function JiraSoftwarePage() {
                   <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M23 21v-2a4 4 0 00-3-3.87" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M16 3.13a4 4 0 010 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
+                  </svg>
+                </div>
               <h3 className="text-2xl font-bold text-blue-600">Takım İş Birliği</h3>
               <p className="text-blue-600/80">Ekip üyeleri arasında sorunsuz iletişim ve iş birliği sağlayın. Gerçek zamanlı güncellemeler ve bildirimlerle her zaman güncel kalın.</p>
             </div>
@@ -215,12 +215,12 @@ export default function JiraSoftwarePage() {
               >
                 Ücretsiz Başlayın
               </Link>
-              <Link 
+            <Link
                 href="/pricing" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
-              >
+            >
                 Fiyatlandırmayı Görüntüle
-              </Link>
+            </Link>
             </div>
           </div>
         </div>

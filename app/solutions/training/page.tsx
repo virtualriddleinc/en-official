@@ -74,7 +74,7 @@ export default function TrainingPage() {
           <div className="absolute h-full w-full bg-[url('/noise.png')] opacity-5"></div>
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-radial from-blue-400/20 via-transparent to-transparent opacity-50"></div>
           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-radial from-blue-600/20 via-transparent to-transparent opacity-30"></div>
-        </div>
+            </div>
         
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
@@ -173,30 +173,30 @@ export default function TrainingPage() {
               <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">1</div>
               <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Eğitim</h3>
               <p className="text-gray-600">Kapsamlı eğitim programı ile bilgi ve becerilerinizi geliştirin.</p>
-            </div>
+                  </div>
 
             {/* Adım 2 */}
             <div className="bg-white p-8 rounded-3xl relative group hover:shadow-lg transition-all">
               <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">2</div>
               <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Pratik</h3>
               <p className="text-gray-600">Gerçek dünya senaryoları ile uygulama deneyimi kazanın.</p>
-            </div>
+                  </div>
 
             {/* Adım 3 */}
             <div className="bg-white p-8 rounded-3xl relative group hover:shadow-lg transition-all">
               <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">3</div>
               <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Sınav</h3>
               <p className="text-gray-600">Online veya gözetimli sertifikasyon sınavına girin.</p>
-            </div>
+                  </div>
 
             {/* Adım 4 */}
             <div className="bg-white p-8 rounded-3xl relative group hover:shadow-lg transition-all">
               <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">4</div>
               <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Sertifika</h3>
               <p className="text-gray-600">Resmi Atlassian sertifikanızı alın ve kariyerinizi ileriye taşıyın.</p>
-            </div>
-          </div>
-        </div>
+                  </div>
+                  </div>
+                  </div>
       </section>
 
       {/* Sertifika Avantajları */}
@@ -207,7 +207,7 @@ export default function TrainingPage() {
             <p className="text-xl text-gray-600">
               Atlassian sertifikasyonu ile elde edeceğiniz kazanımlar
             </p>
-          </div>
+                  </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Avantaj 1 */}
@@ -216,7 +216,7 @@ export default function TrainingPage() {
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                 </svg>
-              </div>
+                  </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Uluslararası Geçerlilik</h3>
               <p className="text-gray-600">
                 Dünya çapında tanınan Atlassian sertifikaları ile global iş olanaklarına erişim sağlayın.
@@ -228,7 +228,7 @@ export default function TrainingPage() {
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+                  </svg>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Kariyer Gelişimi</h3>
               <p className="text-gray-600">
@@ -241,7 +241,7 @@ export default function TrainingPage() {
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
+                  </svg>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Rekabet Avantajı</h3>
               <p className="text-gray-600">
@@ -262,11 +262,11 @@ export default function TrainingPage() {
                 <p className="text-white/80 mb-10">
                   İhtiyaçlarınıza özel eğitim ve sertifikasyon programları için aşağıdaki formu doldurun.
                   Uzman ekibimiz 24 saat içinde sizinle iletişime geçecektir.
-                </p>
+            </p>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
                   {/* Kişisel ve Şirket Bilgileri */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="fullName" className="block text-sm font-medium text-white/80 mb-2">
                         Ad Soyad*
@@ -286,8 +286,8 @@ export default function TrainingPage() {
                       <label htmlFor="companyName" className="block text-sm font-medium text-white/80 mb-2">
                         Şirket Adı*
                       </label>
-                      <input
-                        type="text"
+                  <input
+                    type="text"
                         id="companyName"
                         name="companyName"
                         value={formData.companyName}
@@ -301,8 +301,8 @@ export default function TrainingPage() {
                       <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
                         E-posta*
                       </label>
-                      <input
-                        type="email"
+                  <input
+                    type="email"
                         id="email"
                         name="email"
                         value={formData.email}
@@ -325,14 +325,14 @@ export default function TrainingPage() {
                         required
                         className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
                         placeholder="+90 (___) ___ __ __"
-                      />
-                    </div>
+                  />
+                </div>
                     <div>
                       <label htmlFor="position" className="block text-sm font-medium text-white/80 mb-2">
                         Pozisyon
                       </label>
-                      <input
-                        type="text"
+                <input
+                  type="text"
                         id="position"
                         name="position"
                         value={formData.position}
@@ -345,19 +345,19 @@ export default function TrainingPage() {
                       <label htmlFor="currentExperience" className="block text-sm font-medium text-white/80 mb-2">
                         Atlassian Deneyim Seviyeniz*
                       </label>
-                      <select
+                <select
                         id="currentExperience"
                         name="currentExperience"
                         value={formData.currentExperience}
                         onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                      >
+                >
                         <option value="" disabled>Deneyim seviyenizi seçin</option>
                         {experienceLevels.map(level => (
                           <option key={level} value={level} className="bg-blue-900 text-white">{level}</option>
                         ))}
-                      </select>
+                </select>
                     </div>
                   </div>
 
@@ -391,27 +391,27 @@ export default function TrainingPage() {
                     <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
                       Ek Bilgiler ve Beklentileriniz
                     </label>
-                    <textarea
+                <textarea
                       id="message"
                       name="message"
-                      rows={4}
+                  rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
                       placeholder="Eğitim ve sertifikasyon ihtiyaçlarınız hakkında detaylı bilgi verin"
-                    ></textarea>
+                ></textarea>
                   </div>
 
                   {/* Gönder Butonu */}
                   <div className="flex flex-col sm:flex-row justify-end gap-4">
-                    <button
-                      type="submit"
+                <button
+                  type="submit"
                       className="w-full sm:w-auto px-10 py-3 bg-white text-blue-800 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
-                    >
+                >
                       Başvuru Gönder
-                    </button>
+                </button>
                   </div>
-                </form>
+              </form>
               </div>
             </div>
           </div>

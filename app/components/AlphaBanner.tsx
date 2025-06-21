@@ -8,7 +8,7 @@ export default function AlphaBanner() {
   const [isMinimized, setIsMinimized] = useState(false);
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-[100] mx-4 sm:mx-0">
+    <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 sm:left-auto sm:transform-none sm:right-5 sm:bottom-5 z-[100] w-full sm:w-auto px-4 sm:px-0">
       <AnimatePresence>
         {isMinimized ? (
           <motion.div
@@ -16,7 +16,7 @@ export default function AlphaBanner() {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
-            className="ml-auto"
+            className="flex justify-center sm:justify-start"
           >
             <button
               onClick={() => setIsMinimized(false)}
@@ -33,7 +33,7 @@ export default function AlphaBanner() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="w-full max-w-[calc(100vw-2rem)] sm:max-w-sm"
+            className="w-full sm:w-96"
           >
             <div 
               className="relative bg-yellow-50 dark:bg-yellow-900/80 backdrop-blur-xl border border-yellow-200 dark:border-yellow-700/60 rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden"

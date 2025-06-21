@@ -6,7 +6,7 @@ import CookieConsent from "./components/CookieConsent";
 import AlphaBanner from "./components/AlphaBanner";
 import { useRouter, usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Search, X, FileText, ChevronRight, Package, Zap, Building, Scale, BookText, ChevronDown, ChevronUp } from "lucide-react";
+import { Search, X, FileText, ChevronRight, Package, Zap, Building, Scale, BookText, ChevronDown, ChevronUp, Building2, DollarSign, Mail, BarChart, Users, MessageSquare } from "lucide-react";
 import Fuse, { IFuseOptions, FuseResult } from 'fuse.js';
 import { searchData } from "./lib/searchData";
 import { 
@@ -251,22 +251,22 @@ export default function ClientLayout({
                           <div>
                             <h3 className="font-semibold text-white mb-4 text-xl tracking-tight text-left">Planlama &amp; Takip</h3>
                         <ul className="space-y-3">
-                              <MenuItem href="/products/jira-software" icon={JiraSoftwareIcon} title="Jira Software" description="Çevik proje yönetimi" color="blue" />
-                              <MenuItem href="/products/jira-service-management" icon={JiraServiceManagementIcon} title="Jira Service Management" description="IT servis yönetimi" color="purple" />
-                              <MenuItem href="/products/jira-work-management" icon={JiraWorkManagementIcon} title="Jira Work Management" description="İş takımları için proje yönetimi" color="purple" />
+                              <MenuItem href="/products/jira-software" icon={JiraSoftwareIcon} title="Jira Software" description="Çevik proje yönetimi" color="blue" onClick={() => setIsMobileMenuOpen(false)} />
+                              <MenuItem href="/products/jira-service-management" icon={JiraServiceManagementIcon} title="Jira Service Management" description="IT servis yönetimi" color="purple" onClick={() => setIsMobileMenuOpen(false)} />
+                              <MenuItem href="/products/jira-work-management" icon={JiraWorkManagementIcon} title="Jira Work Management" description="İş takımları için proje yönetimi" color="purple" onClick={() => setIsMobileMenuOpen(false)} />
                             </ul>
                               </div>
                           <div className="space-y-6">
                             <div>
                                 <h3 className="font-semibold text-white mb-4 text-xl tracking-tight">İş Birliği &amp; Güvenlik</h3>
                                 <ul className="space-y-3">
-                                    <MenuItem href="/products/confluence" icon={ConfluenceIcon} title="Confluence" description="Takım iş birliği ve bilgi paylaşımı" color="indigo" />
+                                    <MenuItem href="/products/confluence" icon={ConfluenceIcon} title="Confluence" description="Takım iş birliği ve bilgi paylaşımı" color="indigo" onClick={() => setIsMobileMenuOpen(false)} />
                         </ul>
                       </div>
                             <div className="border-t border-white/10 pt-6">
                                 <h4 className="font-semibold text-white mb-4 text-lg tracking-tight">Kod Yönetimi</h4>
                         <ul className="space-y-3">
-                                    <MenuItem href="/products/bitbucket" icon={BitbucketIcon} title="Bitbucket" description="Git tabanlı kod yönetimi" color="blue" />
+                                    <MenuItem href="/products/bitbucket" icon={BitbucketIcon} title="Bitbucket" description="Git tabanlı kod yönetimi" color="blue" onClick={() => setIsMobileMenuOpen(false)} />
                         </ul>
                       </div>
                     </div>
@@ -297,10 +297,10 @@ export default function ClientLayout({
                     >
                       <div className="p-4">
                         <ul className="space-y-2">
-                           <MenuItem href="/solutions/consulting" icon={ConsultingIcon} title="Atlassian Danışmanlığı" description="Kurumsal süreç optimizasyonu" color="emerald" />
-                           <MenuItem href="/solutions/cloud-migration" icon={CloudMigrationIcon} title="Cloud Migration" description="Bulut geçiş stratejisi" color="sky" />
-                           <MenuItem href="/solutions/training" icon={TrainingIcon} title="Eğitim & Sertifikasyon" description="Atlassian ürün eğitimleri" color="amber" />
-                           <MenuItem href="/free-discovery" icon={DiscoveryIcon} title="Ücretsiz Keşif" description="Dijital dönüşüm ön analizi" color="teal" />
+                           <MenuItem href="/solutions/consulting" icon={ConsultingIcon} title="Atlassian Danışmanlığı" description="Kurumsal süreç optimizasyonu" color="emerald" onClick={() => setIsMobileMenuOpen(false)} />
+                           <MenuItem href="/solutions/cloud-migration" icon={CloudMigrationIcon} title="Cloud Migration" description="Bulut geçiş stratejisi" color="sky" onClick={() => setIsMobileMenuOpen(false)} />
+                           <MenuItem href="/solutions/training" icon={TrainingIcon} title="Eğitim & Sertifikasyon" description="Atlassian ürün eğitimleri" color="amber" onClick={() => setIsMobileMenuOpen(false)} />
+                           <MenuItem href="/free-discovery" icon={DiscoveryIcon} title="Ücretsiz Keşif" description="Dijital dönüşüm ön analizi" color="teal" onClick={() => setIsMobileMenuOpen(false)} />
                         </ul>
                         </div>
                     </motion.div>
@@ -364,7 +364,7 @@ export default function ClientLayout({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm"
+              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <motion.div
@@ -372,47 +372,63 @@ export default function ClientLayout({
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 h-full w-full max-w-sm z-50 bg-white dark:bg-gray-900 shadow-2xl"
+              className="fixed top-0 right-0 h-full w-full max-w-sm z-50 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 shadow-2xl"
             >
-              <div className="p-6 h-full overflow-y-auto">
-                <div className="flex justify-between items-center mb-8">
-                  <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Menü</h3>
+              <div className="p-6 h-full flex flex-col">
+                <div className="flex justify-between items-center mb-6 flex-shrink-0">
+                  <h3 className="text-2xl font-bold text-white">Menü</h3>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    className="p-2 rounded-lg text-gray-300 hover:bg-white/10"
                   >
                     <X className="w-6 h-6" />
                   </button>
                 </div>
 
-                <div className="space-y-4">
-                  <button 
-                    onClick={() => { setIsMobileMenuOpen(false); setIsSearchOpen(true); }}
-                    className="w-full flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-800/50 rounded-lg text-left"
-                  >
-                    <span className="font-semibold text-gray-700 dark:text-gray-300">Ara...</span>
-                    <Search className="w-5 h-5 text-gray-500" />
-                  </button>
+                <div className="flex-grow overflow-y-auto -mr-6 pr-6">
+                  <div className="px-2 space-y-2">
+                    <button 
+                      onClick={() => { setIsMobileMenuOpen(false); setIsSearchOpen(true); }}
+                      className="w-full flex items-center justify-between p-4 bg-white/5 rounded-lg text-left mb-2"
+                    >
+                      <span className="font-semibold text-gray-300">Ara...</span>
+                      <Search className="w-5 h-5 text-gray-500" />
+                    </button>
 
-                  <MobileAccordion title="Ürünler">
-                    <ul className="space-y-2 pt-2">
-                      {productLinks.map(link => (
-                         <MenuItem key={link.href} {...link} />
-                      ))}
-                    </ul>
-                  </MobileAccordion>
+                    <div className="border-b border-white/10">
+                        <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white">
+                            Hakkımızda
+                        </Link>
+                    </div>
+                    
+                    <MobileAccordion title="Ürünler">
+                      <ul className="space-y-1 pt-2">
+                        {productLinks.map(link => (
+                          <MenuItem key={link.href} {...link} onClick={() => setIsMobileMenuOpen(false)} />
+                        ))}
+                      </ul>
+                    </MobileAccordion>
 
-                  <MobileAccordion title="Çözümler">
-                    <ul className="space-y-2 pt-2">
-                      {solutionLinks.map(link => (
-                         <MenuItem key={link.href} {...link} />
-                      ))}
-                    </ul>
-                  </MobileAccordion>
+                    <MobileAccordion title="Çözümler">
+                      <ul className="space-y-1 pt-2">
+                        {solutionLinks.map(link => (
+                          <MenuItem key={link.href} {...link} onClick={() => setIsMobileMenuOpen(false)} />
+                        ))}
+                      </ul>
+                    </MobileAccordion>
+                    
+                    <div className="border-b border-white/10">
+                        <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white">
+                            Fiyatlandırma
+                        </Link>
+                    </div>
 
-                  <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="block p-4 font-semibold text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">Hakkımızda</Link>
-                  <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="block p-4 font-semibold text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">Fiyatlandırma</Link>
-                  <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="block p-4 font-semibold text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">İletişim</Link>
+                    <div className="border-b border-white/10">
+                        <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white">
+                            İletişim
+                        </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -711,17 +727,17 @@ const colorClasses = {
 
 type Color = keyof typeof colorClasses;
 
-const MenuItem = ({ href, icon: Icon, title, description, color }: { href: string, icon: React.ElementType, title: string, description: string, color: Color }) => {
+const MenuItem = ({ href, icon: Icon, title, description, color, onClick }: { href: string, icon: React.ElementType, title: string, description: string, color: Color, onClick?: () => void }) => {
     const classes = colorClasses[color];
 
     return (
         <li>
-            <Link href={href} className="group/item flex items-start p-2.5 rounded-2xl hover:bg-white/5 transition-all">
+            <Link href={href} onClick={onClick} className="group/item flex items-start p-2.5 rounded-2xl hover:bg-white/5 transition-all">
                 <div className={`shrink-0 w-11 h-11 ${classes.bg} rounded-2xl flex items-center justify-center border group-hover/item:scale-95 transition-transform`}>
                     <Icon className={`w-6 h-6 ${classes.text}`} />
                 </div>
                 <div className="ml-3">
-                    <h5 className={`font-semibold text-white ${classes.hoverText} text-[16px] mb-1 transition-colors`}>{title}</h5>
+                    <h5 className={`font-semibold text-white text-[16px] mb-1`}>{title}</h5>
                     <p className="text-[14px] text-gray-300 leading-snug">{description}</p>
                 </div>
             </Link>
@@ -731,15 +747,14 @@ const MenuItem = ({ href, icon: Icon, title, description, color }: { href: strin
 
 const MobileAccordion = ({ title, children }: { title: string, children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <div className="border-b border-gray-200 dark:border-gray-700/50">
+    <div className="border-b border-white/10">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center p-4 font-semibold text-gray-700 dark:text-gray-300"
+        className="w-full flex justify-between items-center p-4 font-semibold text-lg text-white"
       >
         <span>{title}</span>
-        <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-5 h-5 text-white/70 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       <AnimatePresence>
         {isOpen && (
@@ -750,7 +765,7 @@ const MobileAccordion = ({ title, children }: { title: string, children: React.R
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <div className="p-4 pt-0">
+            <div className="pt-2 pb-4">
               {children}
             </div>
           </motion.div>

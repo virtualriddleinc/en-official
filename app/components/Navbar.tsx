@@ -135,11 +135,14 @@ export default function Navbar() {
 
         {/* Mobil Menü */}
         {isOpen && (
-          <div className="md:hidden py-6 border-t border-gray-200 dark:border-gray-700">
-            <div className="flex flex-col space-y-6">
+          <div className="md:hidden py-6 border-t border-gray-200 dark:border-gray-700 relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20">
+            {/* Arkaplan gradient */}
+            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-radial from-blue-400/30 via-transparent to-transparent opacity-70"></div>
+            
+            <div className="flex flex-col space-y-6 relative z-10">
               <Link 
                 href="/" 
-                className="text-lg font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2"
+                className="text-lg font-bold text-blue-700 dark:text-blue-300 transition-colors py-2 hover:text-blue-800 dark:hover:text-blue-200"
                 onClick={() => setIsOpen(false)}
               >
                 Ana Sayfa
@@ -147,12 +150,12 @@ export default function Navbar() {
               
               {/* Mobil Ürünler Menüsü */}
               <div className="space-y-4">
-                <p className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+                <p className="text-xl font-bold text-gray-900 dark:text-white border-b-2 border-blue-200 dark:border-blue-700 pb-2">
                   Ürünler
                 </p>
                 {Object.entries(products).map(([category, items]) => (
                   <div key={category} className="space-y-3">
-                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+                    <p className="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">
                       {category}
                     </p>
                     <div className="pl-4 space-y-2">
@@ -160,7 +163,7 @@ export default function Navbar() {
                         <Link
                           key={item.name}
                           href={item.href}
-                          className="block text-base text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-1"
+                          className="block text-base text-blue-700 dark:text-blue-300 transition-colors py-1 hover:text-blue-800 dark:hover:text-blue-200"
                           onClick={() => setIsOpen(false)}
                         >
                           {item.name}
@@ -174,28 +177,28 @@ export default function Navbar() {
               <div className="space-y-4 pt-2">
                 <Link 
                   href="/about" 
-                  className="block text-lg font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2"
+                  className="block text-lg font-bold text-blue-700 dark:text-blue-300 transition-colors py-2 hover:text-blue-800 dark:hover:text-blue-200"
                   onClick={() => setIsOpen(false)}
                 >
                   Hakkımızda
                 </Link>
                 <Link 
                   href="/career" 
-                  className="block text-lg font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2"
+                  className="block text-lg font-bold text-blue-700 dark:text-blue-300 transition-colors py-2 hover:text-blue-800 dark:hover:text-blue-200"
                   onClick={() => setIsOpen(false)}
                 >
                   Kariyer
                 </Link>
                 <Link 
                   href="/contact" 
-                  className="block text-lg font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2"
+                  className="block text-lg font-bold text-blue-700 dark:text-blue-300 transition-colors py-2 hover:text-blue-800 dark:hover:text-blue-200"
                   onClick={() => setIsOpen(false)}
                 >
                   İletişim
                 </Link>
               </div>
 
-              <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="pt-4 border-t-2 border-blue-200 dark:border-blue-700">
                 <Link 
                   href="/free-discovery" 
                   className="block w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors text-center font-medium text-lg"

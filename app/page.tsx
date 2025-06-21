@@ -55,7 +55,7 @@ export default function Home() {
 
                   {/* Ana Başlık */}
                   <div className="space-y-6">
-                    <h1 className="text-6xl lg:text-7xl font-bold tracking-tight">
+                    <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight">
                       <div className="text-white leading-tight">Atlassian</div>
                       <div className="text-white/90 leading-tight">Danışmanlık</div>
                       <div className="text-white/80 leading-tight">Hizmetleri</div>
@@ -194,7 +194,7 @@ export default function Home() {
         <div className="container mx-auto px-4 relative">
           <div className="text-center mb-20">
             <span className="inline-block px-4 py-2 rounded-full bg-[#0052CC]/10 text-[#0052CC] font-medium text-sm tracking-wider uppercase mb-6">NEDEN BİZ?</span>
-            <h2 className="text-5xl font-bold text-[#253858] mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#253858] mb-6">
               Neden Virtual Riddle?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -341,14 +341,14 @@ export default function Home() {
 
           {/* Gradient Circles */}
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-radial from-blue-400/20 via-transparent to-transparent opacity-50" />
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-radial from-blue-600/20 via-transparent to-transparent opacity-30" />
+          <div className="absolute bottom-0 left-0 w-full max-w-[600px] h-[600px] bg-gradient-radial from-blue-600/20 via-transparent to-transparent opacity-30" />
           
           {/* Subtle Lines */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-1/2 left-1/4 w-full h-32 bg-white/5 rotate-45 transform -translate-x-1/2" />
             <div className="absolute top-1/4 right-0 w-32 h-96 bg-white/5 -rotate-45" />
-              </div>
-                </div>
+          </div>
+        </div>
 
         <div className="container mx-auto px-4 relative">
           <div className="max-w-7xl mx-auto">
@@ -359,7 +359,7 @@ export default function Home() {
                 <span className="text-sm font-medium text-white/90 uppercase tracking-wider">Başarılarımız</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
                 Güvenilir Çözüm Ortağınız
               </h2>
             </div>
@@ -385,7 +385,7 @@ export default function Home() {
                         <span className="text-base font-medium text-white/80">Kurumsal Müşteri</span>
                       </div>
                       <div className="flex items-center">
-                        <span className="text-7xl font-bold text-white leading-none">25</span>
+                        <span className="text-6xl sm:text-7xl font-bold text-white leading-none">25</span>
                         <span className="text-5xl font-bold text-[#FF8E53] ml-1 mb-1">+</span>
                       </div>
                     </div>
@@ -413,11 +413,11 @@ export default function Home() {
                         <span className="text-base font-medium text-white/80">Başarılı Proje</span>
                       </div>
                       <div className="flex items-center">
-                        <span className="text-7xl font-bold text-white leading-none">100</span>
+                        <span className="text-6xl sm:text-7xl font-bold text-white leading-none">100</span>
                         <span className="text-5xl font-bold text-[#EC4899] ml-1 mb-1">+</span>
               </div>
             </div>
-                    <p className="text-base text-white/70 font-medium mt-4">Müşterilerimizin dijital dönüşüm süreçlerine katkı</p>
+                    <p className="text-base text-white/70 font-medium mt-4">Tamamlanan başarılı proje</p>
                   </div>
               </div>
               </div>
@@ -434,8 +434,8 @@ export default function Home() {
         
         {/* Decorative Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-radial from-purple-500/10 via-transparent to-transparent opacity-50 blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-radial from-indigo-500/10 via-transparent to-transparent opacity-30 blur-3xl"></div>
+          <div className="absolute top-0 right-0 w-full max-w-[600px] h-[600px] bg-gradient-radial from-purple-500/10 via-transparent to-transparent opacity-50 blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-full max-w-[600px] h-[600px] bg-gradient-radial from-blue-600/20 via-transparent to-transparent opacity-30" />
         </div>
         
         <div className="container mx-auto px-4 relative">
@@ -478,7 +478,7 @@ export default function Home() {
 
           {/* Gradient Circles */}
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-radial from-blue-400/20 via-transparent to-transparent opacity-50" />
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-radial from-blue-600/20 via-transparent to-transparent opacity-30" />
+          <div className="absolute bottom-0 left-0 w-full max-w-[600px] h-[600px] bg-gradient-radial from-blue-600/20 via-transparent to-transparent opacity-30" />
           
           {/* Subtle Lines */}
           <div className="absolute inset-0 overflow-hidden">

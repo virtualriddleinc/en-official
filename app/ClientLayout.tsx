@@ -243,10 +243,10 @@ export default function ClientLayout({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute left-0 mt-4 w-[550px] bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-3xl border border-white/5 shadow-2xl"
-                >
-                  <div className="p-6">
-                        <div className="grid grid-cols-2 gap-8">
+                      className="absolute left-0 mt-4 w-full max-w-[calc(100vw-2rem)] lg:w-[550px] bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-3xl border border-white/5 shadow-2xl"
+                    >
+                      <div className="p-6">
+                        <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2">
                           <div>
                             <h3 className="font-semibold text-white mb-4 text-xl tracking-tight text-left">Planlama &amp; Takip</h3>
                         <ul className="space-y-3">
@@ -508,11 +508,11 @@ export default function ClientLayout({
                                 <CategoryIcon category={item.category} className={`h-6 w-6 transition-transform group-hover:scale-110 ${selectedIndex === index ? 'text-blue-600 dark:text-blue-400' : ''}`} />
                                 <div>
                                   <p className={`font-semibold text-base ${selectedIndex === index ? 'text-blue-700 dark:text-blue-300' : 'text-gray-800 dark:text-gray-200'}`}>{item.title}</p>
-                                </div>
-                              </div>
+              </div>
+              </div>
                               <ChevronRight className={`h-5 w-5 ${selectedIndex === index ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400'}`} />
                             </a>
-                          </Link>
+                      </Link>
                         </li>
                       ))}
                     </ul>

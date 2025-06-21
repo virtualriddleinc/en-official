@@ -7,7 +7,7 @@ export default function NotFound() {
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 text-white p-4 md:p-8">
       <div className="w-full max-w-2xl text-center">
         <div className="mb-8 relative">
-          <div className="text-[160px] md:text-[220px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400 leading-none">404</div>
+          <div className="text-[80px] sm:text-[120px] md:text-[160px] lg:text-[220px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400 leading-none">404</div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
             <div className="h-2 w-full max-w-md mx-auto bg-white/10 backdrop-blur-sm rounded-full"></div>
           </div>

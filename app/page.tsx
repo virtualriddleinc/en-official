@@ -55,13 +55,13 @@ export default function Home() {
 
                   {/* Ana Başlık */}
                   <div className="space-y-6">
-                    <h1 className="text-6xl lg:text-7xl font-bold tracking-tight">
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
                       <div className="text-white leading-tight">Atlassian</div>
                       <div className="text-white/90 leading-tight">Danışmanlık</div>
                       <div className="text-white/80 leading-tight">Hizmetleri</div>
                 </h1>
                     
-                    <p className="text-xl text-white/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                    <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
                       Jira ve Confluence başta olmak üzere tüm Atlassian ürünleri için kurumsal danışmanlık hizmetleri.
                     </p>
                   </div>
@@ -205,37 +205,37 @@ export default function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Hızlı Entegrasyon Kartı */}
-            <div className="group relative bg-white p-8 rounded-2xl transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.1)] hover:-translate-y-1 border border-gray-100 w-5/6 mx-auto lg:w-full">
+            <div className="group relative bg-white p-6 sm:p-8 rounded-2xl transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.1)] hover:-translate-y-1 border border-gray-100 w-full max-w-sm mx-auto lg:max-w-none lg:w-full">
               <div className="absolute inset-0 bg-gradient-to-br from-[#0052CC]/5 to-[#0052CC]/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="relative">
-                <div className="w-16 h-16 bg-[#0052CC] rounded-2xl flex items-center justify-center mb-6 transform transition-transform group-hover:scale-110 group-hover:rotate-3">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-[#0052CC] rounded-2xl flex items-center justify-center mb-4 sm:mb-6 transform transition-transform group-hover:scale-110 group-hover:rotate-3">
+                  <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-[#253858] mb-4">Hızlı Entegrasyon</h3>
-                <div className="space-y-4">
-                  <p className="text-gray-600 leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#253858] mb-3 sm:mb-4">Hızlı Entegrasyon</h3>
+                <div className="space-y-3 sm:space-y-4">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     Modern teknolojilerle işletmenizi hızla dijitalleştiriyor, süreçlerinizi optimize ediyoruz.
                   </p>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2 sm:space-y-3">
                     <li className="flex items-start">
-                      <svg className="w-5 h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-gray-600">Detaylı ihtiyaç analizi ve planlama</span>
+                      <span className="text-sm sm:text-base text-gray-600">Detaylı ihtiyaç analizi ve planlama</span>
                     </li>
                     <li className="flex items-start">
-                      <svg className="w-5 h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-gray-600">Mevcut sistemlerle sorunsuz entegrasyon</span>
+                      <span className="text-sm sm:text-base text-gray-600">Mevcut sistemlerle sorunsuz entegrasyon</span>
                     </li>
                     <li className="flex items-start">
-                      <svg className="w-5 h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-gray-600">Özelleştirilebilir iş akışları</span>
+                      <span className="text-sm sm:text-base text-gray-600">Özelleştirilebilir iş akışları</span>
                     </li>
                   </ul>
                 </div>
@@ -243,37 +243,37 @@ export default function Home() {
             </div>
 
             {/* Atlassian's Best Practices Kartı */}
-            <div className="group relative bg-white p-8 rounded-2xl transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.1)] hover:-translate-y-1 border border-gray-100 w-5/6 mx-auto lg:w-full">
+            <div className="group relative bg-white p-6 sm:p-8 rounded-2xl transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.1)] hover:-translate-y-1 border border-gray-100 w-full max-w-sm mx-auto lg:max-w-none lg:w-full">
               <div className="absolute inset-0 bg-gradient-to-br from-[#0052CC]/5 to-[#0052CC]/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="relative">
-                <div className="w-16 h-16 bg-[#0052CC] rounded-2xl flex items-center justify-center mb-6 transform transition-transform group-hover:scale-110 group-hover:rotate-3">
-                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-[#0052CC] rounded-2xl flex items-center justify-center mb-4 sm:mb-6 transform transition-transform group-hover:scale-110 group-hover:rotate-3">
+                   <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12.75L11.25 15L15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-[#253858] mb-4">Atlassian's Best Practices</h3>
-                <div className="space-y-4">
-                  <p className="text-gray-600 leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#253858] mb-3 sm:mb-4">Atlassian's Best Practices</h3>
+                <div className="space-y-3 sm:space-y-4">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     Atlassian'ın önerdiği en iyi uygulama ve yöntemleri kullanarak projelerinizi yönetiyoruz.
                   </p>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2 sm:space-y-3">
                     <li className="flex items-start">
-                      <svg className="w-5 h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-gray-600">Doğru yetkilendirme ve proje yönetimi</span>
+                      <span className="text-sm sm:text-base text-gray-600">Doğru yetkilendirme ve proje yönetimi</span>
                     </li>
                     <li className="flex items-start">
-                      <svg className="w-5 h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-gray-600">Doğru yapılandırılmış iş akışları</span>
+                      <span className="text-sm sm:text-base text-gray-600">Doğru yapılandırılmış iş akışları</span>
                     </li>
                     <li className="flex items-start">
-                      <svg className="w-5 h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-gray-600">Verimli proje yönetim metodolojileri</span>
+                      <span className="text-sm sm:text-base text-gray-600">Verimli proje yönetim metodolojileri</span>
                     </li>
                   </ul>
                 </div>
@@ -281,37 +281,37 @@ export default function Home() {
             </div>
 
             {/* Uzman Ekip Kartı */}
-            <div className="group relative bg-white p-8 rounded-2xl transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.1)] hover:-translate-y-1 border border-gray-100 w-5/6 mx-auto lg:w-full">
+            <div className="group relative bg-white p-6 sm:p-8 rounded-2xl transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.1)] hover:-translate-y-1 border border-gray-100 w-full max-w-sm mx-auto lg:max-w-none lg:w-full">
               <div className="absolute inset-0 bg-gradient-to-br from-[#0052CC]/5 to-[#0052CC]/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="relative">
-                <div className="w-16 h-16 bg-[#0052CC] rounded-2xl flex items-center justify-center mb-6 transform transition-transform group-hover:scale-110 group-hover:rotate-3">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-[#0052CC] rounded-2xl flex items-center justify-center mb-4 sm:mb-6 transform transition-transform group-hover:scale-110 group-hover:rotate-3">
+                  <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-[#253858] mb-4">Uzman Ekip</h3>
-                <div className="space-y-4">
-                  <p className="text-gray-600 leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#253858] mb-3 sm:mb-4">Uzman Ekip</h3>
+                <div className="space-y-3 sm:space-y-4">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     Deneyimli ekibimizle projenizin her aşamasında yanınızdayız.
                   </p>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2 sm:space-y-3">
                     <li className="flex items-start">
-                      <svg className="w-5 h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-gray-600">Kapsamlı proje deneyimi</span>
+                      <span className="text-sm sm:text-base text-gray-600">Kapsamlı proje deneyimi</span>
                     </li>
                     <li className="flex items-start">
-                      <svg className="w-5 h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-gray-600">Enterprise seviye proje deneyimi</span>
+                      <span className="text-sm sm:text-base text-gray-600">Enterprise seviye proje deneyimi</span>
                     </li>
                     <li className="flex items-start">
-                      <svg className="w-5 h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-gray-600">Proje özelinde dedike ekip</span>
+                      <span className="text-sm sm:text-base text-gray-600">Proje özelinde dedike ekip</span>
                     </li>
                   </ul>
                 </div>
@@ -385,11 +385,11 @@ export default function Home() {
                         <span className="text-base font-medium text-white/80">Kurumsal Müşteri</span>
                       </div>
                       <div className="flex items-center">
-                        <span className="text-7xl font-bold text-white leading-none">25</span>
-                        <span className="text-5xl font-bold text-[#FF8E53] ml-1 mb-1">+</span>
+                        <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-none">25</span>
+                        <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#FF8E53] ml-1 mb-1">+</span>
                       </div>
                     </div>
-                    <p className="text-base text-white/70 font-medium mt-4">Ulusal ve uluslararası şirketlere Atlassian çözümleri</p>
+                    <p className="text-sm sm:text-base text-white/70 font-medium mt-4">Ulusal ve uluslararası şirketlere Atlassian çözümleri</p>
                   </div>
                 </div>
               </div>
@@ -397,27 +397,27 @@ export default function Home() {
               {/* Proje Kartı */}
               <div className="flex-1 relative group">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#7C3AED] to-[#EC4899] opacity-60 blur-3xl transition-all duration-500 group-hover:opacity-80"></div>
-                <div className="relative h-full bg-black/20 backdrop-blur-xl rounded-3xl p-10 border border-white/10 overflow-hidden transform transition-transform duration-500 hover:scale-[1.02]">
+                <div className="relative h-full bg-black/20 backdrop-blur-xl rounded-3xl p-6 sm:p-8 md:p-10 border border-white/10 overflow-hidden transform transition-transform duration-500 hover:scale-[1.02]">
                   <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-[#7C3AED] to-[#EC4899] opacity-20 blur-3xl rounded-full transform translate-x-20 -translate-y-20"></div>
                   
                   <div className="relative flex flex-col h-full">
                     <div className="mb-auto">
-                      <div className="flex items-center gap-4 mb-6">
-                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#7C3AED] to-[#EC4899] p-0.5">
+                      <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#7C3AED] to-[#EC4899] p-0.5">
                           <div className="w-full h-full rounded-2xl bg-black/30 flex items-center justify-center">
-                            <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg className="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                   </svg>
                           </div>
                         </div>
-                        <span className="text-base font-medium text-white/80">Başarılı Proje</span>
+                        <span className="text-sm sm:text-base font-medium text-white/80">Başarılı Proje</span>
                       </div>
                       <div className="flex items-center">
-                        <span className="text-7xl font-bold text-white leading-none">100</span>
-                        <span className="text-5xl font-bold text-[#EC4899] ml-1 mb-1">+</span>
+                        <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-none">100</span>
+                        <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#EC4899] ml-1 mb-1">+</span>
               </div>
             </div>
-                    <p className="text-base text-white/70 font-medium mt-4">Müşterilerimizin dijital dönüşüm süreçlerine katkı</p>
+                    <p className="text-sm sm:text-base text-white/70 font-medium mt-4">Müşterilerimizin dijital dönüşüm süreçlerine katkı</p>
                   </div>
               </div>
               </div>

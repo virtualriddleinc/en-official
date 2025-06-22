@@ -681,6 +681,24 @@ export default function ClientLayout({
       </footer>
 
       <CookieConsent />
+
+      {/* Alpha Version Sticky Banner */}
+      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
+        <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white px-6 py-3 rounded-full shadow-2xl border border-white/20 backdrop-blur-sm">
+          <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2">
+              <span className="text-lg">🚀</span>
+            </div>
+            <div className="text-sm font-medium">
+              <span className="mr-2">Alpha Versiyon</span>
+              <span className="opacity-80">v1.0.0</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <span className="text-xs opacity-80">Geliştirme Aşamasında</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 } 

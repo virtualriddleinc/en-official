@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { CheckCircle, AlertTriangle, X } from "lucide-react";
 
 export default function FreeDiscoveryPage() {
   // Form durumu için state tanımları
@@ -24,6 +25,14 @@ export default function FreeDiscoveryPage() {
     message: ""
   });
 
+  const [status, setStatus] = useState<null | "success" | "error">(null);
+  const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const requiredFields = ["fullName", "companyName", "email", "phone", "message"];
+  const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+  const [validationMsg, setValidationMsg] = useState("");
+
   // Ürün listesi ve açıklamaları
   const productList = [
     { id: "jira", name: "Jira Software", description: "Çevik proje yönetimi ve planlama" },
@@ -42,12 +51,117 @@ export default function FreeDiscoveryPage() {
     "1000+"
   ];
 
+  // Kullanıcıya görünen ürün etiketleri
+  const productLabels = {
+    jira: "Jira Software",
+    confluence: "Confluence",
+    bitbucket: "Bitbucket",
+    jiraServiceManagement: "Jira Service Management",
+    advanced: "Advanced Roadmaps"
+  };
+
+  // Lambda ile uyumlu field mapping fonksiyonu
+  function mapFormToLambda(form) {
+    return {
+      page: "/free-discovery",
+      name: form.fullName,
+      company: form.companyName,
+      email: form.email,
+      phone: form.phone,
+      position: form.position,
+      teamSize: form.teamSize,
+      atlassianProducts: Object.entries(form.products)
+        .filter(([k,v])=>v)
+        .map(([k])=>productLabels[k] || k)
+        .join(", "),
+      currentTools: form.currentTools,
+      message: form.message
+    };
+  }
+
   // Form gönderim işleme
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form gönderildi:", formData);
-    // API'ye gönderme işlemi burada gerçekleştirilecek
-    alert("Başvurunuz başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz.");
+    setLoading(true);
+    setStatus(null);
+    setValidationMsg("");
+    
+    // Validasyon
+    const newErrors: { [key: string]: boolean } = {};
+    requiredFields.forEach((field) => {
+      if (!formData[field] || formData[field].trim() === "") {
+        newErrors[field] = true;
+      }
+    });
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      setValidationMsg("Lütfen zorunlu alanları doldurun.");
+      setLoading(false);
+      setTimeout(() => setValidationMsg(""), 3000);
+      return;
+    }
+
+    // Lambda ile uyumlu payload oluştur
+    const payload = mapFormToLambda(formData);
+    
+    try {
+      const res = await fetch("https://rvskttz2jh.execute-api.us-east-1.amazonaws.com/prod/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      
+      // Form temizleme
+      setFormData({
+        fullName: "",
+        companyName: "",
+        email: "",
+        phone: "",
+        position: "",
+        teamSize: "",
+        products: {
+          jira: false,
+          confluence: false,
+          bitbucket: false,
+          jiraServiceManagement: false,
+          advanced: false
+        },
+        challenges: [],
+        currentTools: "",
+        message: ""
+      });
+      setErrors({});
+      
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      // Form temizleme
+      setFormData({
+        fullName: "",
+        companyName: "",
+        email: "",
+        phone: "",
+        position: "",
+        teamSize: "",
+        products: {
+          jira: false,
+          confluence: false,
+          bitbucket: false,
+          jiraServiceManagement: false,
+          advanced: false
+        },
+        challenges: [],
+        currentTools: "",
+        message: ""
+      });
+      setErrors({});
+      setStatus("error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Input değişimlerini yakalama
@@ -67,6 +181,17 @@ export default function FreeDiscoveryPage() {
       }
     });
   };
+
+  useEffect(() => {
+    if (status) {
+      setShowPopup(true);
+      const timer = setTimeout(() => {
+        setShowPopup(false);
+        setStatus(null);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
 
   return (
     <main className="flex min-h-screen flex-col items-center pt-32">
@@ -223,7 +348,11 @@ export default function FreeDiscoveryPage() {
                         value={formData.fullName}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.fullName 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
                         placeholder="Adınız ve soyadınız"
                       />
                     </div>
@@ -238,7 +367,11 @@ export default function FreeDiscoveryPage() {
                         value={formData.companyName}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.companyName 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
                         placeholder="Şirketinizin adı"
                       />
                     </div>
@@ -253,7 +386,11 @@ export default function FreeDiscoveryPage() {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.email 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
                         placeholder="ornek@sirket.com"
                       />
                     </div>
@@ -268,7 +405,11 @@ export default function FreeDiscoveryPage() {
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.phone 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
                         placeholder="+90 (___) ___ __ __"
                       />
                     </div>
@@ -305,6 +446,13 @@ export default function FreeDiscoveryPage() {
                       </select>
                     </div>
                   </div>
+
+                  {/* Validation mesajı */}
+                  {validationMsg && (
+                    <div className="bg-red-500/10 border border-red-400 text-red-200 px-4 py-3 rounded-xl">
+                      {validationMsg}
+                    </div>
+                  )}
 
                   {/* İlgilenilen Ürünler */}
                   <div>
@@ -350,7 +498,7 @@ export default function FreeDiscoveryPage() {
                   {/* Ek Mesaj */}
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
-                      Ek Bilgiler ve Beklentileriniz
+                      Ek Bilgiler ve Beklentileriniz*
                     </label>
                     <textarea
                       id="message"
@@ -358,7 +506,12 @@ export default function FreeDiscoveryPage() {
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                      required
+                      className={`w-full px-4 py-3 rounded-xl border ${
+                        errors.message 
+                          ? 'border-red-400 bg-red-500/10' 
+                          : 'border-white/10 bg-white/5'
+                      } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
                       placeholder="Projeleriniz ve beklentileriniz hakkında bize daha fazla bilgi verin"
                     ></textarea>
                   </div>
@@ -367,9 +520,14 @@ export default function FreeDiscoveryPage() {
                   <div className="flex flex-col sm:flex-row justify-end gap-4">
                     <button
                       type="submit"
-                      className="w-full sm:w-auto px-10 py-3 bg-white text-blue-800 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
+                      disabled={loading}
+                      className={`w-full sm:w-auto px-10 py-3 font-semibold rounded-xl transition-colors ${
+                        loading 
+                          ? 'bg-gray-400 text-gray-600 cursor-not-allowed' 
+                          : 'bg-white text-blue-800 hover:bg-blue-50'
+                      }`}
                     >
-                      Başvuru Gönder
+                      {loading ? 'Gönderiliyor...' : 'Başvuru Gönder'}
                     </button>
                   </div>
                 </form>
@@ -378,6 +536,42 @@ export default function FreeDiscoveryPage() {
           </div>
         </div>
       </section>
+
+      {/* Pop-up Modal */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 transform transition-all">
+            <div className="p-8 text-center">
+              <div className="flex justify-center mb-4">
+                {status === "success" ? (
+                  <CheckCircle className="w-16 h-16 text-green-500" />
+                ) : (
+                  <AlertTriangle className="w-16 h-16 text-red-500" />
+                )}
+              </div>
+              <h3 className={`text-xl font-semibold mb-2 ${
+                status === "success" ? "text-green-800" : "text-red-800"
+              }`}>
+                {status === "success" ? "Başarılı!" : "Hata!"}
+              </h3>
+              <p className={`text-gray-600 ${
+                status === "success" ? "text-green-700" : "text-red-700"
+              }`}>
+                {status === "success" 
+                  ? "Başvurunuz başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz." 
+                  : "Bir hata oluştu. Lütfen tekrar deneyin."
+                }
+              </p>
+            </div>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 } 

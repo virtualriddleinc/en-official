@@ -6,40 +6,110 @@ import { CheckCircle, AlertTriangle, X } from "lucide-react";
 
 export default function ConsultingPage() {
   // Form durumu için state tanımları
-  const initialForm = { name: "", companyName: "", email: "", message: "" };
-  const [form, setForm] = useState(initialForm);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    companyName: "",
+    email: "",
+    phone: "",
+    position: "",
+    teamSize: "",
+    services: {
+      processAnalysis: false,
+      productConsulting: false,
+      projectManagement: false,
+      agileTransformation: false,
+      devopsConsulting: false,
+      customConsulting: false
+    },
+    currentTools: "",
+    projectScope: "",
+    timeline: "",
+    budget: "",
+    message: ""
+  });
+
   const [status, setStatus] = useState<null | "success" | "error">(null);
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const requiredFields = ["name", "companyName", "email", "message"];
+
+  const requiredFields = ["fullName", "companyName", "email", "phone", "message"];
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const [validationMsg, setValidationMsg] = useState("");
 
-  // Hizmet türleri
-  const serviceTypes = [
-    "Süreç Analizi",
-    "Ürün Danışmanlığı",
-    "Proje Yönetimi",
-    "Agile Dönüşüm",
-    "DevOps Danışmanlığı"
+  // Danışmanlık hizmetleri
+  const serviceList = [
+    { id: "processAnalysis", name: "Süreç Analizi", description: "Mevcut iş süreçlerinin analizi ve optimizasyonu" },
+    { id: "productConsulting", name: "Ürün Danışmanlığı", description: "Atlassian ürünlerinin yapılandırması ve optimizasyonu" },
+    { id: "projectManagement", name: "Proje Yönetimi", description: "Proje yönetimi süreçlerinin iyileştirilmesi" },
+    { id: "agileTransformation", name: "Agile Dönüşüm", description: "Çevik metodolojilere geçiş danışmanlığı" },
+    { id: "devopsConsulting", name: "DevOps Danışmanlığı", description: "DevOps süreçlerinin kurulması ve optimizasyonu" },
+    { id: "customConsulting", name: "Özel Danışmanlık", description: "Kurumunuza özel danışmanlık hizmetleri" }
   ];
 
-  // Kullanıcıya görünen ürün etiketleri (örnek, gerekirse ekle)
+  // Şirket büyüklükleri
+  const teamSizes = [
+    "1-20",
+    "21-100",
+    "101-500",
+    "501-1000",
+    "1000+"
+  ];
+
+  // Proje kapsamları
+  const projectScopes = [
+    "Küçük Ölçekli (1-3 ay)",
+    "Orta Ölçekli (3-6 ay)",
+    "Büyük Ölçekli (6-12 ay)",
+    "Kurumsal Dönüşüm (12+ ay)"
+  ];
+
+  // Zaman çizelgeleri
+  const timelines = [
+    "Acil (1 ay içinde)",
+    "Orta Vadeli (3 ay içinde)",
+    "Uzun Vadeli (6 ay içinde)",
+    "Planlama Aşamasında"
+  ];
+
+  // Bütçe aralıkları
+  const budgets = [
+    "10K-50K TL",
+    "50K-100K TL",
+    "100K-250K TL",
+    "250K+ TL",
+    "Belirlenmemiş"
+  ];
+
+  // Kullanıcıya görünen hizmet etiketleri
   const serviceLabels = {
-    agile: "Agile Danışmanlığı",
-    devops: "DevOps Danışmanlığı",
-    cloud: "Cloud Danışmanlığı",
-    migration: "Migration Danışmanlığı",
-    custom: "Özel Danışmanlık"
+    processAnalysis: "Süreç Analizi",
+    productConsulting: "Ürün Danışmanlığı",
+    projectManagement: "Proje Yönetimi",
+    agileTransformation: "Agile Dönüşüm",
+    devopsConsulting: "DevOps Danışmanlığı",
+    customConsulting: "Özel Danışmanlık"
   };
 
-  function buildContent(form: typeof initialForm) {
-    return [
-      `Ad Soyad: ${form.name}`,
-      `Şirket Adı: ${form.companyName}`,
-      `E-posta: ${form.email}`,
-      `Danışmanlık Talebi ve Mesaj: ${form.message}`
-    ].join("\n");
+  // Lambda ile uyumlu field mapping fonksiyonu
+  function mapFormToLambda(form) {
+    return {
+      page: "/solutions/consulting",
+      name: form.fullName,
+      company: form.companyName,
+      email: form.email,
+      phone: form.phone,
+      position: form.position,
+      teamSize: form.teamSize,
+      consultingServices: Object.entries(form.services)
+        .filter(([k,v])=>v)
+        .map(([k])=>serviceLabels[k] || k)
+        .join(", "),
+      currentTools: form.currentTools,
+      projectScope: form.projectScope,
+      timeline: form.timeline,
+      budget: form.budget,
+      message: form.message
+    };
   }
 
   // Form gönderim işleme
@@ -48,10 +118,11 @@ export default function ConsultingPage() {
     setLoading(true);
     setStatus(null);
     setValidationMsg("");
+    
     // Validasyon
     const newErrors: { [key: string]: boolean } = {};
     requiredFields.forEach((field) => {
-      if (!form[field] || form[field].trim() === "") {
+      if (!formData[field] || formData[field].trim() === "") {
         newErrors[field] = true;
       }
     });
@@ -62,25 +133,69 @@ export default function ConsultingPage() {
       setTimeout(() => setValidationMsg(""), 3000);
       return;
     }
-    // Subject ve content oluşturma
-    const subject = `Danışmanlık Talebi : ${form.name || ""} - ${form.companyName || ""}`;
-    const content = buildContent(form);
-    const payload = { ...form, subject, content };
+
+    // Lambda ile uyumlu payload oluştur
+    const payload = mapFormToLambda(formData);
+    
     try {
       const res = await fetch("https://rvskttz2jh.execute-api.us-east-1.amazonaws.com/prod/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      setForm(initialForm);
+      
+      // Form temizleme
+      setFormData({
+        fullName: "",
+        companyName: "",
+        email: "",
+        phone: "",
+        position: "",
+        teamSize: "",
+        services: {
+          processAnalysis: false,
+          productConsulting: false,
+          projectManagement: false,
+          agileTransformation: false,
+          devopsConsulting: false,
+          customConsulting: false
+        },
+        currentTools: "",
+        projectScope: "",
+        timeline: "",
+        budget: "",
+        message: ""
+      });
       setErrors({});
+      
       if (res.ok) {
         setStatus("success");
       } else {
         setStatus("error");
       }
     } catch {
-      setForm(initialForm);
+      // Form temizleme
+      setFormData({
+        fullName: "",
+        companyName: "",
+        email: "",
+        phone: "",
+        position: "",
+        teamSize: "",
+        services: {
+          processAnalysis: false,
+          productConsulting: false,
+          projectManagement: false,
+          agileTransformation: false,
+          devopsConsulting: false,
+          customConsulting: false
+        },
+        currentTools: "",
+        projectScope: "",
+        timeline: "",
+        budget: "",
+        message: ""
+      });
       setErrors({});
       setStatus("error");
     } finally {
@@ -89,8 +204,21 @@ export default function ConsultingPage() {
   };
 
   // Input değişimlerini yakalama
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Hizmet seçimlerini yakalama
+  const handleServiceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setFormData({
+      ...formData,
+      services: {
+        ...formData.services,
+        [name]: checked
+      }
+    });
   };
 
   useEffect(() => {
@@ -103,28 +231,6 @@ export default function ConsultingPage() {
       return () => clearTimeout(timer);
     }
   }, [status]);
-
-  function mapFormToLambda(form) {
-    return {
-      page: "/solutions/consulting",
-      name: form.name,
-      company: form.companyName,
-      email: form.email,
-      phone: form.phone,
-      position: form.position,
-      department: form.department || "",
-      currentTools: form.currentTools || "",
-      projectScope: form.projectScope || "",
-      timeline: form.timeline || "",
-      budget: form.budget || "",
-      teamSize: form.teamSize || "",
-      urgency: form.urgency || "",
-      services: Array.isArray(form.services)
-        ? form.services.map((k) => serviceLabels[k] || k).join(", ")
-        : (form.services ? serviceLabels[form.services] || form.services : ""),
-      message: form.message
-    };
-  }
 
   return (
     <main className="flex min-h-screen flex-col items-center pt-32">
@@ -263,36 +369,45 @@ export default function ConsultingPage() {
                   Uzman ekibimiz 24 saat içinde sizinle iletişime geçecektir.
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-8">
                   {/* Kişisel ve Şirket Bilgileri */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
+                      <label htmlFor="fullName" className="block text-sm font-medium text-white/80 mb-2">
                         Ad Soyad*
                       </label>
                       <input
                         type="text"
-                        id="name"
-                        name="name"
-                        value={form.name}
-                        onChange={handleChange}
+                        id="fullName"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
                         required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.name ? 'border-red-500 bg-red-50' : ''}`}
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.fullName 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
                         placeholder="Adınız ve soyadınız"
                       />
                     </div>
                     <div>
                       <label htmlFor="companyName" className="block text-sm font-medium text-white/80 mb-2">
-                        Şirket Adı
+                        Şirket Adı*
                       </label>
                       <input
                         type="text"
                         id="companyName"
                         name="companyName"
-                        value={form.companyName}
-                        onChange={handleChange}
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.companyName ? 'border-red-500 bg-red-50' : ''}`}
-                        placeholder="Şirket adı"
+                        value={formData.companyName}
+                        onChange={handleInputChange}
+                        required
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.companyName 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                        placeholder="Şirketinizin adı"
                       />
                     </div>
                     <div>
@@ -303,49 +418,205 @@ export default function ConsultingPage() {
                         type="email"
                         id="email"
                         name="email"
-                        value={form.email}
-                        onChange={handleChange}
+                        value={formData.email}
+                        onChange={handleInputChange}
                         required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.email ? 'border-red-500 bg-red-50' : ''}`}
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.email 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
                         placeholder="ornek@sirket.com"
                       />
                     </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
+                        Telefon*
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        required
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.phone 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                        placeholder="+90 (___) ___ __ __"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="position" className="block text-sm font-medium text-white/80 mb-2">
+                        Pozisyon
+                      </label>
+                      <input
+                        type="text"
+                        id="position"
+                        name="position"
+                        value={formData.position}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        placeholder="Şirketteki pozisyonunuz"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="teamSize" className="block text-sm font-medium text-white/80 mb-2">
+                        Şirket Büyüklüğü
+                      </label>
+                      <select
+                        id="teamSize"
+                        name="teamSize"
+                        value={formData.teamSize}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                      >
+                        <option value="" disabled>Çalışan sayısını seçin</option>
+                        {teamSizes.map(size => (
+                          <option key={size} value={size} className="bg-blue-900 text-white">{size}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Validation mesajı */}
+                  {validationMsg && (
+                    <div className="bg-red-500/10 border border-red-400 text-red-200 px-4 py-3 rounded-xl">
+                      {validationMsg}
+                    </div>
+                  )}
+
+                  {/* İhtiyaç Duyulan Danışmanlık Hizmetleri */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-white mb-4">İhtiyaç Duyduğunuz Danışmanlık Hizmetleri</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {serviceList.map(service => (
+                        <div key={service.id} className="flex items-start space-x-3 bg-white/5 p-4 rounded-xl hover:bg-white/10 transition-colors">
+                          <input
+                            type="checkbox"
+                            id={service.id}
+                            name={service.id}
+                            checked={formData.services[service.id as keyof typeof formData.services]}
+                            onChange={handleServiceChange}
+                            className="mt-1 h-5 w-5 rounded border-white/30 text-blue-500 focus:ring-blue-400"
+                          />
+                          <div>
+                            <label htmlFor={service.id} className="block font-medium text-white cursor-pointer">
+                              {service.name}
+                            </label>
+                            <p className="text-sm text-white/60">{service.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Proje Detayları */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                      <label htmlFor="projectScope" className="block text-sm font-medium text-white/80 mb-2">
+                        Proje Kapsamı
+                      </label>
+                      <select
+                        id="projectScope"
+                        name="projectScope"
+                        value={formData.projectScope}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                      >
+                        <option value="" disabled>Proje kapsamını seçin</option>
+                        {projectScopes.map(scope => (
+                          <option key={scope} value={scope} className="bg-blue-900 text-white">{scope}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="timeline" className="block text-sm font-medium text-white/80 mb-2">
+                        Zaman Çizelgesi
+                      </label>
+                      <select
+                        id="timeline"
+                        name="timeline"
+                        value={formData.timeline}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                      >
+                        <option value="" disabled>Zaman çizelgesini seçin</option>
+                        {timelines.map(timeline => (
+                          <option key={timeline} value={timeline} className="bg-blue-900 text-white">{timeline}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="budget" className="block text-sm font-medium text-white/80 mb-2">
+                        Bütçe Aralığı
+                      </label>
+                      <select
+                        id="budget"
+                        name="budget"
+                        value={formData.budget}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                      >
+                        <option value="" disabled>Bütçe aralığını seçin</option>
+                        {budgets.map(budget => (
+                          <option key={budget} value={budget} className="bg-blue-900 text-white">{budget}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Mevcut araçlar */}
+                  <div>
+                    <label htmlFor="currentTools" className="block text-sm font-medium text-white/80 mb-2">
+                      Mevcut Kullandığınız Araçlar
+                    </label>
+                    <input
+                      type="text"
+                      id="currentTools"
+                      name="currentTools"
+                      value={formData.currentTools}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                      placeholder="Şu anda kullandığınız araçlar ve sistemler"
+                    />
                   </div>
 
                   {/* Ek Mesaj */}
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
-                      Danışmanlık İhtiyacınız ve Beklentileriniz
+                      Danışmanlık İhtiyacınız ve Beklentileriniz*
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       rows={4}
-                      value={form.message}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.message ? 'border-red-500 bg-red-50' : ''}`}
-                      placeholder="Danışmanlık ihtiyacınız ve projeleriniz hakkında bize daha fazla bilgi verin"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      required
+                      className={`w-full px-4 py-3 rounded-xl border ${
+                        errors.message 
+                          ? 'border-red-400 bg-red-500/10' 
+                          : 'border-white/10 bg-white/5'
+                      } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                      placeholder="Danışmanlık ihtiyacınız, projeleriniz ve beklentileriniz hakkında detaylı bilgi verin"
                     ></textarea>
                   </div>
-
-                  {/* Validasyon mesajı */}
-                  {validationMsg && (
-                    <div className="mb-4 flex items-center justify-center">
-                      <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-800 rounded-xl px-4 py-2 shadow transition-all animate-fade-in-up">
-                        <AlertTriangle className="w-5 h-5 text-red-500" />
-                        <span className="font-semibold">{validationMsg}</span>
-                      </div>
-                    </div>
-                  )}
 
                   {/* Gönder Butonu */}
                   <div className="flex flex-col sm:flex-row justify-end gap-4">
                     <button
                       type="submit"
-                      className="w-full sm:w-auto px-10 py-3 bg-white text-blue-800 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
                       disabled={loading}
+                      className={`w-full sm:w-auto px-10 py-3 font-semibold rounded-xl transition-colors ${
+                        loading 
+                          ? 'bg-gray-400 text-gray-600 cursor-not-allowed' 
+                          : 'bg-white text-blue-800 hover:bg-blue-50'
+                      }`}
                     >
-                      {loading ? "Gönderiliyor..." : "Gönder"}
+                      {loading ? 'Gönderiliyor...' : 'Danışmanlık Talebi Gönder'}
                     </button>
                   </div>
                 </form>
@@ -355,33 +626,38 @@ export default function ConsultingPage() {
         </div>
       </section>
 
-      {/* Bildirim Pop-up Modal */}
-      {showPopup && status && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
-          <div className={`relative w-full max-w-xs sm:max-w-md md:max-w-lg mx-4 sm:mx-0 rounded-2xl shadow-2xl border transition-all duration-300 animate-fade-in-up
-            ${status === "success"
-              ? "bg-gradient-to-br from-green-50 via-white to-green-100 border-green-200 text-green-800"
-              : "bg-gradient-to-br from-red-50 via-white to-red-100 border-red-200 text-red-800"}
-          `}>
-            <button
-              className="absolute top-3 right-3 p-1 rounded-full hover:bg-black/10 focus:outline-none"
-              onClick={() => { setShowPopup(false); setStatus(null); }}
-              aria-label="Kapat"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <div className="flex flex-col items-center gap-3 px-6 py-8 sm:py-10">
-              {status === "success" ? (
-                <CheckCircle className="w-10 h-10 text-green-500 mb-2" />
-              ) : (
-                <AlertTriangle className="w-10 h-10 text-red-500 mb-2" />
-              )}
-              <span className="font-semibold text-center text-base sm:text-lg">
-                {status === "success"
-                  ? "Mesajınız başarıyla iletildi. En kısa sürede sizinle iletişime geçeceğiz."
-                  : "Bir hata oluştu. info@virtualriddle.com adresine doğrudan e-posta gönderebilirsiniz."}
-              </span>
+      {/* Pop-up Modal */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 transform transition-all">
+            <div className="p-8 text-center">
+              <div className="flex justify-center mb-4">
+                {status === "success" ? (
+                  <CheckCircle className="w-16 h-16 text-green-500" />
+                ) : (
+                  <AlertTriangle className="w-16 h-16 text-red-500" />
+                )}
+              </div>
+              <h3 className={`text-xl font-semibold mb-2 ${
+                status === "success" ? "text-green-800" : "text-red-800"
+              }`}>
+                {status === "success" ? "Başarılı!" : "Hata!"}
+              </h3>
+              <p className={`text-gray-600 ${
+                status === "success" ? "text-green-700" : "text-red-700"
+              }`}>
+                {status === "success" 
+                  ? "Danışmanlık talebiniz başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz." 
+                  : "Bir hata oluştu. Lütfen tekrar deneyin."
+                }
+              </p>
             </div>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
           </div>
         </div>
       )}

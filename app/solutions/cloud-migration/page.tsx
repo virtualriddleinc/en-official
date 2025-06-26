@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { CheckCircle, AlertTriangle, X } from "lucide-react";
 
 export default function CloudMigrationPage() {
   // Form durumu için state tanımı
-  const [formData, setFormData] = useState({
+  const initialForm = {
     fullName: "",
     companyName: "",
     email: "",
@@ -14,7 +15,11 @@ export default function CloudMigrationPage() {
     currentEnvironment: "",
     usersCount: "",
     message: ""
-  });
+  };
+  const [form, setForm] = useState(initialForm);
+  const [status, setStatus] = useState<null | "success" | "error">(null);
+  const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   // Mevcut Atlassian ortamları
   const environments = [
@@ -34,19 +39,114 @@ export default function CloudMigrationPage() {
     "2000+"
   ];
 
+  const requiredFields = ["fullName", "companyName", "email", "phone", "currentEnvironment", "usersCount", "message"];
+  const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+  const [validationMsg, setValidationMsg] = useState("");
+
+  // Kullanıcıya görünen ürün etiketleri
+  const productLabels = {
+    jiraSoftware: "Jira Software",
+    confluence: "Confluence",
+    jiraServiceManagement: "Jira Service Management",
+    bitbucket: "Bitbucket",
+    advanced: "İleri Seviye/Özel Çözüm"
+  };
+
+  function buildContent(form: typeof initialForm) {
+    return [
+      `Ad Soyad: ${form.fullName}`,
+      `Şirket Adı: ${form.companyName}`,
+      `E-posta: ${form.email}`,
+      `Telefon: ${form.phone}`,
+      `Mevcut Atlassian Ortamı: ${form.currentEnvironment}`,
+      `Kullanıcı Sayısı: ${form.usersCount}`,
+      `Geçiş İle İlgili Bilgiler ve Beklentileriniz: ${form.message}`
+    ].join("\n");
+  }
+
   // Form gönderim işleme
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form gönderildi:", formData);
-    // API'ye gönderme işlemi burada gerçekleştirilecek
-    alert("Değerlendirme talebiniz başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz.");
+    setLoading(true);
+    setStatus(null);
+    setValidationMsg("");
+    // Validasyon
+    const newErrors: { [key: string]: boolean } = {};
+    requiredFields.forEach((field) => {
+      if (!form[field] || form[field].trim() === "") {
+        newErrors[field] = true;
+      }
+    });
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      setValidationMsg("Lütfen zorunlu alanları doldurun.");
+      setLoading(false);
+      setTimeout(() => setValidationMsg(""), 3000);
+      return;
+    }
+    // Subject ve content oluşturma
+    const subject = `Cloud Migration Değerlendirme Talebi : ${form.fullName || ""} - ${form.companyName || ""}`;
+    const content = buildContent(form);
+    const payload = { ...form, subject, content };
+    try {
+      const res = await fetch("https://rvskttz2jh.execute-api.us-east-1.amazonaws.com/prod/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      setForm(initialForm);
+      setErrors({});
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setForm(initialForm);
+      setErrors({});
+      setStatus("error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Input değişimlerini yakalama
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    if (status) {
+      setShowPopup(true);
+      const timer = setTimeout(() => {
+        setShowPopup(false);
+        setStatus(null);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
+
+  function mapFormToLambda(form) {
+    return {
+      page: "/solutions/cloud-migration",
+      name: form.fullName,
+      company: form.companyName,
+      email: form.email,
+      phone: form.phone,
+      position: form.position,
+      currentSetup: form.currentEnvironment || "",
+      atlassianProducts: Array.isArray(form.atlassianProducts)
+        ? form.atlassianProducts.map((k) => productLabels[k] || k).join(", ")
+        : (form.atlassianProducts ? productLabels[form.atlassianProducts] || form.atlassianProducts : ""),
+      userCount: form.usersCount || "",
+      dataSize: form.dataSize || "",
+      customizations: form.customizations || "",
+      integrations: form.integrations || "",
+      timeline: form.timeline || "",
+      downtime: form.downtime || "",
+      message: form.message
+    };
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center pt-32">
@@ -202,7 +302,17 @@ export default function CloudMigrationPage() {
                   Uzman ekibimiz 24 saat içinde sizinle iletişime geçecektir.
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-8">
+                {/* Validasyon mesajı */}
+                {validationMsg && (
+                  <div className="mb-4 flex items-center justify-center">
+                    <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-800 rounded-xl px-4 py-2 shadow transition-all animate-fade-in-up">
+                      <AlertTriangle className="w-5 h-5 text-red-500" />
+                      <span className="font-semibold">{validationMsg}</span>
+                    </div>
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Kişisel ve Şirket Bilgileri */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -213,10 +323,10 @@ export default function CloudMigrationPage() {
                         type="text"
                         id="fullName"
                         name="fullName"
-                        value={formData.fullName}
-                        onChange={handleInputChange}
+                        value={form.fullName}
+                        onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.fullName ? 'border-red-500 bg-red-50' : ''}`}
                         placeholder="Adınız ve soyadınız"
                       />
                     </div>
@@ -228,10 +338,10 @@ export default function CloudMigrationPage() {
                         type="text"
                         id="companyName"
                         name="companyName"
-                        value={formData.companyName}
-                        onChange={handleInputChange}
+                        value={form.companyName}
+                        onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.companyName ? 'border-red-500 bg-red-50' : ''}`}
                         placeholder="Şirketinizin adı"
                       />
                     </div>
@@ -243,10 +353,10 @@ export default function CloudMigrationPage() {
                         type="email"
                         id="email"
                         name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
+                        value={form.email}
+                        onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.email ? 'border-red-500 bg-red-50' : ''}`}
                         placeholder="ornek@sirket.com"
                       />
                     </div>
@@ -258,10 +368,10 @@ export default function CloudMigrationPage() {
                         type="tel"
                         id="phone"
                         name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
+                        value={form.phone}
+                        onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.phone ? 'border-red-500 bg-red-50' : ''}`}
                         placeholder="+90 (___) ___ __ __"
                       />
                     </div>
@@ -272,10 +382,10 @@ export default function CloudMigrationPage() {
                       <select
                         id="currentEnvironment"
                         name="currentEnvironment"
-                        value={formData.currentEnvironment}
-                        onChange={handleInputChange}
+                        value={form.currentEnvironment}
+                        onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.currentEnvironment ? 'border-red-500 bg-red-50' : ''}`}
                       >
                         <option value="" disabled>Mevcut ortamınızı seçin</option>
                         {environments.map(env => (
@@ -290,10 +400,10 @@ export default function CloudMigrationPage() {
                       <select
                         id="usersCount"
                         name="usersCount"
-                        value={formData.usersCount}
-                        onChange={handleInputChange}
+                        value={form.usersCount}
+                        onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.usersCount ? 'border-red-500 bg-red-50' : ''}`}
                       >
                         <option value="" disabled>Kullanıcı sayısını seçin</option>
                         {userCounts.map(count => (
@@ -312,9 +422,9 @@ export default function CloudMigrationPage() {
                       id="message"
                       name="message"
                       rows={4}
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                      value={form.message}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.message ? 'border-red-500 bg-red-50' : ''}`}
                       placeholder="Mevcut Atlassian ürünleriniz ve cloud geçişi hakkındaki beklentileriniz"
                     ></textarea>
                   </div>
@@ -324,8 +434,9 @@ export default function CloudMigrationPage() {
                     <button
                       type="submit"
                       className="w-full sm:w-auto px-10 py-3 bg-white text-blue-800 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
+                      disabled={loading}
                     >
-                      Değerlendirme Talep Et
+                      {loading ? "Gönderiliyor..." : "Gönder"}
                     </button>
                   </div>
                 </form>
@@ -334,6 +445,37 @@ export default function CloudMigrationPage() {
           </div>
         </div>
       </section>
+
+      {/* Bildirim Pop-up Modal */}
+      {showPopup && status && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+          <div className={`relative w-full max-w-xs sm:max-w-md md:max-w-lg mx-4 sm:mx-0 rounded-2xl shadow-2xl border transition-all duration-300 animate-fade-in-up
+            ${status === "success"
+              ? "bg-gradient-to-br from-green-50 via-white to-green-100 border-green-200 text-green-800"
+              : "bg-gradient-to-br from-red-50 via-white to-red-100 border-red-200 text-red-800"}
+          `}>
+            <button
+              className="absolute top-3 right-3 p-1 rounded-full hover:bg-black/10 focus:outline-none"
+              onClick={() => { setShowPopup(false); setStatus(null); }}
+              aria-label="Kapat"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="flex flex-col items-center gap-3 px-6 py-8 sm:py-10">
+              {status === "success" ? (
+                <CheckCircle className="w-10 h-10 text-green-500 mb-2" />
+              ) : (
+                <AlertTriangle className="w-10 h-10 text-red-500 mb-2" />
+              )}
+              <span className="font-semibold text-center text-base sm:text-lg">
+                {status === "success"
+                  ? "Mesajınız başarıyla iletildi. En kısa sürede sizinle iletişime geçeceğiz."
+                  : "Bir hata oluştu. info@virtualriddle.com adresine doğrudan e-posta gönderebilirsiniz."}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 } 

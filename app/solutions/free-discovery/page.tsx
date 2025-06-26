@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { CheckCircle, AlertTriangle, X } from "lucide-react";
 
 export default function FreeDiscoveryPage() {
   // Form durumu için state tanımları
@@ -24,6 +25,14 @@ export default function FreeDiscoveryPage() {
     message: ""
   });
 
+  const [status, setStatus] = useState<null | "success" | "error">(null);
+  const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const requiredFields = ["fullName", "companyName", "email", "phone", "message"];
+  const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+  const [validationMsg, setValidationMsg] = useState("");
+
   // Ürün listesi ve açıklamaları
   const productList = [
     { id: "jira", name: "Jira Software", description: "Çevik proje yönetimi ve planlama" },
@@ -42,12 +51,108 @@ export default function FreeDiscoveryPage() {
     "1000+"
   ];
 
+  // Kullanıcıya görünen ürün etiketleri
+  const productLabels = {
+    jira: "Jira Software",
+    confluence: "Confluence",
+    bitbucket: "Bitbucket",
+    jiraServiceManagement: "Jira Service Management",
+    advanced: "İleri Seviye/Özel Çözüm"
+  };
+
+  function buildContent(form: typeof formData) {
+    return [
+      `Ad Soyad: ${form.fullName}`,
+      `Şirket Adı: ${form.companyName}`,
+      `E-posta: ${form.email}`,
+      `Telefon: ${form.phone}`,
+      `Pozisyon: ${form.position}`,
+      `Çalışan Sayısı: ${form.teamSize}`,
+      `İlgilendiği Ürünler: ${Object.entries(form.products).filter(([k,v])=>v).map(([k])=>k).join(", ")}`,
+      `Kullandığı Araçlar: ${form.currentTools}`,
+      `Karşılaşılan Zorluklar: ${(form.challenges || []).join(", ")}`,
+      `Mesaj: ${form.message}`
+    ].join("\n");
+  }
+
   // Form gönderim işleme
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form gönderildi:", formData);
-    // API'ye gönderme işlemi burada gerçekleştirilecek
-    alert("Başvurunuz başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz.");
+    setLoading(true);
+    setStatus(null);
+    setValidationMsg("");
+    // Validasyon
+    const newErrors: { [key: string]: boolean } = {};
+    requiredFields.forEach((field) => {
+      if (!formData[field] || formData[field].trim() === "") {
+        newErrors[field] = true;
+      }
+    });
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      setValidationMsg("Lütfen zorunlu alanları doldurun.");
+      setLoading(false);
+      setTimeout(() => setValidationMsg(""), 3000);
+      return;
+    }
+    // Subject ve content oluşturma
+    const subject = `Ücretsiz Keşif Talebi : ${formData.fullName || ""} - ${formData.companyName || ""}`;
+    const content = buildContent(formData);
+    const payload = { ...formData, subject, content };
+    try {
+      const res = await fetch("https://rvskttz2jh.execute-api.us-east-1.amazonaws.com/prod/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      setFormData({
+        fullName: "",
+        companyName: "",
+        email: "",
+        phone: "",
+        position: "",
+        teamSize: "",
+        products: {
+          jira: false,
+          confluence: false,
+          bitbucket: false,
+          jiraServiceManagement: false,
+          advanced: false
+        },
+        challenges: [],
+        currentTools: "",
+        message: ""
+      });
+      setErrors({});
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setFormData({
+        fullName: "",
+        companyName: "",
+        email: "",
+        phone: "",
+        position: "",
+        teamSize: "",
+        products: {
+          jira: false,
+          confluence: false,
+          bitbucket: false,
+          jiraServiceManagement: false,
+          advanced: false
+        },
+        challenges: [],
+        currentTools: "",
+        message: ""
+      });
+      setErrors({});
+      setStatus("error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Input değişimlerini yakalama
@@ -67,6 +172,42 @@ export default function FreeDiscoveryPage() {
       }
     });
   };
+
+  useEffect(() => {
+    if (status) {
+      setShowPopup(true);
+      const timer = setTimeout(() => {
+        setShowPopup(false);
+        setStatus(null);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
+
+  function mapFormToLambda(form) {
+    return {
+      page: "/solutions/free-discovery",
+      name: form.fullName,
+      company: form.companyName,
+      email: form.email,
+      phone: form.phone,
+      position: form.position,
+      industry: form.industry || "",
+      companySize: form.companySize || "",
+      currentChallenges: (form.challenges || []).join(", "),
+      objectives: form.objectives || "",
+      currentTools: form.currentTools || "",
+      timeline: form.timeline || "",
+      budget: form.budget || "",
+      decisionMakers: form.decisionMakers || "",
+      preferredMeetingTime: form.preferredMeetingTime || "",
+      products: Object.entries(form.products)
+        .filter(([k,v])=>v)
+        .map(([k])=>productLabels[k] || k)
+        .join(", "),
+      message: form.message
+    };
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center pt-32">
@@ -209,6 +350,16 @@ export default function FreeDiscoveryPage() {
                   Uzman ekibimiz 24 saat içinde sizinle iletişime geçecektir.
                 </p>
 
+                {/* Validasyon mesajı */}
+                {validationMsg && (
+                  <div className="mb-4 flex items-center justify-center">
+                    <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-800 rounded-xl px-4 py-2 shadow transition-all animate-fade-in-up">
+                      <AlertTriangle className="w-5 h-5 text-red-500" />
+                      <span className="font-semibold">{validationMsg}</span>
+                    </div>
+                  </div>
+                )}
+
                 <form onSubmit={handleSubmit} className="space-y-8">
                   {/* Kişisel ve Şirket Bilgileri */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -223,7 +374,7 @@ export default function FreeDiscoveryPage() {
                         value={formData.fullName}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.fullName ? 'border-red-500 bg-red-50' : ''}`}
                         placeholder="Adınız ve soyadınız"
                       />
                     </div>
@@ -238,7 +389,7 @@ export default function FreeDiscoveryPage() {
                         value={formData.companyName}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.companyName ? 'border-red-500 bg-red-50' : ''}`}
                         placeholder="Şirketinizin adı"
                       />
                     </div>
@@ -253,7 +404,7 @@ export default function FreeDiscoveryPage() {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.email ? 'border-red-500 bg-red-50' : ''}`}
                         placeholder="ornek@sirket.com"
                       />
                     </div>
@@ -268,7 +419,7 @@ export default function FreeDiscoveryPage() {
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.phone ? 'border-red-500 bg-red-50' : ''}`}
                         placeholder="+90 (___) ___ __ __"
                       />
                     </div>
@@ -282,7 +433,7 @@ export default function FreeDiscoveryPage() {
                         name="position"
                         value={formData.position}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.position ? 'border-red-500 bg-red-50' : ''}`}
                         placeholder="Şirketteki pozisyonunuz"
                       />
                     </div>
@@ -296,7 +447,7 @@ export default function FreeDiscoveryPage() {
                         value={formData.teamSize}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.teamSize ? 'border-red-500 bg-red-50' : ''}`}
                       >
                         <option value="" disabled>Çalışan sayısını seçin</option>
                         {teamSizes.map(size => (
@@ -342,7 +493,7 @@ export default function FreeDiscoveryPage() {
                       name="currentTools"
                       value={formData.currentTools}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                      className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.currentTools ? 'border-red-500 bg-red-50' : ''}`}
                       placeholder="Şu anda kullandığınız araçlar (ör. Trello, Asana, GitLab)"
                     />
                   </div>
@@ -358,7 +509,7 @@ export default function FreeDiscoveryPage() {
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                      className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.message ? 'border-red-500 bg-red-50' : ''}`}
                       placeholder="Projeleriniz ve beklentileriniz hakkında bize daha fazla bilgi verin"
                     ></textarea>
                   </div>
@@ -368,8 +519,9 @@ export default function FreeDiscoveryPage() {
                     <button
                       type="submit"
                       className="w-full sm:w-auto px-10 py-3 bg-white text-blue-800 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
+                      disabled={loading}
                     >
-                      Başvuru Gönder
+                      {loading ? "Gönderiliyor..." : "Gönder"}
                     </button>
                   </div>
                 </form>
@@ -378,6 +530,37 @@ export default function FreeDiscoveryPage() {
           </div>
         </div>
       </section>
+
+      {/* Bildirim Pop-up Modal */}
+      {showPopup && status && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+          <div className={`relative w-full max-w-xs sm:max-w-md md:max-w-lg mx-4 sm:mx-0 rounded-2xl shadow-2xl border transition-all duration-300 animate-fade-in-up
+            ${status === "success"
+              ? "bg-gradient-to-br from-green-50 via-white to-green-100 border-green-200 text-green-800"
+              : "bg-gradient-to-br from-red-50 via-white to-red-100 border-red-200 text-red-800"}
+          `}>
+            <button
+              className="absolute top-3 right-3 p-1 rounded-full hover:bg-black/10 focus:outline-none"
+              onClick={() => { setShowPopup(false); setStatus(null); }}
+              aria-label="Kapat"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="flex flex-col items-center gap-3 px-6 py-8 sm:py-10">
+              {status === "success" ? (
+                <CheckCircle className="w-10 h-10 text-green-500 mb-2" />
+              ) : (
+                <AlertTriangle className="w-10 h-10 text-red-500 mb-2" />
+              )}
+              <span className="font-semibold text-center text-base sm:text-lg">
+                {status === "success"
+                  ? "Mesajınız başarıyla iletildi. En kısa sürede sizinle iletişime geçeceğiz."
+                  : "Bir hata oluştu. info@virtualriddle.com adresine doğrudan e-posta gönderebilirsiniz."}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 } 

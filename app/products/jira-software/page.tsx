@@ -70,7 +70,7 @@ export default function JiraSoftwarePage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/contact" 
+                href="/free-discovery" 
                 className="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all w-full sm:w-auto text-center"
               >
                 Ücretsiz Dene
@@ -210,7 +210,7 @@ export default function JiraSoftwarePage() {
             <p className="text-xl text-white/80 mb-8">100.000'den fazla şirket Jira Software ile projelerini yönetiyor. Siz de ekibe katılın.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
-                href="/contact" 
+                href="/free-discovery" 
                 className="px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-white/90 transition-all w-full sm:w-auto text-center"
               >
                 Ücretsiz Başlayın

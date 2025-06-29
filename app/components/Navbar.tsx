@@ -23,9 +23,12 @@ const products = {
   'DevOps & Code': [
     { name: 'Bitbucket', href: '/products/bitbucket' },
   ],
-  'Platform & Marketplace': [
-    { name: 'Atlassian Platform', href: '/products/platform' },
-    { name: 'Marketplace', href: '/products/marketplace' },
+  'Agile & DevOps': [
+    { name: 'Trello', href: '/products/trello' },
+    { name: 'Statuspage', href: '/products/statuspage' },
+  ],
+  'Servis Yönetimi': [
+    { name: 'Opsgenie', href: '/products/opsgenie' },
   ],
 };
 

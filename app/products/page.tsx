@@ -49,6 +49,24 @@ export default function ProductsPage() {
       color: "from-indigo-600 to-indigo-700",
       features: ["Git hosting", "CI/CD pipeline", "Code review", "Jira entegrasyonu"],
       href: "/products/bitbucket"
+    },
+    {
+      id: "trello",
+      name: "Trello",
+      description: "Görsel proje yönetimi ve iş akışı organizasyonu",
+      icon: "/icons/trello.svg",
+      color: "from-teal-600 to-teal-700",
+      features: ["Kanban board'ları", "Butler otomasyonu", "Power-Ups", "Ekip iş birliği"],
+      href: "/products/trello"
+    },
+    {
+      id: "opsgenie",
+      name: "Opsgenie",
+      description: "Uyarı yönetimi ve on-call operasyonları",
+      icon: "/icons/opsgenie.svg",
+      color: "from-red-600 to-red-700",
+      features: ["Akıllı uyarı yönetimi", "On-call rotasyonları", "Olay müdahalesi", "Atlassian entegrasyonu"],
+      href: "/products/opsgenie"
     }
   ];
 
@@ -113,6 +131,8 @@ export default function ProductsPage() {
                         {product.id === "jira-work-management" && "⚙️"}
                         {product.id === "confluence" && "📚"}
                         {product.id === "bitbucket" && "💻"}
+                        {product.id === "trello" && "📋"}
+                        {product.id === "opsgenie" && "🚨"}
                       </div>
                       <div>
                         <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
@@ -244,6 +264,35 @@ export default function ProductsPage() {
                     <Link href="/products/bitbucket" className="flex items-center justify-between p-2 sm:p-3 bg-white rounded-lg sm:rounded-xl hover:bg-orange-50 transition-colors group/item">
                       <span className="text-sm sm:text-base text-orange-600 font-medium">Bitbucket</span>
                       <svg className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600 group-hover/item:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                    <Link href="/products/trello" className="flex items-center justify-between p-2 sm:p-3 bg-white rounded-lg sm:rounded-xl hover:bg-orange-50 transition-colors group/item">
+                      <span className="text-sm sm:text-base text-orange-600 font-medium">Trello</span>
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600 group-hover/item:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Operations Management */}
+              <div className="group relative bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2 border border-red-100 overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-gradient-to-br from-red-200 to-pink-200 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-12 sm:translate-x-16 -translate-y-12 sm:-translate-y-16 scale-0 group-hover:scale-100"></div>
+                
+                <div className="relative">
+                  <div className="text-3xl sm:text-4xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+                    🚨
+                  </div>
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Operasyon Yönetimi</h3>
+                  <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
+                    IT operasyonları ve uyarı yönetimi için özel çözümler ile sistemlerinizi koruyun.
+                  </p>
+                  <div className="space-y-2 sm:space-y-3">
+                    <Link href="/products/opsgenie" className="flex items-center justify-between p-2 sm:p-3 bg-white rounded-lg sm:rounded-xl hover:bg-red-50 transition-colors group/item">
+                      <span className="text-sm sm:text-base text-red-600 font-medium">Opsgenie</span>
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4 text-red-600 group-hover/item:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </Link>

@@ -105,8 +105,6 @@ export default function SitemapPage() {
       ],
       diğer: [
         { title: "Jira Work Management", path: "/products/jira-work-management" },
-        { title: "Marketplace", path: "/products/marketplace" },
-        { title: "Platform", path: "/products/platform" },
       ],
     },
     çözümler: [

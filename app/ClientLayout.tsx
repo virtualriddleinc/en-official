@@ -243,43 +243,139 @@ export default function ClientLayout({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute left-0 mt-4 w-full max-w-[calc(100vw-2rem)] lg:w-[550px] bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-3xl border border-white/5 shadow-2xl"
+                      className="absolute left-0 mt-4 w-full max-w-[calc(100vw-2rem)] lg:w-[525px] bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-2xl border border-white/5 shadow-xl backdrop-blur-sm"
                     >
-                      <div className="p-6">
-                        <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2">
-                          <div>
-                            <h3 className="font-semibold text-white mb-4 text-xl tracking-tight text-left">Planlama & Takip</h3>
-                            <ul className="space-y-3">
-                              <MenuItem href="/products/jira-software" icon={JiraSoftwareIcon} title="Jira Software" description="Çevik proje yönetimi" color="blue" onClick={() => setIsMobileMenuOpen(false)} />
-                              <MenuItem href="/products/jira-service-management" icon={JiraServiceManagementIcon} title="Jira Service Management" description="IT servis yönetimi" color="purple" onClick={() => setIsMobileMenuOpen(false)} />
-                              <MenuItem href="/products/jira-work-management" icon={JiraWorkManagementIcon} title="Jira Work Management" description="İş takımları için proje yönetimi" color="purple" onClick={() => setIsMobileMenuOpen(false)} />
-                            </ul>
+                      <div className="p-4">
+                        {/* Featured Section */}
+                        <div className="mb-5">
+                          <div className="flex items-center justify-between mb-4">
+                            <h3 className="text-white text-lg font-bold tracking-tight">Öne Çıkanlar</h3>
+                            <div className="w-2.5 h-2.5 bg-blue-400 rounded-full animate-pulse"></div>
                           </div>
-                          <div className="space-y-6">
-                            <div>
-                              <h3 className="font-semibold text-white mb-4 text-xl tracking-tight">İş Birliği & Güvenlik</h3>
-                              <ul className="space-y-3">
-                                <MenuItem href="/products/confluence" icon={ConfluenceIcon} title="Confluence" description="Takım iş birliği ve bilgi paylaşımı" color="indigo" onClick={() => setIsMobileMenuOpen(false)} />
-                              </ul>
+                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2.5">
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-blue-500/10 via-blue-600/5 to-transparent rounded-lg p-3 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:scale-[1.02]">
+                              <Link href="/products/jira-software" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-2">
+                                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500/30 to-blue-600/30 rounded-lg flex items-center justify-center border border-blue-500/30 group-hover:border-blue-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <JiraSoftwareIcon className="w-5 h-5 text-blue-300 group-hover:text-blue-200" />
+                                  </div>
+                                  <div>
+                                    <h4 className="text-white text-sm font-bold group-hover:text-blue-200 transition-colors duration-300">Jira Software</h4>
+                                    <p className="text-gray-400 text-xs leading-tight mt-1">Çevik proje yönetimi</p>
+                                  </div>
+                                </div>
+                              </Link>
                             </div>
-                            <div className="border-t border-white/10 pt-6">
-                              <h4 className="font-semibold text-white mb-4 text-lg tracking-tight">Kod Yönetimi</h4>
-                              <ul className="space-y-3">
-                                <MenuItem href="/products/bitbucket" icon={BitbucketIcon} title="Bitbucket" description="Git tabanlı kod yönetimi" color="blue" onClick={() => setIsMobileMenuOpen(false)} />
-                              </ul>
+                            
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-purple-500/10 via-purple-600/5 to-transparent rounded-lg p-3 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:scale-[1.02]">
+                              <Link href="/products/jira-service-management" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-2">
+                                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-lg flex items-center justify-center border border-purple-500/30 group-hover:border-purple-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <JiraServiceManagementIcon className="w-5 h-5 text-purple-300 group-hover:text-purple-200" />
+                                  </div>
+                                  <div>
+                                    <h4 className="text-white text-sm font-bold group-hover:text-purple-200 transition-colors duration-300">Jira Service Management</h4>
+                                    <p className="text-gray-400 text-xs leading-tight mt-1">IT servis yönetimi</p>
+                                  </div>
+                                </div>
+                              </Link>
                             </div>
-                            <div className="border-t border-white/10 pt-6">
-                              <h4 className="font-semibold text-white mb-4 text-lg tracking-tight">Agile & DevOps</h4>
-                              <ul className="space-y-3">
-                                <MenuItem href="/products/trello" icon={JiraSoftwareIcon} title="Trello" description="Görsel proje yönetimi" color="teal" onClick={() => setIsMobileMenuOpen(false)} />
-                                <MenuItem href="/products/statuspage" icon={BitbucketIcon} title="Statuspage" description="Durum ve olay bildirimi" color="indigo" onClick={() => setIsMobileMenuOpen(false)} />
-                              </ul>
+                            
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-emerald-500/10 via-emerald-600/5 to-transparent rounded-lg p-3 border border-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/20 hover:scale-[1.02]">
+                              <Link href="/products/jira-work-management" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-2">
+                                  <div className="w-10 h-10 bg-gradient-to-br from-emerald-500/30 to-emerald-600/30 rounded-lg flex items-center justify-center border border-emerald-500/30 group-hover:border-emerald-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <JiraWorkManagementIcon className="w-5 h-5 text-emerald-300 group-hover:text-emerald-200" />
+                                  </div>
+                                  <div>
+                                    <h4 className="text-white text-sm font-bold group-hover:text-emerald-200 transition-colors duration-300">Jira Work Management</h4>
+                                    <p className="text-gray-400 text-xs leading-tight mt-1">İş takımları için proje yönetimi</p>
+                                  </div>
+                                </div>
+                              </Link>
                             </div>
-                            <div className="border-t border-white/10 pt-6">
-                              <h4 className="font-semibold text-white mb-4 text-lg tracking-tight">Servis Yönetimi</h4>
-                              <ul className="space-y-3">
-                                <MenuItem href="/products/opsgenie" icon={JiraServiceManagementIcon} title="Opsgenie" description="Uyarı ve on-call yönetimi" color="purple" onClick={() => setIsMobileMenuOpen(false)} />
-                              </ul>
+                            
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-indigo-500/10 via-indigo-600/5 to-transparent rounded-lg p-3 border border-indigo-500/20 hover:border-indigo-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 hover:scale-[1.02]">
+                              <Link href="/products/confluence" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-2">
+                                  <div className="w-10 h-10 bg-gradient-to-br from-indigo-500/30 to-indigo-600/30 rounded-lg flex items-center justify-center border border-indigo-500/30 group-hover:border-indigo-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <ConfluenceIcon className="w-5 h-5 text-indigo-300 group-hover:text-indigo-200" />
+                                  </div>
+                                  <div>
+                                    <h4 className="text-white text-sm font-bold group-hover:text-indigo-200 transition-colors duration-300">Confluence</h4>
+                                    <p className="text-gray-400 text-xs leading-tight mt-1">Takım iş birliği platformu</p>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* All Products Section */}
+                        <div className="border-t border-white/10 pt-4">
+                          <div className="flex items-center justify-between mb-2.5">
+                            <h4 className="text-white text-sm font-bold tracking-wide">Keşfet</h4>
+                            <div className="flex space-x-1">
+                              <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+                              <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+                              <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-blue-500/10 via-blue-600/5 to-transparent rounded-lg p-2.5 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 hover:shadow-md hover:shadow-blue-500/20 hover:scale-[1.02]">
+                              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                              <Link href="/products/bitbucket" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-1.5">
+                                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500/30 to-blue-600/30 rounded-md flex items-center justify-center border border-blue-500/30 group-hover:border-blue-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <BitbucketIcon className="w-5 h-5 text-blue-300 group-hover:text-blue-200" />
+                                  </div>
+                                  <div>
+                                    <h4 className="text-white text-xs font-bold group-hover:text-blue-200 transition-colors duration-300">Bitbucket</h4>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                            
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-teal-500/10 via-teal-600/5 to-transparent rounded-lg p-2.5 border border-teal-500/20 hover:border-teal-400/40 transition-all duration-300 hover:shadow-md hover:shadow-teal-500/20 hover:scale-[1.02]">
+                              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                              <Link href="/products/trello" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-1.5">
+                                  <div className="w-10 h-10 bg-gradient-to-br from-teal-500/30 to-teal-600/30 rounded-md flex items-center justify-center border border-teal-500/30 group-hover:border-teal-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <JiraSoftwareIcon className="w-5 h-5 text-teal-300 group-hover:text-teal-200" />
+                                  </div>
+                                  <div>
+                                    <h4 className="text-white text-xs font-bold group-hover:text-teal-200 transition-colors duration-300">Trello</h4>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                            
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-indigo-500/10 via-indigo-600/5 to-transparent rounded-lg p-2.5 border border-indigo-500/20 hover:border-indigo-400/40 transition-all duration-300 hover:shadow-md hover:shadow-indigo-500/20 hover:scale-[1.02]">
+                              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                              <Link href="/products/statuspage" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-1.5">
+                                  <div className="w-10 h-10 bg-gradient-to-br from-indigo-500/30 to-indigo-600/30 rounded-md flex items-center justify-center border border-indigo-500/30 group-hover:border-indigo-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <BitbucketIcon className="w-5 h-5 text-indigo-300 group-hover:text-indigo-200" />
+                                  </div>
+                                  <div>
+                                    <h4 className="text-white text-xs font-bold group-hover:text-indigo-200 transition-colors duration-300">Statuspage</h4>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                            
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-purple-500/10 via-purple-600/5 to-transparent rounded-lg p-2.5 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 hover:shadow-md hover:shadow-purple-500/20 hover:scale-[1.02]">
+                              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                              <Link href="/products/opsgenie" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-1.5">
+                                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-md flex items-center justify-center border border-purple-500/30 group-hover:border-purple-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <JiraServiceManagementIcon className="w-5 h-5 text-purple-300 group-hover:text-purple-200" />
+                                  </div>
+                                  <div>
+                                    <h4 className="text-white text-xs font-bold group-hover:text-purple-200 transition-colors duration-300">Opsgenie</h4>
+                                  </div>
+                                </div>
+                              </Link>
                             </div>
                           </div>
                         </div>
@@ -305,16 +401,71 @@ export default function ClientLayout({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute left-0 mt-4 w-[350px] bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-3xl border border-white/5 shadow-2xl"
+                      className="absolute left-0 mt-4 w-full max-w-[calc(100vw-2rem)] lg:w-[350px] bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-2xl border border-white/5 shadow-xl backdrop-blur-sm"
                     >
                       <div className="p-4">
-                        <ul className="space-y-2">
-                           <MenuItem href="/solutions/consulting" icon={ConsultingIcon} title="Atlassian Danışmanlığı" description="Kurumsal süreç optimizasyonu" color="emerald" onClick={() => setIsMobileMenuOpen(false)} />
-                           <MenuItem href="/solutions/cloud-migration" icon={CloudMigrationIcon} title="Cloud Migration" description="Bulut geçiş stratejisi" color="sky" onClick={() => setIsMobileMenuOpen(false)} />
-                           <MenuItem href="/solutions/training" icon={TrainingIcon} title="Eğitim & Sertifikasyon" description="Atlassian ürün eğitimleri" color="amber" onClick={() => setIsMobileMenuOpen(false)} />
-                           <MenuItem href="/free-discovery" icon={DiscoveryIcon} title="Ücretsiz Keşif" description="Dijital dönüşüm ön analizi" color="teal" onClick={() => setIsMobileMenuOpen(false)} />
-                        </ul>
+                        <div className="space-y-2">
+                          <div className="group relative overflow-hidden bg-gradient-to-br from-emerald-500/10 via-emerald-600/5 to-transparent rounded-xl p-3 border border-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/20 hover:scale-[1.02]">
+                            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <Link href="/solutions/consulting" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                              <div className="flex items-center space-x-3">
+                                <div className="w-10 h-10 bg-gradient-to-br from-emerald-500/30 to-emerald-600/30 rounded-lg flex items-center justify-center border border-emerald-500/30 group-hover:border-emerald-400/50 group-hover:scale-110 transition-all duration-300">
+                                  <ConsultingIcon className="w-5 h-5 text-emerald-300 group-hover:text-emerald-200" />
+                                </div>
+                                <div>
+                                  <h4 className="text-white text-sm font-bold transition-colors duration-300">Atlassian Danışmanlığı</h4>
+                                  <p className="text-gray-400 text-xs leading-tight">Kurumsal süreç optimizasyonu</p>
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
+                          
+                          <div className="group relative overflow-hidden bg-gradient-to-br from-sky-500/10 via-sky-600/5 to-transparent rounded-xl p-3 border border-sky-500/20 hover:border-sky-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-sky-500/20 hover:scale-[1.02]">
+                            <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <Link href="/solutions/cloud-migration" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                              <div className="flex items-center space-x-3">
+                                <div className="w-10 h-10 bg-gradient-to-br from-sky-500/30 to-sky-600/30 rounded-lg flex items-center justify-center border border-sky-500/30 group-hover:border-sky-400/50 group-hover:scale-110 transition-all duration-300">
+                                  <CloudMigrationIcon className="w-5 h-5 text-sky-300 group-hover:text-sky-200" />
+                                </div>
+                                <div>
+                                  <h4 className="text-white text-sm font-bold transition-colors duration-300">Cloud Migration</h4>
+                                  <p className="text-gray-400 text-xs leading-tight">Bulut geçiş stratejisi</p>
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
+                          
+                          <div className="group relative overflow-hidden bg-gradient-to-br from-amber-500/10 via-amber-600/5 to-transparent rounded-xl p-3 border border-amber-500/20 hover:border-amber-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20 hover:scale-[1.02]">
+                            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <Link href="/solutions/training" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                              <div className="flex items-center space-x-3">
+                                <div className="w-10 h-10 bg-gradient-to-br from-amber-500/30 to-amber-600/30 rounded-lg flex items-center justify-center border border-amber-500/30 group-hover:border-amber-400/50 group-hover:scale-110 transition-all duration-300">
+                                  <TrainingIcon className="w-5 h-5 text-amber-300 group-hover:text-amber-200" />
+                                </div>
+                                <div>
+                                  <h4 className="text-white text-sm font-bold transition-colors duration-300">Eğitim & Sertifikasyon</h4>
+                                  <p className="text-gray-400 text-xs leading-tight">Atlassian ürün eğitimleri</p>
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
+                          
+                          <div className="group relative overflow-hidden bg-gradient-to-br from-teal-500/10 via-teal-600/5 to-transparent rounded-xl p-3 border border-teal-500/20 hover:border-teal-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/20 hover:scale-[1.02]">
+                            <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <Link href="/free-discovery" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                              <div className="flex items-center space-x-3">
+                                <div className="w-10 h-10 bg-gradient-to-br from-teal-500/30 to-teal-600/30 rounded-lg flex items-center justify-center border border-teal-500/30 group-hover:border-teal-400/50 group-hover:scale-110 transition-all duration-300">
+                                  <DiscoveryIcon className="w-5 h-5 text-teal-300 group-hover:text-teal-200" />
+                                </div>
+                                <div>
+                                  <h4 className="text-white text-sm font-bold transition-colors duration-300">Ücretsiz Keşif</h4>
+                                  <p className="text-gray-400 text-xs leading-tight">Dijital dönüşüm ön analizi</p>
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
                         </div>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -384,14 +535,14 @@ export default function ClientLayout({
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 h-full w-full max-w-sm z-50 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 shadow-2xl"
+              className="fixed top-0 right-0 h-full w-full max-w-md z-50 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 shadow-2xl"
             >
               <div className="p-6 h-full flex flex-col">
                 <div className="flex justify-between items-center mb-6 flex-shrink-0">
                   <h3 className="text-2xl font-bold text-white">Menü</h3>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 rounded-lg text-gray-300 hover:bg-white/10"
+                    className="p-2 rounded-lg text-gray-300 hover:bg-white/10 transition-all duration-200"
                   >
                     <X className="w-6 h-6" />
                   </button>
@@ -401,42 +552,174 @@ export default function ClientLayout({
                   <div className="px-2 space-y-2">
                     <button 
                       onClick={() => { setIsMobileMenuOpen(false); setIsSearchOpen(true); }}
-                      className="w-full flex items-center justify-between p-4 bg-white/5 rounded-lg text-left mb-2"
+                      className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-blue-500/10 via-blue-600/5 to-transparent rounded-xl text-left mb-3 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300"
                     >
-                      <span className="font-semibold text-gray-300">Ara...</span>
-                      <Search className="w-5 h-5 text-gray-500" />
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500/30 to-blue-600/30 rounded-lg flex items-center justify-center border border-blue-500/30">
+                          <Search className="w-5 h-5 text-blue-300" />
+                        </div>
+                        <div>
+                          <span className="font-semibold text-white text-base">Ara...</span>
+                          <p className="text-gray-400 text-xs mt-1">Ürün, çözüm veya bir özellik arayın</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-1 text-xs text-blue-400">
+                        <kbd className="px-2 py-1 bg-blue-100/20 rounded-lg">{isMac ? '⌘' : 'Ctrl'}</kbd>
+                        <span>+</span>
+                        <kbd className="px-2 py-1 bg-blue-100/20 rounded-lg">K</kbd>
+                      </div>
                     </button>
 
                     <div className="border-b border-white/10">
-                        <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white">
+                        <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white hover:bg-white/5 rounded-xl transition-all duration-200">
                             Hakkımızda
                         </Link>
                     </div>
                     
                     <MobileAccordion title="Ürünler">
-                      <ul className="space-y-1 pt-2">
-                        {productLinks.map(link => (
-                          <MenuItem key={link.href} {...link} onClick={() => setIsMobileMenuOpen(false)} />
-                        ))}
-                      </ul>
+                      <div className="pt-2 pb-4 px-2">
+                        {/* Featured Section */}
+                        <div className="mb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <h3 className="text-white text-sm font-bold tracking-tight">Öne Çıkanlar</h3>
+                            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                          </div>
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-blue-500/10 via-blue-600/5 to-transparent rounded-lg p-3 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:scale-[1.02]">
+                              <Link href="/products/jira-software" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-2">
+                                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500/30 to-blue-600/30 rounded-lg flex items-center justify-center border border-blue-500/30 group-hover:border-blue-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <JiraSoftwareIcon className="w-5 h-5 text-blue-300 group-hover:text-blue-200" />
+                                  </div>
+                                  <div>
+                                    <h4 className="text-white text-xs font-bold group-hover:text-blue-200 transition-colors duration-300">Jira Software</h4>
+                                    <p className="text-gray-400 text-[10px] leading-tight mt-1">Çevik proje yönetimi</p>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                            
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-purple-500/10 via-purple-600/5 to-transparent rounded-lg p-3 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:scale-[1.02]">
+                              <Link href="/products/jira-service-management" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-2">
+                                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-lg flex items-center justify-center border border-purple-500/30 group-hover:border-purple-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <JiraServiceManagementIcon className="w-5 h-5 text-purple-300 group-hover:text-purple-200" />
+                                  </div>
+                                  <div>
+                                    <h4 className="text-white text-xs font-bold group-hover:text-purple-200 transition-colors duration-300">Jira Service Management</h4>
+                                    <p className="text-gray-400 text-[10px] leading-tight mt-1">IT servis yönetimi</p>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                            
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-emerald-500/10 via-emerald-600/5 to-transparent rounded-lg p-3 border border-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/20 hover:scale-[1.02]">
+                              <Link href="/products/jira-work-management" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-2">
+                                  <div className="w-10 h-10 bg-gradient-to-br from-emerald-500/30 to-emerald-600/30 rounded-lg flex items-center justify-center border border-emerald-500/30 group-hover:border-emerald-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <JiraWorkManagementIcon className="w-5 h-5 text-emerald-300 group-hover:text-emerald-200" />
+                                  </div>
+                                  <div>
+                                    <h4 className="text-white text-xs font-bold group-hover:text-emerald-200 transition-colors duration-300">Jira Work Management</h4>
+                                    <p className="text-gray-400 text-[10px] leading-tight mt-1">İş takımları için proje yönetimi</p>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                            
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-indigo-500/10 via-indigo-600/5 to-transparent rounded-lg p-3 border border-indigo-500/20 hover:border-indigo-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 hover:scale-[1.02]">
+                              <Link href="/products/confluence" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-2">
+                                  <div className="w-10 h-10 bg-gradient-to-br from-indigo-500/30 to-indigo-600/30 rounded-lg flex items-center justify-center border border-indigo-500/30 group-hover:border-indigo-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <ConfluenceIcon className="w-5 h-5 text-indigo-300 group-hover:text-indigo-200" />
+                                  </div>
+                                  <div>
+                                    <h4 className="text-white text-xs font-bold group-hover:text-indigo-200 transition-colors duration-300">Confluence</h4>
+                                    <p className="text-gray-400 text-[10px] leading-tight mt-1">Takım iş birliği platformu</p>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* All Products Section */}
+                        <div className="border-t border-white/10 pt-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <h4 className="text-white text-xs font-bold tracking-wide">Keşfet</h4>
+                            <div className="flex space-x-1">
+                              <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+                              <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+                              <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-3 gap-1.5">
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-blue-500/10 via-blue-600/5 to-transparent rounded-md p-2 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300">
+                              <Link href="/products/bitbucket" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-1">
+                                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500/30 to-blue-600/30 rounded-md flex items-center justify-center border border-blue-500/30 group-hover:border-blue-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <BitbucketIcon className="w-4 h-4 text-blue-300 group-hover:text-blue-200" />
+                                  </div>
+                                  <h4 className="text-white text-[10px] font-bold group-hover:text-blue-200 transition-colors duration-300">Bitbucket</h4>
+                                </div>
+                              </Link>
+                            </div>
+                            
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-teal-500/10 via-teal-600/5 to-transparent rounded-md p-2 border border-teal-500/20 hover:border-teal-400/40 transition-all duration-300">
+                              <Link href="/products/trello" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-1">
+                                  <div className="w-8 h-8 bg-gradient-to-br from-teal-500/30 to-teal-600/30 rounded-md flex items-center justify-center border border-teal-500/30 group-hover:border-teal-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <JiraSoftwareIcon className="w-4 h-4 text-teal-300 group-hover:text-teal-200" />
+                                  </div>
+                                  <h4 className="text-white text-[10px] font-bold group-hover:text-teal-200 transition-colors duration-300">Trello</h4>
+                                </div>
+                              </Link>
+                            </div>
+                            
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-indigo-500/10 via-indigo-600/5 to-transparent rounded-md p-2 border border-indigo-500/20 hover:border-indigo-400/40 transition-all duration-300">
+                              <Link href="/products/statuspage" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-1">
+                                  <div className="w-8 h-8 bg-gradient-to-br from-indigo-500/30 to-indigo-600/30 rounded-md flex items-center justify-center border border-indigo-500/30 group-hover:border-indigo-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <BitbucketIcon className="w-4 h-4 text-indigo-300 group-hover:text-indigo-200" />
+                                  </div>
+                                  <h4 className="text-white text-[10px] font-bold group-hover:text-indigo-200 transition-colors duration-300">Statuspage</h4>
+                                </div>
+                              </Link>
+                            </div>
+                            
+                            <div className="group relative overflow-hidden bg-gradient-to-br from-purple-500/10 via-purple-600/5 to-transparent rounded-md p-2 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300">
+                              <Link href="/products/opsgenie" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
+                                <div className="flex flex-col items-center text-center space-y-1">
+                                  <div className="w-8 h-8 bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-md flex items-center justify-center border border-purple-500/30 group-hover:border-purple-400/50 group-hover:scale-110 transition-all duration-300">
+                                    <JiraServiceManagementIcon className="w-4 h-4 text-purple-300 group-hover:text-purple-200" />
+                                  </div>
+                                  <h4 className="text-white text-[10px] font-bold group-hover:text-purple-200 transition-colors duration-300">Opsgenie</h4>
+                                </div>
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </MobileAccordion>
 
                     <MobileAccordion title="Çözümler">
-                      <ul className="space-y-1 pt-2">
-                        {solutionLinks.map(link => (
-                          <MenuItem key={link.href} {...link} onClick={() => setIsMobileMenuOpen(false)} />
-                        ))}
-                      </ul>
+                      <div className="pt-2 pb-4 px-2">
+                        <ul className="space-y-1">
+                          {solutionLinks.map(link => (
+                            <MenuItem key={link.href} {...link} onClick={() => setIsMobileMenuOpen(false)} />
+                          ))}
+                        </ul>
+                      </div>
                     </MobileAccordion>
                     
                     <div className="border-b border-white/10">
-                        <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white">
+                        <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white hover:bg-white/5 rounded-xl transition-all duration-200">
                             Fiyatlandırma
                         </Link>
                     </div>
 
                     <div className="border-b border-white/10">
-                        <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white">
+                        <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white hover:bg-white/5 rounded-xl transition-all duration-200">
                             İletişim
                         </Link>
                     </div>
@@ -521,8 +804,8 @@ export default function ClientLayout({
                                 <CategoryIcon category={item.category} className={`h-6 w-6 transition-transform group-hover:scale-110 ${selectedIndex === index ? 'text-blue-600 dark:text-blue-400' : ''}`} />
                                 <div>
                                   <p className={`font-semibold text-base ${selectedIndex === index ? 'text-blue-700 dark:text-blue-300' : 'text-gray-800 dark:text-gray-200'}`}>{item.title}</p>
-              </div>
-              </div>
+                                </div>
+                              </div>
                               <ChevronRight className={`h-5 w-5 ${selectedIndex === index ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400'}`} />
                             </a>
                       </Link>

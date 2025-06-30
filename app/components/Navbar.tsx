@@ -19,16 +19,12 @@ const products = {
   ],
   'Doküman & İşbirliği': [
     { name: 'Confluence', href: '/products/confluence' },
+    { name: 'Trello', href: '/products/trello' },
   ],
   'DevOps & Code': [
     { name: 'Bitbucket', href: '/products/bitbucket' },
-  ],
-  'Agile & DevOps': [
-    { name: 'Trello', href: '/products/trello' },
-    { name: 'Statuspage', href: '/products/statuspage' },
-  ],
-  'Servis Yönetimi': [
     { name: 'Opsgenie', href: '/products/opsgenie' },
+    { name: 'Statuspage', href: '/products/statuspage' },
   ],
 };
 

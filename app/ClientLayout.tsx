@@ -259,10 +259,10 @@ export default function ClientLayout({
                                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500/30 to-blue-600/30 rounded-lg flex items-center justify-center border border-blue-500/30 group-hover:border-blue-400/50 group-hover:scale-110 transition-all duration-300">
                                     <JiraSoftwareIcon className="w-5 h-5 text-blue-300 group-hover:text-blue-200" />
                                   </div>
-                                  <div>
+                          <div>
                                     <h4 className="text-white text-sm font-bold group-hover:text-blue-200 transition-colors duration-300">Jira Software</h4>
                                     <p className="text-gray-400 text-xs leading-tight mt-1">Çevik proje yönetimi</p>
-                                  </div>
+                              </div>
                                 </div>
                               </Link>
                             </div>
@@ -273,13 +273,13 @@ export default function ClientLayout({
                                   <div className="w-10 h-10 bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-lg flex items-center justify-center border border-purple-500/30 group-hover:border-purple-400/50 group-hover:scale-110 transition-all duration-300">
                                     <JiraServiceManagementIcon className="w-5 h-5 text-purple-300 group-hover:text-purple-200" />
                                   </div>
-                                  <div>
+                            <div>
                                     <h4 className="text-white text-sm font-bold group-hover:text-purple-200 transition-colors duration-300">Jira Service Management</h4>
                                     <p className="text-gray-400 text-xs leading-tight mt-1">IT servis yönetimi</p>
-                                  </div>
-                                </div>
+                      </div>
+                      </div>
                               </Link>
-                            </div>
+                    </div>
                             
                             <div className="group relative overflow-hidden bg-gradient-to-br from-emerald-500/10 via-emerald-600/5 to-transparent rounded-lg p-3 border border-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/20 hover:scale-[1.02]">
                               <Link href="/products/jira-work-management" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
@@ -378,8 +378,8 @@ export default function ClientLayout({
                               </Link>
                             </div>
                           </div>
-                        </div>
-                      </div>
+                  </div>
+                </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -465,7 +465,7 @@ export default function ClientLayout({
                             </Link>
                           </div>
                         </div>
-                      </div>
+                        </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -550,8 +550,8 @@ export default function ClientLayout({
 
                 <div className="flex-grow overflow-y-auto -mr-6 pr-6">
                   <div className="px-2 space-y-2">
-                    <button 
-                      onClick={() => { setIsMobileMenuOpen(false); setIsSearchOpen(true); }}
+                  <button 
+                    onClick={() => { setIsMobileMenuOpen(false); setIsSearchOpen(true); }}
                       className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-blue-500/10 via-blue-600/5 to-transparent rounded-xl text-left mb-3 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300"
                     >
                       <div className="flex items-center space-x-3">
@@ -568,15 +568,15 @@ export default function ClientLayout({
                         <span>+</span>
                         <kbd className="px-2 py-1 bg-blue-100/20 rounded-lg">K</kbd>
                       </div>
-                    </button>
+                  </button>
 
                     <div className="border-b border-white/10">
                         <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white hover:bg-white/5 rounded-xl transition-all duration-200">
                             Hakkımızda
                         </Link>
                     </div>
-                    
-                    <MobileAccordion title="Ürünler">
+
+                  <MobileAccordion title="Ürünler">
                       <div className="pt-2 pb-4 px-2">
                         {/* Featured Section */}
                         <div className="mb-4">
@@ -700,18 +700,18 @@ export default function ClientLayout({
                           </div>
                         </div>
                       </div>
-                    </MobileAccordion>
+                  </MobileAccordion>
 
-                    <MobileAccordion title="Çözümler">
+                  <MobileAccordion title="Çözümler">
                       <div className="pt-2 pb-4 px-2">
                         <ul className="space-y-1">
-                          {solutionLinks.map(link => (
+                      {solutionLinks.map(link => (
                             <MenuItem key={link.href} {...link} onClick={() => setIsMobileMenuOpen(false)} />
-                          ))}
-                        </ul>
+                      ))}
+                    </ul>
                       </div>
-                    </MobileAccordion>
-                    
+                  </MobileAccordion>
+
                     <div className="border-b border-white/10">
                         <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white hover:bg-white/5 rounded-xl transition-all duration-200">
                             Fiyatlandırma
@@ -804,8 +804,8 @@ export default function ClientLayout({
                                 <CategoryIcon category={item.category} className={`h-6 w-6 transition-transform group-hover:scale-110 ${selectedIndex === index ? 'text-blue-600 dark:text-blue-400' : ''}`} />
                                 <div>
                                   <p className={`font-semibold text-base ${selectedIndex === index ? 'text-blue-700 dark:text-blue-300' : 'text-gray-800 dark:text-gray-200'}`}>{item.title}</p>
-                                </div>
-                              </div>
+              </div>
+              </div>
                               <ChevronRight className={`h-5 w-5 ${selectedIndex === index ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400'}`} />
                             </a>
                       </Link>

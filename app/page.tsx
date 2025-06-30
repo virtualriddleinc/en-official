@@ -254,7 +254,7 @@ export default function Home() {
                 <h3 className="text-2xl font-bold text-[#253858] mb-4">Atlassian's Best Practices</h3>
                 <div className="space-y-4">
                   <p className="text-gray-600 leading-relaxed">
-                    Atlassian'ın önerdiği en iyi uygulama ve yöntemleri kullanarak projelerinizi yönetiyoruz.
+                    Atlassian'ın önerdiği en iyi uygulama ve yöntemleri kullanarak projelerinizi doğru şekilde yönetmenize yardımcı oluyoruz.
                   </p>
                   <ul className="space-y-3">
                     <li className="flex items-start">
@@ -305,7 +305,7 @@ export default function Home() {
                       <svg className="w-5 h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-gray-600">Resmi Atlassian partneri</span>
+                      <span className="text-gray-600">Atlassian araçlarında köklü deneyim</span>
                     </li>
                     <li className="flex items-start">
                       <svg className="w-5 h-5 text-[#0052CC] mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -369,27 +369,27 @@ export default function Home() {
               {/* Müşteri Kartı */}
               <div className="flex-1 relative group">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#FF6B6B] to-[#FF8E53] opacity-60 blur-3xl transition-all duration-500 group-hover:opacity-80"></div>
-                <div className="relative h-full bg-black/20 backdrop-blur-xl rounded-3xl p-10 border border-white/10 overflow-hidden transform transition-transform duration-500 hover:scale-[1.02]">
+                <div className="relative h-full bg-black/20 backdrop-blur-xl rounded-3xl p-10 border border-white/10 overflow-hidden transform transition-transform duration-500 hover:scale-[1.02] flex flex-col justify-center">
                   <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-[#FF6B6B] to-[#FF8E53] opacity-20 blur-3xl rounded-full transform translate-x-20 -translate-y-20"></div>
-                  
-                  <div className="relative flex flex-col h-full">
-                    <div className="mb-auto">
-                      <div className="flex items-center gap-4 mb-6">
-                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF6B6B] to-[#FF8E53] p-0.5">
-                          <div className="w-full h-full rounded-2xl bg-black/30 flex items-center justify-center">
-                            <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                            </svg>
-                          </div>
+                  <div className="flex flex-col items-center justify-start">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF6B6B] to-[#FF8E53] p-0.5">
+                        <div className="w-full h-full rounded-2xl bg-black/30 flex items-center justify-center">
+                          <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                          </svg>
                         </div>
-                        <span className="text-base font-medium text-white/80">Kurumsal Müşteri</span>
                       </div>
-                      <div className="flex items-center">
-                        <span className="text-6xl sm:text-7xl font-bold text-white leading-none">25</span>
-                        <span className="text-5xl font-bold text-[#FF8E53] ml-1 mb-1">+</span>
-                      </div>
+                      <span className="text-2xl font-extrabold bg-gradient-to-r from-[#FF8E53] via-white to-[#FF6B6B] bg-clip-text text-transparent drop-shadow text-center leading-none">Kurumsal Müşteri</span>
                     </div>
-                    <p className="text-base text-white/70 font-medium mt-4">Ulusal ve uluslararası şirketlere Atlassian çözümleri</p>
+                    <div className="flex flex-row items-center justify-center mb-2 gap-1">
+                      <span className="text-7xl sm:text-8xl font-extrabold text-white leading-none drop-shadow-lg">25</span>
+                      <span className="text-5xl font-extrabold text-[#FF8E53] -mb-2">+</span>
+                    </div>
+                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-2 bg-gradient-to-r from-[#FF8E53] via-white to-[#FF6B6B] bg-clip-text text-transparent drop-shadow-xl text-center tracking-tight">
+                      Kurumsal Müşteri
+                    </h3>
+                    <p className="text-lg text-white/90 font-semibold mt-6 text-center">Ulusal ve uluslararası şirketlere Atlassian çözümleri</p>
                   </div>
                 </div>
               </div>
@@ -397,29 +397,29 @@ export default function Home() {
               {/* Proje Kartı */}
               <div className="flex-1 relative group">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#7C3AED] to-[#EC4899] opacity-60 blur-3xl transition-all duration-500 group-hover:opacity-80"></div>
-                <div className="relative h-full bg-black/20 backdrop-blur-xl rounded-3xl p-10 border border-white/10 overflow-hidden transform transition-transform duration-500 hover:scale-[1.02]">
+                <div className="relative h-full bg-black/20 backdrop-blur-xl rounded-3xl p-10 border border-white/10 overflow-hidden transform transition-transform duration-500 hover:scale-[1.02] flex flex-col justify-center">
                   <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-[#7C3AED] to-[#EC4899] opacity-20 blur-3xl rounded-full transform translate-x-20 -translate-y-20"></div>
-                  
-                  <div className="relative flex flex-col h-full">
-                    <div className="mb-auto">
-                      <div className="flex items-center gap-4 mb-6">
-                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#7C3AED] to-[#EC4899] p-0.5">
-                          <div className="w-full h-full rounded-2xl bg-black/30 flex items-center justify-center">
-                            <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                  </svg>
-                          </div>
+                  <div className="flex flex-col items-center justify-start">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#7C3AED] to-[#EC4899] p-0.5">
+                        <div className="w-full h-full rounded-2xl bg-black/30 flex items-center justify-center">
+                          <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                          </svg>
                         </div>
-                        <span className="text-base font-medium text-white/80">Başarılı Proje</span>
                       </div>
-                      <div className="flex items-center">
-                        <span className="text-6xl sm:text-7xl font-bold text-white leading-none">100</span>
-                        <span className="text-5xl font-bold text-[#EC4899] ml-1 mb-1">+</span>
-              </div>
-            </div>
-                    <p className="text-base text-white/70 font-medium mt-4">Tamamlanan başarılı proje</p>
+                      <span className="text-2xl font-extrabold bg-gradient-to-r from-[#EC4899] via-white to-[#7C3AED] bg-clip-text text-transparent drop-shadow text-center leading-none">Başarılı Proje</span>
+                    </div>
+                    <div className="flex flex-row items-center justify-center mb-2 gap-1">
+                      <span className="text-7xl sm:text-8xl font-extrabold text-white leading-none drop-shadow-lg">100</span>
+                      <span className="text-5xl font-extrabold text-[#EC4899] -mb-2">+</span>
+                    </div>
+                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-2 bg-gradient-to-r from-[#EC4899] via-white to-[#7C3AED] bg-clip-text text-transparent drop-shadow-xl text-center tracking-tight">
+                      Başarılı Proje
+                    </h3>
+                    <p className="text-lg text-white/90 font-semibold mt-6 text-center">Tamamlanan başarılı proje</p>
                   </div>
-              </div>
+                </div>
               </div>
             </div>
           </div>
@@ -497,18 +497,18 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Atlassian Danışmanlığı */}
             <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all w-5/6 mx-auto lg:w-full">
-              <div className="relative h-48">
+              <div className="relative h-48 w-full flex items-center justify-center bg-white rounded-t-xl">
                 <Image
-                  src="/images/business-optimization.svg"
+                  src="/vr-showcase/solutions-1.svg"
                   alt="Atlassian Danışmanlığı"
                   fill
-                  className="object-cover p-0"
+                  className="object-contain p-4"
                 />
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-semibold text-[#253858] mb-3">Atlassian Danışmanlığı</h3>
                 <p className="text-[#42526E] mb-4">Jira, Confluence ve diğer Atlassian ürünleriyle iş süreçlerinizi optimize edin. Uzman ekibimiz, kurumunuza özel yapılandırma, entegrasyon ve süreç iyileştirme çözümleri sunuyor.</p>
-                <a href="/cozumler/atlassian-danismanligi" className="inline-flex items-center text-[#0052CC] font-medium hover:underline">
+                <a href="/solutions/consulting" className="inline-flex items-center text-[#0052CC] font-medium hover:underline">
                   Detaylı Bilgi
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
@@ -519,18 +519,18 @@ export default function Home() {
               
             {/* Cloud Migration */}
             <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all w-5/6 mx-auto lg:w-full">
-              <div className="relative h-48">
+              <div className="relative h-48 w-full flex items-center justify-center bg-white rounded-t-xl">
                 <Image
-                  src="/images/cloud-infrastructure.svg"
+                  src="/vr-showcase/solutions-2.png"
                   alt="Cloud Migration"
                   fill
-                  className="object-cover p-0"
+                  className="object-contain p-4"
                 />
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-semibold text-[#253858] mb-3">Cloud Migration</h3>
                 <p className="text-[#42526E] mb-4">On-premise Atlassian ürünlerinizi sorunsuz şekilde Cloud ortamına taşıyın. Verilerinizin güvenli migrasyonu, kullanıcı yönetimi ve entegrasyonlar için uçtan uca destek sağlıyoruz.</p>
-                <a href="/cozumler/cloud-migration" className="inline-flex items-center text-[#0052CC] font-medium hover:underline">
+                <a href="/solutions/cloud-migration" className="inline-flex items-center text-[#0052CC] font-medium hover:underline">
                   Detaylı Bilgi
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
@@ -541,18 +541,18 @@ export default function Home() {
 
             {/* Eğitim & Sertifikasyon */}
             <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all w-5/6 mx-auto lg:w-full">
-              <div className="relative h-48">
+              <div className="relative h-48 w-full flex items-center justify-center bg-white rounded-t-xl">
                 <Image
-                  src="/images/software-development.svg"
+                  src="/vr-showcase/solutions-3.png"
                   alt="Eğitim & Sertifikasyon"
                   fill
-                  className="object-cover p-0"
+                  className="object-contain p-4"
                 />
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-semibold text-[#253858] mb-3">Eğitim & Sertifikasyon</h3>
                 <p className="text-[#42526E] mb-4">Ekibinizin Atlassian ürünlerini etkin kullanabilmesi için özelleştirilmiş eğitim programları ve sertifikasyon hazırlık kursları sunuyoruz. Uygulamalı eğitimlerle verimlilik artışı sağlayın.</p>
-                <a href="/cozumler/egitim-sertifikasyon" className="inline-flex items-center text-[#0052CC] font-medium hover:underline">
+                <a href="/solutions/training" className="inline-flex items-center text-[#0052CC] font-medium hover:underline">
                   Detaylı Bilgi
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
@@ -576,7 +576,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* AI DevOps Card */}
+            {/* AI Altyapısı Card */}
             <div className="group bg-gradient-to-br from-blue-800 to-blue-900 rounded-3xl p-1 hover:from-blue-400 hover:to-blue-500 transition-all duration-300 w-5/6 mx-auto lg:w-full">
               <div className="bg-gradient-to-br from-blue-800 to-blue-900 rounded-3xl p-8 h-full">
                 <div className="mb-6 relative">
@@ -589,13 +589,13 @@ export default function Home() {
               </div>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <h3 className="text-2xl font-bold text-white">AI DevOps</h3>
+                  <h3 className="text-2xl font-bold text-white">AI Altyapısı</h3>
                     <span className="px-3 py-1 text-xs font-bold text-blue-900 bg-blue-200 rounded-full">Yeni</span>
                 </div>
                   <p className="text-blue-200">
-                  Yapay zeka destekli DevOps çözümlerimizle süreçlerinizi otomatikleştirin ve verimliliğinizi artırın.
+                  Yapay zeka destekli altyapı çözümlerimizle süreçlerinizi otomatikleştirin ve verimliliğinizi artırın.
                 </p>
-                  <a href="/solutions/devops" className="inline-flex items-center text-blue-300 font-bold group-hover:text-white">
+                  <a href="/products/rovo" className="inline-flex items-center text-blue-300 font-bold group-hover:text-white">
                   İncele
                   <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -621,7 +621,7 @@ export default function Home() {
                   <p className="text-blue-200">
                   Modern cloud altyapısı ile işletmenizi geleceğe taşıyın, maliyetlerinizi optimize edin.
                 </p>
-                  <a href="/solutions/cloud" className="inline-flex items-center text-blue-300 font-bold group-hover:text-white">
+                  <a href="/solutions/consulting" className="inline-flex items-center text-blue-300 font-bold group-hover:text-white">
                   İncele
                   <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />

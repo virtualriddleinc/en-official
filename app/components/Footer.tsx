@@ -1,6 +1,31 @@
 "use client";
 
 export default function Footer() {
+  const products = {
+    'Proje & İş Yönetimi': [
+      { name: 'Jira Software', href: '/products/jira-software' },
+      { name: 'Jira Work Management', href: '/products/jira-work-management' },
+      { name: 'Jira Service Management', href: '/products/jira-service-management' },
+    ],
+    'Doküman & İşbirliği': [
+      { name: 'Confluence', href: '/products/confluence' },
+    ],
+    'DevOps & Code': [
+      { name: 'Bitbucket', href: '/products/bitbucket' },
+    ],
+    'Platform & Marketplace': [
+      { name: 'Atlassian Platform', href: '/products/platform' },
+      { name: 'Marketplace', href: '/products/marketplace' },
+    ],
+  };
+
+  const exploreProducts = [
+    { name: 'Bitbucket', href: '/products/bitbucket' },
+    { name: 'Trello', href: '/products/trello' },
+    { name: 'Statuspage', href: '/products/statuspage' },
+    { name: 'Opsgenie', href: '/products/opsgenie' },
+  ];
+
   return (
     <footer className="bg-[#0F172A] text-white py-16">
       <div className="container mx-auto px-4">
@@ -19,12 +44,84 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Navigasyon */}
-        <div className="flex justify-center gap-8 mb-12">
-          <a href="/" className="text-gray-400 hover:text-white transition-colors">Ana Sayfa</a>
-          <a href="/about" className="text-gray-400 hover:text-white transition-colors">Hakkımızda</a>
-          <a href="/career" className="text-gray-400 hover:text-white transition-colors">Kariyer</a>
-          <a href="/contact" className="text-gray-400 hover:text-white transition-colors">İletişim</a>
+        {/* Ana İçerik Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* Ürünler */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-white">Ürünler</h3>
+            <div className="space-y-4">
+              {Object.entries(products).map(([category, items]) => (
+                <div key={category}>
+                  <h4 className="text-sm font-medium text-gray-300 mb-2">{category}</h4>
+                  <ul className="space-y-1">
+                    {items.map((item) => (
+                      <li key={item.name}>
+                        <a 
+                          href={item.href} 
+                          className="text-gray-400 hover:text-white transition-colors text-sm"
+                        >
+                          {item.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+              
+              {/* Keşfet */}
+              <div>
+                <h4 className="text-sm font-medium text-gray-300 mb-2">Keşfet</h4>
+                <ul className="space-y-1">
+                  {exploreProducts.map((item) => (
+                    <li key={item.name}>
+                      <a 
+                        href={item.href} 
+                        className="text-gray-400 hover:text-white transition-colors text-sm"
+                      >
+                        {item.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Çözümler */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-white">Çözümler</h3>
+            <ul className="space-y-2">
+              <li><a href="/solutions/consulting" className="text-gray-400 hover:text-white transition-colors text-sm">Atlassian Danışmanlığı</a></li>
+              <li><a href="/solutions/cloud-migration" className="text-gray-400 hover:text-white transition-colors text-sm">Cloud Migration</a></li>
+              <li><a href="/solutions/training" className="text-gray-400 hover:text-white transition-colors text-sm">Eğitim & Sertifikasyon</a></li>
+              <li><a href="/solutions/devops" className="text-gray-400 hover:text-white transition-colors text-sm">AI Altyapısı</a></li>
+              <li><a href="/solutions/it-support" className="text-gray-400 hover:text-white transition-colors text-sm">IT Destek</a></li>
+            </ul>
+          </div>
+
+          {/* Şirket */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-white">Şirket</h3>
+            <ul className="space-y-2">
+              <li><a href="/about" className="text-gray-400 hover:text-white transition-colors text-sm">Hakkımızda</a></li>
+              <li><a href="/career" className="text-gray-400 hover:text-white transition-colors text-sm">Kariyer</a></li>
+              <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors text-sm">İletişim</a></li>
+              <li><a href="/blog" className="text-gray-400 hover:text-white transition-colors text-sm">Blog</a></li>
+              <li><a href="/pricing" className="text-gray-400 hover:text-white transition-colors text-sm">Fiyatlandırma</a></li>
+            </ul>
+          </div>
+
+          {/* Destek */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-white">Destek</h3>
+            <ul className="space-y-2">
+              <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors text-sm">Teknik Destek</a></li>
+              <li><a href="/free-discovery" className="text-gray-400 hover:text-white transition-colors text-sm">Ücretsiz Keşif</a></li>
+              <li><a href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm">Gizlilik Politikası</a></li>
+              <li><a href="/terms" className="text-gray-400 hover:text-white transition-colors text-sm">Kullanım Şartları</a></li>
+              <li><a href="/sitemap" className="text-gray-400 hover:text-white transition-colors text-sm">Site Haritası</a></li>
+            </ul>
+          </div>
         </div>
 
         {/* Sosyal Medya */}

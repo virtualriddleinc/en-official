@@ -45,9 +45,10 @@ type Column = {
   issues: Issue[];
 };
 
-function DroppableColumn({ column, children }: { column: Column; children: React.ReactNode }) {
+function DroppableColumn({ column, children, isMobile }: { column: Column; children: React.ReactNode; isMobile: boolean }) {
   const { setNodeRef } = useDroppable({
     id: column.id,
+    disabled: isMobile, // Mobil cihazlarda drag & drop devre dışı
   });
 
   const getColumnStyle = (columnId: string) => {
@@ -120,14 +121,17 @@ function DroppableColumn({ column, children }: { column: Column; children: React
   );
 }
 
-function SortableIssue({ issue, columnId }: { issue: Issue; columnId: string }) {
+function SortableIssue({ issue, columnId, isMobile }: { issue: Issue; columnId: string; isMobile: boolean }) {
   const {
     attributes,
     listeners,
     setNodeRef,
     transform,
     transition,
-  } = useSortable({ id: issue.id });
+  } = useSortable({ 
+    id: issue.id,
+    disabled: isMobile, // Mobil cihazlarda drag & drop devre dışı
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -156,9 +160,8 @@ function SortableIssue({ issue, columnId }: { issue: Issue; columnId: string }) 
     <div
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
-      className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm cursor-move"
+      {...(isMobile ? {} : { ...attributes, ...listeners })} // Mobil cihazlarda drag & drop özelliklerini kaldır
+      className={`bg-white p-4 rounded-lg border border-gray-200 shadow-sm ${isMobile ? '' : 'cursor-move'}`}
     >
       <h4 className="kanban-card-title text-[#172B4D] mb-2">
         {issue.title}
@@ -186,9 +189,20 @@ function SortableIssue({ issue, columnId }: { issue: Issue; columnId: string }) 
 
 export default function KanbanBoard() {
   const [isClient, setIsClient] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
+    
+    // Mobil cihaz kontrolü
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const [columns, setColumns] = useState<{ [key: string]: Column }>({
@@ -255,17 +269,24 @@ export default function KanbanBoard() {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8, // Mobil cihazlarda yanlışlıkla tetiklenmeyi önlemek için
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
 
   const handleDragStart = (event: DragStartEvent) => {
+    if (isMobile) return; // Mobil cihazlarda drag başlatma
     setActiveId(event.active.id as string);
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
+    if (isMobile) return; // Mobil cihazlarda drag işlemi yapma
+    
     const { active, over } = event;
     
     if (!over) return;
@@ -379,6 +400,11 @@ export default function KanbanBoard() {
           </h2>
           <p className="subtitle text-[#42526E] max-w-2xl mx-auto">
             Projelerinizi planlamak, takip etmek ve tamamlamak için modern ve kullanıcı dostu arayüz
+            {isMobile && (
+              <span className="block mt-2 text-sm text-gray-500">
+                Mobil cihazlarda sadece görüntüleme modu
+              </span>
+            )}
           </p>
         </div>
         
@@ -390,16 +416,16 @@ export default function KanbanBoard() {
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {Object.entries(columns).map(([columnId, column]) => (
-              <DroppableColumn key={columnId} column={column}>
+              <DroppableColumn key={columnId} column={column} isMobile={isMobile}>
                 {column.issues.map((issue) => (
-                  <SortableIssue key={issue.id} issue={issue} columnId={columnId} />
+                  <SortableIssue key={issue.id} issue={issue} columnId={columnId} isMobile={isMobile} />
                 ))}
               </DroppableColumn>
             ))}
           </div>
 
           <DragOverlay>
-            {activeId ? (
+            {activeId && !isMobile ? (
               <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-lg">
                 <span className="kanban-card-title">
                   {Object.values(columns).map(column => 

@@ -29,6 +29,13 @@ const products = {
   ],
 };
 
+const exploreProducts = [
+  { name: 'Bitbucket', href: '/products/bitbucket' },
+  { name: 'Trello', href: '/products/trello' },
+  { name: 'Statuspage', href: '/products/statuspage' },
+  { name: 'Opsgenie', href: '/products/opsgenie' },
+];
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -92,6 +99,28 @@ export default function Navbar() {
                         ))}
                       </div>
                     ))}
+                    
+                    {/* Keşfet Bölümü */}
+                    <div className="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
+                      <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Keşfet</p>
+                      <div className="grid grid-cols-2 gap-1">
+                        {exploreProducts.map((item) => (
+                          <Menu.Item key={item.name}>
+                            {({ active }) => (
+                              <Link
+                                href={item.href}
+                                className={classNames(
+                                  active ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300',
+                                  'block px-3 py-2 text-sm rounded-md'
+                                )}
+                              >
+                                {item.name}
+                              </Link>
+                            )}
+                          </Menu.Item>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </Menu.Items>
               </Transition>
@@ -172,6 +201,25 @@ export default function Navbar() {
                     </div>
                   </div>
                 ))}
+                
+                {/* Mobil Keşfet Bölümü - 2x2 Grid */}
+                <div className="space-y-3">
+                  <p className="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">
+                    Keşfet
+                  </p>
+                  <div className="grid grid-cols-2 gap-3 pl-4">
+                    {exploreProducts.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className="block text-base text-blue-700 dark:text-blue-300 transition-colors py-2 px-3 bg-white/50 dark:bg-gray-800/50 rounded-lg hover:bg-white/80 dark:hover:bg-gray-800/80 hover:text-blue-800 dark:hover:text-blue-200 text-center"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div className="space-y-4 pt-2">

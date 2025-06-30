@@ -248,29 +248,42 @@ export default function ClientLayout({
                       <div className="p-6">
                         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2">
                           <div>
-                            <h3 className="font-semibold text-white mb-4 text-xl tracking-tight text-left">Planlama &amp; Takip</h3>
-                        <ul className="space-y-3">
+                            <h3 className="font-semibold text-white mb-4 text-xl tracking-tight text-left">Planlama & Takip</h3>
+                            <ul className="space-y-3">
                               <MenuItem href="/products/jira-software" icon={JiraSoftwareIcon} title="Jira Software" description="Çevik proje yönetimi" color="blue" onClick={() => setIsMobileMenuOpen(false)} />
                               <MenuItem href="/products/jira-service-management" icon={JiraServiceManagementIcon} title="Jira Service Management" description="IT servis yönetimi" color="purple" onClick={() => setIsMobileMenuOpen(false)} />
                               <MenuItem href="/products/jira-work-management" icon={JiraWorkManagementIcon} title="Jira Work Management" description="İş takımları için proje yönetimi" color="purple" onClick={() => setIsMobileMenuOpen(false)} />
                             </ul>
-                              </div>
+                          </div>
                           <div className="space-y-6">
                             <div>
-                                <h3 className="font-semibold text-white mb-4 text-xl tracking-tight">İş Birliği &amp; Güvenlik</h3>
-                                <ul className="space-y-3">
-                                    <MenuItem href="/products/confluence" icon={ConfluenceIcon} title="Confluence" description="Takım iş birliği ve bilgi paylaşımı" color="indigo" onClick={() => setIsMobileMenuOpen(false)} />
-                        </ul>
-                      </div>
+                              <h3 className="font-semibold text-white mb-4 text-xl tracking-tight">İş Birliği & Güvenlik</h3>
+                              <ul className="space-y-3">
+                                <MenuItem href="/products/confluence" icon={ConfluenceIcon} title="Confluence" description="Takım iş birliği ve bilgi paylaşımı" color="indigo" onClick={() => setIsMobileMenuOpen(false)} />
+                              </ul>
+                            </div>
                             <div className="border-t border-white/10 pt-6">
-                                <h4 className="font-semibold text-white mb-4 text-lg tracking-tight">Kod Yönetimi</h4>
-                        <ul className="space-y-3">
-                                    <MenuItem href="/products/bitbucket" icon={BitbucketIcon} title="Bitbucket" description="Git tabanlı kod yönetimi" color="blue" onClick={() => setIsMobileMenuOpen(false)} />
-                        </ul>
+                              <h4 className="font-semibold text-white mb-4 text-lg tracking-tight">Kod Yönetimi</h4>
+                              <ul className="space-y-3">
+                                <MenuItem href="/products/bitbucket" icon={BitbucketIcon} title="Bitbucket" description="Git tabanlı kod yönetimi" color="blue" onClick={() => setIsMobileMenuOpen(false)} />
+                              </ul>
+                            </div>
+                            <div className="border-t border-white/10 pt-6">
+                              <h4 className="font-semibold text-white mb-4 text-lg tracking-tight">Agile & DevOps</h4>
+                              <ul className="space-y-3">
+                                <MenuItem href="/products/trello" icon={JiraSoftwareIcon} title="Trello" description="Görsel proje yönetimi" color="teal" onClick={() => setIsMobileMenuOpen(false)} />
+                                <MenuItem href="/products/statuspage" icon={BitbucketIcon} title="Statuspage" description="Durum ve olay bildirimi" color="indigo" onClick={() => setIsMobileMenuOpen(false)} />
+                              </ul>
+                            </div>
+                            <div className="border-t border-white/10 pt-6">
+                              <h4 className="font-semibold text-white mb-4 text-lg tracking-tight">Servis Yönetimi</h4>
+                              <ul className="space-y-3">
+                                <MenuItem href="/products/opsgenie" icon={JiraServiceManagementIcon} title="Opsgenie" description="Uyarı ve on-call yönetimi" color="purple" onClick={() => setIsMobileMenuOpen(false)} />
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

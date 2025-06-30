@@ -19,12 +19,13 @@ const products = {
   ],
   'Doküman & İşbirliği': [
     { name: 'Confluence', href: '/products/confluence' },
-    { name: 'Trello', href: '/products/trello' },
   ],
   'DevOps & Code': [
     { name: 'Bitbucket', href: '/products/bitbucket' },
-    { name: 'Opsgenie', href: '/products/opsgenie' },
-    { name: 'Statuspage', href: '/products/statuspage' },
+  ],
+  'Platform & Marketplace': [
+    { name: 'Atlassian Platform', href: '/products/platform' },
+    { name: 'Marketplace', href: '/products/marketplace' },
   ],
 };
 

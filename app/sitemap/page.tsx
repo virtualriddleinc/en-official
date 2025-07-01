@@ -65,6 +65,12 @@ export default function SitemapPage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
           </svg>
         );
+      case "ai":
+        return (
+          <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+        );
       case "diğer":
         return (
           <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -81,10 +87,10 @@ export default function SitemapPage() {
     ana: [
       { title: "Ana Sayfa", path: "/" },
       { title: "Hakkımızda", path: "/about" },
-      { title: "Hizmetler", path: "/services" },
       { title: "Kariyer", path: "/career" },
       { title: "İletişim", path: "/contact" },
       { title: "Blog", path: "/blog" },
+      { title: "Fiyatlandırma", path: "/pricing" },
       { title: "Site Haritası", path: "/sitemap" },
     ],
     ürünler: {
@@ -103,21 +109,27 @@ export default function SitemapPage() {
         { title: "Trello", path: "/products/trello" },
         { title: "Statuspage", path: "/products/statuspage" },
       ],
+      ai: [
+        { title: "Atlassian Rovo", path: "/products/rovo" },
+      ],
       diğer: [
         { title: "Jira Work Management", path: "/products/jira-work-management" },
+        { title: "Atlas", path: "/products/atlas" },
       ],
     },
     çözümler: [
       { title: "Atlassian Danışmanlığı", path: "/solutions/consulting" },
       { title: "Cloud Migration", path: "/solutions/cloud-migration" },
       { title: "Eğitim & Sertifikasyon", path: "/solutions/training" },
+      { title: "IT Destek", path: "/solutions/it-support" },
+      { title: "DevOps", path: "/solutions/devops" },
+      { title: "Agile", path: "/solutions/agile" },
+      { title: "Cloud", path: "/solutions/cloud" },
       { title: "Ücretsiz Keşif", path: "/free-discovery" },
     ],
     yasal: [
       { title: "Gizlilik Politikası", path: "/privacy" },
       { title: "Kullanım Koşulları", path: "/terms" },
-      { title: "Sıkça Sorulan Sorular", path: "/faq" },
-      { title: "Destek", path: "/support" },
     ],
   };
 
@@ -229,6 +241,7 @@ export default function SitemapPage() {
                     { title: "İletişim", path: "/contact", icon: "contact" },
                     { title: "Blog", path: "/blog", icon: "blog" },
                     { title: "Ürünler", path: "/products", icon: "products" },
+                    { title: "Fiyatlandırma", path: "/pricing", icon: "pricing" },
                   ].map((item, index) => (
                     <Link 
                       key={index}
@@ -280,6 +293,7 @@ export default function SitemapPage() {
                       kod: "Kod Yönetimi",
                       servis: "Servis Yönetimi",
                       agile: "Agile & DevOps",
+                      ai: "AI Destekli Ürünler",
                       diğer: "Diğer Ürünler"
                     };
                     
@@ -425,6 +439,14 @@ function IconForQuickLinks({ name }: { name: string }) {
           </svg>
         </div>
       );
+    case "pricing":
+      return (
+        <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+          <svg className="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+          </svg>
+        </div>
+      );
     default:
       return null;
   }
@@ -445,6 +467,18 @@ function SolutionIcon({ index }: { index: number }) {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
     </svg>,
     <svg key={3} className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>,
+    <svg key={4} className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+    </svg>,
+    <svg key={5} className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+    </svg>,
+    <svg key={6} className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+    </svg>,
+    <svg key={7} className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
     </svg>,
   ];
@@ -460,12 +494,6 @@ function LegalIcon({ index }: { index: number }) {
     </svg>,
     <svg key={1} className="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>,
-    <svg key={2} className="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>,
-    <svg key={3} className="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
     </svg>,
   ];
   

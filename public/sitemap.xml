@@ -1,97 +1,230 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Ana Sayfa -->
   <url>
     <loc>https://virtualriddle.com/</loc>
-    <lastmod>2024-06-01</lastmod>
+    <lastmod>2025-07-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  <!-- Ana Kategori Sayfaları -->
   <url>
-    <loc>https://virtualriddle.com/about</loc>
-    <lastmod>2024-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://virtualriddle.com/contact</loc>
-    <lastmod>2024-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://virtualriddle.com/career</loc>
-    <lastmod>2024-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://virtualriddle.com/pricing</loc>
-    <lastmod>2024-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://virtualriddle.com/privacy</loc>
-    <lastmod>2024-06-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://virtualriddle.com/terms</loc>
-    <lastmod>2024-06-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://virtualriddle.com/sitemap</loc>
-    <lastmod>2024-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://virtualriddle.com/search</loc>
-    <lastmod>2024-06-01</lastmod>
+    <loc>https://virtualriddle.com/products</loc>
+    <lastmod>2025-07-05</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.9</priority>
   </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/solutions</loc>
+    <lastmod>2025-07-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/blog</loc>
+    <lastmod>2025-07-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Önemli Hizmet Sayfaları -->
   <url>
     <loc>https://virtualriddle.com/free-discovery</loc>
-    <lastmod>2024-06-01</lastmod>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/pricing</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Kurumsal Sayfalar -->
+  <url>
+    <loc>https://virtualriddle.com/about</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/contact</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/career</loc>
+    <lastmod>2025-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  
+  <!-- Ürün Detay Sayfaları -->
   <url>
-    <loc>https://virtualriddle.com/products</loc>
-    <lastmod>2024-06-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://virtualriddle.com/products/jira-software</loc>
+    <lastmod>2025-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
+  
   <url>
-    <loc>https://virtualriddle.com/solutions</loc>
-    <lastmod>2024-06-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://virtualriddle.com/products/jira-service-management</loc>
+    <lastmod>2025-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
-  <!-- Ürün detayları -->
-  <url><loc>https://virtualriddle.com/products/jira-software</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://virtualriddle.com/products/jira-service-management</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://virtualriddle.com/products/jira-work-management</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://virtualriddle.com/products/confluence</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://virtualriddle.com/products/bitbucket</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://virtualriddle.com/products/trello</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://virtualriddle.com/products/opsgenie</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://virtualriddle.com/products/statuspage</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <!-- Çözüm detayları -->
-  <url><loc>https://virtualriddle.com/solutions/consulting</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://virtualriddle.com/solutions/cloud-migration</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://virtualriddle.com/solutions/training</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://virtualriddle.com/solutions/free-discovery</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <!-- Blog ana ve detayları -->
-  <url><loc>https://virtualriddle.com/blog</loc><lastmod>2024-06-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://virtualriddle.com/blog/2024-devops-trendleri</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://virtualriddle.com/blog/basarili-dijital-donusum-stratejileri</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://virtualriddle.com/blog/cloud-native-performans</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://virtualriddle.com/blog/favori-wiki-aracimiz-confluence</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://virtualriddle.com/blog/jira-software-nedir</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://virtualriddle.com/blog/multi-cloud-stratejileri</loc><lastmod>2024-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  
+  <url>
+    <loc>https://virtualriddle.com/products/jira-work-management</loc>
+    <lastmod>2025-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/products/confluence</loc>
+    <lastmod>2025-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/products/bitbucket</loc>
+    <lastmod>2025-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/products/trello</loc>
+    <lastmod>2025-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/products/opsgenie</loc>
+    <lastmod>2025-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/products/statuspage</loc>
+    <lastmod>2025-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Çözüm Detay Sayfaları -->
+  <url>
+    <loc>https://virtualriddle.com/solutions/consulting</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/solutions/cloud-migration</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/solutions/training</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/solutions/free-discovery</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Blog Yazıları - Güncel Priority ile -->
+  <url>
+    <loc>https://virtualriddle.com/blog/2024-devops-trendleri</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/blog/basarili-dijital-donusum-stratejileri</loc>
+    <lastmod>2024-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/blog/cloud-native-performans</loc>
+    <lastmod>2024-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/blog/favori-wiki-aracimiz-confluence</loc>
+    <lastmod>2024-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/blog/jira-software-nedir</loc>
+    <lastmod>2024-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/blog/multi-cloud-stratejileri</loc>
+    <lastmod>2024-07-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Yardımcı Sayfalar -->
+  <url>
+    <loc>https://virtualriddle.com/search</loc>
+    <lastmod>2025-07-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/sitemap</loc>
+    <lastmod>2025-07-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- Yasal Sayfalar -->
+  <url>
+    <loc>https://virtualriddle.com/privacy</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/terms</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
 </urlset> 

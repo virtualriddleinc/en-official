@@ -507,6 +507,7 @@ export default function ClientLayout({
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="lg:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                aria-label={isMobileMenuOpen ? "Mobil menüyü kapat" : "Mobil menüyü aç"}
               >
                 <X className={`w-6 h-6 transition-transform ${!isMobileMenuOpen ? 'rotate-45 scale-0' : ''}`} />
                 <svg className={`w-6 h-6 transition-transform ${isMobileMenuOpen ? '-rotate-45 scale-0' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -543,6 +544,7 @@ export default function ClientLayout({
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="p-2 rounded-lg text-gray-300 hover:bg-white/10 transition-all duration-200"
+                    aria-label="Mobil menüyü kapat"
                   >
                     <X className="w-6 h-6" />
                   </button>
@@ -553,6 +555,7 @@ export default function ClientLayout({
                   <button 
                     onClick={() => { setIsMobileMenuOpen(false); setIsSearchOpen(true); }}
                       className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-blue-500/10 via-blue-600/5 to-transparent rounded-xl text-left mb-3 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300"
+                      aria-label="Arama yap"
                     >
                       <div className="flex items-center space-x-3">
                         <div className="w-10 h-10 bg-gradient-to-br from-blue-500/30 to-blue-600/30 rounded-lg flex items-center justify-center border border-blue-500/30">

@@ -566,6 +566,7 @@ export default function FreeDiscoveryPage() {
             <button
               onClick={() => setShowPopup(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Popup'ı kapat"
             >
               <X className="w-6 h-6" />
             </button>

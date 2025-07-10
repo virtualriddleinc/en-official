@@ -27,7 +27,7 @@ export default function JiraSoftwareNedir() {
           <h2>Proje yönetimi artık bir kabus değil 📊</h2>
           <p>Hatırlıyor musunuz, eskiden projeleri Excel tablolarında ya da post-it'lerle takip etmeye çalıştığınız günleri? O günler artık geride kaldı. Jira ile <b>her şey tek bir yerde</b> ve kontrol altında.</p>
 
-          <h3>Sprint'ler ve Backlog Yönetimi</h3>
+          <h4>Sprint'ler ve Backlog Yönetimi</h4>
           <p><b>"Öncelikler artık kafanızda karışmayacak"</b></p>
           <p>Jira'nın en güçlü yanlarından biri sprint planlaması. Product backlog'unuzu düzenleyebilir, story'leri önceliklendirebilir ve sprint'lerinizi kolayca planlayabilirsiniz. Story point'ler, estimation'lar, velocity tracking - hepsi otomatik olarak hesaplanıyor.</p>
           <p>Burndown chart'ları sayesinde sprint'inizin nasıl gittiğini görebilir, gerektiğinde erken müdahale edebilirsiniz. Bu sadece Scrum Master'ların işini kolaylaştırmıyor, tüm takımın motivasyonunu da artırıyor çünkü <b>ilerlemeyi somut olarak görebiliyorsunuz</b> 📈.</p>
@@ -35,7 +35,7 @@ export default function JiraSoftwareNedir() {
           <h2>Her Görev Bir Hikaye Anlatır 📝</h2>
           <p>Jira'da oluşturduğunuz her issue aslında bir hikaye. Bug report'larından feature request'lere, epic'lerden subtask'lara kadar her türlü işi sistematik olarak takip edebiliyorsunuz.</p>
 
-          <h3>Detaylı İzlenebilirlik</h3>
+          <h4>Detaylı İzlenebilirlik</h4>
           <p><b>"Kim ne yaptı, ne zaman yaptı? Artık bunlar sır değil!"</b></p>
           <p>Her issue üzerinde yapılan değişiklikleri, yorumları, attachment'ları görebiliyorsunuz. Activity stream sayesinde proje üzerindeki tüm hareketliliği real-time takip edebilirsiniz. Bu özellikle büyük takımlarda çok kritik çünkü <b>bilgi kaybı yaşamıyorsunuz</b> 🔍.</p>
           <p>Comment'ler, @mention'lar, notification'lar... Takım içi iletişim hiç bu kadar organize olmamıştı. Artık "Bu konuda konuştuk mu?" sorusuna cevap aramak zorunda kalmıyorsunuz.</p>
@@ -43,7 +43,7 @@ export default function JiraSoftwareNedir() {
           <h2>Raporlama: Veri Odaklı Kararlar 📈</h2>
           <p>Jira'nın sunduğu raporlama özellikleri gerçekten etkileyici. Velocity chart'larından cumulative flow diagram'lara, burnup chart'larından release burndown'lara kadar pek çok raporu otomatik olarak alabiliyorsunuz.</p>
 
-          <h3>Dashboard'lar ile Görselleştirme</h3>
+          <h4>Dashboard'lar ile Görselleştirme</h4>
           <p><b>"Rakamlar artık hikaye anlatacak"</b></p>
           <p>Kendi dashboard'larınızı oluşturabilir, takımınızın performansını, proje durumunu ve darboğazları kolayca görselleştirebilirsiniz. Widget'lar sayesinde sadece size önemli olan metrikleri görebilirsiniz 📊.</p>
           <p>Bu raporları stakeholder'larla paylaşmak da çok kolay. Artık uzun mail'ler yazıp durumu açıklamaya gerek yok - dashboard'u gösteriyorsunuz, işiniz bitiyor.</p>
@@ -51,21 +51,21 @@ export default function JiraSoftwareNedir() {
           <h2>Entegrasyon Gücü: Tek Ekosistem 🔗</h2>
           <p>Jira'nın asıl gücü diğer araçlarla entegrasyonunda ortaya çıkıyor. Confluence ile dokümantasyon yönetimi, Bitbucket ile code management, Slack ile team communication... Hepsi birbirine bağlı çalışıyor.</p>
 
-          <h3>CI/CD Pipeline Entegrasyonu</h3>
+          <h4>CI/CD Pipeline Entegrasyonu</h4>
           <p><b>"Code'dan production'a kadar her şey bağlı"</b></p>
           <p>Jenkins, GitHub Actions, GitLab CI gibi araçlarla entegre çalıştığında, commit'leriniz otomatik olarak issue'larla eşleşiyor. Pull request'ler Jira ticket'larına bağlanıyor. Deployment'lar issue status'larını otomatik güncelliyor. Bu ne demek? <b>Manuel iş yükünüz azalıyor, hata yapma riski minimuma iniyor</b> ⚡.</p>
 
           <h2>Özelleştirme İmkanları: Size Göre Şekillenir 🎨</h2>
           <p>Her takım farklıdır, her proje farklı ihtiyaçları vardır. Jira bu gerçeği çok iyi anlıyor. Workflow'larınızı özelleştirebilir, custom field'lar ekleyebilir, screen'lerinizi düzenleyebilirsiniz.</p>
 
-          <h3>Automation Rules</h3>
+          <h4>Automation Rules</h4>
           <p><b>"Rutin işler artık otomatik"</b></p>
           <p>Jira'nın automation engine'i gerçekten güçlü. "Issue bug olarak açıldığında otomatik olarak QA'ya assign et", "Sprint bittiğinde tamamlanmamış story'leri next sprint'e taşı" gibi kurallar yazabiliyorsunuz. Bu sayede <b>manuel hatalar azalıyor, verimlilik artıyor</b> 🤖.</p>
 
           <h2>Accessibility ve Scalability 🌐</h2>
           <p>Jira cloud, on-premise, hybrid - istediğiniz şekilde deploy edebilirsiniz. 5 kişilik startup'tan 5000 kişilik enterprise'a kadar scale edebiliyor. Mobile app'leri sayesinde her yerden erişebiliyorsunuz.</p>
 
-          <h3>Permission ve Security</h3>
+          <h4>Permission ve Security</h4>
           <p><b>"Herkes sadece görmesi gerekeni görür"</b></p>
           <p>Granular permission system'i sayesinde project security'sini tam kontrol altında tutabiliyorsunuz. Role-based access control, project-level permissions, issue-level security - hepsi mevcut.</p>
 

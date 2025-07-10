@@ -9,7 +9,7 @@ export default function FavoriWikiAracimizConfluence() {
         </header>
         <article>
   <header>
-    <h1>Confluence Kullanmanın Avantajları 📘</h1>
+    <h2>Confluence Kullanmanın Avantajları 📘</h2>
     <p><strong>Yayın tarihi:</strong> 1 Temmuz 2025</p>
   </header>
 

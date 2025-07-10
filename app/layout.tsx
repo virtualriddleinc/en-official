@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
-// import './globals.css' // kaldırıldı
+import './globals.css'
 import ClientLayout from './ClientLayout'
 import ThemeToggle from './components/ThemeToggle'
 import Head from 'next/head'
@@ -27,8 +27,6 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL('https://virtualriddle.com'),
-  viewport: 'width=device-width, initial-scale=1',
-  themeColor: '#004CFF',
   robots: {
     index: true,
     follow: true,
@@ -65,6 +63,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#004CFF',
 }
 
 export default function RootLayout({
@@ -81,9 +80,6 @@ export default function RootLayout({
           h1 { font-size: 2.75rem; font-weight: bold; color: #172B4D; }
           .hero-bg { background: linear-gradient(90deg, #004BB3, #0052CC, #004BB3); }
         `}</style>
-        {/* Global CSS asenkron yükle */}
-        <link rel="stylesheet" href="/app/globals.css" media="print" onLoad={(e) => { e.currentTarget.media = 'all'; }} />
-        <noscript><link rel="stylesheet" href="/app/globals.css" /></noscript>
       </head>
       <body className="min-h-screen bg-white">
         <ThemeToggle />

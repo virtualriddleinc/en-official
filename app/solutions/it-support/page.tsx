@@ -46,7 +46,7 @@ export default function ITSupportPage() {
                   <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">Hızlı Kurulum</h3>
+              <h2 className="text-2xl font-bold text-blue-600">Hızlı Kurulum</h2>
               <p className="text-blue-600/80">Hazır şablonlar ve kolay entegrasyon seçenekleri ile IT destek masanızı dakikalar içinde kurun.</p>
             </div>
             {/* Feature 2 */}
@@ -56,7 +56,7 @@ export default function ITSupportPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-green-600">Merkezi Yönetim</h3>
+              <h2 className="text-2xl font-bold text-green-600">Merkezi Yönetim</h2>
               <p className="text-green-600/80">Tüm IT destek taleplerini tek bir platformdan yönetin ve takip edin.</p>
             </div>
             {/* Feature 3 */}
@@ -66,7 +66,7 @@ export default function ITSupportPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-purple-600">Yapay Zeka Desteği</h3>
+              <h2 className="text-2xl font-bold text-purple-600">Yapay Zeka Desteği</h2>
               <p className="text-purple-600/80">AI destekli otomasyon ile rutin görevleri otomatikleştirin ve yanıt sürelerini kısaltın.</p>
             </div>
           </div>

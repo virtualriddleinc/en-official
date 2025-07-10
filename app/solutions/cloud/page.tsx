@@ -24,7 +24,7 @@ export default function CloudPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Cloud Migration</h3>
+                <h2 className="text-xl font-bold text-gray-900 mb-4">Cloud Migration</h2>
                 <p className="text-gray-700">
                   Mevcut sistemlerinizi güvenli ve kesintisiz bir şekilde cloud ortamına taşıyın.
                 </p>
@@ -35,7 +35,7 @@ export default function CloudPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Cloud Native</h3>
+                <h2 className="text-xl font-bold text-gray-900 mb-4">Cloud Native</h2>
                 <p className="text-gray-700">
                   Modern mikroservis mimarileri ile ölçeklenebilir uygulamalar geliştirin.
                 </p>
@@ -46,7 +46,7 @@ export default function CloudPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Cloud Security</h3>
+                <h2 className="text-xl font-bold text-gray-900 mb-4">Cloud Security</h2>
                 <p className="text-gray-700">
                   En iyi güvenlik pratikleri ile cloud altyapınızı koruyun.
                 </p>

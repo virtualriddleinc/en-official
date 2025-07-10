@@ -92,7 +92,7 @@ const PricingPage = () => {
                   En Popüler
                 </span>
               )}
-              <h3 className="text-2xl font-semibold text-[#253858] mb-4">{pkg.name}</h3>
+              <h2 className="text-2xl font-semibold text-[#253858] mb-4">{pkg.name}</h2>
             <div className="mb-6">
                 {pkg.oldPrice && (
                   <div className="flex justify-center mb-1">

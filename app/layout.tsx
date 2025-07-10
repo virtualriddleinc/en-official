@@ -11,25 +11,54 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Virtual Riddle',
-  description: 'Atlassian Çözüm Ortağınız',
-  keywords: 'Jira Software, Confluence, Atlassian, proje yönetimi, yazılım geliştirme, takım iş birliği',
-  authors: [{ name: 'Virtual Riddle Team' }],
+  title: {
+    template: '%s | Virtual Riddle',
+    default: 'Virtual Riddle - Atlassian Danışmanlığı ve Modern Yazılım Çözümleri'
+  },
+  description: 'Atlassian araçları ve modern yazılım çözümleri konusunda uzman danışmanlık hizmetleri',
+  keywords: ['Atlassian', 'Jira', 'Confluence', 'yazılım danışmanlığı', 'Türkiye'],
+  authors: [{ name: 'Virtual Riddle' }],
+  creator: 'Virtual Riddle',
+  publisher: 'Virtual Riddle',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://virtualriddle.com'),
   viewport: 'width=device-width, initial-scale=1',
-  robots: 'index, follow',
+  themeColor: '#004CFF',
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     type: 'website',
     locale: 'tr_TR',
     url: 'https://virtualriddle.com',
-    title: 'Virtual Riddle - Modern Yazılım Çözümleri',
-    description: 'Yazılım geliştirme süreçlerinizi modernleştirin. Jira Software, Confluence ve daha fazlası ile ekip çalışmasını güçlendirin.',
+    title: 'Virtual Riddle - Atlassian Danışmanlığı ve Modern Yazılım Çözümleri',
+    description: 'Atlassian araçları ve modern yazılım çözümleri konusunda uzman danışmanlık hizmetleri',
     siteName: 'Virtual Riddle',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Virtual Riddle - Modern Yazılım Çözümleri',
-    description: 'Yazılım geliştirme süreçlerinizi modernleştirin. Jira Software, Confluence ve daha fazlası ile ekip çalışmasını güçlendirin.',
+    title: 'Virtual Riddle - Atlassian Danışmanlığı ve Modern Yazılım Çözümleri',
+    description: 'Atlassian araçları ve modern yazılım çözümleri konusunda uzman danışmanlık hizmetleri',
   },
+  other: {
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'DENY',
+    'X-XSS-Protection': '1; mode=block'
+  }
 }
 
 export const viewport: Viewport = {

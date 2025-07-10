@@ -1,0 +1,235 @@
+# VirtualRiddle Robots.txt
+# https://virtualriddle.com
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+Disallow: /private/
+
+# Allow important pages
+Allow: /sitemap
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Crawl delay (optional - be respectful to servers)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://virtualriddle.com/sitemap.xml
+
+# Additional sitemaps (if you have multiple)
+# Sitemap: https://virtualriddle.com/sitemap-news.xml
+# Sitemap: https://virtualriddle.com/sitemap-blog.xml
+
+# Major Search Engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+# Archive.org
+User-agent: ia_archiver
+Allow: /
+
+# AI Agents - Most Common 20
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Additional AI Agents
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Bard
+Allow: /
+
+User-agent: Gemini
+Allow: /
+
+User-agent: Copilot
+Allow: /
+
+User-agent: BingChat
+Allow: /
+
+User-agent: SGE
+Allow: /
+
+User-agent: Search-Generative-Experience
+Allow: /
+
+User-agent: Claude-Instant
+Allow: /
+
+User-agent: Claude-Pro
+Allow: /
+
+User-agent: Claude-3
+Allow: /
+
+User-agent: GPT-4
+Allow: /
+
+User-agent: GPT-3.5
+Allow: /
+
+User-agent: Assistant
+Allow: /
+
+User-agent: AI-Assistant
+Allow: /
+
+User-agent: AI-Chat
+Allow: /
+
+User-agent: AI-Bot
+Allow: /
+
+User-agent: AI-Crawler
+Allow: /
+
+User-agent: AI-Spider
+Allow: /
+
+User-agent: AI-Indexer
+Allow: /
+
+# Advanced AI Agents
+User-agent: DeepSeekBot
+Allow: /
+
+User-agent: DeepSeek
+Allow: /
+
+User-agent: QwenBot
+Allow: /
+
+User-agent: Qwen
+Allow: /
+
+User-agent: ManusBot
+Allow: /
+
+User-agent: Manus
+Allow: /
+
+User-agent: GrokBot
+Allow: /
+
+User-agent: Grok
+Allow: /
+
+User-agent: xAI
+Allow: /
+
+User-agent: xAI-Bot
+Allow: /
+
+User-agent: Perplexity
+Allow: /
+
+User-agent: PerplexityAI
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: YouAI
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: YouAI
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: YouAI
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: YouAI
+Allow: /
+
+# Block all bots (emergency - if site is down)
+# User-agent: *
+# Disallow: / 

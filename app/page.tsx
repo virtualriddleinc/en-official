@@ -90,6 +90,8 @@ export default function Home() {
                 <div className="relative">
                   {/* Workflow Container */}
                   <div className="relative p-8 pb-16 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                    {/* Workflow Başlık */}
+                    <h2 className="text-2xl font-bold text-white mb-8">Danışmanlık Süreci</h2>
                     {/* Workflow Steps */}
                     <div className="relative">
                       <div className="absolute left-[2.25rem] top-12 bottom-4 w-0.5 bg-gradient-to-b from-[#0052CC] via-[#00B8D9] to-[#36B37E]"></div>

@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
+// import './globals.css' // kaldırıldı
 import ClientLayout from './ClientLayout'
 import ThemeToggle from './components/ThemeToggle'
+import Head from 'next/head'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -73,6 +74,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr" className={inter.className}>
+      <head>
+        {/* Kritik CSS inline */}
+        <style>{`
+          body { background: #fff; color: #172B4D; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; }
+          h1 { font-size: 2.75rem; font-weight: bold; color: #172B4D; }
+          .hero-bg { background: linear-gradient(90deg, #004BB3, #0052CC, #004BB3); }
+        `}</style>
+        {/* Global CSS asenkron yükle */}
+        <link rel="stylesheet" href="/app/globals.css" media="print" onLoad={(e) => { e.currentTarget.media = 'all'; }} />
+        <noscript><link rel="stylesheet" href="/app/globals.css" /></noscript>
+      </head>
       <body className="min-h-screen bg-white">
         <ThemeToggle />
         <ClientLayout>{children}</ClientLayout>

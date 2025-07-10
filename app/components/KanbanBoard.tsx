@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import {
   closestCenter,
@@ -190,6 +190,7 @@ function SortableIssue({ issue, columnId, isMobile }: { issue: Issue; columnId: 
 export default function KanbanBoard() {
   const [isClient, setIsClient] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const resizeTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -200,9 +201,15 @@ export default function KanbanBoard() {
     };
     
     checkMobile();
-    window.addEventListener('resize', checkMobile);
+    const handleResize = () => {
+      if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
+      resizeTimeout.current = setTimeout(() => {
+        checkMobile();
+      }, 100);
+    };
+    window.addEventListener('resize', handleResize);
     
-    return () => window.removeEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const [columns, setColumns] = useState<{ [key: string]: Column }>({

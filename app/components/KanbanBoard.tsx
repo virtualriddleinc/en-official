@@ -140,19 +140,19 @@ function SortableIssue({ issue, columnId, isMobile }: { issue: Issue; columnId: 
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'high': return 'bg-[#EF4444] text-white';
-      case 'medium': return 'bg-[#F59E0B] text-white';
-      case 'low': return 'bg-[#10B981] text-white';
-      default: return 'bg-[#6B7280] text-white';
+      case 'high': return 'bg-[#DC2626] text-white'; // Daha koyu kırmızı
+      case 'medium': return 'bg-[#D97706] text-white'; // Daha koyu turuncu
+      case 'low': return 'bg-[#059669] text-white'; // Daha koyu yeşil
+      default: return 'bg-[#374151] text-white'; // Daha koyu gri
     }
   };
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'bug': return 'bg-[#DC2626] text-white';
-      case 'feature': return 'bg-[#2563EB] text-white';
-      case 'task': return 'bg-[#7C3AED] text-white';
-      default: return 'bg-[#6B7280] text-white';
+      case 'bug': return 'bg-[#B91C1C] text-white'; // Daha koyu kırmızı
+      case 'feature': return 'bg-[#1D4ED8] text-white'; // Daha koyu mavi
+      case 'task': return 'bg-[#6D28D9] text-white'; // Daha koyu mor
+      default: return 'bg-[#374151] text-white'; // Daha koyu gri
     }
   };
 

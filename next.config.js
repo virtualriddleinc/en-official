@@ -84,6 +84,14 @@ const nextConfig = {
           },
         },
       };
+      
+      // Modern JavaScript optimizasyonları
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        crypto: false,
+        stream: false,
+        util: false,
+      };
     }
     
     return config;

@@ -2,6 +2,10 @@
   "name": "virtualriddle",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -26,6 +30,7 @@
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
+    "swc-loader": "^0.2.6",
     "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {

@@ -24,6 +24,15 @@ const sampleResults = [
   }
 ];
 
+// Debounce fonksiyonu
+function debounce<T extends (...args: any[]) => void>(func: T, wait: number) {
+  let timeout: NodeJS.Timeout;
+  return (...args: Parameters<T>) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+}
+
 export default function SearchButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,6 +41,23 @@ export default function SearchButton() {
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  const debouncedSearch = useRef(
+    debounce((query: string) => {
+      if (!query.trim()) {
+        setResults([]);
+        setIsLoading(false);
+        return;
+      }
+      setIsLoading(true);
+      const filteredResults = sampleResults.filter(result =>
+        result.title.toLowerCase().includes(query.toLowerCase()) ||
+        result.description.toLowerCase().includes(query.toLowerCase())
+      ).slice(0, 3);
+      setResults(filteredResults);
+      setIsLoading(false);
+    }, 250)
+  ).current;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -54,25 +80,8 @@ export default function SearchButton() {
 
   // Anlık arama için useEffect
   useEffect(() => {
-    const performSearch = async () => {
-      if (!searchQuery.trim()) {
-        setResults([]);
-        return;
-      }
-
-      setIsLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 300)); // Kısa gecikme
-
-      const filteredResults = sampleResults.filter(result =>
-        result.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        result.description.toLowerCase().includes(searchQuery.toLowerCase())
-      ).slice(0, 3); // Sadece ilk 3 sonucu göster
-
-      setResults(filteredResults);
-      setIsLoading(false);
-    };
-
-    performSearch();
+    setIsLoading(true);
+    debouncedSearch(searchQuery);
   }, [searchQuery]);
 
   const navigateToSearch = () => {

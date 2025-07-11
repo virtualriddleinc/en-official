@@ -9,6 +9,15 @@ import { searchData } from "../lib/searchData";
 
 const categories = ["Tümü", ...Array.from(new Set(searchData.map(item => item.category)))];
 
+// Debounce fonksiyonu
+function debounce<T extends (...args: any[]) => void>(func: T, wait: number) {
+  let timeout: NodeJS.Timeout;
+  return (...args: Parameters<T>) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+}
+
 export default function UniversalSearchBox() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,6 +42,25 @@ export default function UniversalSearchBox() {
     ignoreLocation: true
   });
 
+  const debouncedSearch = useRef(
+    debounce((query: string, category: string) => {
+      let filtered: typeof searchData = [];
+      if (!query.trim()) {
+        setResults([]);
+        setIsLoading(false);
+        return;
+      }
+      setIsLoading(true);
+      if (category === "Tümü") {
+        filtered = fuse.search(query).map(res => res.item);
+      } else {
+        filtered = fuse.search(query).map(res => res.item).filter(item => item.category === category);
+      }
+      setResults(filtered.slice(0, 7));
+      setIsLoading(false);
+    }, 250)
+  ).current;
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
@@ -53,23 +81,8 @@ export default function UniversalSearchBox() {
   }, [isOpen]);
 
   useEffect(() => {
-    const performSearch = async () => {
-      if (!searchQuery.trim()) {
-        setResults([]);
-        return;
-      }
-      setIsLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 200));
-      let filtered: typeof searchData = [];
-      if (selectedCategory === "Tümü") {
-        filtered = fuse.search(searchQuery).map(res => res.item);
-      } else {
-        filtered = fuse.search(searchQuery).map(res => res.item).filter(item => item.category === selectedCategory);
-      }
-      setResults(filtered.slice(0, 7));
-      setIsLoading(false);
-    };
-    performSearch();
+    setIsLoading(true);
+    debouncedSearch(searchQuery, selectedCategory);
   }, [searchQuery, selectedCategory]);
 
   const navigateToSearch = () => {

@@ -99,25 +99,25 @@ export default function JiraWorkManagementPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* AI Feature 1 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h4 className="text-lg font-semibold text-white mb-2">Akıllı Önceliklendirme</h4>
+              <h3 className="text-lg font-semibold text-white mb-2">Akıllı Önceliklendirme</h3>
               <p className="text-white/80">Yapay zeka iş önceliklerinizi analiz ederek en kritik görevleri belirlemenize yardımcı olur.</p>
             </div>
 
             {/* AI Feature 2 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h4 className="text-lg font-semibold text-white mb-2">İş Akışı Önerileri</h4>
+              <h3 className="text-lg font-semibold text-white mb-2">İş Akışı Önerileri</h3>
               <p className="text-white/80">Mevcut iş akışlarınızı analiz eden AI, verimliliği artırmak için iyileştirme önerileri sunar.</p>
             </div>
 
             {/* AI Feature 3 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h4 className="text-lg font-semibold text-white mb-2">Otomatik Görev Oluşturma</h4>
+              <h3 className="text-lg font-semibold text-white mb-2">Otomatik Görev Oluşturma</h3>
               <p className="text-white/80">Yapay zeka, ekip ihtiyaçlarını anlayarak gerekli görevleri otomatik olarak oluşturur ve atar.</p>
             </div>
 
             {/* AI Feature 4 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h4 className="text-lg font-semibold text-white mb-2">Performans Tahminleri</h4>
+              <h3 className="text-lg font-semibold text-white mb-2">Performans Tahminleri</h3>
               <p className="text-white/80">Geçmiş verilere dayalı performans tahminleri ile proje tamamlanma sürelerini daha doğru hesaplayın.</p>
             </div>
           </div>

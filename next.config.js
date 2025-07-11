@@ -1,4 +1,35 @@
 /** @type {import('next').NextConfig} */
+const securityHeaders = [
+  {
+    key: 'Content-Security-Policy',
+    value: [
+      "default-src 'self';",
+      "script-src 'self' https://maps.googleapis.com https://www.googletagmanager.com 'unsafe-inline';",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;",
+      "img-src 'self' data: https://virtualriddle.com https://maps.googleapis.com;",
+      "font-src 'self' https://fonts.gstatic.com data:;",
+      "connect-src 'self' https://rvskttz2jh.execute-api.us-east-1.amazonaws.com;",
+      "object-src 'none';",
+      "frame-ancestors 'none';",
+      "base-uri 'self';",
+      "form-action 'self';",
+      "report-uri /api/csp-violation;"
+    ].join(' ')
+  },
+  {
+    key: 'Strict-Transport-Security',
+    value: 'max-age=31536000; includeSubDomains; preload'
+  },
+  {
+    key: 'Cross-Origin-Opener-Policy',
+    value: 'same-origin'
+  },
+  {
+    key: 'X-Frame-Options',
+    value: 'DENY'
+  }
+];
+
 const nextConfig = {
   output: 'standalone',
   images: {
@@ -28,7 +59,12 @@ const nextConfig = {
     maxInactiveAge: 25 * 1000,
     pagesBufferLength: 2,
   },
+  productionBrowserSourceMaps: false, // Production'da source map dosyalarını istemciye sunma
   webpack: (config, { dev, isServer }) => {
+    // Source map üretimini etkinleştir
+    if (dev) {
+      config.devtool = 'source-map';
+    }
     // Optimize bundle size
     if (!dev && !isServer) {
       config.optimization.splitChunks = {
@@ -44,6 +80,14 @@ const nextConfig = {
     }
     
     return config;
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: securityHeaders,
+      },
+    ];
   },
 }
 

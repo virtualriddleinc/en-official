@@ -118,7 +118,7 @@ export default function Home() {
                             </svg>
                           </div>
                           <div className="flex-1 pt-2">
-                            <h4 className="text-xl font-semibold text-white mb-2">İhtiyaç Analizi</h4>
+                            <h3 className="text-xl font-semibold text-white mb-2">İhtiyaç Analizi</h3>
                             <p className="text-base text-white/80">Mevcut süreçlerin analizi ve Atlassian ürün seçimi</p>
                           </div>
                         </div>
@@ -131,7 +131,7 @@ export default function Home() {
                             </svg>
                           </div>
                           <div className="flex-1 pt-2">
-                            <h4 className="text-xl font-semibold text-white mb-2">Kurulum ve Yapılandırma</h4>
+                            <h3 className="text-xl font-semibold text-white mb-2">Kurulum ve Yapılandırma</h3>
                             <p className="text-base text-white/80">Atlassian ürünlerinin kurulumu ve özelleştirmesi</p>
                           </div>
                         </div>
@@ -144,7 +144,7 @@ export default function Home() {
                             </svg>
                           </div>
                           <div className="flex-1 pt-2">
-                            <h4 className="text-xl font-semibold text-white mb-2">Eğitim ve Dokümantasyon</h4>
+                            <h3 className="text-xl font-semibold text-white mb-2">Eğitim ve Dokümantasyon</h3>
                             <p className="text-base text-white/80">Kullanıcı ve admin eğitimleri, süreç dokümantasyonu</p>
                           </div>
                         </div>
@@ -157,7 +157,7 @@ export default function Home() {
                             </svg>
                           </div>
                           <div className="flex-1 pt-2">
-                            <h4 className="text-xl font-semibold text-white mb-2">Sürekli Destek</h4>
+                            <h3 className="text-xl font-semibold text-white mb-2">Sürekli Destek</h3>
                             <p className="text-base text-white/80">Farklı SLA seviyeleriyle teknik destek ve optimizasyon</p>
                           </div>
                         </div>

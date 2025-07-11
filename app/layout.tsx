@@ -92,7 +92,9 @@ export default function RootLayout({
         
         {/* Preload critical fonts */}
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
-        
+        <noscript>
+          <link rel="stylesheet" href="/app/globals.css" />
+        </noscript>
         {/* Critical CSS inline */}
         <style>{`
           body { background: #fff; color: #172B4D; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; }

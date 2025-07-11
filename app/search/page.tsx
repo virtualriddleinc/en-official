@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useMemo, Suspense } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Fuse, { IFuseOptions } from 'fuse.js';
@@ -37,6 +37,15 @@ const fuseOptions: IFuseOptions<SearchItem> = {
 // Fuse'u SearchItem tipi ile başlatma
 const fuse = new Fuse(searchData as SearchItem[], fuseOptions);
 
+// Debounce fonksiyonu
+function debounce<T extends (...args: any[]) => void>(func: T, wait: number) {
+  let timeout: NodeJS.Timeout;
+  return (...args: Parameters<T>) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+}
+
 function SearchPageComponent() {
   const router = useRouter();
   const pathname = usePathname();
@@ -63,29 +72,30 @@ function SearchPageComponent() {
 
   const [results, setResults] = useState<SearchResult[]>([]);
 
+  const debouncedFilter = useRef(
+    debounce((query: string, selectedCategories: string[], selectedTags: string[]) => {
+      let filteredData: SearchItem[];
+      if (query) {
+        filteredData = fuse.search(query).map(result => result.item);
+      } else {
+        filteredData = searchData as SearchItem[];
+      }
+      if (selectedCategories.length > 0) {
+        filteredData = filteredData.filter(item => selectedCategories.includes(item.category));
+      }
+      if (selectedTags.length > 0) {
+        filteredData = filteredData.filter(item => selectedTags.some(tag => item.tags.includes(tag)));
+      }
+      setResults(filteredData.map((item, index) => ({ item, refIndex: index })));
+    }, 250)
+  ).current;
+
   useEffect(() => {
     setSearchQuery(query);
   }, [query]);
 
   useEffect(() => {
-    let filteredData: SearchItem[];
-
-    if (query) {
-      filteredData = fuse.search(query).map(result => result.item);
-    } else {
-      filteredData = searchData as SearchItem[];
-    }
-    
-    if (selectedCategories.length > 0) {
-      filteredData = filteredData.filter(item => selectedCategories.includes(item.category));
-    }
-
-    if (selectedTags.length > 0) {
-      filteredData = filteredData.filter(item => selectedTags.some(tag => item.tags.includes(tag)));
-    }
-
-    setResults(filteredData.map((item, index) => ({ item, refIndex: index })));
-
+    debouncedFilter(query, selectedCategories, selectedTags);
   }, [query, selectedCategories, selectedTags]);
   
   const updateURLParams = (newParams: Record<string, string | string[]>) => {
@@ -258,8 +268,6 @@ function SearchPageComponent() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={<div>Yükleniyor...</div>}>
-      <SearchPageComponent />
-    </Suspense>
+    <SearchPageComponent />
   );
 } 

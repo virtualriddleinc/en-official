@@ -95,25 +95,25 @@ export default function JiraServiceManagementPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* AI Feature 1 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h4 className="text-lg font-semibold text-white mb-2">Akıllı Bilet Sınıflandırma</h4>
+              <h3 className="text-lg font-semibold text-white mb-2">Akıllı Bilet Sınıflandırma</h3>
               <p className="text-white/80">Yapay zeka, talepleri otomatik olarak analiz eder ve doğru departmana yönlendirir.</p>
             </div>
 
             {/* AI Feature 2 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h4 className="text-lg font-semibold text-white mb-2">Çözüm Önerileri</h4>
+              <h3 className="text-lg font-semibold text-white mb-2">Çözüm Önerileri</h3>
               <p className="text-white/80">Benzer biletlerin çözümlerine dayanarak, yapay zeka hızlı çözüm yolları önerir.</p>
             </div>
 
             {/* AI Feature 3 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h4 className="text-lg font-semibold text-white mb-2">Önleyici Analitik</h4>
+              <h3 className="text-lg font-semibold text-white mb-2">Önleyici Analitik</h3>
               <p className="text-white/80">Potansiyel sorunları önceden tespit ederek IT ekiplerinin proaktif önlem almasını sağlar.</p>
             </div>
 
             {/* AI Feature 4 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h4 className="text-lg font-semibold text-white mb-2">Sanal Asistanlar</h4>
+              <h3 className="text-lg font-semibold text-white mb-2">Sanal Asistanlar</h3>
               <p className="text-white/80">Chatbot'lar ile kullanıcılara 7/24 hizmet vererek tekrarlayan talepleri otomatik çözüme ulaştırın.</p>
             </div>
           </div>

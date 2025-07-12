@@ -2,28 +2,14 @@
 import { useState } from "react";
 import { Link } from "../components/Link";
 
-const posts = [
-  {
-    href: "/blog/jira-danismanligi-avantajlari",
-    category: "Jira Danışmanlığı",
-    title: "Jira Danışmanlığı Almanın İşletmenize Sağlayacağı 8 Kritik Avantaj",
-    summary: "Jira danışmanlığı ile işletmenizin proje yönetimi süreçlerini optimize edin. %40-60 verimlilik artışı, maliyet tasarrufu ve sürekli iyileştirme avantajları.",
-    date: "15 Mart 2024",
-    color: "from-blue-600 to-blue-800",
-    icon: (
-      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    categoryColor: "text-blue-700",
-    hoverColor: "group-hover:text-blue-800"
-  },
+export const posts = [
   {
     href: "/blog/favori-wiki-aracimiz-confluence",
-    category: "Atlassian",
+    category: "Confluence",
     title: "Favori Wiki Aracımız: Confluence!",
     summary: "Ekip içi bilgi paylaşımında neden Confluence'ı tercih ediyoruz? Avantajları, ipuçları ve entegrasyonlar...",
-    date: "1 Temmuz 2025",
+    date: "5 Temmuz 2025",
+    readingTime: "4 dk",
     color: "from-blue-400 to-blue-700",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,10 +22,11 @@ const posts = [
   },
   {
     href: "/blog/jira-software-nedir",
-    category: "Atlassian",
+    category: "Jira",
     title: "Nedir bu Jira Software?",
     summary: "Jira Software nedir, ne işe yarar ve neden bu kadar popüler? Modern ekipler için avantajları ve ipuçları...",
     date: "10 Haziran 2024",
+    readingTime: "4 dk",
     color: "from-yellow-400 to-yellow-600",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,11 +38,44 @@ const posts = [
     hoverColor: "group-hover:text-yellow-800"
   },
   {
+    href: "/blog/cloud-native-performans",
+    category: "Jira Service Management",
+    title: "Jira Service Management ile IT Operasyonlarınızı Devrim Niteliğinde Dönüştürün",
+    summary: "Jira Service Management (JSM), Atlassian'ın modern IT ekipleri için geliştirdiği kapsamlı ITSM platformudur. Otomatikleştirme özellikleri ile manuel işlemleri %60-70 oranında azaltır, AI destekli çözüm önerileri ile first-call resolution oranını %30-40 artırır.",
+    date: "7 Nisan 2024",
+    readingTime: "8 dk",
+    color: "from-blue-600 to-blue-700",
+    icon: (
+      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    categoryColor: "text-blue-700",
+    hoverColor: "group-hover:text-blue-800"
+  },
+  {
+    href: "/blog/jira-danismanligi-avantajlari",
+    category: "Danışmanlık",
+    title: "Jira Danışmanlığı Almanın İşletmenize Sağlayacağı 8 Kritik Avantaj",
+    summary: "Jira danışmanlığı ile işletmenizin proje yönetimi süreçlerini optimize edin. %40-60 verimlilik artışı, maliyet tasarrufu ve sürekli iyileştirme avantajları.",
+    date: "15 Mart 2024",
+    readingTime: "4 dk",
+    color: "from-blue-600 to-blue-800",
+    icon: (
+      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    categoryColor: "text-blue-700",
+    hoverColor: "group-hover:text-blue-800"
+  },
+  {
     href: "/blog/2024-devops-trendleri",
     category: "DevOps & Cloud",
     title: "2024 DevOps Trendleri",
     summary: "Yapay zeka destekli DevOps araçları, GitOps ve Platform mühendisliğinin yükselişi...",
     date: "5 Mart 2024",
+    readingTime: "6 dk",
     color: "from-blue-600 to-blue-700",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,25 +91,11 @@ const posts = [
     title: "Başarılı Dijital Dönüşüm Stratejileri",
     summary: "Şirketlerin dijital dönüşüm yolculuğunda dikkat etmesi gereken kritik noktalar...",
     date: "3 Mart 2024",
+    readingTime: "7 dk",
     color: "from-indigo-600 to-indigo-700",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-      </svg>
-    ),
-    categoryColor: "text-blue-800",
-    hoverColor: "group-hover:text-blue-900"
-  },
-  {
-    href: "/blog/cloud-native-performans",
-    category: "Performans",
-    title: "Cloud Native Uygulamalarda Performans",
-    summary: "Mikroservis mimarilerde performans optimizasyonu ve izleme stratejileri...",
-    date: "1 Mart 2024",
-    color: "from-purple-600 to-purple-700",
-    icon: (
-      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
       </svg>
     ),
     categoryColor: "text-blue-800",
@@ -101,6 +107,7 @@ const posts = [
     title: "Multi-Cloud Stratejileri",
     summary: "Farklı cloud sağlayıcılarını etkin kullanmanın yolları ve best practice'ler...",
     date: "28 Şubat 2024",
+    readingTime: "6 dk",
     color: "from-green-600 to-green-700",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,24 +152,68 @@ export default function BlogPage() {
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {paginatedPosts.map((post, i) => (
-                <Link
+                                                <Link
                   key={post.href}
                   href={post.href}
-                  className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden block group focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="group relative block bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-blue-500/30 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transform hover:-translate-y-2"
                 >
-                  <div className={`aspect-[4/3] bg-gradient-to-br ${post.color} p-6 flex items-center justify-center`}>
-                    <div className="w-16 h-16 bg-white/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      {post.icon}
+                  <div style={{ height: 420 }}>
+                    {/* Gradient Background Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    {/* Top Section - Category and Icon */}
+                    <div className="relative p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className={`px-3 py-1.5 rounded-full text-xs font-bold ${post.categoryColor} bg-opacity-10 backdrop-blur-sm border border-opacity-20 shadow-sm`}>
+                          {post.category}
+                        </div>
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${post.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                          {post.icon}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Title Section - Fixed Height */}
+                    <div className="px-6 mb-3" style={{ height: 80 }}>
+                      <h3 className="text-lg font-bold text-gray-900 leading-tight group-hover:text-blue-600 transition-colors" style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                        {post.title}
+                      </h3>
+                    </div>
+                    
+                    {/* Summary Section - Fixed Height */}
+                    <div className="px-6 mb-4" style={{ height: 100 }}>
+                      <p className="text-gray-700 text-sm leading-relaxed" style={{ display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                        {post.summary}
+                      </p>
+                    </div>
+                    
+                    {/* Bottom Section - Meta Info */}
+                    <div className="absolute bottom-0 left-0 right-0 px-6 pb-4">
+                      <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                      <div className="flex items-center gap-3 text-xs text-gray-500">
+                        <div className="flex items-center gap-2">
+                          <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2" />
+                          </svg>
+                          <span className="font-semibold">{post.readingTime}</span>
+                        </div>
+                        <span className="text-gray-400">•</span>
+                        <span className="font-medium">{post.date}</span>
+                      </div>
+                      
+                      {/* Read More */}
+                      <span className={`${post.categoryColor} text-sm font-bold group-hover:underline ${post.hoverColor} transition-colors inline-flex items-center gap-1`}>
+                        Devamını Oku 
+                        <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
                     </div>
                   </div>
-                  <div className="p-6">
-                    <div className={`${post.categoryColor} text-sm font-semibold mb-2`}>{post.category}</div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">{post.title}</h3>
-                    <p className="text-gray-700 text-sm mb-4">{post.summary}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500">{post.date}</span>
-                      <span className={`${post.categoryColor} text-sm font-semibold ${post.hoverColor} transition-colors inline-flex items-center`}>Devamını Oku <span className="ml-1 transform group-hover:translate-x-1 transition-transform">→</span></span>
-                    </div>
+                  
+                  {/* Decorative Corner Element */}
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-blue-500/10 to-transparent rounded-bl-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   </div>
                 </Link>
               ))}

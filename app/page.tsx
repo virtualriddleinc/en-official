@@ -4,6 +4,7 @@ import Image from "next/image";
 import dynamic from 'next/dynamic';
 import Link from "next/link";
 import StructuredData from './components/StructuredData';
+import { posts as blogPosts } from "./blog/page";
 
 // Lazy load components for better performance
 const KanbanBoard = dynamic(() => import('./components/KanbanBoard'), { 
@@ -672,6 +673,110 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6.5 Blog Yazıları Section */}
+      <section className="w-full py-24 bg-gradient-to-b from-[#F4F5F7] via-white to-[#F4F5F7] relative overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-radial from-[#0052CC]/5 via-transparent to-transparent opacity-60"></div>
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-radial from-[#0052CC]/3 via-transparent to-transparent opacity-40"></div>
+          <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#0052CC]/10 to-transparent"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative">
+          <div className="flex flex-col items-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0052CC]/10 border border-[#0052CC]/20 mb-4">
+              <div className="w-2 h-2 rounded-full bg-[#0052CC] animate-pulse"></div>
+              <span className="text-[#0052CC] font-bold tracking-widest text-xs uppercase">Blog</span>
+              <div className="w-2 h-2 rounded-full bg-[#0052CC] animate-pulse"></div>
+            </div>
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#172B4D] text-center mb-6 leading-tight">
+              Son <span className="bg-gradient-to-r from-[#0052CC] to-[#004BB3] bg-clip-text text-transparent">Yazılarımız</span>
+            </h2>
+            <p className="text-lg text-[#42526E] max-w-3xl text-center leading-relaxed">
+              Dijital dönüşüm, Atlassian ve teknoloji dünyasından en güncel içerikler
+            </p>
+          </div>
+          
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            {blogPosts.slice(0, 4).map((post, index) => (
+                              <a
+                  key={post.href}
+                  href={post.href}
+                  className="group relative block bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-[#0052CC]/30 focus:outline-none focus:ring-4 focus:ring-[#0052CC]/20 transform hover:-translate-y-2"
+                  style={{ height: 420 }}
+                >
+                  {/* Gradient Background Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#0052CC]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  {/* Top Section - Category and Icon */}
+                  <div className="relative p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className={`px-3 py-1.5 rounded-full text-xs font-bold ${post.categoryColor} bg-opacity-10 backdrop-blur-sm border border-opacity-20 shadow-sm`}>
+                        {post.category}
+                      </div>
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${post.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                        {post.icon}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Title Section - Fixed Height */}
+                  <div className="px-6 mb-3" style={{ height: 80 }}>
+                    <h3 className="text-lg font-bold text-[#172B4D] leading-tight group-hover:text-[#0052CC] transition-colors" style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      {post.title}
+                    </h3>
+                  </div>
+                  
+                  {/* Summary Section - Fixed Height */}
+                  <div className="px-6 mb-4" style={{ height: 100 }}>
+                    <p className="text-[#42526E] text-sm leading-relaxed" style={{ display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      {post.summary}
+                    </p>
+                  </div>
+                  
+                  {/* Bottom Section - Meta Info */}
+                  <div className="absolute bottom-0 left-0 right-0 px-6 pb-4">
+                    <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                    <div className="flex items-center gap-3 text-xs text-[#6B778C]">
+                      <div className="flex items-center gap-2">
+                        <svg className="w-4 h-4 text-[#0052CC]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <circle cx="12" cy="12" r="10" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2" />
+                        </svg>
+                        <span className="font-semibold">{post.readingTime}</span>
+                      </div>
+                      <span className="text-gray-400">•</span>
+                      <span className="font-medium">{post.date}</span>
+                    </div>
+                    
+                    {/* Read More */}
+                    <span className="text-[#0052CC] text-sm font-bold group-hover:underline flex items-center gap-1">
+                      Oku 
+                      <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Decorative Corner Element */}
+                <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-[#0052CC]/10 to-transparent rounded-bl-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </a>
+            ))}
+          </div>
+          
+          {/* CTA Button */}
+          <div className="flex justify-center mt-16">
+            <a href="/blog" className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-[#0052CC] to-[#004BB3] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <span>Tüm Blog Yazılarını Gör</span>
+              <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
           </div>
         </div>
       </section>

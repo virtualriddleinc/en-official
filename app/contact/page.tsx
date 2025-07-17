@@ -238,7 +238,7 @@ export default function ContactPage() {
             <div className="mt-12 flex flex-col items-center gap-4 w-full">
               <div className="w-full max-w-6xl mx-auto rounded-xl overflow-hidden shadow-lg">
                 <GoogleMap 
-                  address="Maslak Mah. AOS 55. Sok. 42 Maslak B Blok No:4/542 Sarıyer/İSTANBUL"
+                  address="Kolektif House Maslak, 42 Maslak, Maslak Mah. AOS 55. Sok. B Blok No:4/542, 34398 Sarıyer/İstanbul"
                   apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
                 />
               </div>

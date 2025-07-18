@@ -10,6 +10,7 @@ const securityHeaders = [
       "font-src 'self' https://fonts.gstatic.com data:;",
       "connect-src 'self' https://rvskttz2jh.execute-api.us-east-1.amazonaws.com;",
       "object-src 'none';",
+      "frame-src https://www.google.com https://maps.google.com https://www.google.com/maps/ https://maps.gstatic.com;",
       "frame-ancestors 'none';",
       "base-uri 'self';",
       "form-action 'self';",

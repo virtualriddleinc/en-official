@@ -1,11 +1,64 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CheckCircle, AlertTriangle, X } from "lucide-react";
 import StructuredData from '../components/StructuredData';
 import dynamic from 'next/dynamic';
 
 const GoogleMap = dynamic(() => import('../components/GoogleMap'), { ssr: false });
+
+function SimpleGoogleMap() {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<any>(null);
+
+  useEffect(() => {
+    // Google Maps JS yükle
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyD_16pLyXZxeu-NhhKebjtLvo9Z6TDe6to&libraries=marker&v=weekly`;
+    script.async = true;
+    script.onload = async () => {
+      const { google } = window as any;
+      if (!google || !mapRef.current) return;
+      
+      try {
+        const { Map } = await google.maps.importLibrary("maps");
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+        
+        const position = { lat: 41.1130485, lng: 29.0185254 };
+        
+        const map = new Map(mapRef.current, {
+          zoom: 16,
+          center: position,
+          mapId: "DEMO_MAP_ID",
+        });
+        
+        mapInstanceRef.current = map;
+        
+        const marker = new AdvancedMarkerElement({
+          map: map,
+          position: position,
+          title: "42 Maslak",
+        });
+      } catch (error) {
+        console.error('Google Maps yüklenirken hata:', error);
+      }
+    };
+    
+    document.body.appendChild(script);
+    
+    return () => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="w-full h-[450px] rounded-xl overflow-hidden shadow-lg">
+      <div ref={mapRef} className="w-full h-full" />
+    </div>
+  );
+}
 
 export default function ContactPage() {
   const initialForm = { name: "", email: "", subject: "", message: "" };
@@ -233,17 +286,25 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-
-            {/* Google Maps */}
-            <div className="mt-12 flex flex-col items-center gap-4 w-full">
-              <div className="w-full max-w-6xl mx-auto rounded-xl overflow-hidden shadow-lg">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3005.983818269273!2d29.018530775781436!3d41.1130444713361!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab5bf89700723%3A0xb746023adab01c47!2s42%20Maslak!5e0!3m2!1str!2str!4v1752792619140!5m2!1str!2str" width="100%" height="450" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
-              </div>
-              {/* Adres metni kaldırıldı */}
-            </div>
           </div>
         </div>
       </section>
+
+      {/* Google Maps */}
+      <div className="mt-6 mb-16 flex flex-col items-center gap-4 w-full">
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">Bizi Ziyaret Edin</h2>
+        <div className="w-full max-w-6xl mx-auto rounded-xl overflow-hidden shadow-lg">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3005.953863185987!2d29.018368075781428!3d41.113698671335946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab55922b60eef%3A0x3091fdd92dc97d43!2sVirtual%20Riddle%20Teknoloji%20A.%C5%9E.!5e0!3m2!1str!2str!4v1752847175795!5m2!1str!2str"
+            width="100%"
+            height="450"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer"
+          ></iframe>
+        </div>
+      </div>
 
       {/* Structured Data */}
       <StructuredData

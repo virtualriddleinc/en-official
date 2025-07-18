@@ -1,4 +1,5 @@
 import StructuredData from '../components/StructuredData';
+import OfficePhotoSlider from '../components/OfficePhotoSlider';
 
 export default function AboutPage() {
   return (
@@ -114,80 +115,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="lg:w-3/5 mt-8 lg:mt-0">
-                <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-xl bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-                  {/* Sadece Emoji Animasyonu */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    
-                    {/* Merkez Büyük Emoji */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <div className="text-8xl animate-bounce">🏢</div>
-                    </div>
-                    
-                    {/* Üst Köşe Emojileri */}
-                    <div className="absolute top-8 left-8 text-4xl animate-pulse">💻</div>
-                    <div className="absolute top-12 right-12 text-3xl animate-pulse" style={{animationDelay: '0.3s'}}>🚀</div>
-                    
-                    {/* Alt Köşe Emojileri */}
-                    <div className="absolute bottom-8 left-12 text-3xl animate-pulse" style={{animationDelay: '0.6s'}}>🤝</div>
-                    <div className="absolute bottom-12 right-8 text-4xl animate-pulse" style={{animationDelay: '0.9s'}}>💡</div>
-                    
-                    {/* Orta Sol Emojileri */}
-                    <div className="absolute top-1/3 left-6 text-2xl animate-bounce" style={{animationDelay: '0.2s'}}>👨‍💻</div>
-                    <div className="absolute bottom-1/3 left-6 text-2xl animate-bounce" style={{animationDelay: '0.8s'}}>👩‍💼</div>
-                    
-                    {/* Orta Sağ Emojileri */}
-                    <div className="absolute top-1/3 right-6 text-2xl animate-bounce" style={{animationDelay: '0.4s'}}>👨‍🔧</div>
-                    <div className="absolute bottom-1/3 right-6 text-2xl animate-bounce" style={{animationDelay: '1.0s'}}>👩‍🎨</div>
-                    
-                    {/* Üst Orta Emojileri */}
-                    <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 text-3xl animate-pulse" style={{animationDelay: '0.5s'}}>🏆</div>
-                    <div className="absolute top-1/4 left-1/3 text-2xl animate-pulse" style={{animationDelay: '0.7s'}}>⭐</div>
-                    <div className="absolute top-1/4 right-1/3 text-2xl animate-pulse" style={{animationDelay: '0.1s'}}>🌟</div>
-                    
-                    {/* Alt Orta Emojileri */}
-                    <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 text-3xl animate-pulse" style={{animationDelay: '0.2s'}}>📈</div>
-                    <div className="absolute bottom-1/4 left-1/3 text-2xl animate-pulse" style={{animationDelay: '0.4s'}}>🎯</div>
-                    <div className="absolute bottom-1/4 right-1/3 text-2xl animate-pulse" style={{animationDelay: '0.6s'}}>⚡</div>
-                    
-                    {/* Merkez Etrafındaki Küçük Emojiler */}
-                    <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2 text-xl animate-ping">😊</div>
-                    <div className="absolute top-1/2 right-1/4 transform -translate-y-1/2 text-xl animate-ping" style={{animationDelay: '0.3s'}}>🎉</div>
-                    <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 text-xl animate-ping" style={{animationDelay: '0.6s'}}>🔥</div>
-                    <div className="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 text-xl animate-ping" style={{animationDelay: '0.9s'}}>✨</div>
-                    
-                    {/* Köşe Dekoratif Emojiler */}
-                    <div className="absolute top-4 left-1/4 text-lg animate-pulse" style={{animationDelay: '0.1s'}}>🔧</div>
-                    <div className="absolute top-4 right-1/4 text-lg animate-pulse" style={{animationDelay: '0.4s'}}>📊</div>
-                    <div className="absolute bottom-4 left-1/4 text-lg animate-pulse" style={{animationDelay: '0.7s'}}>🎨</div>
-                    <div className="absolute bottom-4 right-1/4 text-lg animate-pulse" style={{animationDelay: '1.0s'}}>🤖</div>
-                    
-                    {/* Dönen Emojiler */}
-                    <div className="absolute top-1/4 left-1/4 text-2xl animate-spin" style={{animationDuration: '4s'}}>🔄</div>
-                    <div className="absolute bottom-1/4 right-1/4 text-2xl animate-spin" style={{animationDuration: '6s', animationDirection: 'reverse'}}>⚙️</div>
-                    
-                    {/* Zıplayan Emojiler */}
-                    <div className="absolute top-1/3 left-1/3 text-xl animate-bounce" style={{animationDelay: '0.5s'}}>🎪</div>
-                    <div className="absolute bottom-1/3 right-1/3 text-xl animate-bounce" style={{animationDelay: '0.8s'}}>🎭</div>
-                    
-                    {/* Yanıp Sönen Emojiler */}
-                    <div className="absolute top-1/6 left-1/2 transform -translate-x-1/2 text-lg animate-pulse">💫</div>
-                    <div className="absolute bottom-1/6 left-1/2 transform -translate-x-1/2 text-lg animate-pulse" style={{animationDelay: '0.3s'}}>💫</div>
-                    
-                  </div>
-
-                  {/* Animasyonlu Arka Plan Elementleri */}
-                  <div className="absolute top-3 left-3 w-3 h-3 bg-blue-400 rounded-full animate-ping opacity-60"></div>
-                  <div className="absolute top-6 right-6 w-2 h-2 bg-green-400 rounded-full animate-ping opacity-60" style={{animationDelay: '0.3s'}}></div>
-                  <div className="absolute bottom-6 left-6 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-60" style={{animationDelay: '0.6s'}}></div>
-                  <div className="absolute bottom-3 right-3 w-3 h-3 bg-orange-400 rounded-full animate-ping opacity-60" style={{animationDelay: '0.9s'}}></div>
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-pink-400 rounded-full animate-ping opacity-40" style={{animationDelay: '0.2s'}}></div>
-
-                  {/* Dekoratif Çizgiler */}
-                  <svg className="absolute bottom-0 left-0 w-full h-8 opacity-30" viewBox="0 0 400 32" fill="none">
-                    <path d="M0 25 Q100 15 200 20 T400 15" stroke="#3B82F6" strokeWidth="2" fill="none" className="animate-pulse"/>
-                    <path d="M0 30 Q100 20 200 25 T400 20" stroke="#10B981" strokeWidth="2" fill="none" className="animate-pulse" style={{animationDelay: '0.2s'}}/>
-                  </svg>
-                </div>
+                <OfficePhotoSlider />
               </div>
             </div>
           </div>

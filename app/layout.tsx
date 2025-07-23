@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import ClientLayout from './ClientLayout'
-import ThemeToggle from './components/ThemeToggle'
 import Head from 'next/head'
 
 const inter = Inter({ 
@@ -128,9 +127,10 @@ export default function RootLayout({
           h1 { font-size: 2.75rem; font-weight: bold; color: #172B4D; }
           .hero-bg { background: linear-gradient(90deg, #004BB3, #0052CC, #004BB3); }
         `}</style>
+        {/* rel="me" içeren doğrulama linki */}
+        <link rel="me" href="https://sosyal.teknofest.app/@virtualriddle" />
       </head>
       <body className="min-h-screen bg-white">
-        <ThemeToggle />
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

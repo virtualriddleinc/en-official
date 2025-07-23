@@ -31,13 +31,13 @@ export default function GoogleMap({ address, apiKey }: GoogleMapProps) {
       return;
     }
     // Google Maps API'sini yükle
-    const script = document.createElement('script');
+      const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-    script.async = true;
-    script.defer = true;
+      script.async = true;
+      script.defer = true;
     script.onload = initializeMap;
     script.onerror = () => setError('Google Maps yüklenemedi. API anahtarı yanlış veya bağlantı sorunu olabilir.');
-    document.head.appendChild(script);
+      document.head.appendChild(script);
 
     function initializeMap() {
       if (!mapRef.current || !(window as any).google || !(window as any).google.maps) return;
@@ -88,8 +88,8 @@ export default function GoogleMap({ address, apiKey }: GoogleMapProps) {
             infoWindow.setContent(`<div style='font-weight:bold;font-size:16px;'>${DEFAULT_NAME}</div><div style='font-size:13px;'>${results[0].formatted_address}</div>`);
             infoWindow.open(map, marker);
             if (inputRef.current) inputRef.current.value = results[0].formatted_address;
-          }
-        });
+            }
+          });
       });
     }
 
@@ -118,11 +118,11 @@ export default function GoogleMap({ address, apiKey }: GoogleMapProps) {
           {error}
         </div>
       ) : (
-        <div
-          ref={mapRef}
-          className="w-full h-[400px] rounded-xl shadow-lg overflow-hidden"
-          style={{ filter: 'grayscale(20%) contrast(110%)' }}
-        />
+    <div 
+      ref={mapRef} 
+      className="w-full h-[400px] rounded-xl shadow-lg overflow-hidden"
+      style={{ filter: 'grayscale(20%) contrast(110%)' }}
+    />
       )}
     </div>
   );

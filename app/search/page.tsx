@@ -74,19 +74,19 @@ function SearchPageComponent() {
 
   const debouncedFilter = useRef(
     debounce((query: string, selectedCategories: string[], selectedTags: string[]) => {
-      let filteredData: SearchItem[];
-      if (query) {
-        filteredData = fuse.search(query).map(result => result.item);
-      } else {
-        filteredData = searchData as SearchItem[];
-      }
-      if (selectedCategories.length > 0) {
-        filteredData = filteredData.filter(item => selectedCategories.includes(item.category));
-      }
-      if (selectedTags.length > 0) {
-        filteredData = filteredData.filter(item => selectedTags.some(tag => item.tags.includes(tag)));
-      }
-      setResults(filteredData.map((item, index) => ({ item, refIndex: index })));
+    let filteredData: SearchItem[];
+    if (query) {
+      filteredData = fuse.search(query).map(result => result.item);
+    } else {
+      filteredData = searchData as SearchItem[];
+    }
+    if (selectedCategories.length > 0) {
+      filteredData = filteredData.filter(item => selectedCategories.includes(item.category));
+    }
+    if (selectedTags.length > 0) {
+      filteredData = filteredData.filter(item => selectedTags.some(tag => item.tags.includes(tag)));
+    }
+    setResults(filteredData.map((item, index) => ({ item, refIndex: index })));
     }, 250)
   ).current;
 

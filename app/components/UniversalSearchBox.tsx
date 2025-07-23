@@ -81,7 +81,7 @@ export default function UniversalSearchBox() {
   }, [isOpen]);
 
   useEffect(() => {
-    setIsLoading(true);
+      setIsLoading(true);
     debouncedSearch(searchQuery, selectedCategory);
   }, [searchQuery, selectedCategory]);
 

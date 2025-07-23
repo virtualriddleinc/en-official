@@ -28,65 +28,65 @@ export default function FavoriWikiAracimizConfluence() {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Tüm Bilgi Tek Yerde ✍️</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
             Ekip içinde sık yaşanan "o doküman neredeydi ya?" sorusu artık tarihe karışıyor. Confluence sayesinde tüm belgeler, toplantı notları, stratejiler ve planlar tek bir yerde tutulabiliyor. 
-            <strong>Arama fonksiyonu</strong> sayesinde eski bir belgeyi dakikalarca aramak zorunda kalmıyorsun — yaz, bul, tıkla.
-          </p>
-          
+      <strong>Arama fonksiyonu</strong> sayesinde eski bir belgeyi dakikalarca aramak zorunda kalmıyorsun — yaz, bul, tıkla.
+    </p>
+
           <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Gerçek Zamanlı İş Birliği 🤝</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Confluence, Google Docs benzeri bir deneyim sunar: <em>aynı dokümanda birden fazla kişi aynı anda çalışabilir</em>. Her değişiklik anında kaydedilir. 
+      Confluence, Google Docs benzeri bir deneyim sunar: <em>aynı dokümanda birden fazla kişi aynı anda çalışabilir</em>. Her değişiklik anında kaydedilir. 
             Bu da "en güncel versiyon hangisiydi?" karmaşasını ortadan kaldırır. 
-            Ayrıca yorum sistemiyle ekip üyeleri kolayca geri bildirim verebilir.
-          </p>
-          
+      Ayrıca yorum sistemiyle ekip üyeleri kolayca geri bildirim verebilir.
+    </p>
+
           <h2 className="text-2xl font-bold text-gray-900 mb-4">3. Şeffaflık ve Kurumsal Hafıza 🧾</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Herkesin erişebildiği ortak bir bilgi platformu, ekipler arası şeffaflığı artırır. Bir projede neler konuşuldu, kim hangi kararı aldı, hangi dokümana dayanılarak ilerleniyor — hepsi kayıt altındadır.
-            <strong>Yıllar sonra bile bir konunun geçmişine ulaşmak mümkün.</strong>
-          </p>
-          
+      Herkesin erişebildiği ortak bir bilgi platformu, ekipler arası şeffaflığı artırır. Bir projede neler konuşuldu, kim hangi kararı aldı, hangi dokümana dayanılarak ilerleniyor — hepsi kayıt altındadır.
+      <strong>Yıllar sonra bile bir konunun geçmişine ulaşmak mümkün.</strong>
+    </p>
+
           <h2 className="text-2xl font-bold text-gray-900 mb-4">4. Sayfa Şablonlarıyla Hız Kazan 📄⚡</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Toplantı notu, proje planı, sprint özeti… Her şeyi sıfırdan yazmaya gerek yok. Confluence, önceden hazırlanmış <strong>şablonlarla</strong> geliyor. 
-            Bu da hem zaman kazandırıyor hem de dokümantasyonun belli bir standartta kalmasını sağlıyor.
-          </p>
-          
+      Toplantı notu, proje planı, sprint özeti… Her şeyi sıfırdan yazmaya gerek yok. Confluence, önceden hazırlanmış <strong>şablonlarla</strong> geliyor. 
+      Bu da hem zaman kazandırıyor hem de dokümantasyonun belli bir standartta kalmasını sağlıyor.
+    </p>
+
           <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Jira ile Mükemmel Uyum 🔄</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Atlassian ailesinin bir ürünü olarak, Confluence en çok da Jira kullanan ekipler için biçilmiş kaftan. 
+      Atlassian ailesinin bir ürünü olarak, Confluence en çok da Jira kullanan ekipler için biçilmiş kaftan. 
             Jira'daki issue'ları doğrudan Confluence sayfalarına bağlayabilir, <strong>proje dokümantasyonu ile uygulama geliştirmeyi senkronize şekilde yürütebilirsin</strong>. 
-            Bu entegrasyon, özellikle yazılım ekipleri için büyük avantaj.
-          </p>
-          
+      Bu entegrasyon, özellikle yazılım ekipleri için büyük avantaj.
+    </p>
+
           <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Erişim ve Yetkilendirme Esnekliği 🔐</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Herkesin her şeyi görmesi gerekmez. Confluence ile sayfa veya alan bazında yetkilendirme yapabilirsin. 
-            Yani <em>bazı sayfalar sadece yöneticilere açıkken</em>, diğerleri tüm ekibe açık olabilir. Bu da hem gizliliği korur hem de bilgiye erişimi kontrollü hale getirir.
-          </p>
+      Herkesin her şeyi görmesi gerekmez. Confluence ile sayfa veya alan bazında yetkilendirme yapabilirsin. 
+      Yani <em>bazı sayfalar sadece yöneticilere açıkken</em>, diğerleri tüm ekibe açık olabilir. Bu da hem gizliliği korur hem de bilgiye erişimi kontrollü hale getirir.
+    </p>
           
           <h2 className="text-2xl font-bold text-gray-900 mb-4">7. Mobil Uygulama ile Her Yerden Erişim 📱</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
             Tatildeyken bile ekipten kopmamak mı istiyorsun? (Umarız zorunda kalmazsın 😅) Confluence'ın mobil uygulaması sayesinde, her an her yerden sayfalara erişebilir, güncellemeleri takip edebilirsin. 
-            Uzaktan veya hibrit çalışan ekipler için harika bir çözüm.
-          </p>
-          
+      Uzaktan veya hibrit çalışan ekipler için harika bir çözüm.
+    </p>
+
           <h2 className="text-2xl font-bold text-gray-900 mb-4">8. Etkili Arama ve Etiketleme 🔍🏷️</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Sayfalara etiket ekleyerek belirli konularda içerik gruplamak mümkün. Ayrıca gelişmiş arama özelliği sayesinde, sadece başlığa değil <strong>sayfa içeriğine de göre arama yapılabiliyor</strong>. 
+      Sayfalara etiket ekleyerek belirli konularda içerik gruplamak mümkün. Ayrıca gelişmiş arama özelliği sayesinde, sadece başlığa değil <strong>sayfa içeriğine de göre arama yapılabiliyor</strong>. 
             Bu da "aramakla vakit kaybetmek" devrini kapatıyor.
-          </p>
-          
+    </p>
+
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Sonuç: Sadece Bir Wiki Değil, Ekip Kültürünün Temeli 🎯</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Confluence, dokümantasyonu bir angarya olmaktan çıkarıyor. Onu bir ekip alışkanlığına dönüştürmek, iş süreçlerini sadeleştiriyor, bilgiye ulaşımı kolaylaştırıyor ve herkesin aynı sayfada olmasını sağlıyor.
-            <strong>Verimli bir ekip çalışması için merkezi bir bilgi alanı şartsa, Confluence doğru seçim olabilir.</strong>
-          </p>
+      Confluence, dokümantasyonu bir angarya olmaktan çıkarıyor. Onu bir ekip alışkanlığına dönüştürmek, iş süreçlerini sadeleştiriyor, bilgiye ulaşımı kolaylaştırıyor ve herkesin aynı sayfada olmasını sağlıyor.
+      <strong>Verimli bir ekip çalışması için merkezi bir bilgi alanı şartsa, Confluence doğru seçim olabilir.</strong>
+    </p>
           
           <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-xl mb-6">
             <p className="text-blue-900 text-sm leading-relaxed">
               📝 Yazıyı beğendiysen paylaşabilir ya da yorumlarını bizimle paylaşabilirsin!
             </p>
           </div>
-        </section>
+  </section>
         <footer className="mt-12 border-t pt-8">
           <div className="mb-4 text-gray-700 font-semibold">Diğer Yazılar</div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -106,7 +106,7 @@ export default function FavoriWikiAracimizConfluence() {
               <div className="text-xs text-gray-500 mt-1">3 Mart 2024</div>
             </Link>
           </div>
-        </footer>
+  </footer>
       </article>
     </main>
   );

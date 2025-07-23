@@ -181,7 +181,7 @@ export default function BlogPage() {
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {paginatedPosts.map((post, i) => (
-                                                <Link
+                <Link
                   key={post.href}
                   href={post.href}
                   className="group relative block bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-blue-500/30 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transform hover:-translate-y-2"
@@ -197,7 +197,7 @@ export default function BlogPage() {
                           {post.category}
                         </div>
                         <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${post.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                          {post.icon}
+                      {post.icon}
                         </div>
                       </div>
                     </div>
@@ -229,7 +229,7 @@ export default function BlogPage() {
                         </div>
                         <span className="text-gray-400">•</span>
                         <span className="font-medium">{post.date}</span>
-                      </div>
+                  </div>
                       
                       {/* Read More */}
                       <span className={`${post.categoryColor} text-sm font-bold group-hover:underline ${post.hoverColor} transition-colors inline-flex items-center gap-1`}>

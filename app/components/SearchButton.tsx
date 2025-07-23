@@ -80,7 +80,7 @@ export default function SearchButton() {
 
   // Anlık arama için useEffect
   useEffect(() => {
-    setIsLoading(true);
+      setIsLoading(true);
     debouncedSearch(searchQuery);
   }, [searchQuery]);
 

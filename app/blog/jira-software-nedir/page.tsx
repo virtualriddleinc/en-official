@@ -26,17 +26,17 @@ export default function JiraSoftwareNedir() {
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
             Jira Software, Atlassian tarafından geliştirilen, özellikle yazılım geliştirme ekipleri için tasarlanmış kapsamlı bir proje yönetimi platformudur. Agile ve Scrum metodolojilerini destekleyen araçlar sunar.
           </p>
-          
+
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Temel Özellikler</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
             Issue tracking, sprint planning, backlog management, burndown charts ve team collaboration gibi özellikler ile ekiplerin projelerini etkili bir şekilde yönetmesini sağlar.
           </p>
-          
+
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Agile ve Scrum Desteği</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
             Jira Software, Agile ve Scrum süreçlerini destekleyen özel araçlar sunar. Sprint planning, daily standups, retrospective ve release planning gibi aktiviteler için optimize edilmiştir.
           </p>
-          
+
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Entegrasyon ve Ekosistem</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
             Confluence, Bitbucket, Slack gibi diğer Atlassian ürünleri ve üçüncü parti araçlarla güçlü entegrasyon imkanları sunar. Bu sayede tüm geliştirme süreci tek bir platformda yönetilebilir.

@@ -4,8 +4,17 @@ import { Metadata } from 'next';
 async function getHomeData() {
   return {
     title: 'Virtual Riddle - Atlassian Danışmanlığı ve Modern Yazılım Çözümleri',
-    description: 'Jira ve Confluence başta olmak üzere tüm Atlassian ürünleri için kurumsal danışmanlık hizmetleri. Profesyonel danışmanlık ve modern yazılım çözümleri.',
-    services: ['Jira', 'Confluence', 'Bitbucket', 'Atlassian Danışmanlığı']
+    description: 'Jira ve Confluence başta olmak üzere tüm Atlassian ürünleri için kurumsal danışmanlık hizmetleri. Profesyonel danışmanlık, modern yazılım çözümleri ve dinamik fiyatlandırma sistemi.',
+    services: [
+      'Jira Danışmanlığı', 
+      'Confluence Danışmanlığı', 
+      'Bitbucket Danışmanlığı', 
+      'Atlassian Danışmanlığı',
+      'Dinamik Fiyatlandırma',
+      'Proje Bazlı Danışmanlık',
+      'Tam Zamanlı Danışmanlık',
+      'Eğitim Paketleri'
+    ]
   }
 }
 
@@ -25,7 +34,15 @@ export async function generateMetadata(): Promise<Metadata> {
       'kurumsal çözümler',
       'proje yönetimi',
       'agile dönüşüm',
-      'devops danışmanlığı'
+      'devops danışmanlığı',
+      'dinamik fiyatlandırma',
+      'proje bazlı danışmanlık',
+      'tam zamanlı danışmanlık',
+      'eğitim paketleri',
+      'saatlik günlük faturalandırma',
+      'minimum sözleşme süreleri',
+      '1 gün 8 saat hesaplama',
+      'anlık fiyat güncelleme'
     ],
     alternates: {
       canonical: '/'

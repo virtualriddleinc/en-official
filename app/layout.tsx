@@ -8,7 +8,9 @@ const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
-  fallback: ['system-ui', 'arial']
+  fallback: ['system-ui', 'arial'],
+  variable: '--font-inter',
+  weight: ['400', '500', '600', '700']
 })
 
 export const metadata: Metadata = {
@@ -40,6 +42,7 @@ export const metadata: Metadata = {
     apple: '/favicon.svg',
     shortcut: '/favicon.svg'
   },
+  manifest: '/manifest.json',
   robots: {
     index: true,
     follow: true,
@@ -87,15 +90,19 @@ export default function RootLayout({
   return (
     <html lang="tr" className={inter.className}>
       <head>
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17342577259"></script>
+        {/* Google tag (gtag.js) - Optimized for performance */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'AW-17342577259');
+              gtag('config', 'AW-17342577259', {
+                'send_page_view': false,
+                'anonymize_ip': true,
+                'allow_google_signals': false,
+                'allow_ad_personalization_signals': false
+              });
               function gtag_report_conversion(url) {
                 var callback = function () {
                   if (typeof(url) != 'undefined') {
@@ -111,6 +118,7 @@ export default function RootLayout({
             `
           }}
         />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17342577259"></script>
         
         {/* DNS Prefetch for external domains */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -122,6 +130,7 @@ export default function RootLayout({
         
         {/* Preload critical fonts */}
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
         
         {/* Preload critical pages to reduce network dependency chain */}
         <link rel="preload" href="/contact" as="fetch" crossOrigin="anonymous" />
@@ -132,6 +141,8 @@ export default function RootLayout({
           body { background: #fff; color: #172B4D; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; }
           h1 { font-size: 2.75rem; font-weight: bold; color: #172B4D; }
           .hero-bg { background: linear-gradient(90deg, #004BB3, #0052CC, #004BB3); }
+          .loading-skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
+          @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
         `}</style>
         {/* rel="me" içeren doğrulama linki */}
         <link rel="me" href="https://sosyal.teknofest.app/@virtualriddle" />

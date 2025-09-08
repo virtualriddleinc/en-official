@@ -1,0 +1,35 @@
+{
+  "name": "Virtual Riddle - Atlassian Danışmanlığı",
+  "short_name": "Virtual Riddle",
+  "description": "Atlassian araçları ve modern yazılım çözümleri konusunda uzman danışmanlık hizmetleri",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0052CC",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "screenshots": [
+    {
+      "src": "/images/solutions-1.svg",
+      "sizes": "1280x720",
+      "type": "image/svg+xml",
+      "form_factor": "wide"
+    }
+  ]
+}

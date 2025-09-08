@@ -520,6 +520,8 @@ export default function Home() {
                   alt="Atlassian Danışmanlığı"
                   fill
                   className="object-contain p-4"
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
               <div className="p-6">
@@ -542,6 +544,8 @@ export default function Home() {
                   alt="Cloud Migration"
                   fill
                   className="object-contain p-4"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
               <div className="p-6">
@@ -564,6 +568,8 @@ export default function Home() {
                   alt="Eğitim & Sertifikasyon"
                   fill
                   className="object-contain p-4"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
               <div className="p-6">

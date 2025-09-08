@@ -46,6 +46,7 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
       { href: '/contact', as: 'fetch' },
       { href: '/free-discovery', as: 'fetch' },
       { href: '/about', as: 'fetch' },
+      { href: '/manifest.json', as: 'manifest' },
     ];
 
     preloadLinks.forEach(({ href, as }) => {
@@ -60,11 +61,31 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
     // Service Worker registration for caching
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {
-          // Service worker registration failed
+        navigator.serviceWorker.register('/sw.js', {
+          scope: '/',
+          updateViaCache: 'none'
+        }).then((registration) => {
+          console.log('SW registered: ', registration);
+        }).catch((registrationError) => {
+          console.log('SW registration failed: ', registrationError);
         });
       });
     }
+
+    // Preload critical images
+    const criticalImages = [
+      '/vr-showcase/solutions-1.svg',
+      '/logo.svg',
+      '/logo-footer.svg'
+    ];
+
+    criticalImages.forEach((src) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = src;
+      link.as = 'image';
+      document.head.appendChild(link);
+    });
   }, []);
 
   return <>{children}</>;

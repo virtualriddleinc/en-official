@@ -34,11 +34,14 @@ const securityHeaders = [
 const nextConfig = {
   output: 'standalone',
   images: {
-    unoptimized: true,
+    unoptimized: false,
     domains: ['virtualriddle.com'],
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 31536000,
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -50,20 +53,14 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['@heroicons/react', 'lucide-react', 'react', 'react-dom'],
     optimizeServerReact: true,
+    optimizeCss: true,
+    scrollRestoration: true,
     turbo: {
       rules: {
         '*.svg': {
           loaders: ['@svgr/webpack'],
           as: '*.js',
         },
-      },
-    },
-  },
-  // CSS optimization to reduce network dependency chain
-  css: {
-    modules: {
-      getLocalIdent: (context, localIdentName, localName, options) => {
-        return localName;
       },
     },
   },

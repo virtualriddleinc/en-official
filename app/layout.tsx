@@ -17,7 +17,13 @@ export const metadata: Metadata = {
     default: 'Virtual Riddle - Atlassian Danışmanlığı ve Modern Yazılım Çözümleri'
   },
   description: 'Atlassian araçları ve modern yazılım çözümleri konusunda uzman danışmanlık hizmetleri',
-  keywords: ['Atlassian', 'Jira', 'Confluence', 'yazılım danışmanlığı', 'Türkiye'],
+  keywords: [
+    'Atlassian', 'Jira', 'Confluence', 'yazılım danışmanlığı', 'Türkiye',
+    'Claude AI', 'MCP entegrasyonu', 'yapay zeka', 'AI asistan',
+    'Atlassian danışmanlığı', 'Jira danışmanlığı', 'Confluence danışmanlığı',
+    'DevOps', 'Agile', 'proje yönetimi', 'kurumsal çözümler',
+    'Remote MCP Server', 'Anthropic Claude', 'AI iş akışları'
+  ],
   authors: [{ name: 'Virtual Riddle' }],
   creator: 'Virtual Riddle',
   publisher: 'Virtual Riddle',

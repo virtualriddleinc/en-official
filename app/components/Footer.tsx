@@ -97,7 +97,6 @@ export default function Footer() {
               <li><a href="/career" className="text-gray-400 hover:text-white transition-colors text-sm">Kariyer</a></li>
               <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors text-sm">İletişim</a></li>
               <li><a href="/blog" className="text-gray-400 hover:text-white transition-colors text-sm">Blog</a></li>
-              <li><a href="/pricing" className="text-gray-400 hover:text-white transition-colors text-sm">Fiyatlandırma</a></li>
             </ul>
           </div>
 

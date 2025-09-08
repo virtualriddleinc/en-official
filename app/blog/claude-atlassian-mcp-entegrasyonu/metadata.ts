@@ -1,0 +1,76 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Claude ile Atlassian\'ı Bağlayarak Çalışmak: MCP Devrimi',
+  description: 'Atlassian\'ın yeni Remote MCP Server\'ı sayesinde Claude ile Jira ve Confluence verilerinize doğrudan erişebilir, AI destekli iş akışları oluşturabilirsiniz. Bu entegrasyon, ekip verimliliğini artırırken bilgi silolarını ortadan kaldırıyor.',
+  keywords: [
+    'Claude',
+    'Atlassian MCP',
+    'Model Context Protocol',
+    'Jira AI entegrasyonu',
+    'Confluence AI',
+    'yapay zeka',
+    'AI asistan',
+    'Atlassian danışmanlığı',
+    'Remote MCP Server',
+    'Anthropic Claude',
+    'AI iş akışları',
+    'kurumsal AI',
+    'Atlassian otomasyonu',
+    'AI destekli proje yönetimi',
+    'Claude entegrasyonu'
+  ],
+  authors: [{ name: 'Virtual Riddle Blog Ekibi' }],
+  creator: 'Virtual Riddle',
+  publisher: 'Virtual Riddle',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://virtualriddle.com'),
+  alternates: {
+    canonical: '/blog/claude-atlassian-mcp-entegrasyonu',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'article',
+    locale: 'tr_TR',
+    url: 'https://virtualriddle.com/blog/claude-atlassian-mcp-entegrasyonu',
+    title: 'Claude ile Atlassian\'ı Bağlayarak Çalışmak: MCP Devrimi',
+    description: 'Atlassian\'ın yeni Remote MCP Server\'ı sayesinde Claude ile Jira ve Confluence verilerinize doğrudan erişebilir, AI destekli iş akışları oluşturabilirsiniz.',
+    siteName: 'Virtual Riddle',
+    publishedTime: '2025-09-01T00:00:00.000Z',
+    modifiedTime: '2025-09-01T00:00:00.000Z',
+    authors: ['Virtual Riddle Blog Ekibi'],
+    section: 'Yapay Zeka',
+    tags: ['Claude', 'Atlassian', 'MCP', 'AI', 'Yapay Zeka', 'Entegrasyon'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Claude ile Atlassian\'ı Bağlayarak Çalışmak: MCP Devrimi',
+    description: 'Atlassian\'ın yeni Remote MCP Server\'ı sayesinde Claude ile Jira ve Confluence verilerinize doğrudan erişebilir, AI destekli iş akışları oluşturabilirsiniz.',
+    creator: '@virtualriddle',
+  },
+  other: {
+    'article:author': 'Virtual Riddle Blog Ekibi',
+    'article:published_time': '2025-09-01T00:00:00.000Z',
+    'article:modified_time': '2025-09-01T00:00:00.000Z',
+    'article:section': 'Yapay Zeka',
+    'article:tag': 'Claude,Atlassian,MCP,AI,Yapay Zeka,Entegrasyon',
+    'reading-time': '10',
+    'word-count': '2500',
+  }
+};

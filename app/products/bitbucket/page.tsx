@@ -172,10 +172,10 @@ export default function BitbucketPage() {
                 Ücretsiz Başlayın
               </Link>
               <Link 
-                href="/pricing" 
+                href="/solutions/consulting" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
               >
-                Fiyatlandırmayı Görüntüle
+                Teklif İste
               </Link>
             </div>
           </div>

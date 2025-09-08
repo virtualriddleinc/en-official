@@ -6,7 +6,7 @@ import { useState, useEffect, useMemo, useRef, useCallback, memo } from "react";
 import Link from "next/link";
 import CookieConsent from "./components/CookieConsent";
 import PerformanceOptimizer from "./components/PerformanceOptimizer";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search, X, FileText, ChevronRight, Package, Zap, Building, Scale, BookText, ChevronDown, ChevronUp, Building2, DollarSign, Mail, BarChart, Users, MessageSquare } from "lucide-react";
 import Fuse, { IFuseOptions, FuseResult } from 'fuse.js';
@@ -67,7 +67,8 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
+  const router = useRouter();
+  const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProductsMenuOpen, setIsProductsMenuOpen] = useState(false);
   const [isSolutionsMenuOpen, setIsSolutionsMenuOpen] = useState(false);
@@ -78,7 +79,6 @@ export default function ClientLayout({
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const listContainerRef = useRef<HTMLDivElement>(null);
 
-  const router = useRouter();
   let productsCloseTimeout: NodeJS.Timeout;
   let solutionsCloseTimeout: NodeJS.Timeout;
 
@@ -482,12 +482,6 @@ export default function ClientLayout({
                 </AnimatePresence>
               </div>
               <Link 
-                href="/pricing" 
-                className="px-4 py-2 text-base text-gray-800 hover:text-blue-600 font-semibold rounded-xl transition-all duration-200"
-              >
-                Fiyatlandırma
-              </Link>
-              <Link 
                 href="/contact" 
                 className="px-4 py-2 text-base text-gray-800 hover:text-blue-600 font-semibold rounded-xl transition-all duration-200"
               >
@@ -726,11 +720,6 @@ export default function ClientLayout({
                       </div>
                   </MobileAccordion>
 
-                    <div className="border-b border-white/10">
-                        <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white hover:bg-white/5 rounded-xl transition-all duration-200">
-                            Fiyatlandırma
-                        </Link>
-                    </div>
 
                     <div className="border-b border-white/10">
                         <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white hover:bg-white/5 rounded-xl transition-all duration-200">

@@ -14,6 +14,22 @@ function parseTurkishDate(dateStr) {
 
 export const posts = [
   {
+    href: "/blog/claude-atlassian-mcp-entegrasyonu",
+    category: "Yapay Zeka",
+    title: "Claude ile Atlassian'ı Bağlayarak Çalışmak: MCP Devrimi",
+    summary: "Atlassian'ın yeni Remote MCP Server'ı sayesinde Claude ile Jira ve Confluence verilerinize doğrudan erişebilir, AI destekli iş akışları oluşturabilirsiniz. Bu entegrasyon, ekip verimliliğini artırırken bilgi silolarını ortadan kaldırıyor.",
+    date: "1 Eylül 2025",
+    readingTime: "10 dk",
+    color: "from-purple-600 to-blue-700",
+    icon: (
+      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      </svg>
+    ),
+    categoryColor: "text-purple-700",
+    hoverColor: "group-hover:text-purple-800"
+  },
+  {
     href: "/blog/favori-wiki-aracimiz-confluence",
     category: "Confluence",
     title: "Favori Wiki Aracımız: Confluence!",
@@ -137,10 +153,7 @@ export const posts = [
     color: "from-purple-600 to-blue-700",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <rect x="4" y="4" width="16" height="16" rx="4" strokeWidth="2" />
-        <circle cx="9" cy="10" r="1" fill="white" />
-        <circle cx="15" cy="10" r="1" fill="white" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16c1.333-1 4.667-1 6 0" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
       </svg>
     ),
     categoryColor: "text-purple-700",

@@ -90,7 +90,6 @@ export default function SitemapPage() {
       { title: "Kariyer", path: "/career" },
       { title: "İletişim", path: "/contact" },
       { title: "Blog", path: "/blog" },
-      { title: "Fiyatlandırma", path: "/pricing" },
       { title: "Site Haritası", path: "/sitemap" },
     ],
     ürünler: {
@@ -241,7 +240,6 @@ export default function SitemapPage() {
                     { title: "İletişim", path: "/contact", icon: "contact" },
                     { title: "Blog", path: "/blog", icon: "blog" },
                     { title: "Ürünler", path: "/products", icon: "products" },
-                    { title: "Fiyatlandırma", path: "/pricing", icon: "pricing" },
                   ].map((item, index) => (
                     <Link 
                       key={index}
@@ -436,14 +434,6 @@ function IconForQuickLinks({ name }: { name: string }) {
         <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center">
           <svg className="w-6 h-6 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-          </svg>
-        </div>
-      );
-    case "pricing":
-      return (
-        <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
-          <svg className="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
           </svg>
         </div>
       );

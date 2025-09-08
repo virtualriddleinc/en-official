@@ -40,7 +40,6 @@
   </url>
   
   <url>
-    <loc>https://virtualriddle.com/pricing</loc>
     <lastmod>2025-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -152,6 +151,20 @@
     <lastmod>2025-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/blog/claude-atlassian-mcp-entegrasyonu</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://virtualriddle.com/blog/favori-wiki-aracimiz-confluence</loc>
+    <lastmod>2025-07-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   
   <url>

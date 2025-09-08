@@ -174,12 +174,12 @@ export const searchData = [
     tags: ["blog", "makaleler", "yazılar", "haberler", "teknoloji", "dijital dönüşüm", "agile", "devops", "atlassian"]
   },
   {
-    id: "page-pricing",
-    title: "Fiyatlandırma",
-    description: "Atlassian lisansları ve danışmanlık hizmetlerimiz için fiyatlandırma seçenekleri ve paketler.",
-    url: "/pricing",
-    category: "Kurumsal",
-    tags: ["fiyatlandırma", "lisans", "paketler", "hizmet bedeli", "danışmanlık ücretleri", "teklif al", "maliyet"]
+    id: "page-blog-claude-mcp",
+    title: "Claude ile Atlassian'ı Bağlayarak Çalışmak: MCP Devrimi",
+    description: "Atlassian'ın yeni Remote MCP Server'ı sayesinde Claude ile Jira ve Confluence verilerinize doğrudan erişebilir, AI destekli iş akışları oluşturabilirsiniz.",
+    url: "/blog/claude-atlassian-mcp-entegrasyonu",
+    category: "Yapay Zeka",
+    tags: ["claude", "atlassian", "mcp", "ai", "yapay zeka", "entegrasyon", "jira", "confluence", "remote mcp server", "anthropic", "ai iş akışları"]
   },
   {
     id: "page-terms",

@@ -162,7 +162,11 @@ export default function Footer() {
             className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-colors"
             aria-label="Next Social"
           >
-            <img src="/next.svg" alt="Next" className="w-6 h-6" />
+            <svg xmlns="//v6s.cnnturk.com/images/favicon/next-button.svg" width="14" height="14" viewBox="0 0 16 16" fill="none" className="w-6 h-6">
+              <path d="M4.77139 0.0125732H0.00012207V15.9997H4.77139V0.0125732Z" fill="currentColor"></path>
+              <path d="M10.2404 15.9871C9.08771 15.9871 8.0582 15.3922 7.67872 14.5067L5.32297 8.38192L2.12354 0H7.77092L11.1035 8.68911L13.9783 15.9871H10.2404Z" fill="currentColor"></path>
+              <path d="M11.354 9.57871C11.271 9.34492 11.2288 9.34462 11.2288 9.09744V0.0131836H16.0001V13.7914C16.0001 14.9291 15.1134 15.8686 13.9785 15.9871L11.354 9.57871Z" fill="currentColor"></path>
+            </svg>
           </a>
         </div>
 

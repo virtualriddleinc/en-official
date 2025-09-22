@@ -94,18 +94,90 @@ export default function RootLayout({
         {/* DNS Prefetch for external domains */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+        <link rel="dns-prefetch" href="//maps.googleapis.com" />
         
         {/* Preconnect for critical resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://maps.googleapis.com" />
         
-        {/* Preload critical fonts with optimized loading */}
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
-        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
+        {/* Critical CSS inline for above-the-fold content */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            /* Critical CSS for above-the-fold content */
+            *{box-sizing:border-box;margin:0;padding:0}
+            html{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;line-height:1.5;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+            body{background-color:#fff;color:#172B4D;font-size:0.875rem;line-height:1.4285}
+            .container{max-width:1200px;margin:0 auto;padding:0 1rem}
+            .text-center{text-align:center}
+            .font-bold{font-weight:700}
+            .text-white{color:#fff}
+            .bg-blue-600{background-color:#2563eb}
+            .min-h-screen{min-height:100vh}
+            .relative{position:relative}
+            .absolute{position:absolute}
+            .inset-0{top:0;right:0;bottom:0;left:0}
+            .flex{display:flex}
+            .items-center{align-items:center}
+            .justify-center{justify-content:center}
+            .grid{display:grid}
+            .hidden{display:none}
+            .overflow-hidden{overflow:hidden}
+            .rounded-lg{border-radius:0.5rem}
+            .shadow-lg{box-shadow:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05)}
+            .transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}
+            .hover\\:shadow-xl:hover{box-shadow:0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04)}
+            .mb-4{margin-bottom:1rem}
+            .mb-6{margin-bottom:1.5rem}
+            .mb-8{margin-bottom:2rem}
+            .mb-12{margin-bottom:3rem}
+            .text-4xl{font-size:2.25rem;line-height:2.5rem}
+            .text-5xl{font-size:3rem;line-height:1}
+            .text-lg{font-size:1.125rem;line-height:1.75rem}
+            .text-xl{font-size:1.25rem;line-height:1.75rem}
+            .max-w-2xl{max-width:42rem}
+            .max-w-3xl{max-width:48rem}
+            .mx-auto{margin-left:auto;margin-right:auto}
+            .px-4{padding-left:1rem;padding-right:1rem}
+            .py-20{padding-top:5rem;padding-bottom:5rem}
+            .w-full{width:100%}
+            .h-48{height:12rem}
+            .object-contain{object-fit:contain}
+            .p-4{padding:1rem}
+            .p-6{padding:1.5rem}
+            .bg-white{background-color:#fff}
+            .text-\\[\\#253858\\]{color:#253858}
+            .text-\\[\\#42526E\\]{color:#42526E}
+            .text-\\[\\#0052CC\\]{color:#0052CC}
+            .font-semibold{font-weight:600}
+            .font-medium{font-weight:500}
+            .hover\\:underline:hover{text-decoration:underline}
+            .inline-flex{display:inline-flex}
+            .items-center{align-items:center}
+            .gap-8{gap:2rem}
+            .grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
+            .lg\\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+            .rounded-xl{border-radius:0.75rem}
+            .overflow-hidden{overflow:hidden}
+            .shadow-sm{box-shadow:0 1px 2px 0 rgba(0,0,0,0.05)}
+            .hover\\:shadow-lg:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05)}
+            .w-5\\/6{width:83.333333%}
+            .lg\\:w-full{width:100%}
+            .h-64{height:16rem}
+            .animate-pulse{animation:pulse 2s cubic-bezier(0.4,0,0.6,1) infinite}
+            @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+            .bg-gray-200{background-color:#e5e7eb}
+            @media (min-width:1024px){.lg\\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\\:w-full{width:100%}}
+          `
+        }} />
         
         {/* Load non-critical CSS asynchronously */}
-        <link rel="preload" href="/app/globals.css" as="style" />
-        <noscript><link rel="stylesheet" href="/app/globals.css" /></noscript>
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onLoad="this.onload=null;this.rel='stylesheet'" />
+        <link rel="preload" href="/app/globals.css" as="style" onLoad="this.onload=null;this.rel='stylesheet'" />
+        <noscript>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+          <link rel="stylesheet" href="/app/globals.css" />
+        </noscript>
         
         {/* Preload critical resources to reduce network dependency chain */}
         <link rel="preload" href="/contact" as="fetch" crossOrigin="anonymous" />

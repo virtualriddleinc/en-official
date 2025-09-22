@@ -58,8 +58,8 @@ export default function LazyImage({
     return () => observer.disconnect();
   }, [priority, isClient]);
 
-  // Server-side rendering için placeholder
-  if (!isClient) {
+  // Server-side rendering için placeholder göster
+  if (!isClient && !priority) {
     return (
       <div ref={imgRef} className={`relative ${className}`}>
         <div className="absolute inset-0 bg-gray-200 animate-pulse rounded" />

@@ -26,13 +26,8 @@ const officeImages = [
 ];
 
 export default function OfficePhotoSlider() {
-  const [isClient, setIsClient] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  
-  useEffect(() => { 
-    setIsClient(true); 
-  }, []);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % officeImages.length);
@@ -41,8 +36,6 @@ export default function OfficePhotoSlider() {
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + officeImages.length) % officeImages.length);
   };
-
-  if (!isClient) return null;
 
   return (
     <div className="w-full max-w-3xl mx-auto px-2">

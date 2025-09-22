@@ -4,6 +4,7 @@ import Image from "next/image";
 import dynamic from 'next/dynamic';
 import Link from "next/link";
 import StructuredData from './components/StructuredData';
+import LazyImage from './components/LazyImage';
 import { posts as blogPosts } from "./blog/page";
 
 // Lazy load components for better performance
@@ -515,14 +516,12 @@ export default function Home() {
             {/* Atlassian Danışmanlığı */}
             <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all w-5/6 mx-auto lg:w-full">
               <div className="relative h-48 w-full flex items-center justify-center bg-white rounded-t-xl">
-                <Image
+                <LazyImage
                   src="/vr-showcase/solutions-1.svg"
                   alt="Atlassian Danışmanlığı"
-                  fill
-                  className="object-contain p-4"
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority={false}
+                  width={400}
+                  height={192}
+                  className="object-contain p-4 w-full h-full"
                 />
               </div>
               <div className="p-6">
@@ -540,14 +539,12 @@ export default function Home() {
             {/* Cloud Migration */}
             <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all w-5/6 mx-auto lg:w-full">
               <div className="relative h-48 w-full flex items-center justify-center bg-white rounded-t-xl">
-                <Image
+                <LazyImage
                   src="/vr-showcase/solutions-2.png"
                   alt="Cloud Migration"
-                  fill
-                  className="object-contain p-4"
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority={false}
+                  width={400}
+                  height={192}
+                  className="object-contain p-4 w-full h-full"
                 />
               </div>
               <div className="p-6">
@@ -565,14 +562,12 @@ export default function Home() {
             {/* Eğitim & Sertifikasyon */}
             <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all w-5/6 mx-auto lg:w-full">
               <div className="relative h-48 w-full flex items-center justify-center bg-white rounded-t-xl">
-                <Image
+                <LazyImage
                   src="/vr-showcase/solutions-3.png"
                   alt="Eğitim & Sertifikasyon"
-                  fill
-                  className="object-contain p-4"
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority={false}
+                  width={400}
+                  height={192}
+                  className="object-contain p-4 w-full h-full"
                 />
               </div>
               <div className="p-6">

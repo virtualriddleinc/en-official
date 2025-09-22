@@ -98,9 +98,6 @@ export default function RootLayout({
         {/* Preconnect for critical resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://maps.googleapis.com" />
-        <link rel="preconnect" href="https://maps.gstatic.com" />
-        <link rel="preconnect" href="https://rvskttz2jh.execute-api.us-east-1.amazonaws.com" />
         
         {/* Preload critical fonts with optimized loading */}
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />

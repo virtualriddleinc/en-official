@@ -72,8 +72,11 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
       });
     }
 
-    // Preload critical images (only above-the-fold)
+    // Preload critical images
     const criticalImages = [
+      '/vr-showcase/solutions-1.svg',
+      '/vr-showcase/solutions-2.png',
+      '/vr-showcase/solutions-3.png',
       '/logo.svg',
       '/logo-footer.svg'
     ];

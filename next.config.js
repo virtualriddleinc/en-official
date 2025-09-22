@@ -55,9 +55,10 @@ const nextConfig = {
   },
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react', 'react', 'react-dom', 'framer-motion', 'fuse.js'],
+    optimizePackageImports: ['@heroicons/react', 'lucide-react', 'react', 'react-dom'],
     optimizeServerReact: true,
     scrollRestoration: true,
+    optimizeCss: true,
     turbo: {
       rules: {
         '*.svg': {
@@ -136,17 +137,8 @@ const nextConfig = {
       config.optimization.usedExports = true;
       config.optimization.sideEffects = false;
       
-      // Modern JavaScript target (ES2020+)
-      config.target = ['web', 'es2020'];
-      
       // Bundle analizi için
       config.optimization.minimize = true;
-      
-      // Polyfill'leri kaldır (modern tarayıcılar için)
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        'core-js': false,
-      };
     }
     
     return config;

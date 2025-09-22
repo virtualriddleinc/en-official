@@ -28,10 +28,15 @@ export default function LazyImage({
 }: LazyImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
+  const [isClient, setIsClient] = useState(false);
   const imgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (priority) return;
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (priority || !isClient) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -51,7 +56,16 @@ export default function LazyImage({
     }
 
     return () => observer.disconnect();
-  }, [priority]);
+  }, [priority, isClient]);
+
+  // Server-side rendering için placeholder
+  if (!isClient) {
+    return (
+      <div ref={imgRef} className={`relative ${className}`}>
+        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded" />
+      </div>
+    );
+  }
 
   return (
     <div ref={imgRef} className={`relative ${className}`}>

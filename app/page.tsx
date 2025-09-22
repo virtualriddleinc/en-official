@@ -522,6 +522,7 @@ export default function Home() {
                   className="object-contain p-4"
                   loading="lazy"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={false}
                 />
               </div>
               <div className="p-6">
@@ -546,6 +547,7 @@ export default function Home() {
                   className="object-contain p-4"
                   loading="lazy"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={false}
                 />
               </div>
               <div className="p-6">
@@ -570,6 +572,7 @@ export default function Home() {
                   className="object-contain p-4"
                   loading="lazy"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={false}
                 />
               </div>
               <div className="p-6">

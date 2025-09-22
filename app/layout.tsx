@@ -118,8 +118,15 @@ export default function RootLayout({
         {/* Critical CSS inline - Above the fold styles */}
         <style>{`
           /* Critical above-the-fold styles */
-          * { box-sizing: border-box; }
-          html { scroll-behavior: smooth; font-display: swap; }
+          * { 
+            box-sizing: border-box; 
+          }
+          
+          html { 
+            scroll-behavior: smooth; 
+            font-display: swap; 
+          }
+          
           body { 
             background: #fff; 
             color: #172B4D; 
@@ -127,6 +134,9 @@ export default function RootLayout({
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            text-rendering: optimizeSpeed;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
           }
           
           /* Hero section critical styles */
@@ -141,9 +151,10 @@ export default function RootLayout({
           h1 { 
             font-size: 2.75rem; 
             font-weight: bold; 
-            color: #172B4D; 
+            color: white; 
             margin: 0;
             line-height: 1.1;
+            letter-spacing: -0.025em;
           }
           
           h2 { 
@@ -152,6 +163,7 @@ export default function RootLayout({
             color: #172B4D; 
             margin: 0;
             line-height: 1.25;
+            letter-spacing: -0.02em;
           }
           
           /* Critical layout */
@@ -163,9 +175,9 @@ export default function RootLayout({
           
           /* Critical button styles */
           .btn-primary {
-            background: #0052CC;
-            color: white;
-            padding: 0.75rem 1.5rem;
+            background: white;
+            color: #004BB3;
+            padding: 0.875rem 2rem;
             border-radius: 0.5rem;
             text-decoration: none;
             display: inline-block;
@@ -197,6 +209,8 @@ export default function RootLayout({
         `}</style>
         {/* rel="me" içeren doğrulama linki */}
         <link rel="me" href="https://sosyal.teknofest.app/@virtualriddle" />
+        
+        {/* CSS is automatically loaded by Next.js */}
       </head>
       <body className="min-h-screen bg-white">
         <ClientLayout>{children}</ClientLayout>

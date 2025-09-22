@@ -1,7 +1,5 @@
-/* Critical CSS - Load immediately */
-@tailwind base;
-
 /* Non-critical CSS - Load asynchronously */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -51,13 +49,7 @@ img {
   contain: strict;
 }
 
-/* Optimize font loading */
-@font-face {
-  font-family: 'Inter';
-  font-display: swap;
-  font-weight: 400 700;
-  src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-}
+/* Fonts are handled by Next.js font optimization */
 
 /* Temel renk değişkenleri */
 :root {

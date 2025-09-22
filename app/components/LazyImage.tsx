@@ -73,7 +73,7 @@ export default function LazyImage({
           quality={quality}
           placeholder={placeholder}
           blurDataURL={blurDataURL}
-          loading={priority ? 'eager' : 'lazy'}
+          loading={isMounted && priority ? 'eager' : 'lazy'}
           onLoad={() => setIsLoaded(true)}
           className={`transition-opacity duration-300 ${
             isLoaded ? 'opacity-100' : 'opacity-0'

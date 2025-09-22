@@ -93,6 +93,7 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
     });
 
     // CSS and fonts are handled by Next.js automatically
+    // Additional performance optimizations can be added here
   }, []);
 
   return <>{children}</>;

@@ -55,7 +55,7 @@ const nextConfig = {
   },
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['@heroicons/react', 'lucide-react', 'react', 'react-dom', 'fuse.js'],
+    optimizePackageImports: ['lucide-react', 'react', 'react-dom', 'framer-motion', 'fuse.js'],
     optimizeServerReact: true,
     scrollRestoration: true,
     turbo: {
@@ -88,24 +88,15 @@ const nextConfig = {
     if (!dev && !isServer) {
       config.optimization.splitChunks = {
         chunks: 'all',
-        minSize: 10000,
-        maxSize: 200000,
-        minChunks: 1,
-        maxAsyncRequests: 30,
-        maxInitialRequests: 30,
+        minSize: 20000,
+        maxSize: 244000,
         cacheGroups: {
-          default: {
-            minChunks: 2,
-            priority: -20,
-            reuseExistingChunk: true,
-          },
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
             chunks: 'all',
             priority: 10,
             reuseExistingChunk: true,
-            enforce: true,
           },
           react: {
             test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
@@ -113,7 +104,6 @@ const nextConfig = {
             chunks: 'all',
             priority: 20,
             reuseExistingChunk: true,
-            enforce: true,
           },
           lucide: {
             test: /[\\/]node_modules[\\/]lucide-react[\\/]/,
@@ -121,22 +111,12 @@ const nextConfig = {
             chunks: 'all',
             priority: 15,
             reuseExistingChunk: true,
-            enforce: true,
-          },
-          fuse: {
-            test: /[\\/]node_modules[\\/]fuse\.js[\\/]/,
-            name: 'fuse',
-            chunks: 'all',
-            priority: 15,
-            reuseExistingChunk: true,
-            enforce: true,
           },
           styles: {
             name: 'styles',
             test: /\.(css|scss)$/,
             chunks: 'all',
             enforce: true,
-            priority: 25,
           },
         },
       };
@@ -152,15 +132,21 @@ const nextConfig = {
         os: false,
       };
       
-      // Modern tarayıcıları hedefle (ES2020+)
-      config.target = ['web', 'es2020'];
-      
       // Tree shaking optimizasyonu
       config.optimization.usedExports = true;
       config.optimization.sideEffects = false;
       
+      // Modern JavaScript target (ES2020+)
+      config.target = ['web', 'es2020'];
+      
       // Bundle analizi için
       config.optimization.minimize = true;
+      
+      // Polyfill'leri kaldır (modern tarayıcılar için)
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'core-js': false,
+      };
     }
     
     return config;

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CommandLineIcon, UsersIcon, ChartBarIcon, MagnifyingGlassIcon, ChatBubbleLeftRightIcon, CpuChipIcon } from '@heroicons/react/24/outline';
+import { Terminal, Users, BarChart3, Search, MessageCircle, Cpu } from 'lucide-react';
 import Image from 'next/image';
 import { Suspense } from 'react';
 
@@ -34,17 +34,17 @@ const IntegrationCard = ({ index }: { index: number }) => (
 export default function RovoPage() {
   const features = [
     {
-      Icon: MagnifyingGlassIcon,
+      Icon: Search,
       title: "AI Destekli Arama",
       description: "Takımınızın bilgilerini süper şarj eden, kişiselleştirilmiş AI destekli arama deneyimi."
     },
     {
-      Icon: ChatBubbleLeftRightIcon,
+      Icon: MessageCircle,
       title: "Akıllı Sohbet",
       description: "İş bağlamında özelleştirilmiş içgörüler ve yanıtlarla öğrenmeyi artıran Rovo Chat."
     },
     {
-      Icon: CpuChipIcon,
+      Icon: Cpu,
       title: "AI Ajanları",
       description: "Herhangi bir görev için hazır, Atlassian cloud platformuna yerleşik özelleşmiş becerilere sahip ajanlar."
     }

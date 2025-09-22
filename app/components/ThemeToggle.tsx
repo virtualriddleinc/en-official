@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { Moon, Sun } from 'lucide-react';
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
@@ -27,9 +27,9 @@ export default function ThemeToggle() {
       aria-label="Tema Değiştir"
     >
       {isDark ? (
-        <SunIcon className="w-6 h-6 text-yellow-500" />
+        <Sun className="w-6 h-6 text-yellow-500" />
       ) : (
-        <MoonIcon className="w-6 h-6 text-gray-700" />
+        <Moon className="w-6 h-6 text-gray-700" />
       )}
     </button>
   );

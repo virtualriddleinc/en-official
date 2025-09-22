@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CommandLineIcon, UsersIcon, ChartBarIcon } from '@heroicons/react/24/outline';
+import { Terminal, Users, BarChart3 } from 'lucide-react';
 import Image from 'next/image';
 import { Suspense } from 'react';
 
@@ -34,17 +34,17 @@ const IntegrationCard = ({ index }: { index: number }) => (
 export default function JiraSoftwarePage() {
   const features = [
     {
-      Icon: CommandLineIcon,
+      Icon: Terminal,
       title: "Çevik Planlama",
       description: "Scrum, Kanban veya kendi özel iş akışınızla projelerinizi planlayın ve takip edin."
     },
     {
-      Icon: UsersIcon,
+      Icon: Users,
       title: "Takım İş Birliği",
       description: "Ekip üyeleri arasında sorunsuz iletişim ve iş birliği sağlayın."
     },
     {
-      Icon: ChartBarIcon,
+      Icon: BarChart3,
       title: "Gelişmiş Raporlama",
       description: "Gerçek zamanlı metrikler ve özelleştirilebilir raporlarla projenizi analiz edin."
     }

@@ -89,7 +89,23 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
       document.head.appendChild(link);
     });
 
-    // CSS loading is now handled in layout.tsx with critical CSS inline
+    // Preload critical CSS
+    const criticalCSS = [
+      '/app/globals.css',
+      'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
+    ];
+
+    criticalCSS.forEach((href) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = href;
+      link.as = 'style';
+      link.onload = function() {
+        this.onload = null;
+        this.rel = 'stylesheet';
+      };
+      document.head.appendChild(link);
+    });
   }, []);
 
   return <>{children}</>;

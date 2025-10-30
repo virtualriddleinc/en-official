@@ -91,9 +91,13 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
           scope: '/',
           updateViaCache: 'none'
         }).then((registration) => {
-          console.log('SW registered: ', registration);
+          if (process.env.NODE_ENV === 'development') {
+            console.log('SW registered: ', registration);
+          }
         }).catch((registrationError) => {
-          console.log('SW registration failed: ', registrationError);
+          if (process.env.NODE_ENV === 'development') {
+            console.log('SW registration failed: ', registrationError);
+          }
         });
       });
     }
@@ -125,4 +129,4 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
   }, []);
 
   return <>{children}</>;
-} 
+}

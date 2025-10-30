@@ -7,9 +7,9 @@ import Link from "next/link";
 import Fuse from "fuse.js";
 import { searchData } from "../lib/searchData";
 
-const categories = ["Tümü", ...Array.from(new Set(searchData.map(item => item.category)))];
+const categories = ["All", ...Array.from(new Set(searchData.map(item => item.category)))]
 
-// Debounce fonksiyonu
+// Debounce function
 function debounce<T extends (...args: any[]) => void>(func: T, wait: number) {
   let timeout: NodeJS.Timeout;
   return (...args: Parameters<T>) => {
@@ -21,7 +21,7 @@ function debounce<T extends (...args: any[]) => void>(func: T, wait: number) {
 export default function UniversalSearchBox() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("Tümü");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [results, setResults] = useState<typeof searchData>([]);
   const [isLoading, setIsLoading] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -29,7 +29,7 @@ export default function UniversalSearchBox() {
   const router = useRouter();
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
-  // Fuzzy search ayarları
+  // Fuzzy search settings
   const fuse = new Fuse(searchData, {
     keys: [
       "title",
@@ -51,7 +51,7 @@ export default function UniversalSearchBox() {
         return;
       }
       setIsLoading(true);
-      if (category === "Tümü") {
+      if (category === "All") {
         filtered = fuse.search(query).map(res => res.item);
       } else {
         filtered = fuse.search(query).map(res => res.item).filter(item => item.category === category);
@@ -89,7 +89,7 @@ export default function UniversalSearchBox() {
     if (searchQuery.trim()) {
       setIsOpen(false);
       router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}&cat=${encodeURIComponent(selectedCategory)}`);
-      setSearchQuery(""); // Arama sonrası input'u temizle
+      setSearchQuery(""); // Clear input after search
       setResults([]);
       setHighlightedIndex(-1);
     }
@@ -124,7 +124,7 @@ export default function UniversalSearchBox() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-        aria-label="Site içi arama"
+        aria-label="Site-wide search"
       >
         <Search className="w-5 h-5 text-gray-600 dark:text-gray-300" />
       </button>
@@ -151,7 +151,7 @@ export default function UniversalSearchBox() {
                     setHighlightedIndex(-1);
                   }}
                   onKeyDown={handleKeyDown}
-                  placeholder="Site içinde ara..."
+                  placeholder="Search the site..."
                   className="w-full px-4 py-2 pr-10 rounded-md bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 text-gray-900 dark:text-white text-sm"
                   autoComplete="off"
                 />
@@ -170,7 +170,7 @@ export default function UniversalSearchBox() {
                 )}
               </div>
             </div>
-            <button type="submit" className="sr-only">Ara</button>
+            <button type="submit" className="sr-only">Search</button>
           </form>
           <div className="mt-2 space-y-2 max-h-48 sm:max-h-64 overflow-y-auto">
             {isLoading ? (
@@ -182,7 +182,7 @@ export default function UniversalSearchBox() {
               ))
             ) : results.length === 0 && searchQuery ? (
               <div className="text-center text-gray-600 dark:text-gray-400 text-sm py-4">
-                Sonuç bulunamadı
+                No results found
               </div>
             ) : results.length > 0 ? (
               <>
@@ -217,7 +217,7 @@ export default function UniversalSearchBox() {
                     onClick={navigateToSearch}
                     className="w-full text-center text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 py-2"
                   >
-                    Tüm sonuçları görüntüle
+                    View all results
                   </button>
                 </div>
               </>

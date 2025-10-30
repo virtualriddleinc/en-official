@@ -1,80 +1,78 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
+export { generateMetadata } from './metadata';
 
 export default function ProductsPage() {
   const products = [
     {
       id: "jira-software",
       name: "Jira Software",
-      description: "Yazılım ekipleri için proje yönetimi ve issue tracking çözümü",
+      description: "Project management and issue tracking solution for software teams",
       icon: "/icons/jira-software.svg",
       color: "from-blue-600 to-blue-700",
-      features: ["Agile proje yönetimi", "Issue tracking", "Sprint planlama", "Kanban board"],
+      features: ["Agile project management", "Issue tracking", "Sprint planning", "Kanban board"],
       href: "/products/jira-software"
     },
     {
       id: "jira-service-management",
       name: "Jira Service Management",
-      description: "IT servis yönetimi ve müşteri desteği için kapsamlı çözüm",
+      description: "Comprehensive solution for IT service management and customer support",
       icon: "/icons/jira-service-management.svg",
       color: "from-green-600 to-green-700",
-      features: ["ITSM", "Müşteri desteği", "SLA yönetimi", "Self-service portal"],
+      features: ["ITSM", "Customer support", "SLA management", "Self-service portal"],
       href: "/products/jira-service-management"
     },
     {
       id: "jira-work-management",
       name: "Jira Work Management",
-      description: "Tüm iş ekipleri için özelleştirilebilir iş yönetim platformu",
+      description: "Customizable work management platform for all business teams",
       icon: "/icons/jira-work-management.svg",
       color: "from-purple-600 to-purple-700",
-      features: ["İş akışı yönetimi", "Departmanlar arası iş birliği", "Esnek görünümler", "Özelleştirilebilir süreçler"],
+      features: ["Workflow management", "Cross-department collaboration", "Flexible views", "Customizable processes"],
       href: "/products/jira-work-management"
     },
     {
       id: "confluence",
       name: "Confluence",
-      description: "Ekip bilgisi ve dokümantasyon için merkezi platform",
+      description: "Central platform for team knowledge and documentation",
       icon: "/icons/confluence.svg",
       color: "from-orange-600 to-orange-700",
-      features: ["Bilgi tabanı", "İş birliği alanları", "Dokümantasyon", "Entegrasyonlar"],
+      features: ["Knowledge base", "Collaboration spaces", "Documentation", "Integrations"],
       href: "/products/confluence"
     },
     {
       id: "bitbucket",
       name: "Bitbucket",
-      description: "Git repository yönetimi ve CI/CD entegrasyonu",
+      description: "Git repository management and CI/CD integration",
       icon: "/icons/bitbucket.svg",
       color: "from-indigo-600 to-indigo-700",
-      features: ["Git hosting", "CI/CD pipeline", "Code review", "Jira entegrasyonu"],
+      features: ["Git hosting", "CI/CD pipeline", "Code review", "Jira integration"],
       href: "/products/bitbucket"
     },
     {
       id: "trello",
       name: "Trello",
-      description: "Görsel proje yönetimi ve iş akışı organizasyonu",
+      description: "Visual project management and workflow organization",
       icon: "/icons/trello.svg",
       color: "from-teal-600 to-teal-700",
-      features: ["Kanban board'ları", "Butler otomasyonu", "Power-Ups", "Ekip iş birliği"],
+      features: ["Kanban boards", "Butler automation", "Power-Ups", "Team collaboration"],
       href: "/products/trello"
     },
     {
       id: "opsgenie",
       name: "Opsgenie",
-      description: "Uyarı yönetimi ve on-call operasyonları",
+      description: "Alert management and on-call operations",
       icon: "/icons/opsgenie.svg",
       color: "from-red-600 to-red-700",
-      features: ["Akıllı uyarı yönetimi", "On-call rotasyonları", "Olay müdahalesi", "Atlassian entegrasyonu"],
+      features: ["Smart alert management", "On-call rotations", "Incident response", "Atlassian integration"],
       href: "/products/opsgenie"
     },
     {
       id: "statuspage",
       name: "Statuspage",
-      description: "Gerçek zamanlı servis durumu ve olay bildirimi",
+      description: "Real-time service status and incident notifications",
       icon: "/icons/statuspage.svg",
       color: "from-indigo-600 to-indigo-700",
-      features: ["Durum bildirimi", "Olay yönetimi", "Güvenilirlik gösterimi", "Entegrasyonlar"],
+      features: ["Status notifications", "Incident management", "Reliability display", "Integrations"],
       href: "/products/statuspage"
     }
   ];
@@ -92,11 +90,11 @@ export default function ProductsPage() {
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold text-white mb-6">
-              Atlassian Ürün Ailesi
+              Atlassian Product Suite
             </h1>
             <p className="text-xl mb-8">
-              Yazılım geliştirme, proje yönetimi, iş birliği ve daha fazlası için kapsamlı çözümler. 
-              Her ekip için doğru araçları keşfedin.
+              Comprehensive solutions for software development, project management, collaboration and more. 
+              Discover the right tools for every team.
             </p>
           </div>
         </div>
@@ -109,13 +107,13 @@ export default function ProductsPage() {
             <div className="text-center mb-12 sm:mb-16 lg:mb-20">
               <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-blue-100 text-blue-700 font-semibold text-xs sm:text-sm mb-4 sm:mb-6">
                 <span className="text-base sm:text-lg">🚀</span>
-                <span>ÜRÜN PORTFÖYÜ</span>
+                <span>PRODUCT PORTFOLIO</span>
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-                Danışmanlık Hizmeti Verdiğimiz Ürünler
+                Products We Provide Consulting Services For
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto px-4">
-                Atlassian ekosisteminde uzmanlaştığımız ürünler ile işletmenizi dijitalleştirin
+                Products we specialize in within the Atlassian ecosystem to digitalize your business
               </p>
             </div>
 
@@ -166,7 +164,7 @@ export default function ProductsPage() {
 
                     <div className="flex items-center justify-between">
                       <span className="text-sm sm:text-base text-blue-600 font-semibold group-hover:text-blue-700 transition-colors">
-                        Detayları Görüntüle
+                        View Details
                       </span>
                       <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
                         <svg className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -189,13 +187,13 @@ export default function ProductsPage() {
             <div className="text-center mb-12 sm:mb-16 lg:mb-20">
               <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-green-100 text-green-700 font-semibold text-xs sm:text-sm mb-4 sm:mb-6">
                 <span className="text-base sm:text-lg">🎯</span>
-                <span>KATEGORİLER</span>
+                <span>CATEGORIES</span>
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-                Kategorilere Göre Keşfedin
+                Discover by Category
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto px-4">
-                İhtiyacınıza en uygun ürünü bulun ve işletmenizi dönüştürün
+                Find the product that best suits your needs and transform your business
               </p>
             </div>
 
@@ -208,9 +206,9 @@ export default function ProductsPage() {
                   <div className="text-3xl sm:text-4xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                     📋
                   </div>
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Proje Yönetimi</h3>
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Project Management</h3>
                   <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
-                    Yazılım geliştirme ve genel proje yönetimi için kapsamlı çözümler ile ekiplerinizi organize edin.
+                    Comprehensive solutions for software development and general project management to organize your teams.
                   </p>
                   <div className="space-y-2 sm:space-y-3">
                     <Link href="/products/jira-software" className="flex items-center justify-between p-2 sm:p-3 bg-white rounded-lg sm:rounded-xl hover:bg-blue-50 transition-colors group/item">
@@ -237,9 +235,9 @@ export default function ProductsPage() {
                   <div className="text-3xl sm:text-4xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                     🛠️
                   </div>
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Servis Yönetimi</h3>
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Service Management</h3>
                   <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
-                    IT servis yönetimi ve müşteri desteği için özel çözümler ile hizmet kalitenizi artırın.
+                    Specialized solutions for IT service management and customer support to enhance your service quality.
                   </p>
                   <div className="space-y-2 sm:space-y-3">
                     <Link href="/products/jira-service-management" className="flex items-center justify-between p-2 sm:p-3 bg-white rounded-lg sm:rounded-xl hover:bg-green-50 transition-colors group/item">
@@ -260,9 +258,9 @@ export default function ProductsPage() {
                   <div className="text-3xl sm:text-4xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                     🤝
                   </div>
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">İş Birliği & Dokümantasyon</h3>
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Collaboration & Documentation</h3>
                   <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
-                    Ekip iş birliği ve bilgi yönetimi için güçlü platformlar ile verimliliği artırın.
+                    Powerful platforms for team collaboration and knowledge management to increase efficiency.
                   </p>
                   <div className="space-y-2 sm:space-y-3">
                     <Link href="/products/confluence" className="flex items-center justify-between p-2 sm:p-3 bg-white rounded-lg sm:rounded-xl hover:bg-orange-50 transition-colors group/item">
@@ -295,9 +293,9 @@ export default function ProductsPage() {
                   <div className="text-3xl sm:text-4xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                     🚨
                   </div>
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Operasyon Yönetimi</h3>
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Operations Management</h3>
                   <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
-                    IT operasyonları ve uyarı yönetimi için özel çözümler ile sistemlerinizi koruyun.
+                    Specialized solutions for IT operations and alert management to protect your systems.
                   </p>
                   <div className="space-y-2 sm:space-y-3">
                     <Link href="/products/opsgenie" className="flex items-center justify-between p-2 sm:p-3 bg-white rounded-lg sm:rounded-xl hover:bg-red-50 transition-colors group/item">
@@ -319,23 +317,23 @@ export default function ProductsPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6">
-              Hangi ürünün size uygun olduğunu öğrenin
+              Find out which product best suits you
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-6 sm:mb-8 px-4">
-              Uzmanlarımızla görüşün ve ihtiyaçlarınıza en uygun Atlassian çözümünü keşfedin.
+              Talk to our experts and discover the Atlassian solution that best suits your needs.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4">
               <Link 
                 href="/free-discovery" 
                 className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-white/90 transition-all text-center"
               >
-                Ücretsiz Keşif
+                Free Discovery
               </Link>
               <Link 
                 href="/contact" 
                 className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all text-center backdrop-blur-sm"
               >
-                Uzmanla Görüşün
+                Talk to an Expert
               </Link>
             </div>
           </div>

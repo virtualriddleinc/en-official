@@ -5,19 +5,19 @@ import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import Link from 'next/link';
 import ThemeToggle from './ThemeToggle';
-import UniversalSearchBox from './UniversalSearchBox';
+import UnisalSearchBox from './UnisalSearchBox';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
 const products = {
-  'Proje & İş Yönetimi': [
+  'Project & Work Management': [
     { name: 'Jira Software', href: '/products/jira-software' },
     { name: 'Jira Work Management', href: '/products/jira-work-management' },
     { name: 'Jira Service Management', href: '/products/jira-service-management' },
   ],
-  'Doküman & İşbirliği': [
+  'Documentation & Collaboration': [
     { name: 'Confluence', href: '/products/confluence' },
   ],
   'DevOps & Code': [
@@ -53,17 +53,17 @@ export default function Navbar() {
             <span className="text-xl font-bold text-gray-900 dark:text-white">Virtual Riddle</span>
           </Link>
 
-          {/* Masaüstü Menü */}
+          {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              Ana Sayfa
+              Home
             </Link>
             
-            {/* Ürünler Dropdown */}
+            {/* Products Dropdown */}
             <Menu as="div" className="relative inline-block text-left">
               <div>
                 <Menu.Button className="inline-flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  Ürünler
+                  Products
                   <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
                 </Menu.Button>
               </div>
@@ -100,9 +100,9 @@ export default function Navbar() {
                       </div>
                     ))}
                     
-                    {/* Keşfet Bölümü */}
+                    {/* Explore Section */}
                     <div className="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-                      <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Keşfet</p>
+                      <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Explore</p>
                       <div className="grid grid-cols-2 gap-1">
                         {exploreProducts.map((item) => (
                           <Menu.Item key={item.name}>
@@ -127,25 +127,25 @@ export default function Navbar() {
             </Menu>
 
             <Link href="/about" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              Hakkımızda
+              About
             </Link>
             <Link href="/career" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              Kariyer
+              Career
             </Link>
             <Link href="/contact" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              İletişim
+              Contact
             </Link>
-            <UniversalSearchBox />
+            <UnisalSearchBox />
             <ThemeToggle />
 
             <Link href="/free-discovery" className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-              Başlayın
+              Start Free
             </Link>
           </div>
 
-          {/* Mobil Menü Butonu */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-4">
-            <UniversalSearchBox />
+            <UnisalSearchBox />
             <ThemeToggle />
             <button 
               className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -162,10 +162,10 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobil Menü */}
+        {/* Mobile Menu */}
         {isOpen && (
           <div className="md:hidden py-6 border-t border-gray-200 dark:border-gray-700 relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20">
-            {/* Arkaplan gradient */}
+            {/* Background gradient */}
             <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-radial from-blue-400/30 via-transparent to-transparent opacity-70"></div>
             
             <div className="flex flex-col space-y-6 relative z-10">
@@ -174,13 +174,13 @@ export default function Navbar() {
                 className="text-lg font-bold text-blue-700 dark:text-blue-300 transition-colors py-2 hover:text-blue-800 dark:hover:text-blue-200"
                 onClick={() => setIsOpen(false)}
               >
-                Ana Sayfa
+                Home
               </Link>
               
-              {/* Mobil Ürünler Menüsü */}
+              {/* Mobile Products Menu */}
               <div className="space-y-4">
                 <p className="text-xl font-bold text-gray-900 dark:text-white border-b-2 border-blue-200 dark:border-blue-700 pb-2">
-                  Ürünler
+                  Products
                 </p>
                 {Object.entries(products).map(([category, items]) => (
                   <div key={category} className="space-y-3">
@@ -202,10 +202,10 @@ export default function Navbar() {
                   </div>
                 ))}
                 
-                {/* Mobil Keşfet Bölümü - 2x2 Grid */}
+                {/* Mobile Explore Section - 2x2 Grid */}
                 <div className="space-y-3">
                   <p className="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">
-                    Keşfet
+                    Explore
                   </p>
                   <div className="grid grid-cols-2 gap-3 pl-4">
                     {exploreProducts.map((item) => (
@@ -228,21 +228,21 @@ export default function Navbar() {
                   className="block text-lg font-bold text-blue-700 dark:text-blue-300 transition-colors py-2 hover:text-blue-800 dark:hover:text-blue-200"
                   onClick={() => setIsOpen(false)}
                 >
-                  Hakkımızda
+                  About
                 </Link>
                 <Link 
                   href="/career" 
                   className="block text-lg font-bold text-blue-700 dark:text-blue-300 transition-colors py-2 hover:text-blue-800 dark:hover:text-blue-200"
                   onClick={() => setIsOpen(false)}
                 >
-                  Kariyer
+                  Career
                 </Link>
                 <Link 
                   href="/contact" 
                   className="block text-lg font-bold text-blue-700 dark:text-blue-300 transition-colors py-2 hover:text-blue-800 dark:hover:text-blue-200"
                   onClick={() => setIsOpen(false)}
                 >
-                  İletişim
+                  Contact
                 </Link>
               </div>
 
@@ -252,7 +252,7 @@ export default function Navbar() {
                   className="block w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors text-center font-medium text-lg"
                   onClick={() => setIsOpen(false)}
                 >
-                  Başlayın
+                  Start Free
                 </Link>
               </div>
             </div>

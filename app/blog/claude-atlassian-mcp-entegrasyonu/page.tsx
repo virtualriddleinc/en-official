@@ -2,16 +2,16 @@ import { Link } from "../../components/Link";
 import { metadata } from "./metadata";
 import StructuredData from "../../components/StructuredData";
 
-export default function ClaudeAtlassianMCPEntegrasyonu() {
+export default function ClaudeAtlassianMCPIntegration() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Claude ile Atlassian'ı Bağlayarak Çalışmak: MCP Devrimi",
-    "description": "Atlassian'ın yeni Remote MCP Server'ı sayesinde Claude ile Jira ve Confluence verilerinize doğrudan erişebilir, AI destekli iş akışları oluşturabilirsiniz. Bu entegrasyon, ekip verimliliğini artırırken bilgi silolarını ortadan kaldırıyor.",
+    "headline": "Working with Claude Connected to Atlassian: The MCP Revolution",
+    "description": "Thanks to Atlassian's new Remote MCP Server, you can directly access your Jira and Confluence data with Claude and create AI-powered workflows. This integration increases team productivity while eliminating information silos.",
     "image": "https://virtualriddle.com/images/claude-atlassian-mcp.jpg",
     "author": {
       "@type": "Organization",
-      "name": "Virtual Riddle Blog Ekibi",
+      "name": "Virtual Riddle Blog Team",
       "url": "https://virtualriddle.com"
     },
     "publisher": {
@@ -28,11 +28,11 @@ export default function ClaudeAtlassianMCPEntegrasyonu() {
       "@type": "WebPage",
       "@id": "https://virtualriddle.com/blog/claude-atlassian-mcp-entegrasyonu"
     },
-    "articleSection": "Yapay Zeka",
-    "keywords": ["Claude", "Atlassian", "MCP", "AI", "Yapay Zeka", "Entegrasyon", "Jira", "Confluence"],
+    "articleSection": "Artificial Intelligence",
+    "keywords": ["Claude", "Atlassian", "MCP", "AI", "Artificial Intelligence", "Integration", "Jira", "Confluence"],
     "wordCount": 2500,
     "timeRequired": "PT10M",
-    "inLanguage": "tr-TR",
+    "inLanguage": "en-US",
     "isPartOf": {
       "@type": "Blog",
       "name": "Virtual Riddle Blog",
@@ -47,149 +47,149 @@ export default function ClaudeAtlassianMCPEntegrasyonu() {
         <article className="w-full max-w-4xl bg-white rounded-2xl shadow-lg p-8 mx-auto mt-8">
         <header className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <span className="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-semibold">Yapay Zeka</span>
-            <span className="text-xs text-gray-400">1 Eylül 2025</span>
-            <span className="text-xs text-gray-400">• 10 dk okuma</span>
+            <span className="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-semibold">Artificial Intelligence</span>
+            <span className="text-xs text-gray-400">1 September 2025</span>
+            <span className="text-xs text-gray-400">• 10 min read</span>
           </div>
-          <h1 className="text-4xl font-bold text-blue-900 mb-4">Claude ile Atlassian'ı Bağlayarak Çalışmak: MCP Devrimi</h1>
-          <div className="text-gray-600 text-base mb-4">Yazar: <span className="font-semibold">Virtual Riddle Blog Ekibi</span></div>
+          <h1 className="text-4xl font-bold text-blue-900 mb-4">Working with Claude Connected to Atlassian: The MCP Revolution</h1>
+          <div className="text-gray-600 text-base mb-4">Author: <span className="font-semibold">Virtual Riddle Blog Team</span></div>
           <div className="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-xl mb-6">
-            <div className="font-semibold text-purple-700 mb-1">TL;DR - Özetle</div>
+            <div className="font-semibold text-purple-700 mb-1">TL;DR - Summary</div>
             <p className="text-purple-900 text-sm leading-relaxed">
-              Atlassian'ın yeni Remote MCP Server'ı sayesinde artık Claude ile Jira ve Confluence verilerinize doğrudan erişebilir, AI destekli iş akışları oluşturabilirsiniz. Bu entegrasyon, ekip verimliliğini artırırken bilgi silolarını ortadan kaldırıyor ve yapay zeka ile çalışma deneyimini köklü şekilde değiştiriyor.
+              Thanks to Atlassian's new Remote MCP Server, you can now directly access your Jira and Confluence data with Claude and create AI-powered workflows. This integration increases team efficiency while eliminating knowledge silos and fundamentally transforms the work experience with artificial intelligence.
             </p>
           </div>
         </header>
         <section className="prose prose-lg max-w-none text-gray-900">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">AI Çağında Atlassian: MCP ile Yeni Bir Dönem Başlıyor 🤖</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Atlassian in the AI Age: A New Era Begins with MCP 🤖</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            <strong>Yayın tarihi:</strong> 1 Eylül 2025
+            <strong>Publication date:</strong> 1 September 2025
           </p>
           
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Atlassian, 1 Mayıs 2025'te duyurduğu <strong>Remote Model Context Protocol (MCP) Server</strong> ile yapay zeka dünyasında yeni bir çığır açtı. 
-            Bu gelişme, özellikle Claude kullanıcıları için büyük bir dönüm noktası çünkü artık Jira ve Confluence verilerinize doğrudan AI asistanı üzerinden erişebiliyorsunuz.
+            Atlassian has opened a new frontier in the artificial intelligence world with the <strong>Remote Model Context Protocol (MCP) Server</strong> it announced on May 1, 2025. 
+            This development is a major milestone, especially for Claude users, as you can now directly access your Jira and Confluence data through an AI assistant.
           </p>
 
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">MCP Nedir ve Neden Bu Kadar Önemli? 🔗</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">What is MCP and Why is it So Important? 🔗</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Model Context Protocol (MCP), AI sistemlerinin veri kaynaklarıyla bağlantı kurmasını sağlayan açık kaynaklı bir standarttır. 
-            <strong>MCP sayesinde AI asistanları artık sadece sohbet etmekle kalmıyor, gerçek verilerinizle çalışabiliyor.</strong>
+            Model Context Protocol (MCP) is an open-source standard that enables AI systems to connect with data sources. 
+            <strong>Thanks to MCP, AI assistants no longer just chat, but can work with your real data.</strong>
           </p>
 
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Atlassian'ın Remote MCP Server'ı, güvenlik ve ölçeklenebilirlik açısından özel olarak tasarlanmış. 
-            Cloudflare altyapısında barındırılan bu sunucu, OAuth kimlik doğrulama ve mevcut izin kontrollerinizi destekliyor.
+            Atlassian's Remote MCP Server is specially designed for security and scalability. 
+            This server, hosted on Cloudflare infrastructure, supports OAuth authentication and your existing permission controls.
           </p>
 
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Claude ile Atlassian Entegrasyonu: Neler Yapabilirsiniz? ⚡</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Claude & Atlassian Integration: What Can You Do? ⚡</h2>
           
-          <h3 className="text-xl font-bold text-gray-800 mb-3">1. Jira Verilerinizi AI ile Analiz Edin 📊</h3>
+          <h3 className="text-xl font-bold text-gray-800 mb-3">1. Analyze Your Jira Data with AI 📊</h3>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Claude artık Jira ticket'larınızı okuyabilir, özetleyebilir ve analiz edebilir. 
-            <em>"Bu sprint'te en çok zaman alan task'ları analiz et"</em> gibi komutlarla proje durumunuzu hızla değerlendirebilirsiniz.
+            Claude can now read, summarize and analyze your Jira tickets. 
+            With commands like <em>"Analyze the tasks that took the most time in this sprint"</em>, you can quickly evaluate your project status.
           </p>
 
-          <h3 className="text-xl font-bold text-gray-800 mb-3">2. Confluence Dokümantasyonunuzu AI ile Yönetin 📝</h3>
+          <h3 className="text-xl font-bold text-gray-800 mb-3">2. Manage Your Confluence Documentation with AI 📝</h3>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Confluence sayfalarınızı Claude ile okuyabilir, özetleyebilir ve hatta yeni sayfalar oluşturabilirsiniz. 
-            <strong>Toplantı notlarını otomatik olarak Confluence'a aktarmak</strong> artık mümkün.
+            You can have Claude read, summarize and even create new Confluence pages. 
+            <strong>Automatically transferring meeting notes to Confluence</strong> is now possible.
           </p>
 
-          <h3 className="text-xl font-bold text-gray-800 mb-3">3. Çok Adımlı İş Akışları Oluşturun 🔄</h3>
+          <h3 className="text-xl font-bold text-gray-800 mb-3">3. Create Multi-Step Workflows 🔄</h3>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Claude, tek bir komutla birden fazla işlemi gerçekleştirebilir. Örneğin, 
-            <em>"Bu proje için 5 yeni Jira ticket'ı oluştur ve her birine ilgili Confluence sayfasını bağla"</em> gibi karmaşık görevleri otomatikleştirebilirsiniz.
+            Claude can execute multiple processes with a single command. For example, 
+            you can automate complex tasks like <em>"Create 5 new Jira tickets for this project and link the relevant Confluence page to each"</em>.
           </p>
 
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Güvenlik: Verileriniz Güvende mi? 🔐</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Security: Is Your Data Secure? 🔐</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Atlassian, güvenliği öncelik olarak ele almış. Remote MCP Server'ı:
+            Atlassian has prioritized security. The Remote MCP Server:
           </p>
           <ul className="list-disc pl-6 mb-6 text-lg text-gray-700">
-            <li><strong>OAuth kimlik doğrulama</strong> kullanıyor</li>
-            <li>Mevcut <strong>izin kontrollerinizi</strong> tamamen destekliyor</li>
-            <li>Verileriniz <strong>Atlassian'ın güvenli altyapısında</strong> kalıyor</li>
-            <li>Cloudflare'in <strong>güvenlik standartları</strong> ile korunuyor</li>
+            <li>Uses <strong>OAuth authentication</strong></li>
+            <li>Fully supports your existing <strong>permission controls</strong></li>
+            <li>Your data remains in <strong>Atlassian's secure infrastructure</strong></li>
+            <li>Is protected by <strong>Cloudflare's security standards</strong></li>
           </ul>
 
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Pratik Kullanım Örnekleri 💼</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Practical Usage Examples 💼</h2>
           
-          <h3 className="text-xl font-bold text-gray-800 mb-3">Örnek 1: Sprint Retrospektifi Hazırlama</h3>
+          <h3 className="text-xl font-bold text-gray-800 mb-3">Example 1: Sprint Retrospective Preparation</h3>
           <p className="text-lg text-gray-700 leading-relaxed mb-4">
-            <em>"Bu sprint'teki tüm completed ticket'ları analiz et ve retrospektif raporu hazırla"</em>
+            <em>"Analyze all completed tickets in this sprint and prepare a retrospective report"</em>
           </p>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Claude, Jira'daki ticket'ları inceleyerek otomatik olarak başarıları, zorlukları ve iyileştirme önerilerini içeren bir rapor oluşturabilir.
+            Claude can automatically create a report by examining tickets in Jira, including successes, challenges and improvement suggestions.
           </p>
 
-          <h3 className="text-xl font-bold text-gray-800 mb-3">Örnek 2: Dokümantasyon Güncelleme</h3>
+          <h3 className="text-xl font-bold text-gray-800 mb-3">Example 2: Documentation Update</h3>
           <p className="text-lg text-gray-700 leading-relaxed mb-4">
-            <em>"API değişiklikleri için Confluence dokümantasyonunu güncelle"</em>
+            <em>"Update the Confluence documentation for API changes"</em>
           </p>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Claude, mevcut dokümantasyonu inceleyerek yeni API değişikliklerini yansıtan güncellenmiş sayfalar oluşturabilir.
+            Claude can create updated pages reflecting new API changes by examining existing documentation.
           </p>
 
-          <h3 className="text-xl font-bold text-gray-800 mb-3">Örnek 3: Proje Durumu Raporlama</h3>
+          <h3 className="text-xl font-bold text-gray-800 mb-3">Example 3: Project Status Reporting</h3>
           <p className="text-lg text-gray-700 leading-relaxed mb-4">
-            <em>"Bu ayki proje ilerlemesini yöneticilere raporla"</em>
+            <em>"Report this month's project progress to managers"</em>
           </p>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Claude, Jira ve Confluence verilerini birleştirerek kapsamlı bir proje durumu raporu hazırlayabilir.
-          </p>
-
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Gelecek: Daha Fazla Atlassian Ürünü Yakında 🚀</h2>
-          <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Atlassian, MCP entegrasyonunu genişletmeye devam ediyor. Şu anda Jira ve Confluence ile başlayan bu yolculuk, 
-            <strong>Bitbucket, Trello ve diğer Atlassian ürünleri</strong> ile devam edecek.
+            Claude can prepare a comprehensive project status report by combining Jira and Confluence data.
           </p>
 
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Nasıl Başlayabilirsiniz? 🛠️</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Future: More Atlassian Products Coming Soon 🚀</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            MCP entegrasyonunu kullanmaya başlamak için:
+            Atlassian continues to expand MCP integration. This journey, which currently begins with Jira and Confluence, 
+            will continue to <strong>Bitbucket, Trello and other Atlassian products</strong>.
+          </p>
+
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">How Can You Get Started? 🛠️</h2>
+          <p className="text-lg text-gray-700 leading-relaxed mb-6">
+            To start using MCP integration:
           </p>
           <ol className="list-decimal pl-6 mb-6 text-lg text-gray-700">
-            <li><strong>Claude Desktop</strong> uygulamasını güncelleyin</li>
-            <li>Atlassian MCP Server'ını yapılandırın</li>
-            <li>Jira ve Confluence hesaplarınızı bağlayın</li>
-            <li>İlk AI destekli iş akışlarınızı test edin</li>
+            <li>Update the <strong>Claude Desktop</strong> application</li>
+            <li>Configure the Atlassian MCP Server</li>
+            <li>Connect your Jira and Confluence accounts</li>
+            <li>Test your first AI-powered workflows</li>
           </ol>
 
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Sonuç: AI ile Çalışma Deneyimini Yeniden Tanımlamak 🎯</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Conclusion: Redefining the Work Experience with AI Completely 🎯</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Atlassian'ın MCP entegrasyonu, sadece bir özellik değil, <strong>çalışma şeklimizi köklü olarak değiştiren bir devrim</strong>. 
-            Artık AI asistanları sadece sohbet etmekle kalmıyor, gerçek iş verilerinizle çalışarak size gerçek değer katıyor.
+            Atlassian's MCP integration is not just a feature, but <strong>a revolution that fundamentally changes the way we work</strong>. 
+            AI assistants no longer just chat, but work with your real business data to add real value to you.
           </p>
 
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Bu entegrasyon, özellikle yazılım geliştirme ekipleri için büyük fırsatlar sunuyor. 
-            <em>Proje yönetiminden dokümantasyona, kod incelemeden raporlamaya</em> kadar her alanda AI'dan faydalanabilirsiniz.
+            This integration offers great opportunities, especially for software development teams. 
+            You can benefit from AI in every area, <em>from project management to documentation, from code review to reporting</em>.
           </p>
 
           <div className="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-xl mb-6">
             <p className="text-purple-900 text-sm leading-relaxed">
-              🤖 Bu yazıyı beğendiysen, MCP entegrasyonu hakkındaki deneyimlerini bizimle paylaşabilirsin!
+              🤖 If you liked this article, you can share your experiences about MCP integration with us!
             </p>
           </div>
         </section>
         <footer className="mt-12 border-t pt-8">
-          <div className="mb-4 text-gray-700 font-semibold">Diğer Yazılar</div>
+          <div className="mb-4 text-gray-700 font-semibold">Other Articles</div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Link href="/blog/rovo-devrimi" className="block bg-gray-50 hover:bg-purple-50 rounded-xl p-4 border border-gray-100 transition">
-              <div className="text-purple-800 text-xs font-semibold mb-1">Yapay Zeka</div>
-              <div className="font-bold text-gray-900">Rovo: Atlassian'ın GenAI ile Kurumsal Bilgiye Dokunma Devrimi</div>
-              <div className="text-xs text-gray-500 mt-1">8 Temmuz 2024</div>
+              <div className="text-purple-800 text-xs font-semibold mb-1">Artificial Intelligence</div>
+              <div className="font-bold text-gray-900">Rovo: Atlassian's Revolution in Accessing Enterprise Knowledge with GenAI</div>
+              <div className="text-xs text-gray-500 mt-1">8 July 2024</div>
             </Link>
             <Link href="/blog/favori-wiki-aracimiz-confluence" className="block bg-gray-50 hover:bg-blue-50 rounded-xl p-4 border border-gray-100 transition">
               <div className="text-blue-800 text-xs font-semibold mb-1">Confluence</div>
-              <div className="font-bold text-gray-900">Favori Wiki Aracımız: Confluence!</div>
-              <div className="text-xs text-gray-500 mt-1">5 Temmuz 2025</div>
+              <div className="font-bold text-gray-900">Our Favorite Wiki Tool: Confluence!</div>
+              <div className="text-xs text-gray-500 mt-1">5 July 2025</div>
             </Link>
             <Link href="/blog/2024-devops-trendleri" className="block bg-gray-50 hover:bg-blue-50 rounded-xl p-4 border border-gray-100 transition">
               <div className="text-blue-800 text-xs font-semibold mb-1">DevOps & Cloud</div>
-              <div className="font-bold text-gray-900">2024 DevOps Trendleri</div>
-              <div className="text-xs text-gray-500 mt-1">5 Mart 2024</div>
+              <div className="font-bold text-gray-900">2024 DevOps Trends</div>
+              <div className="text-xs text-gray-500 mt-1">5 March 2024</div>
             </Link>
           </div>
         </footer>

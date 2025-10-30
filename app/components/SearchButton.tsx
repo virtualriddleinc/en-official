@@ -5,21 +5,21 @@ import { Search, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-// Örnek arama sonuçları (hızlı önizleme için)
+// Sample search results (for quick preview)
 const sampleResults = [
   {
     title: 'Jira Software',
-    description: 'Çevik proje yönetimi ve sorun takibi için güçlü araç.',
+    description: 'Powerful tool for agile project management and issue tracking.',
     url: '/products/jira-software'
   },
   {
     title: 'Confluence',
-    description: 'Ekip işbirliği ve bilgi paylaşımı platformu.',
+    description: 'Team collaboration and knowledge sharing platform.',
     url: '/products/confluence'
   },
   {
     title: 'Bitbucket',
-    description: 'Git tabanlı kod barındırma ve işbirliği platformu.',
+    description: 'Git-based code hosting and collaboration platform.',
     url: '/products/bitbucket'
   }
 ];
@@ -78,7 +78,7 @@ export default function SearchButton() {
     }
   }, [isOpen]);
 
-  // Anlık arama için useEffect
+  // useEffect for instant search
   useEffect(() => {
       setIsLoading(true);
     debouncedSearch(searchQuery);
@@ -109,7 +109,7 @@ export default function SearchButton() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-        aria-label="Arama"
+        aria-label="Search"
       >
         <Search className="w-5 h-5 text-gray-600 dark:text-gray-300" />
       </button>
@@ -124,7 +124,7 @@ export default function SearchButton() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Ara..."
+                placeholder="Search..."
                 className="w-full px-4 py-2 pr-10 rounded-md bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 dark:text-white"
                 autoComplete="off"
               />
@@ -141,7 +141,7 @@ export default function SearchButton() {
                 </button>
               )}
             </div>
-            <button type="submit" className="sr-only">Ara</button>
+            <button type="submit" className="sr-only">Search</button>
           </form>
           
           <div className="mt-4 space-y-4">
@@ -154,7 +154,7 @@ export default function SearchButton() {
               ))
             ) : results.length === 0 && searchQuery ? (
               <div className="text-center text-gray-600 dark:text-gray-400">
-                Enter tuşuna basarak tüm sonuçları görüntüleyin
+                Press Enter to view all results
               </div>
             ) : results.length > 0 ? (
               <>
@@ -178,7 +178,7 @@ export default function SearchButton() {
                     onClick={navigateToSearch}
                     className="w-full text-center text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
                   >
-                    Tüm sonuçları görüntüle
+                    View all results
                   </button>
                 </div>
               </>

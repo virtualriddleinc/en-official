@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { searchData } from '../lib/searchData';
 import { Search, Tag, X, ListFilter, FileText } from 'lucide-react';
 
-// Arama verisi için net bir tip tanımı
+// Clear type definition for search data
 interface SearchItem {
   id: string;
   title: string;
@@ -34,10 +34,10 @@ const fuseOptions: IFuseOptions<SearchItem> = {
   minMatchCharLength: 2,
 };
 
-// Fuse'u SearchItem tipi ile başlatma
+// Initialize Fuse with SearchItem type
 const fuse = new Fuse(searchData as SearchItem[], fuseOptions);
 
-// Debounce fonksiyonu
+// Debounce function
 function debounce<T extends (...args: any[]) => void>(func: T, wait: number) {
   let timeout: NodeJS.Timeout;
   return (...args: Parameters<T>) => {
@@ -140,11 +140,11 @@ function SearchPageComponent() {
     <div className="container mx-auto px-4 py-8 md:py-12 pt-20">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         
-        {/* Filtreleme Paneli */}
+        {/* Filter Panel */}
         <aside className="lg:col-span-1 bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg self-start sticky top-24">
           <h2 className="text-xl font-semibold mb-4 flex items-center">
             <ListFilter className="mr-2 h-5 w-5" />
-            Filtreler
+            Filters
           </h2>
           
           {hasActiveContent && (
@@ -153,13 +153,13 @@ function SearchPageComponent() {
               className="w-full mb-6 text-sm flex items-center justify-center px-3 py-2 border border-red-500 text-red-500 rounded-md hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
             >
               <X className="mr-1.5 h-4 w-4" />
-              Tüm Filtreleri Kaldır
+              Clear All Filters
             </button>
           )}
 
-          {/* Kategoriler */}
+          {/* Categories */}
           <div className="mb-6">
-            <h3 className="font-semibold mb-3">Kategoriler</h3>
+            <h3 className="font-semibold mb-3">Categories</h3>
             <div className="space-y-2">
               {allCategories.map(category => (
                 <label key={category} className="flex items-center space-x-2 cursor-pointer text-sm">
@@ -175,9 +175,9 @@ function SearchPageComponent() {
             </div>
           </div>
 
-          {/* Etiketler */}
+          {/* Tags */}
           <div>
-            <h3 className="font-semibold mb-3">Popüler Etiketler</h3>
+            <h3 className="font-semibold mb-3">Popular Tags</h3>
             <div className="flex flex-wrap gap-2">
               {topTags.map((tag, index) => (
                 <button
@@ -196,14 +196,14 @@ function SearchPageComponent() {
           </div>
         </aside>
 
-        {/* Arama Sonuçları */}
+        {/* Search Results */}
         <main className="lg:col-span-3">
           <form onSubmit={handleSearch} className="mb-8 relative">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Sitede ara... (örn: jira, agile, danışmanlık)"
+              placeholder="Search the site... (e.g., jira, agile, consulting)"
               className="w-full pl-12 pr-4 py-3 text-lg border-2 border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition dark:bg-gray-800"
             />
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-6 w-6 text-gray-400" />
@@ -211,7 +211,7 @@ function SearchPageComponent() {
 
           <div className="mb-4">
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {results.length} sonuç bulundu {query && `için: "${query}"`}
+              {results.length} result{results.length !== 1 ? 's' : ''} found{query && ` for: "${query}"`}
             </p>
           </div>
           
@@ -252,9 +252,9 @@ function SearchPageComponent() {
                   className="text-center py-16 px-6 bg-gray-50 dark:bg-gray-800/50 rounded-lg"
                 >
                   <FileText className="mx-auto h-12 w-12 text-gray-400" />
-                  <h3 className="mt-4 text-xl font-semibold text-gray-800 dark:text-gray-100">Sonuç Bulunamadı</h3>
+                  <h3 className="mt-4 text-xl font-semibold text-gray-800 dark:text-gray-100">No Results Found</h3>
                   <p className="mt-2 text-gray-500 dark:text-gray-400">
-                    Arama kriterlerinizi değiştirmeyi veya filtreleri temizlemeyi deneyin.
+                    Try changing your search criteria or clearing the filters.
                   </p>
                 </motion.div>
               )}
@@ -268,7 +268,7 @@ function SearchPageComponent() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={<div className="container mx-auto px-4 py-8 md:py-12 pt-20">Yükleniyor...</div>}>
+    <Suspense fallback={<div className="container mx-auto px-4 py-8 md:py-12 pt-20">Loading...</div>}>
       <SearchPageComponent />
     </Suspense>
   );

@@ -1,7 +1,5 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
+export { generateMetadata } from './metadata';
 
 export default function OpsgeniePage() {
   return (
@@ -17,18 +15,18 @@ export default function OpsgeniePage() {
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold text-white mb-6">
-              Uyarı ve On-Call Yönetimi
+              Alert and On-Call Management
             </h1>
             <p className="text-xl mb-8">
-              Opsgenie ile IT operasyonlarınızı optimize edin. Uyarı yönetimi, on-call rotasyonları ve 
-              olay müdahale süreçlerinizi otomatikleştirin ve hızlandırın.
+              Optimize your IT operations with Opsgenie. Automate and accelerate alert management, on-call rotations, 
+              and incident response processes.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/free-discovery" 
                 className="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all w-full sm:w-auto text-center"
               >
-                Ücretsiz Dene
+                Try Free
               </Link>
               <Link
                 href="https://www.atlassian.com/software/opsgenie" 
@@ -36,7 +34,7 @@ export default function OpsgeniePage() {
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
               >
-                Ürünü İncele
+                View Product
               </Link>
             </div>
           </div>
@@ -54,8 +52,8 @@ export default function OpsgeniePage() {
                   <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">Akıllı Uyarı Yönetimi</h3>
-              <p className="text-blue-600/80">Gelişmiş uyarı filtreleme ve yönlendirme ile doğru kişiye doğru zamanda bildirim gönderin.</p>
+              <h3 className="text-2xl font-bold text-blue-600">Smart Alert Management</h3>
+              <p className="text-blue-600/80">Send notifications to the right person at the right time with advanced alert filtering and routing.</p>
             </div>
 
             {/* Feature 2 */}
@@ -65,8 +63,8 @@ export default function OpsgeniePage() {
                   <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">On-Call Rotasyonları</h3>
-              <p className="text-blue-600/80">Otomatik on-call rotasyonları ile ekip yükünü dengeli dağıtın ve 7/24 kapsama sağlayın.</p>
+              <h3 className="text-2xl font-bold text-blue-600">On-Call Rotations</h3>
+              <p className="text-blue-600/80">Distribute team workload evenly and ensure 24/7 coverage with automatic on-call rotations.</p>
             </div>
 
             {/* Feature 3 */}
@@ -76,8 +74,8 @@ export default function OpsgeniePage() {
                   <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">Hızlı Olay Müdahalesi</h3>
-              <p className="text-blue-600/80">Olay müdahale süreçlerini hızlandırın, SLA'ları takip edin ve çözüm sürelerini kısaltın.</p>
+              <h3 className="text-2xl font-bold text-blue-600">Fast Incident Response</h3>
+              <p className="text-blue-600/80">Accelerate incident response processes, track SLAs, and reduce resolution times.</p>
             </div>
           </div>
         </div>
@@ -87,33 +85,33 @@ export default function OpsgeniePage() {
       <section className="py-24 bg-blue-600">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Atlassian Platform Entegrasyonu</h2>
-            <p className="text-xl text-white/80">Opsgenie'nin Atlassian ekosistemi ile tam entegrasyonu ile iş akışlarınızı optimize edin.</p>
+            <h2 className="text-4xl font-bold text-white mb-4">Atlassian Platform Integration</h2>
+            <p className="text-xl text-white/80">Optimize your workflows with Opsgenie's seamless integration into the Atlassian ecosystem.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* AI Feature 1 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
               <h4 className="text-lg font-semibold text-white mb-2">Jira Service Management</h4>
-              <p className="text-white/80">Opsgenie uyarılarını otomatik olarak Jira Service Management olaylarına dönüştürün.</p>
+              <p className="text-white/80">Automatically convert Opsgenie alerts into Jira Service Management incidents.</p>
             </div>
 
             {/* AI Feature 2 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h4 className="text-lg font-semibold text-white mb-2">Compass Entegrasyonu</h4>
-              <p className="text-white/80">Geliştirici deneyimini artırın ve Opsgenie uyarılarını Compass ile entegre edin.</p>
+              <h4 className="text-lg font-semibold text-white mb-2">Compass Integration</h4>
+              <p className="text-white/80">Enhance developer experience and integrate Opsgenie alerts with Compass.</p>
             </div>
 
             {/* AI Feature 3 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h4 className="text-lg font-semibold text-white mb-2">Otomatik Migrasyon</h4>
-              <p className="text-white/80">Mevcut Opsgenie verilerinizi ve konfigürasyonlarınızı otomatik olarak taşıyın.</p>
+              <h4 className="text-lg font-semibold text-white mb-2">Automatic Migration</h4>
+              <p className="text-white/80">Automatically migrate your existing Opsgenie data and configurations.</p>
             </div>
 
             {/* AI Feature 4 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h4 className="text-lg font-semibold text-white mb-2">Kesintisiz İş Sürekliliği</h4>
-              <p className="text-white/80">IT operasyonlarınızı kesintisiz yönetin ve kritik sistemlerinizi koruyun.</p>
+              <h4 className="text-lg font-semibold text-white mb-2">Seamless Business Continuity</h4>
+              <p className="text-white/80">Manage your IT operations seamlessly and protect your critical systems.</p>
             </div>
           </div>
         </div>
@@ -123,32 +121,32 @@ export default function OpsgeniePage() {
       <section className="py-24 bg-blue-600/10">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-4xl font-bold text-blue-600 mb-4">IT Operasyonları İçin Kapsamlı Çözüm</h2>
-            <p className="text-xl text-blue-600/80">Opsgenie ile farklı IT operasyon ihtiyaçlarına özel çözümler sunun.</p>
+            <h2 className="text-4xl font-bold text-blue-600 mb-4">Comprehensive Solution for IT Operations</h2>
+            <p className="text-xl text-blue-600/80">Provide customized solutions for different IT operation needs with Opsgenie.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-blue-600">DevOps Ekipleri</h3>
-                <p className="text-blue-600/80">CI/CD pipeline'larından gelen uyarıları yönetin, deployment süreçlerini izleyin ve hızlı müdahale sağlayın.</p>
+                <h3 className="text-2xl font-semibold text-blue-600">DevOps Teams</h3>
+                <p className="text-blue-600/80">Manage alerts from CI/CD pipelines, monitor deployment processes, and enable fast response.</p>
               </div>
 
               <div className="space-y-4">
                 <h3 className="text-2xl font-semibold text-blue-600">Site Reliability Engineering</h3>
-                <p className="text-blue-600/80">Sistem sağlığını izleyin, performans metriklerini takip edin ve proaktif sorun çözümü sağlayın.</p>
+                <p className="text-blue-600/80">Monitor system health, track performance metrics, and provide proactive problem solving.</p>
               </div>
             </div>
 
             <div className="space-y-8">
               <div className="space-y-4">
                 <h3 className="text-2xl font-semibold text-blue-600">IT Service Management</h3>
-                <p className="text-blue-600/80">ITSM süreçlerinizi optimize edin, SLA'ları takip edin ve müşteri deneyimini iyileştirin.</p>
+                <p className="text-blue-600/80">Optimize your ITSM processes, track SLAs, and improve customer experience.</p>
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-blue-600">Kurumsal Güvenlik</h3>
-                <p className="text-blue-600/80">Güvenlik olaylarını hızlıca tespit edin, güvenlik ekiplerinizi uyarın ve müdahale süreçlerini yönetin.</p>
+                <h3 className="text-2xl font-semibold text-blue-600">Enterprise Security</h3>
+                <p className="text-blue-600/80">Quickly detect security incidents, alert your security teams, and manage response processes.</p>
               </div>
             </div>
           </div>
@@ -161,18 +159,37 @@ export default function OpsgeniePage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="bg-yellow-100 rounded-2xl p-8 border border-yellow-300">
               <h2 className="text-3xl font-bold text-yellow-800 mb-4">
-                Opsgenie Migrasyonu
+                Opsgenie Migration Timeline
               </h2>
-              <p className="text-lg text-yellow-700 mb-6">
-                Opsgenie'nin uyarı ve on-call özellikleri artık Jira Service Management ve Compass'ta mevcuttur. 
-                5 Nisan 2027'ye kadar mevcut Opsgenie verilerinizi ve konfigürasyonlarınızı otomatik migrasyon aracımızla taşıyabilirsiniz.
-              </p>
+              <div className="space-y-4 mb-6">
+                <p className="text-lg text-yellow-700">
+                  Opsgenie's alert and on-call features are now available in Jira Service Management and Compass. 
+                  Important migration dates:
+                </p>
+                <ul className="text-left text-yellow-700 space-y-2 max-w-2xl mx-auto">
+                  <li className="flex items-start">
+                    <span className="font-semibold mr-2">• March 4, 2025:</span>
+                    <span>End of sales announced</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="font-semibold mr-2">• June 4, 2025:</span>
+                    <span>New customer sign-ups and plan upgrades/downgrades disabled</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="font-semibold mr-2">• April 5, 2027:</span>
+                    <span>Opsgenie will be fully shut down. All unmigrated customer data will be deleted.</span>
+                  </li>
+                </ul>
+                <p className="text-lg text-yellow-700 mt-4">
+                  Migrate your existing Opsgenie data and configurations using our automatic migration tool before April 5, 2027.
+                </p>
+              </div>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link 
                   href="/free-discovery" 
                   className="px-8 py-4 bg-yellow-600 text-white rounded-xl font-semibold hover:bg-yellow-700 transition-all w-full sm:w-auto text-center"
                 >
-                  Migrasyon Planı Alın
+                  Get Migration Plan
                 </Link>
                 <Link 
                   href="https://www.atlassian.com/software/opsgenie" 
@@ -180,7 +197,7 @@ export default function OpsgeniePage() {
                   rel="noopener noreferrer"
                   className="px-8 py-4 bg-white text-yellow-600 rounded-xl font-semibold hover:bg-yellow-50 transition-all w-full sm:w-auto text-center border border-yellow-300"
                 >
-                  Detayları Öğrenin
+                  Learn More
                 </Link>
               </div>
             </div>
@@ -192,20 +209,20 @@ export default function OpsgeniePage() {
       <section className="py-24 bg-blue-600">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-white mb-6">Opsgenie'yi keşfedin</h2>
-            <p className="text-xl text-white/80 mb-8">IT operasyonlarınızı optimize edin ve kesintisiz hizmet sağlayın.</p>
+            <h2 className="text-4xl font-bold text-white mb-6">Discover Opsgenie</h2>
+            <p className="text-xl text-white/80 mb-8">Optimize your IT operations and provide seamless service.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
                 href="/free-discovery" 
                 className="px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-white/90 transition-all w-full sm:w-auto text-center"
               >
-                Ücretsiz Başlayın
+                Start Free
               </Link>
               <Link 
                 href="/solutions/consulting" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
               >
-                Teklif İste
+                Request Quote
               </Link>
             </div>
           </div>

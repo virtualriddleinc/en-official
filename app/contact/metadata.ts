@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
 
-// Contact sayfası metadata generation function
+// Contact page metadata generation function
 async function getContactData() {
   return {
-    title: 'İletişim - Virtual Riddle Teknoloji A.Ş.',
-    description: 'Virtual Riddle ile iletişime geçin. Atlassian danışmanlığı, dijital dönüşüm ve teknoloji çözümleri için bizimle iletişime geçin.',
+    title: 'Contact - Virtual Riddle Technology Inc.',
+    description: 'Contact Virtual Riddle. Reach out to us for Atlassian consulting, digital transformation, and technology solutions.',
     contact: {
       email: 'info@virtualriddle.com',
-      address: 'Maslak Mahallesi AOS 55. Sokak 42 Maslak B Blok No: 4/542, Sarıyer, İstanbul'
+      address: 'Maslak Neighborhood, AOS 55. Street, 42 Maslak B Block, Unit 4/542, Sarıyer, Istanbul'
     }
   }
 }
@@ -19,14 +19,14 @@ export async function generateMetadata(): Promise<Metadata> {
     title: data.title,
     description: data.description,
     keywords: [
-      'Virtual Riddle iletişim',
-      'Atlassian danışmanlığı iletişim',
-      'dijital dönüşüm iletişim',
-      'teknoloji danışmanlığı',
-      'Jira danışmanlığı',
-      'Confluence danışmanlığı',
-      'İstanbul teknoloji şirketi',
-      'Maslak teknoloji danışmanlığı'
+      'Virtual Riddle contact',
+      'Atlassian consulting contact',
+      'digital transformation contact',
+      'technology consulting',
+      'Jira consulting',
+      'Confluence consulting',
+      'Istanbul technology company',
+      'Maslak technology consulting'
     ],
     alternates: {
       canonical: '/contact'
@@ -36,8 +36,8 @@ export async function generateMetadata(): Promise<Metadata> {
       follow: true
     },
     other: {
-      'article:section': 'İletişim',
-      'article:tag': 'İletişim, Virtual Riddle, Atlassian Danışmanlığı'
+      'article:section': 'Contact',
+      'article:tag': 'Contact, Virtual Riddle, Atlassian Consulting'
     }
   }
 } 

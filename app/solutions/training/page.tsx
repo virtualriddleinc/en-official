@@ -2,16 +2,59 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CheckCircle, AlertTriangle, X } from "lucide-react";
 
+// Country codes with flags (sorted by popularity, Palestine first)
+const countryCodes = [
+  { code: "+970", flag: "🇵🇸", country: "Palestine" },
+  { code: "+1", flag: "🇺🇸", country: "United States" },
+  { code: "+90", flag: "🇹🇷", country: "Turkey" },
+  { code: "+44", flag: "🇬🇧", country: "United Kingdom" },
+  { code: "+49", flag: "🇩🇪", country: "Germany" },
+  { code: "+33", flag: "🇫🇷", country: "France" },
+  { code: "+39", flag: "🇮🇹", country: "Italy" },
+  { code: "+34", flag: "🇪🇸", country: "Spain" },
+  { code: "+31", flag: "🇳🇱", country: "Netherlands" },
+  { code: "+41", flag: "🇨🇭", country: "Switzerland" },
+  { code: "+32", flag: "🇧🇪", country: "Belgium" },
+  { code: "+43", flag: "🇦🇹", country: "Austria" },
+  { code: "+46", flag: "🇸🇪", country: "Sweden" },
+  { code: "+47", flag: "🇳🇴", country: "Norway" },
+  { code: "+45", flag: "🇩🇰", country: "Denmark" },
+  { code: "+358", flag: "🇫🇮", country: "Finland" },
+  { code: "+971", flag: "🇦🇪", country: "UAE" },
+  { code: "+966", flag: "🇸🇦", country: "Saudi Arabia" },
+  { code: "+974", flag: "🇶🇦", country: "Qatar" },
+  { code: "+81", flag: "🇯🇵", country: "Japan" },
+  { code: "+86", flag: "🇨🇳", country: "China" },
+  { code: "+91", flag: "🇮🇳", country: "India" },
+  { code: "+82", flag: "🇰🇷", country: "South Korea" },
+  { code: "+61", flag: "🇦🇺", country: "Australia" },
+  { code: "+64", flag: "🇳🇿", country: "New Zealand" },
+  { code: "+55", flag: "🇧🇷", country: "Brazil" },
+  { code: "+52", flag: "🇲🇽", country: "Mexico" },
+  { code: "+54", flag: "🇦🇷", country: "Argentina" },
+  { code: "+57", flag: "🇨🇴", country: "Colombia" },
+  { code: "+56", flag: "🇨🇱", country: "Chile" },
+  { code: "+7", flag: "🇷🇺", country: "Russia" },
+  { code: "+30", flag: "🇬🇷", country: "Greece" },
+  { code: "+48", flag: "🇵🇱", country: "Poland" },
+  { code: "+420", flag: "🇨🇿", country: "Czech Republic" },
+  { code: "+36", flag: "🇭🇺", country: "Hungary" },
+  { code: "+40", flag: "🇷🇴", country: "Romania" },
+  { code: "+351", flag: "🇵🇹", country: "Portugal" },
+  { code: "+27", flag: "🇿🇦", country: "South Africa" },
+];
+
 export default function TrainingPage() {
-  // Form durumu için state tanımı
+  // Form state definition
   const [formData, setFormData] = useState({
     fullName: "",
     companyName: "",
     email: "",
     phone: "",
+    countryCode: "+1",
     position: "",
     interests: {
       jiraSoftware: false,
@@ -27,82 +70,99 @@ export default function TrainingPage() {
   const [status, setStatus] = useState<null | "success" | "error">(null);
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const [countrySearch, setCountrySearch] = useState("");
+  const countryDropdownRef = useRef<HTMLDivElement>(null);
 
   const requiredFields = ["fullName", "companyName", "email", "phone", "message"];
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const [validationMsg, setValidationMsg] = useState("");
 
-  // Eğitim programları
+  // Training programs
   const programs = [
-    { id: "jiraSoftware", name: "Jira Software", description: "Proje yönetimi ve Agile metodolojiler" },
-    { id: "confluence", name: "Confluence", description: "İçerik yönetimi ve ekip iş birliği" },
-    { id: "jiraServiceManagement", name: "Jira Service Management", description: "ITSM ve servis masası yönetimi" },
-    { id: "bitbucket", name: "Bitbucket", description: "Git tabanlı kod yönetimi" },
-    { id: "advanced", name: "Advanced Roadmaps", description: "Gelişmiş proje planlama ve portföy yönetimi" }
+    { id: "jiraSoftware", name: "Jira Software", description: "Project management and Agile methodologies" },
+    { id: "confluence", name: "Confluence", description: "Content management and team collaboration" },
+    { id: "jiraServiceManagement", name: "Jira Service Management", description: "ITSM and service desk management" },
+    { id: "bitbucket", name: "Bitbucket", description: "Git-based code management" },
+    { id: "advanced", name: "Advanced Roadmaps", description: "Advanced project planning and portfolio management" }
   ];
 
-  // Deneyim seviyeleri
+  // Experience Levels
   const experienceLevels = [
-    "Başlangıç",
-    "Orta Seviye",
-    "İleri Seviye",
-    "Henüz deneyimim yok"
+    "Beginner",
+    "Intermediate",
+    "Advanced",
+    "No experience yet"
   ];
 
-  // Kullanıcıya görünen ürün etiketleri
+  // Product labels visible to users
   const productLabels = {
     jiraSoftware: "Jira Software",
     confluence: "Confluence",
     jiraServiceManagement: "Jira Service Management",
     bitbucket: "Bitbucket",
-    advanced: "İleri Seviye/Özel Eğitim"
+    advanced: "Advanced/Custom Training"
   };
 
-  function buildContent(form: typeof formData) {
-    return [
-      `Ad Soyad: ${form.fullName || "-"}`,
-      `Şirket Adı: ${form.companyName || "-"}`,
-      `E-posta: ${form.email || "-"}`,
-      `Telefon: ${form.phone || "-"}`,
-      `Pozisyon: ${form.position || "-"}`,
-      `Deneyim Seviyesi: ${form.currentExperience || "-"}`,
-      `Eğitim ve Sertifikasyon İlgisi: ${Object.entries(form.interests).filter(([k,v])=>v).map(([k])=>k).join(", ") || "-"}`,
-      `Mesaj: ${form.message || "-"}`
-    ].join("\n");
-  }
-
-  // Lambda ile uyumlu field mapping fonksiyonu
+  // Lambda-compatible field mapping function for AWS SES
   function mapFormToLambda(form) {
+    const selectedProducts = Object.entries(form.interests)
+      .filter(([k, v]) => v)
+      .map(([k]) => productLabels[k] || k)
+      .join(", ");
+
     return {
       page: "/solutions/training",
-      name: form.fullName,
-      company: form.companyName,
-      email: form.email,
-      phone: form.phone,
-      position: form.position,
-      trainingType: form.trainingType || "",
-      atlassianProducts: Object.entries(form.interests)
-        .filter(([k,v])=>v)
-        .map(([k])=>productLabels[k] || k)
-        .join(", "),
-      participantCount: form.participantCount || "",
-      experienceLevel: form.currentExperience,
-      trainingFormat: form.trainingFormat || "",
-      language: form.language || "",
-      timeline: form.timeline || "",
-      certification: form.certification || "",
-      customRequirements: form.customRequirements || "",
-      message: form.message
+      name: form.fullName || "",
+      company: form.companyName || "",
+      email: form.email || "",
+      phone: form.countryCode && form.phone ? form.countryCode + form.phone : form.phone || "",
+      countryCode: form.countryCode || "+1",
+      position: form.position || "",
+      atlassianProducts: selectedProducts || "",
+      experienceLevel: form.currentExperience || "",
+      message: form.message || ""
     };
   }
 
-  // Form gönderim işleme
+  // Handle phone number input (only numbers)
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, ''); // Only get numbers
+    // Allow up to 15 digits for international phone numbers
+    if (value.length <= 15) {
+      setFormData({ ...formData, phone: value });
+    }
+  };
+
+  // Handle country code selection
+  const handleCountryCodeChange = (countryCode: string) => {
+    setFormData({ ...formData, countryCode });
+    setShowCountryDropdown(false);
+    setCountrySearch("");
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (countryDropdownRef.current && !countryDropdownRef.current.contains(event.target as Node)) {
+        setShowCountryDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Form submission processing
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
     setValidationMsg("");
-    // Validasyon
+    
+    // Validation
     const newErrors: { [key: string]: boolean } = {};
     requiredFields.forEach((field) => {
       if (!formData[field] || formData[field].trim() === "") {
@@ -111,12 +171,13 @@ export default function TrainingPage() {
     });
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) {
-      setValidationMsg("Lütfen zorunlu alanları doldurun.");
+      setValidationMsg("Please fill in the required fields.");
       setLoading(false);
       setTimeout(() => setValidationMsg(""), 3000);
       return;
     }
-    // Lambda ile uyumlu payload oluştur
+
+    // Create Lambda-compatible payload
     const payload = mapFormToLambda(formData);
     try {
       const res = await fetch("https://rvskttz2jh.execute-api.us-east-1.amazonaws.com/prod/contact", {
@@ -124,11 +185,14 @@ export default function TrainingPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+      
+      // Clear form
       setFormData({
         fullName: "",
         companyName: "",
         email: "",
         phone: "",
+        countryCode: "+1",
         position: "",
         interests: {
           jiraSoftware: false,
@@ -141,17 +205,21 @@ export default function TrainingPage() {
         message: ""
       });
       setErrors({});
+      setCountrySearch("");
+      
       if (res.ok) {
         setStatus("success");
       } else {
         setStatus("error");
       }
     } catch {
+      // Clear form
       setFormData({
         fullName: "",
         companyName: "",
         email: "",
         phone: "",
+        countryCode: "+1",
         position: "",
         interests: {
           jiraSoftware: false,
@@ -164,19 +232,20 @@ export default function TrainingPage() {
         message: ""
       });
       setErrors({});
+      setCountrySearch("");
       setStatus("error");
     } finally {
       setLoading(false);
     }
   };
 
-  // Input değişimlerini yakalama
+  // Capturing input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Program seçimlerini yakalama
+  // Capturing program selections
   const handleProgramChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     setFormData({
@@ -211,23 +280,22 @@ export default function TrainingPage() {
         
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold text-white mb-6">Eğitim & Sertifikasyon</h1>
+            <h1 className="text-5xl font-bold text-white mb-6">Training & Certification</h1>
             <p className="text-xl">
-              Atlassian ürünlerinde uzmanlaşın, kariyerinizi ileriye taşıyın.
-              Profesyonel eğitimlerimizle bilgi ve becerinizi geliştirin, uluslararası geçerliliği olan
-              sertifikalarla uzmanlığınızı belgeleyin.
+              Specialize in Atlassian products and take your career to the next level.
+              Develop your knowledge and skills with our professional training programs, and document your expertise with internationally recognized certifications.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Eğitimler Bölümü */}
+      {/* Training Programs Section */}
       <section className="w-full py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Eğitim Programları</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Training Programs</h2>
             <p className="text-xl text-gray-600">
-              Temel seviyeden ileri seviyeye kadar kapsamlı eğitim programlarımız
+              Comprehensive training programs from basic to advanced level
             </p>
           </div>
 
@@ -242,10 +310,10 @@ export default function TrainingPage() {
               </div>
               <h3 className="text-xl font-semibold text-blue-800 mb-4">Jira Software</h3>
               <ul className="space-y-2 text-gray-600">
-                <li>• Proje yönetimi temelleri</li>
-                <li>• Agile & Scrum metodolojileri</li>
-                <li>• İş akışı yönetimi ve otomasyon</li>
-                <li>• Raporlama ve analitik</li>
+                <li>• Project management fundamentals</li>
+                <li>• Agile & Scrum methodologies</li>
+                <li>• Workflow management and automation</li>
+                <li>• Reporting and analytics</li>
               </ul>
             </div>
 
@@ -261,10 +329,10 @@ export default function TrainingPage() {
               </div>
               <h3 className="text-xl font-semibold text-blue-800 mb-4">Confluence</h3>
               <ul className="space-y-2 text-gray-600">
-                <li>• İçerik yönetimi ve oluşturma</li>
-                <li>• Ekip iş birliği ve bilgi paylaşımı</li>
-                <li>• Şablonlar ve makrolar</li>
-                <li>• Entegrasyonlar ve özelleştirme</li>
+                <li>• Content management and creation</li>
+                <li>• Team collaboration and knowledge sharing</li>
+                <li>• Templates and macros</li>
+                <li>• Integrations and customization</li>
               </ul>
             </div>
 
@@ -280,139 +348,136 @@ export default function TrainingPage() {
               </div>
               <h3 className="text-xl font-semibold text-blue-800 mb-4">Jira Service Management</h3>
               <ul className="space-y-2 text-gray-600">
-                <li>• ITSM temelleri ve ITIL uyumu</li>
-                <li>• Servis masası yönetimi</li>
-                <li>• SLA ve raporlama</li>
-                <li>• Müşteri portalı ve otomasyon</li>
+                <li>• ITSM fundamentals and ITIL compliance</li>
+                <li>• Service desk management</li>
+                <li>• SLA and reporting</li>
+                <li>• Customer portal and automation</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Sertifikasyon Süreci */}
+      {/* Certification Process */}
       <section className="w-full py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Sertifikasyon Süreci</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Certification Process</h2>
             <p className="text-xl text-gray-600">
-              Atlassian sertifikaları ile uzmanlığınızı belgeleyin
+              Document your expertise with Atlassian certifications
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Adım 1 */}
+            {/* Step 1 */}
             <div className="bg-white p-8 rounded-3xl relative group hover:shadow-lg transition-all">
               <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">1</div>
-              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Eğitim</h3>
-              <p className="text-gray-600">Kapsamlı eğitim programı ile bilgi ve becerilerinizi geliştirin.</p>
+              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Training</h3>
+              <p className="text-gray-600">Enhance your knowledge and skills with comprehensive training programs.</p>
             </div>
 
-            {/* Adım 2 */}
+            {/* Step 2 */}
             <div className="bg-white p-8 rounded-3xl relative group hover:shadow-lg transition-all">
               <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">2</div>
-              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Pratik</h3>
-              <p className="text-gray-600">Gerçek dünya senaryoları ile uygulama deneyimi kazanın.</p>
+              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Practice</h3>
+              <p className="text-gray-600">Gain practical experience with real-world scenarios.</p>
             </div>
 
-            {/* Adım 3 */}
+            {/* Step 3 */}
             <div className="bg-white p-8 rounded-3xl relative group hover:shadow-lg transition-all">
               <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">3</div>
-              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Sınav</h3>
-              <p className="text-gray-600">Online veya gözetimli sertifikasyon sınavına girin.</p>
+              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Exam</h3>
+              <p className="text-gray-600">Take the online or proctored certification exam.</p>
             </div>
 
-            {/* Adım 4 */}
+            {/* Step 4 */}
             <div className="bg-white p-8 rounded-3xl relative group hover:shadow-lg transition-all">
               <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">4</div>
-              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Sertifika</h3>
-              <p className="text-gray-600">Resmi Atlassian sertifikanızı alın ve kariyerinizi ileriye taşıyın.</p>
+              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Certification</h3>
+              <p className="text-gray-600">Receive your official Atlassian certification and take your career to the next level.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Sertifika Avantajları */}
+      {/* Certification Benefits */}
       <section className="w-full py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Sertifika Avantajları</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Certification Benefits</h2>
             <p className="text-xl text-gray-600">
-              Atlassian sertifikasyonu ile elde edeceğiniz kazanımlar
+              The benefits you will gain from Atlassian certification
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Avantaj 1 */}
+            {/* Benefit 1 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Uluslararası Geçerlilik</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">International Recognition</h3>
               <p className="text-gray-600">
-                Dünya çapında tanınan Atlassian sertifikaları ile global iş olanaklarına erişim sağlayın.
+                Gain access to global job opportunities with Atlassian certifications recognized worldwide.
               </p>
             </div>
 
-            {/* Avantaj 2 */}
+            {/* Benefit 2 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Kariyer Gelişimi</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Career Development</h3>
               <p className="text-gray-600">
-                Sektördeki değerinizi artırın, daha iyi pozisyonlara ve ücretlere erişim kazanın.
+                Increase your value in the industry and gain access to better positions and salaries.
               </p>
             </div>
 
-            {/* Avantaj 3 */}
+            {/* Benefit 3 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Rekabet Avantajı</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Competitive Advantage</h3>
               <p className="text-gray-600">
-                Diğer adaylardan farklılaşın, işverenlere doğrulanmış uzmanlığınızı gösterin.
+                Stand out from other candidates and demonstrate your verified expertise to employers.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Başvuru Formu */}
+      {/* Application Form */}
       <section className="w-full py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="bg-gradient-to-r from-blue-800 to-blue-950 rounded-3xl shadow-xl overflow-hidden">
               <div className="p-10 md:p-12">
-                <h2 className="text-3xl font-bold text-white mb-8">Eğitim ve Sertifikasyon Başvuru Formu</h2>
+                <h2 className="text-3xl font-bold text-white mb-8">Training & Certification Application Form</h2>
                 <p className="text-white/80 mb-10">
-                  İhtiyaçlarınıza özel eğitim ve sertifikasyon programları için aşağıdaki formu doldurun.
-                  Uzman ekibimiz 24 saat içinde sizinle iletişime geçecektir.
+                  Fill out the form below for custom training and certification programs tailored to your needs.
+                  Our expert team will contact you within 24 hours.
                 </p>
 
-                {/* Validasyon mesajı */}
+                {/* Validation message */}
                 {validationMsg && (
-                  <div className="mb-4 flex items-center justify-center">
-                    <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-800 rounded-xl px-4 py-2 shadow transition-all animate-fade-in-up">
-                      <AlertTriangle className="w-5 h-5 text-red-500" />
-                      <span className="font-semibold">{validationMsg}</span>
-                    </div>
+                  <div className="bg-red-500/10 border border-red-400 text-red-200 px-4 py-3 rounded-xl mb-6">
+                    {validationMsg}
                   </div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-8">
-                  {/* Kişisel ve Şirket Bilgileri */}
+                  {/* Personal and Company Information */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="fullName" className="block text-sm font-medium text-white/80 mb-2">
-                        Ad Soyad*
+                        Full Name*
                       </label>
                       <input
                         type="text"
@@ -421,13 +486,17 @@ export default function TrainingPage() {
                         value={formData.fullName}
                         onChange={handleInputChange}
                         required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.fullName ? 'border-red-500 bg-red-50' : ''}`}
-                        placeholder="Adınız ve soyadınız"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.fullName 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                        placeholder="Your first and last name"
                       />
                     </div>
                     <div>
                       <label htmlFor="companyName" className="block text-sm font-medium text-white/80 mb-2">
-                        Şirket Adı*
+                        Company Name*
                       </label>
                       <input
                         type="text"
@@ -436,13 +505,17 @@ export default function TrainingPage() {
                         value={formData.companyName}
                         onChange={handleInputChange}
                         required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.companyName ? 'border-red-500 bg-red-50' : ''}`}
-                        placeholder="Şirketinizin adı"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.companyName 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                        placeholder="Your company name"
                       />
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
-                        E-posta*
+                        Email*
                       </label>
                       <input
                         type="email"
@@ -451,28 +524,94 @@ export default function TrainingPage() {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.email ? 'border-red-500 bg-red-50' : ''}`}
-                        placeholder="ornek@sirket.com"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.email 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                        placeholder="example@company.com"
                       />
                     </div>
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
-                        Telefon*
+                        Phone*
                       </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.phone ? 'border-red-500 bg-red-50' : ''}`}
-                        placeholder="+90 (___) ___ __ __"
-                      />
+                      <div className="flex gap-2">
+                        {/* Country Code Selector */}
+                        <div className="relative" ref={countryDropdownRef}>
+                          <button
+                            type="button"
+                            onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                            className="px-3 py-3 rounded-xl border border-white/10 bg-white/5 text-white hover:bg-white/10 transition-colors flex items-center gap-2 min-w-[100px] justify-between"
+                          >
+                            <span className="flex items-center gap-2">
+                              <span>{countryCodes.find(c => c.code === formData.countryCode)?.flag || "🇺🇸"}</span>
+                              <span className="text-sm">{formData.countryCode}</span>
+                            </span>
+                            <svg className={`w-4 h-4 transition-transform ${showCountryDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
+                          
+                          {showCountryDropdown && (
+                            <div className="absolute top-full left-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 max-h-80 w-64">
+                              {/* Search Input */}
+                              <div className="p-3 border-b border-gray-200 sticky top-0 bg-white">
+                                <input
+                                  type="text"
+                                  placeholder="Search country..."
+                                  value={countrySearch}
+                                  onChange={(e) => setCountrySearch(e.target.value)}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                              </div>
+                              
+                              {/* Country List */}
+                              <div className="overflow-y-auto max-h-64">
+                                {countryCodes
+                                  .filter(country => 
+                                    country.country.toLowerCase().includes(countrySearch.toLowerCase()) ||
+                                    country.code.includes(countrySearch)
+                                  )
+                                  .map((country) => (
+                                    <button
+                                      key={country.code}
+                                      type="button"
+                                      onClick={() => handleCountryCodeChange(country.code)}
+                                      className={`w-full px-4 py-3 text-left hover:bg-blue-50 transition-colors flex items-center gap-3 ${
+                                        formData.countryCode === country.code ? 'bg-blue-100' : ''
+                                      }`}
+                                    >
+                                      <span className="text-xl">{country.flag}</span>
+                                      <span className="text-gray-900 text-sm font-medium">{country.country}</span>
+                                      <span className="text-gray-500 text-sm ml-auto">{country.code}</span>
+                                    </button>
+                                  ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Phone Number Input */}
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handlePhoneChange}
+                          required
+                          className={`flex-1 px-4 py-3 rounded-xl border ${
+                            errors.phone 
+                              ? 'border-red-400 bg-red-500/10' 
+                              : 'border-white/10 bg-white/5'
+                          } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                          placeholder="Phone number"
+                        />
+                      </div>
                     </div>
                     <div>
                       <label htmlFor="position" className="block text-sm font-medium text-white/80 mb-2">
-                        Pozisyon
+                        Position
                       </label>
                       <input
                         type="text"
@@ -480,13 +619,13 @@ export default function TrainingPage() {
                         name="position"
                         value={formData.position}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.position ? 'border-red-500 bg-red-50' : ''}`}
-                        placeholder="Şirketteki pozisyonunuz"
+                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                        placeholder="Your position at the company"
                       />
                     </div>
                     <div>
                       <label htmlFor="currentExperience" className="block text-sm font-medium text-white/80 mb-2">
-                        Atlassian Deneyim Seviyeniz*
+                        Atlassian Experience Level*
                       </label>
                       <select
                         id="currentExperience"
@@ -494,9 +633,13 @@ export default function TrainingPage() {
                         value={formData.currentExperience}
                         onChange={handleInputChange}
                         required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.currentExperience ? 'border-red-500 bg-red-50' : ''}`}
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.currentExperience 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
                       >
-                        <option value="" disabled>Deneyim seviyenizi seçin</option>
+                        <option value="" disabled>Select your experience level</option>
                         {experienceLevels.map(level => (
                           <option key={level} value={level} className="bg-blue-900 text-white">{level}</option>
                         ))}
@@ -504,9 +647,9 @@ export default function TrainingPage() {
                     </div>
                   </div>
 
-                  {/* İlgilenilen Eğitimler */}
+                  {/* Interested Training Programs */}
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-4">İlgilendiğiniz Eğitim Programları</h3>
+                    <h3 className="text-lg font-semibold text-white mb-4">Training Programs You Are Interested In</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {programs.map(program => (
                         <div key={program.id} className="flex items-start space-x-3 bg-white/5 p-4 rounded-xl hover:bg-white/10 transition-colors">
@@ -516,7 +659,7 @@ export default function TrainingPage() {
                             name={program.id}
                             checked={formData.interests[program.id as keyof typeof formData.interests]}
                             onChange={handleProgramChange}
-                            className={`mt-1 h-5 w-5 rounded border-white/30 text-blue-500 focus:ring-blue-400 ${errors[program.id] ? 'border-red-500 bg-red-50' : ''}`}
+                            className="mt-1 h-5 w-5 rounded border-white/30 text-blue-500 focus:ring-blue-400"
                           />
                           <div>
                             <label htmlFor={program.id} className="block font-medium text-white cursor-pointer">
@@ -529,10 +672,10 @@ export default function TrainingPage() {
                     </div>
                   </div>
 
-                  {/* Ek Mesaj */}
+                  {/* Additional Message */}
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
-                      Ek Bilgiler ve Beklentileriniz
+                      Additional Information and Expectations
                     </label>
                     <textarea
                       id="message"
@@ -540,19 +683,28 @@ export default function TrainingPage() {
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.message ? 'border-red-500 bg-red-50' : ''}`}
-                      placeholder="Eğitim ve sertifikasyon ihtiyaçlarınız hakkında detaylı bilgi verin"
+                      required
+                      className={`w-full px-4 py-3 rounded-xl border ${
+                        errors.message 
+                          ? 'border-red-400 bg-red-500/10' 
+                          : 'border-white/10 bg-white/5'
+                      } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                      placeholder="Please provide detailed information about your training and certification needs"
                     ></textarea>
                   </div>
 
-                  {/* Gönder Butonu */}
+                  {/* Send Button */}
                   <div className="flex flex-col sm:flex-row justify-end gap-4">
                     <button
                       type="submit"
-                      className="w-full sm:w-auto px-10 py-3 bg-white text-blue-800 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
                       disabled={loading}
+                      className={`w-full sm:w-auto px-10 py-3 font-semibold rounded-xl transition-colors ${
+                        loading 
+                          ? 'bg-gray-400 text-gray-600 cursor-not-allowed' 
+                          : 'bg-white text-blue-800 hover:bg-blue-50'
+                      }`}
                     >
-                      {loading ? "Gönderiliyor..." : "Gönder"}
+                      {loading ? "Sending..." : "Submit Application"}
                     </button>
                   </div>
                 </form>
@@ -562,33 +714,39 @@ export default function TrainingPage() {
         </div>
       </section>
 
-      {/* Bildirim Pop-up Modal */}
+      {/* Notification Pop-up Modal */}
       {showPopup && status && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
-          <div className={`relative w-full max-w-xs sm:max-w-md md:max-w-lg mx-4 sm:mx-0 rounded-2xl shadow-2xl border transition-all duration-300 animate-fade-in-up
-            ${status === "success"
-              ? "bg-gradient-to-br from-green-50 via-white to-green-100 border-green-200 text-green-800"
-              : "bg-gradient-to-br from-red-50 via-white to-red-100 border-red-200 text-red-800"}
-          `}>
-            <button
-              className="absolute top-3 right-3 p-1 rounded-full hover:bg-black/10 focus:outline-none"
-              onClick={() => { setShowPopup(false); setStatus(null); }}
-              aria-label="Kapat"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <div className="flex flex-col items-center gap-3 px-6 py-8 sm:py-10">
-              {status === "success" ? (
-                <CheckCircle className="w-10 h-10 text-green-500 mb-2" />
-              ) : (
-                <AlertTriangle className="w-10 h-10 text-red-500 mb-2" />
-              )}
-              <span className="font-semibold text-center text-base sm:text-lg">
-                {status === "success"
-                  ? "Mesajınız başarıyla iletildi. En kısa sürede sizinle iletişime geçeceğiz."
-                  : "Bir hata oluştu. info@virtualriddle.com adresine doğrudan e-posta gönderebilirsiniz."}
-              </span>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 transform transition-all">
+            <div className="p-8 text-center">
+              <div className="flex justify-center mb-4">
+                {status === "success" ? (
+                  <CheckCircle className="w-16 h-16 text-green-500" />
+                ) : (
+                  <AlertTriangle className="w-16 h-16 text-red-500" />
+                )}
+              </div>
+              <h3 className={`text-xl font-semibold mb-2 ${
+                status === "success" ? "text-green-800" : "text-red-800"
+              }`}>
+                {status === "success" ? "Success!" : "Error!"}
+              </h3>
+              <p className={`text-gray-600 ${
+                status === "success" ? "text-green-700" : "text-red-700"
+              }`}>
+                {status === "success" 
+                  ? "Your message has been successfully sent. We will contact you as soon as possible." 
+                  : "An error occurred. You can send an email directly to info@virtualriddle.com."
+                }
+              </p>
             </div>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Close popup"
+            >
+              <X className="w-6 h-6" />
+            </button>
           </div>
         </div>
       )}

@@ -12,8 +12,10 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Hata loglama
-    console.error('Uygulama hatası:', error);
+    // Error logging (development only)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Application error:', error);
+    }
   }, [error]);
 
   return (
@@ -24,10 +26,10 @@ export default function Error({
             <AlertTriangle className="w-8 h-8 text-red-600 dark:text-red-400" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-            Bir Hata Oluştu
+            An Error Occurred
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.
+            An unexpected error occurred. Please try again.
           </p>
         </div>
 
@@ -37,7 +39,7 @@ export default function Error({
             className="w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             <RefreshCw className="w-4 h-4 mr-2" />
-            Tekrar Dene
+            Try Again
           </button>
           
           <Link
@@ -45,14 +47,14 @@ export default function Error({
             className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
           >
             <Home className="w-4 h-4 mr-2" />
-            Ana Sayfaya Dön
+            Return to Home
           </Link>
         </div>
 
         {process.env.NODE_ENV === 'development' && (
           <details className="mt-8 text-left">
             <summary className="cursor-pointer text-sm text-gray-500 dark:text-gray-400 mb-2">
-              Hata Detayları (Geliştirme)
+              Error Details (Development)
             </summary>
             <pre className="text-xs bg-gray-100 dark:bg-gray-800 p-3 rounded overflow-auto">
               {error.message}

@@ -1,7 +1,5 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
+export { generateMetadata } from './metadata';
 
 export default function JiraServiceManagementPage() {
   return (
@@ -17,17 +15,17 @@ export default function JiraServiceManagementPage() {
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold text-white mb-6">
-              ITSM'nin Geleceği Burada
+              The Future of ITSM is Here
             </h1>
             <p className="text-xl mb-8">
-              Jira Service Management ile IT ekiplerinizin hızını artırın, sorunu yönetin ve üstün müşteri deneyimi sunun.
+              Accelerate your IT teams with Jira Service Management, manage incidents, and deliver exceptional customer experiences.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/free-discovery" 
                 className="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all w-full sm:w-auto text-center"
               >
-                Ücretsiz Dene
+                Try Free
               </Link>
               <Link
                 href="https://www.atlassian.com/software/jira/service-management" 
@@ -35,7 +33,7 @@ export default function JiraServiceManagementPage() {
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
               >
-                Ürünü İncele
+                View Product
               </Link>
             </div>
           </div>
@@ -54,8 +52,8 @@ export default function JiraServiceManagementPage() {
                   <circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">Müşteri Hizmetleri Mükemmelliği</h3>
-              <p className="text-blue-600/80">Müşterileriniz için kullanımı kolay self-servis portalları, bilgi tabanları ve otomasyon ile hizmet kalitesini artırın.</p>
+              <h3 className="text-2xl font-bold text-blue-600">Customer Service Excellence</h3>
+              <p className="text-blue-600/80">Increase service quality with easy-to-use self-service portals, knowledge bases, and automation for your customers.</p>
             </div>
 
             {/* Feature 2 */}
@@ -65,8 +63,8 @@ export default function JiraServiceManagementPage() {
                   <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">Gelişmiş Olay Yönetimi</h3>
-              <p className="text-blue-600/80">Major olayları hızla tespit edin ve çözün. Olayları otomatik sınıflandırma ve önceliklendirme ile etkin yönetin.</p>
+              <h3 className="text-2xl font-bold text-blue-600">Advanced Incident Management</h3>
+              <p className="text-blue-600/80">Quickly detect and resolve major incidents. Manage incidents effectively with automatic classification and prioritization.</p>
             </div>
 
             {/* Feature 3 */}
@@ -77,8 +75,8 @@ export default function JiraServiceManagementPage() {
                   <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">Gerçek Zamanlı Raporlama</h3>
-              <p className="text-blue-600/80">Hizmet seviyesi anlaşmaları (SLA), performans metrikleri ve ekip verimliliği için gerçek zamanlı raporlar ve gösterge panelleri.</p>
+              <h3 className="text-2xl font-bold text-blue-600">Real-Time Reporting</h3>
+              <p className="text-blue-600/80">Real-time reports and dashboards for service level agreements (SLA), performance metrics, and team efficiency.</p>
             </div>
           </div>
         </div>
@@ -88,33 +86,33 @@ export default function JiraServiceManagementPage() {
       <section className="py-24 bg-blue-600">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Yapay Zeka Destekli Hizmet Yönetimi</h2>
-            <p className="text-xl text-white/80">Jira Service Management'ın yapay zeka özellikleriyle talep çözüm sürelerini kısaltın ve ekip verimliliğini artırın.</p>
+            <h2 className="text-4xl font-bold text-white mb-4">AI-Powered Service Management</h2>
+            <p className="text-xl text-white/80">Reduce request resolution times and increase team efficiency with Jira Service Management's artificial intelligence features.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* AI Feature 1 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2">Akıllı Bilet Sınıflandırma</h3>
-              <p className="text-white/80">Yapay zeka, talepleri otomatik olarak analiz eder ve doğru departmana yönlendirir.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Smart Ticket Classification</h3>
+              <p className="text-white/80">Artificial intelligence automatically analyzes requests and routes them to the correct department.</p>
             </div>
 
             {/* AI Feature 2 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2">Çözüm Önerileri</h3>
-              <p className="text-white/80">Benzer biletlerin çözümlerine dayanarak, yapay zeka hızlı çözüm yolları önerir.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Solution Recommendations</h3>
+              <p className="text-white/80">Based on solutions to similar issues, AI suggests quick resolution paths.</p>
             </div>
 
             {/* AI Feature 3 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2">Önleyici Analitik</h3>
-              <p className="text-white/80">Potansiyel sorunları önceden tespit ederek IT ekiplerinin proaktif önlem almasını sağlar.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Predictive Analytics</h3>
+              <p className="text-white/80">Detect potential issues in advance and enable IT teams to take proactive measures.</p>
             </div>
 
             {/* AI Feature 4 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2">Sanal Asistanlar</h3>
-              <p className="text-white/80">Chatbot'lar ile kullanıcılara 7/24 hizmet vererek tekrarlayan talepleri otomatik çözüme ulaştırın.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Virtual Assistants</h3>
+              <p className="text-white/80">Provide 24/7 service to users with chatbots and automatically resolve recurring requests.</p>
             </div>
           </div>
         </div>
@@ -124,32 +122,32 @@ export default function JiraServiceManagementPage() {
       <section className="py-24 bg-blue-600/10">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-4xl font-bold text-blue-600 mb-4">Çeşitli Kullanım Senaryoları</h2>
-            <p className="text-xl text-blue-600/80">Jira Service Management ile farklı ekip ve departmanlarınızın tüm hizmet yönetimi ihtiyaçlarını karşılayın.</p>
+            <h2 className="text-4xl font-bold text-blue-600 mb-4">Various Use Cases</h2>
+            <p className="text-xl text-blue-600/80">Meet all service management needs of your different teams and departments with Jira Service Management.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-8">
               <div className="space-y-4">
                 <h3 className="text-2xl font-semibold text-blue-600">IT Service Desk</h3>
-                <p className="text-blue-600/80">IT yardım masası ekipleriniz için talep yönetimi, sorun çözümü ve asset management. ITIL uyumlu süreçler ve otomasyon.</p>
+                <p className="text-blue-600/80">Request management, issue resolution, and asset management for your IT help desk teams. ITIL-compliant processes and automation.</p>
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-blue-600">Müşteri Hizmetleri</h3>
-                <p className="text-blue-600/80">Müşteri taleplerinizi tek bir platformda yönetin. Kişiselleştirilmiş yanıtlar ve otomatik bildirimlerle müşteri memnuniyetini artırın.</p>
+                <h3 className="text-2xl font-semibold text-blue-600">Customer Services</h3>
+                <p className="text-blue-600/80">Manage customer requests on a single platform. Increase customer satisfaction with personalized responses and automatic notifications.</p>
               </div>
             </div>
 
             <div className="space-y-8">
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-blue-600">HR Hizmet Yönetimi</h3>
-                <p className="text-blue-600/80">İşe alım süreçleri, onboarding talepleri ve çalışan sorularını verimli bir şekilde yönetin ve izleyin.</p>
+                <h3 className="text-2xl font-semibold text-blue-600">HR Service Management</h3>
+                <p className="text-blue-600/80">Manage and track recruitment processes, onboarding requests, and employee questions efficiently.</p>
               </div>
 
               <div className="space-y-4">
                 <h3 className="text-2xl font-semibold text-blue-600">DevOps</h3>
-                <p className="text-blue-600/80">Geliştirme ve operasyon ekipleri arasında kesintisiz iş birliği. Değişiklik yönetimi ve otomatik deployment süreçleri.</p>
+                <p className="text-blue-600/80">Seamless collaboration between development and operations teams. Change management and automated deployment processes.</p>
               </div>
             </div>
           </div>
@@ -160,8 +158,8 @@ export default function JiraServiceManagementPage() {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Geniş Entegrasyon Ağı</h2>
-            <p className="text-xl text-gray-600">Jira Service Management'ı mevcut IT altyapınızla sorunsuz bir şekilde entegre edin.</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Extensive Integration Network</h2>
+            <p className="text-xl text-gray-600">Seamlessly integrate Jira Service Management with your existing IT infrastructure.</p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 justify-items-center">
@@ -182,7 +180,7 @@ export default function JiraServiceManagementPage() {
               <p className="text-gray-500 font-medium">Zendesk</p>
             </div>
             <div className="flex items-center justify-center bg-gray-100 rounded-xl p-6 w-full h-24">
-              <p className="text-gray-500 font-medium">+200 Entegrasyon</p>
+              <p className="text-gray-500 font-medium">+200 Integrations</p>
             </div>
           </div>
         </div>
@@ -192,20 +190,20 @@ export default function JiraServiceManagementPage() {
       <section className="py-24 bg-blue-600">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-white mb-6">Jira Service Management'ı ücretsiz deneyin</h2>
-            <p className="text-xl text-white/80 mb-8">35.000'den fazla şirket IT hizmet yönetimi süreçlerinde Jira Service Management'a güveniyor.</p>
+            <h2 className="text-4xl font-bold text-white mb-6">Try Jira Service Management for Free</h2>
+            <p className="text-xl text-white/80 mb-8">Over 35,000 companies trust Jira Service Management for their IT service management processes.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
                 href="/free-discovery" 
                 className="px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-white/90 transition-all w-full sm:w-auto text-center"
               >
-                Ücretsiz Başlayın
+                Start Free
               </Link>
             <Link
                 href="/solutions/consulting" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
             >
-                Teklif İste
+                Request Quote
             </Link>
             </div>
           </div>

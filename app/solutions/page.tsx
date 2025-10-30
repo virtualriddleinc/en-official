@@ -1,54 +1,53 @@
-"use client";
-
 import Link from "next/link";
+export { generateMetadata } from './metadata';
 
 const solutions = [
   {
     id: "consulting",
-    name: "Atlassian Danışmanlığı",
-    description: "Atlassian ürünlerinde uzmanlaşmış danışmanlık ve uygulama desteği. Süreç analizi, kurulum, entegrasyon ve özelleştirme ile uçtan uca hizmet sunuyoruz.",
+    name: "Atlassian Consulting",
+    description: "Expert consulting and implementation support specialized in Atlassian products. We provide end-to-end services from process analysis to installation, integration and customization.",
     icon: "💼",
     href: "/solutions/consulting",
     advantages: [
-      "Uzman Atlassian danışman ekibi",
-      "Kurumsal süreçlere özel çözümler",
-      "Hızlı kurulum ve entegrasyon"
+      "Expert Atlassian consultant team",
+      "Customized solutions for corporate processes",
+      "Fast installation and integration"
     ]
   },
   {
     id: "cloud-migration",
     name: "Cloud Migration",
-    description: "Bulut geçişi ve modern altyapı dönüşümü için uçtan uca hizmet. Mevcut verilerinizi güvenle taşıyın, iş sürekliliğinizi artırın.",
+    description: "End-to-end service for cloud migration and modern infrastructure transformation. Migrate your existing data securely and increase your business continuity.",
     icon: "☁️",
     href: "/solutions/cloud-migration",
     advantages: [
-      "Güvenli ve kesintisiz geçiş",
-      "Veri kaybı riskine karşı önlemler",
-      "Bulutta maliyet ve performans optimizasyonu"
+      "Secure and seamless migration",
+      "Measures against data loss risk",
+      "Cost and performance optimization in the cloud"
     ]
   },
   {
     id: "training",
-    name: "Eğitim & Sertifikasyon",
-    description: "Ekipleriniz için Atlassian eğitimleri ve sertifikasyon programları. Pratik uygulamalar ve güncel içeriklerle bilgi seviyenizi yükseltin.",
+    name: "Training & Certification",
+    description: "Atlassian training and certification programs for your teams. Elevate your knowledge level with practical applications and current content.",
     icon: "🎓",
     href: "/solutions/training",
     advantages: [
-      "Resmi Atlassian eğitim içerikleri",
-      "Online ve yerinde eğitim seçenekleri",
-      "Sertifikalı eğitmenler"
+      "Official Atlassian training content",
+      "Online and on-site training options",
+      "Certified instructors"
     ]
   },
   {
     id: "free-discovery",
-    name: "Ücretsiz Keşif",
-    description: "İhtiyaçlarınıza özel ücretsiz ön analiz ve yol haritası. Dijital dönüşümünüz için ilk adımı birlikte atalım.",
+    name: "Free Discovery",
+    description: "Free preliminary analysis and roadmap tailored to your needs. Let's take the first step together for your digital transformation.",
     icon: "🔍",
-    href: "/solutions/free-discovery",
+    href: "/free-discovery",
     advantages: [
-      "Hızlı ve kapsamlı analiz",
-      "Kişiselleştirilmiş çözüm önerileri",
-      "Hiçbir taahhüt gerektirmez"
+      "Fast and comprehensive analysis",
+      "Personalized solution recommendations",
+      "No commitment required"
     ]
   }
 ];
@@ -65,14 +64,14 @@ export default function SolutionsPage() {
         </div>
         <div className="container mx-auto px-4 relative">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl font-bold text-white mb-6">Çözümlerimiz</h1>
-            <p className="text-xl mb-4">Dijital dönüşüm yolculuğunuzda uzman ekibimizle yanınızdayız. İşinize değer katacak çözümlerimizi keşfedin.</p>
+            <h1 className="text-5xl font-bold text-white mb-6">Our Solutions</h1>
+            <p className="text-xl mb-4">We are with you on your digital transformation journey with our expert team. Discover our solutions that add value to your business.</p>
             <div className="mt-6 bg-white/10 rounded-xl p-6 max-w-2xl mx-auto text-white/90 text-lg shadow-lg">
-              <span className="font-semibold text-white">Neden Virtual Riddle çözümleri?</span>
+              <span className="font-semibold text-white">Why Virtual Riddle solutions?</span>
               <ul className="list-disc list-inside mt-2 text-white/80 text-base text-left mx-auto max-w-lg">
-                <li>Her sektöre ve ölçeğe uygun, esnek ve sürdürülebilir çözümler</li>
-                <li>Deneyimli danışman ve teknik ekip</li>
-                <li>Hızlı uygulama, sürekli destek ve yüksek müşteri memnuniyeti</li>
+                <li>Flexible and sustainable solutions compliant with every industry and scale</li>
+                <li>Experienced consultants and technical team</li>
+                <li>Fast implementation, continuous support and high customer satisfaction</li>
               </ul>
             </div>
           </div>
@@ -86,13 +85,13 @@ export default function SolutionsPage() {
             <div className="text-center mb-12 sm:mb-16 lg:mb-20">
               <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-blue-100 text-blue-700 font-semibold text-xs sm:text-sm mb-4 sm:mb-6">
                 <span className="text-base sm:text-lg">✨</span>
-                <span>ÇÖZÜM PORTFÖYÜ</span>
+                <span>SOLUTION PORTFOLIO</span>
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-                Danışmanlık ve Dönüşüm Hizmetlerimiz
+                Consulting & Transformation Services
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto px-4">
-                İş süreçlerinizi modernleştiren, verimliliği artıran ve rekabette öne çıkaran çözümler sunuyoruz.
+                We offer solutions that modernize your business processes, increase efficiency and help you stand out in competition.
               </p>
             </div>
 
@@ -126,7 +125,7 @@ export default function SolutionsPage() {
                         <li key={i}>{adv}</li>
                       ))}
                     </ul>
-                    <span className="inline-block mt-2 px-4 py-2 rounded-lg bg-blue-100 text-blue-700 font-semibold text-sm group-hover:bg-blue-600 group-hover:text-white transition-all">Detayları Gör</span>
+                    <span className="inline-block mt-2 px-4 py-2 rounded-lg bg-blue-100 text-blue-700 font-semibold text-sm group-hover:bg-blue-600 group-hover:text-white transition-all">View Details</span>
                   </div>
                 </Link>
               ))}
@@ -136,9 +135,9 @@ export default function SolutionsPage() {
       </section>
 
       <div className="mt-20 mb-24 text-center">
-        <h3 className="text-2xl font-bold mb-4 text-blue-900">Çözümünüzü bulamadınız mı?</h3>
-        <p className="text-gray-600 mb-6">Ekibimizle iletişime geçin, size özel bir yol haritası oluşturalım.</p>
-        <Link href="/contact" className="inline-block px-8 py-4 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-all text-lg shadow-lg">Bize Ulaşın</Link>
+        <h3 className="text-2xl font-bold mb-4 text-blue-900">Couldn't find your solution?</h3>
+        <p className="text-gray-600 mb-6">Contact our team, let's create a custom roadmap for you.</p>
+        <Link href="/contact" className="inline-block px-8 py-4 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-all text-lg shadow-lg">Contact Us</Link>
       </div>
     </main>
   );

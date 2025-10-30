@@ -1,19 +1,19 @@
 import { Metadata } from 'next';
 
-// Ana sayfa metadata generation function
+// Home metadata generation function
 async function getHomeData() {
   return {
-    title: 'Virtual Riddle - Atlassian Danışmanlığı ve Modern Yazılım Çözümleri',
-    description: 'Jira ve Confluence başta olmak üzere tüm Atlassian ürünleri için kurumsal danışmanlık hizmetleri. Profesyonel danışmanlık, modern yazılım çözümleri ve dinamik fiyatlandırma sistemi.',
+    title: 'Virtual Riddle - Atlassian Consulting and Modern Software Solutions',
+    description: 'Enterprise consulting services for all Atlassian products, especially Jira and Confluence. Professional consulting, modern software solutions and dynamic pricing system.',
     services: [
-      'Jira Danışmanlığı', 
-      'Confluence Danışmanlığı', 
-      'Bitbucket Danışmanlığı', 
-      'Atlassian Danışmanlığı',
-      'Dinamik Fiyatlandırma',
-      'Proje Bazlı Danışmanlık',
-      'Tam Zamanlı Danışmanlık',
-      'Eğitim Paketleri'
+      'Jira Consulting', 
+      'Confluence Consulting', 
+      'Bitbucket Consulting', 
+      'Atlassian Consulting',
+      'Dynamic Pricing',
+      'Project-Based Consulting',
+      'Time-Based Consulting',
+      'Training Packages'
     ]
   }
 }
@@ -25,24 +25,24 @@ export async function generateMetadata(): Promise<Metadata> {
     title: data.title,
     description: data.description,
     keywords: [
-      'Atlassian danışmanlığı',
-      'Jira danışmanlığı',
-      'Confluence danışmanlığı',
-      'Bitbucket danışmanlığı',
-      'Atlassian Türkiye',
-      'yazılım danışmanlığı',
-      'kurumsal çözümler',
-      'proje yönetimi',
-      'agile dönüşüm',
-      'devops danışmanlığı',
-      'dinamik fiyatlandırma',
-      'proje bazlı danışmanlık',
-      'tam zamanlı danışmanlık',
-      'eğitim paketleri',
-      'saatlik günlük faturalandırma',
-      'minimum sözleşme süreleri',
-      '1 gün 8 saat hesaplama',
-      'anlık fiyat güncelleme'
+      'Atlassian consulting',
+      'Jira consulting',
+      'Confluence consulting',
+      'Bitbucket consulting',
+      'Atlassian Turkey',
+      'software consulting',
+      'enterprise solutions',
+      'project management',
+      'agile transformation',
+      'devops consulting',
+      'dynamic pricing',
+      'project-based consulting',
+      'time-based consulting',
+      'training packages',
+      'hourly daily billing',
+      'minimum contract periods',
+      '1 day 8 hours calculation',
+      'real-time price updates'
     ],
     alternates: {
       canonical: '/'
@@ -52,7 +52,7 @@ export async function generateMetadata(): Promise<Metadata> {
       follow: true
     },
     other: {
-      'article:section': 'Ana Sayfa',
+      'article:section': 'Home',
       'article:tag': data.services.join(', ')
     }
   }

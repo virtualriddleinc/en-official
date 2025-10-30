@@ -2,16 +2,59 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CheckCircle, AlertTriangle, X } from "lucide-react";
 
+// Country codes with flags (sorted by popularity, Palestine first)
+const countryCodes = [
+  { code: "+970", flag: "🇵🇸", country: "Palestine" },
+  { code: "+1", flag: "🇺🇸", country: "United States" },
+  { code: "+90", flag: "🇹🇷", country: "Turkey" },
+  { code: "+44", flag: "🇬🇧", country: "United Kingdom" },
+  { code: "+49", flag: "🇩🇪", country: "Germany" },
+  { code: "+33", flag: "🇫🇷", country: "France" },
+  { code: "+39", flag: "🇮🇹", country: "Italy" },
+  { code: "+34", flag: "🇪🇸", country: "Spain" },
+  { code: "+31", flag: "🇳🇱", country: "Netherlands" },
+  { code: "+41", flag: "🇨🇭", country: "Switzerland" },
+  { code: "+32", flag: "🇧🇪", country: "Belgium" },
+  { code: "+43", flag: "🇦🇹", country: "Austria" },
+  { code: "+46", flag: "🇸🇪", country: "Sweden" },
+  { code: "+47", flag: "🇳🇴", country: "Norway" },
+  { code: "+45", flag: "🇩🇰", country: "Denmark" },
+  { code: "+358", flag: "🇫🇮", country: "Finland" },
+  { code: "+971", flag: "🇦🇪", country: "UAE" },
+  { code: "+966", flag: "🇸🇦", country: "Saudi Arabia" },
+  { code: "+974", flag: "🇶🇦", country: "Qatar" },
+  { code: "+81", flag: "🇯🇵", country: "Japan" },
+  { code: "+86", flag: "🇨🇳", country: "China" },
+  { code: "+91", flag: "🇮🇳", country: "India" },
+  { code: "+82", flag: "🇰🇷", country: "South Korea" },
+  { code: "+61", flag: "🇦🇺", country: "Australia" },
+  { code: "+64", flag: "🇳🇿", country: "New Zealand" },
+  { code: "+55", flag: "🇧🇷", country: "Brazil" },
+  { code: "+52", flag: "🇲🇽", country: "Mexico" },
+  { code: "+54", flag: "🇦🇷", country: "Argentina" },
+  { code: "+57", flag: "🇨🇴", country: "Colombia" },
+  { code: "+56", flag: "🇨🇱", country: "Chile" },
+  { code: "+7", flag: "🇷🇺", country: "Russia" },
+  { code: "+30", flag: "🇬🇷", country: "Greece" },
+  { code: "+48", flag: "🇵🇱", country: "Poland" },
+  { code: "+420", flag: "🇨🇿", country: "Czech Republic" },
+  { code: "+36", flag: "🇭🇺", country: "Hungary" },
+  { code: "+40", flag: "🇷🇴", country: "Romania" },
+  { code: "+351", flag: "🇵🇹", country: "Portugal" },
+  { code: "+27", flag: "🇿🇦", country: "South Africa" },
+];
+
 export default function CloudMigrationPage() {
-  // Form durumu için state tanımı
+  // Form state definition
   const initialForm = {
     fullName: "",
     companyName: "",
     email: "",
     phone: "",
+    countryCode: "+1",
     currentEnvironment: "",
     usersCount: "",
     message: ""
@@ -20,16 +63,19 @@ export default function CloudMigrationPage() {
   const [status, setStatus] = useState<null | "success" | "error">(null);
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const [countrySearch, setCountrySearch] = useState("");
+  const countryDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Mevcut Atlassian ortamları
+  // Current Atlassian environments
   const environments = [
     "Server",
     "Data Center",
     "Cloud",
-    "Henüz kullanmıyorum"
+    "Not using yet"
   ];
 
-  // Kullanıcı sayıları
+  // User counts
   const userCounts = [
     "1-10",
     "11-50",
@@ -43,34 +89,59 @@ export default function CloudMigrationPage() {
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const [validationMsg, setValidationMsg] = useState("");
 
-  // Kullanıcıya görünen ürün etiketleri
-  const productLabels = {
-    jiraSoftware: "Jira Software",
-    confluence: "Confluence",
-    jiraServiceManagement: "Jira Service Management",
-    bitbucket: "Bitbucket",
-    advanced: "İleri Seviye/Özel Çözüm"
-  };
-
-  function buildContent(form: typeof initialForm) {
-    return [
-      `Ad Soyad: ${form.fullName}`,
-      `Şirket Adı: ${form.companyName}`,
-      `E-posta: ${form.email}`,
-      `Telefon: ${form.phone}`,
-      `Mevcut Atlassian Ortamı: ${form.currentEnvironment}`,
-      `Kullanıcı Sayısı: ${form.usersCount}`,
-      `Geçiş İle İlgili Bilgiler ve Beklentileriniz: ${form.message}`
-    ].join("\n");
+  // Lambda-compatible field mapping function for AWS SES
+  function mapFormToLambda(form) {
+    return {
+      page: "/solutions/cloud-migration",
+      name: form.fullName || "",
+      company: form.companyName || "",
+      email: form.email || "",
+      phone: form.countryCode && form.phone ? form.countryCode + form.phone : form.phone || "",
+      countryCode: form.countryCode || "+1",
+      currentEnvironment: form.currentEnvironment || "",
+      userCount: form.usersCount || "",
+      message: form.message || ""
+    };
   }
 
-  // Form gönderim işleme
+  // Handle phone number input (only numbers)
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, ''); // Only get numbers
+    // Allow up to 15 digits for international phone numbers
+    if (value.length <= 15) {
+      setForm({ ...form, phone: value });
+    }
+  };
+
+  // Handle country code selection
+  const handleCountryCodeChange = (countryCode: string) => {
+    setForm({ ...form, countryCode });
+    setShowCountryDropdown(false);
+    setCountrySearch("");
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (countryDropdownRef.current && !countryDropdownRef.current.contains(event.target as Node)) {
+        setShowCountryDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Form submission processing
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
     setValidationMsg("");
-    // Validasyon
+    
+    // Validation
     const newErrors: { [key: string]: boolean } = {};
     requiredFields.forEach((field) => {
       if (!form[field] || form[field].trim() === "") {
@@ -79,38 +150,43 @@ export default function CloudMigrationPage() {
     });
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) {
-      setValidationMsg("Lütfen zorunlu alanları doldurun.");
+      setValidationMsg("Please fill in the required fields.");
       setLoading(false);
       setTimeout(() => setValidationMsg(""), 3000);
       return;
     }
-    // Subject ve content oluşturma
-    const subject = `Cloud Migration Değerlendirme Talebi : ${form.fullName || ""} - ${form.companyName || ""}`;
-    const content = buildContent(form);
-    const payload = { ...form, subject, content };
+
+    // Create Lambda-compatible payload
+    const payload = mapFormToLambda(form);
     try {
       const res = await fetch("https://rvskttz2jh.execute-api.us-east-1.amazonaws.com/prod/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+      
+      // Clear form
       setForm(initialForm);
       setErrors({});
+      setCountrySearch("");
+      
       if (res.ok) {
         setStatus("success");
       } else {
         setStatus("error");
       }
     } catch {
+      // Clear form
       setForm(initialForm);
       setErrors({});
+      setCountrySearch("");
       setStatus("error");
     } finally {
       setLoading(false);
     }
   };
 
-  // Input değişimlerini yakalama
+  // Capturing input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -121,32 +197,10 @@ export default function CloudMigrationPage() {
       const timer = setTimeout(() => {
         setShowPopup(false);
         setStatus(null);
-      }, 3000);
+      }, 5000);
       return () => clearTimeout(timer);
     }
   }, [status]);
-
-  function mapFormToLambda(form) {
-    return {
-      page: "/solutions/cloud-migration",
-      name: form.fullName,
-      company: form.companyName,
-      email: form.email,
-      phone: form.phone,
-      position: form.position,
-      currentSetup: form.currentEnvironment || "",
-      atlassianProducts: Array.isArray(form.atlassianProducts)
-        ? form.atlassianProducts.map((k) => productLabels[k] || k).join(", ")
-        : (form.atlassianProducts ? productLabels[form.atlassianProducts] || form.atlassianProducts : ""),
-      userCount: form.usersCount || "",
-      dataSize: form.dataSize || "",
-      customizations: form.customizations || "",
-      integrations: form.integrations || "",
-      timeline: form.timeline || "",
-      downtime: form.downtime || "",
-      message: form.message
-    };
-  }
 
   return (
     <main className="flex min-h-screen flex-col items-center pt-32">
@@ -162,29 +216,29 @@ export default function CloudMigrationPage() {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold text-white mb-6">Cloud Migration</h1>
             <p className="text-xl">
-              Atlassian Cloud'a güvenli ve sorunsuz geçiş için uzman ekibimizden destek alın.
-              Server ve Data Center ortamlarından Cloud'a sorunsuz geçiş çözümleri sunuyoruz.
+              Get support from our expert team for a secure and seamless transition to Atlassian Cloud.
+              We provide seamless migration solutions from Server and Data Center environments to Cloud.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Süreç Adımları */}
+      {/* Process Steps */}
       <section className="w-full py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Cloud Geçiş Süreci</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Cloud Migration Process</h2>
             <p className="text-xl text-gray-600">
-              Adım adım güvenli ve sorunsuz cloud geçişi için yapılandırılmış metodolojimiz
+              Our structured methodology for a step-by-step secure and seamless cloud migration
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Adım 1 */}
+            {/* Step 1 */}
             <div className="bg-blue-50 p-8 rounded-3xl relative group hover:shadow-lg transition-all">
               <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">1</div>
-              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Değerlendirme</h3>
-              <p className="text-gray-600">Mevcut sistem analizi ve geçiş planı oluşturma, uygunluk değerlendirmesi</p>
+              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Assessment</h3>
+              <p className="text-gray-600">Current system analysis and migration plan creation, compliance assessment</p>
               <div className="mt-6">
                 <svg className="w-16 h-16 mx-auto text-blue-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -194,11 +248,11 @@ export default function CloudMigrationPage() {
               </div>
             </div>
 
-            {/* Adım 2 */}
+            {/* Step 2 */}
             <div className="bg-blue-50 p-8 rounded-3xl relative group hover:shadow-lg transition-all">
               <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">2</div>
-              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Hazırlık</h3>
-              <p className="text-gray-600">Veri temizliği, yetkilendirme planı ve geçiş öncesi optimizasyon</p>
+              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Readiness</h3>
+              <p className="text-gray-600">Data cleansing, authorization planning and pre-migration optimization</p>
               <div className="mt-6">
                 <svg className="w-16 h-16 mx-auto text-blue-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 8V16M8 12H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -207,11 +261,11 @@ export default function CloudMigrationPage() {
               </div>
             </div>
 
-            {/* Adım 3 */}
+            {/* Step 3 */}
             <div className="bg-blue-50 p-8 rounded-3xl relative group hover:shadow-lg transition-all">
               <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">3</div>
-              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Geçiş</h3>
-              <p className="text-gray-600">Güvenli veri transferi, kullanıcı ve uygulama taşıma, doğrulama</p>
+              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Migration</h3>
+              <p className="text-gray-600">Secure data transfer, user and application migration, validation</p>
               <div className="mt-6">
                 <svg className="w-16 h-16 mx-auto text-blue-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 16C4.79086 16 3 14.2091 3 12C3 9.79086 4.79086 8 7 8C7.11001 8 7.21947 8.00466 7.32779 8.01377C7.95849 5.66926 10.1655 4 12.7778 4C15.8921 4 18.4212 6.59238 18.5 9.80108C20.5 10.36 22 12.26 22 14.5C22 16.99 19.99 19 17.5 19H7Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -220,11 +274,11 @@ export default function CloudMigrationPage() {
               </div>
             </div>
 
-            {/* Adım 4 */}
+            {/* Step 4 */}
             <div className="bg-blue-50 p-8 rounded-3xl relative group hover:shadow-lg transition-all">
               <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl font-bold transform group-hover:scale-110 transition-transform">4</div>
-              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Optimizasyon</h3>
-              <p className="text-gray-600">Cloud ortamında performans optimizasyonu ve en iyi uygulamaların uygulanması</p>
+              <h3 className="text-xl font-semibold text-blue-800 mt-6 mb-4">Optimization</h3>
+              <p className="text-gray-600">Performance optimization in Cloud environment and implementation of best practices</p>
               <div className="mt-6">
                 <svg className="w-16 h-16 mx-auto text-blue-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M14 10L21 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -237,87 +291,84 @@ export default function CloudMigrationPage() {
         </div>
       </section>
 
-      {/* Faydalar Bölümü */}
+      {/* Benefits Section */}
       <section className="w-full py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Cloud'un Avantajları</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Benefits of Cloud</h2>
             <p className="text-xl text-gray-600">
-              Atlassian Cloud ile işinizi bir üst seviyeye taşımanın faydaları
+              The benefits of taking your business to the next level with Atlassian Cloud
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Fayda 1 */}
+            {/* Benefit 1 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Ölçeklenebilirlik</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Scalability</h3>
               <p className="text-gray-600">
-                İhtiyaçlarınıza göre esnek kaynak kullanımı ile hızlı büyüme imkanı
+                Flexible resource usage according to your needs and fast growth opportunities
               </p>
             </div>
 
-            {/* Fayda 2 */}
+            {/* Benefit 2 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Gelişmiş Güvenlik</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Enhanced Security</h3>
               <p className="text-gray-600">
-                Enterprise seviye güvenlik, veri koruma ve düzenli otomatik güncellemeler
+                Enterprise-level security, data protection and regular automatic updates
               </p>
             </div>
 
-            {/* Fayda 3 */}
+            {/* Benefit 3 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Maliyet Tasarrufu</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Cost Savings</h3>
               <p className="text-gray-600">
-                Altyapı maliyetlerinde önemli tasarruf ve yönetim kolaylığı ile maliyet optimizasyonu
+                Significant savings in infrastructure costs and cost optimization with management ease
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Başvuru Formu */}
+      {/* Application Form */}
       <section className="w-full py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="bg-gradient-to-r from-blue-800 to-blue-950 rounded-3xl shadow-xl overflow-hidden">
               <div className="p-10 md:p-12">
-                <h2 className="text-3xl font-bold text-white mb-8">Ücretsiz Cloud Migration Değerlendirmesi</h2>
+                <h2 className="text-3xl font-bold text-white mb-8">Free Cloud Migration Assessment</h2>
                 <p className="text-white/80 mb-10">
-                  Atlassian sistemleriniz için ücretsiz cloud migration analizi ve geçiş planı almak için aşağıdaki formu doldurun.
-                  Uzman ekibimiz 24 saat içinde sizinle iletişime geçecektir.
+                  Fill out the form below to get a free cloud migration analysis and migration plan for your Atlassian systems.
+                  Our expert team will contact you within 24 hours.
                 </p>
 
-                {/* Validasyon mesajı */}
+                {/* Validation message */}
                 {validationMsg && (
-                  <div className="mb-4 flex items-center justify-center">
-                    <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-800 rounded-xl px-4 py-2 shadow transition-all animate-fade-in-up">
-                      <AlertTriangle className="w-5 h-5 text-red-500" />
-                      <span className="font-semibold">{validationMsg}</span>
-                    </div>
+                  <div className="bg-red-500/10 border border-red-400 text-red-200 px-4 py-3 rounded-xl mb-6">
+                    {validationMsg}
                   </div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Kişisel ve Şirket Bilgileri */}
+                  {/* Personal and Company Information */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="fullName" className="block text-sm font-medium text-white/80 mb-2">
-                        Ad Soyad*
+                        Full Name*
                       </label>
                       <input
                         type="text"
@@ -326,13 +377,17 @@ export default function CloudMigrationPage() {
                         value={form.fullName}
                         onChange={handleChange}
                         required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.fullName ? 'border-red-500 bg-red-50' : ''}`}
-                        placeholder="Adınız ve soyadınız"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.fullName 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                        placeholder="Your first and last name"
                       />
                     </div>
                     <div>
                       <label htmlFor="companyName" className="block text-sm font-medium text-white/80 mb-2">
-                        Şirket Adı*
+                        Company Name*
                       </label>
                       <input
                         type="text"
@@ -341,13 +396,17 @@ export default function CloudMigrationPage() {
                         value={form.companyName}
                         onChange={handleChange}
                         required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.companyName ? 'border-red-500 bg-red-50' : ''}`}
-                        placeholder="Şirketinizin adı"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.companyName 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                        placeholder="Your company name"
                       />
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
-                        E-posta*
+                        Email*
                       </label>
                       <input
                         type="email"
@@ -356,28 +415,94 @@ export default function CloudMigrationPage() {
                         value={form.email}
                         onChange={handleChange}
                         required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.email ? 'border-red-500 bg-red-50' : ''}`}
-                        placeholder="ornek@sirket.com"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.email 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                        placeholder="example@company.com"
                       />
                     </div>
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
-                        Telefon*
+                        Phone*
                       </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={form.phone}
-                        onChange={handleChange}
-                        required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.phone ? 'border-red-500 bg-red-50' : ''}`}
-                        placeholder="+90 (___) ___ __ __"
-                      />
+                      <div className="flex gap-2">
+                        {/* Country Code Selector */}
+                        <div className="relative" ref={countryDropdownRef}>
+                          <button
+                            type="button"
+                            onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                            className="px-3 py-3 rounded-xl border border-white/10 bg-white/5 text-white hover:bg-white/10 transition-colors flex items-center gap-2 min-w-[100px] justify-between"
+                          >
+                            <span className="flex items-center gap-2">
+                              <span>{countryCodes.find(c => c.code === form.countryCode)?.flag || "🇺🇸"}</span>
+                              <span className="text-sm">{form.countryCode}</span>
+                            </span>
+                            <svg className={`w-4 h-4 transition-transform ${showCountryDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
+                          
+                          {showCountryDropdown && (
+                            <div className="absolute top-full left-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 max-h-80 w-64">
+                              {/* Search Input */}
+                              <div className="p-3 border-b border-gray-200 sticky top-0 bg-white">
+                                <input
+                                  type="text"
+                                  placeholder="Search country..."
+                                  value={countrySearch}
+                                  onChange={(e) => setCountrySearch(e.target.value)}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                              </div>
+                              
+                              {/* Country List */}
+                              <div className="overflow-y-auto max-h-64">
+                                {countryCodes
+                                  .filter(country => 
+                                    country.country.toLowerCase().includes(countrySearch.toLowerCase()) ||
+                                    country.code.includes(countrySearch)
+                                  )
+                                  .map((country) => (
+                                    <button
+                                      key={country.code}
+                                      type="button"
+                                      onClick={() => handleCountryCodeChange(country.code)}
+                                      className={`w-full px-4 py-3 text-left hover:bg-blue-50 transition-colors flex items-center gap-3 ${
+                                        form.countryCode === country.code ? 'bg-blue-100' : ''
+                                      }`}
+                                    >
+                                      <span className="text-xl">{country.flag}</span>
+                                      <span className="text-gray-900 text-sm font-medium">{country.country}</span>
+                                      <span className="text-gray-500 text-sm ml-auto">{country.code}</span>
+                                    </button>
+                                  ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Phone Number Input */}
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={form.phone}
+                          onChange={handlePhoneChange}
+                          required
+                          className={`flex-1 px-4 py-3 rounded-xl border ${
+                            errors.phone 
+                              ? 'border-red-400 bg-red-500/10' 
+                              : 'border-white/10 bg-white/5'
+                          } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                          placeholder="Phone number"
+                        />
+                      </div>
                     </div>
                     <div>
                       <label htmlFor="currentEnvironment" className="block text-sm font-medium text-white/80 mb-2">
-                        Mevcut Atlassian Ortamı*
+                        Current Atlassian Environment*
                       </label>
                       <select
                         id="currentEnvironment"
@@ -385,9 +510,13 @@ export default function CloudMigrationPage() {
                         value={form.currentEnvironment}
                         onChange={handleChange}
                         required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.currentEnvironment ? 'border-red-500 bg-red-50' : ''}`}
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.currentEnvironment 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
                       >
-                        <option value="" disabled>Mevcut ortamınızı seçin</option>
+                        <option value="" disabled>Select your current environment</option>
                         {environments.map(env => (
                           <option key={env} value={env} className="bg-blue-900 text-white">{env}</option>
                         ))}
@@ -395,7 +524,7 @@ export default function CloudMigrationPage() {
                     </div>
                     <div>
                       <label htmlFor="usersCount" className="block text-sm font-medium text-white/80 mb-2">
-                        Kullanıcı Sayısı*
+                        User Count*
                       </label>
                       <select
                         id="usersCount"
@@ -403,9 +532,13 @@ export default function CloudMigrationPage() {
                         value={form.usersCount}
                         onChange={handleChange}
                         required
-                        className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.usersCount ? 'border-red-500 bg-red-50' : ''}`}
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.usersCount 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
                       >
-                        <option value="" disabled>Kullanıcı sayısını seçin</option>
+                        <option value="" disabled>Select user count</option>
                         {userCounts.map(count => (
                           <option key={count} value={count} className="bg-blue-900 text-white">{count}</option>
                         ))}
@@ -413,10 +546,10 @@ export default function CloudMigrationPage() {
                     </div>
                   </div>
 
-                  {/* Ek Mesaj */}
+                  {/* Additional Message */}
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
-                      Geçiş İle İlgili Bilgiler ve Beklentileriniz
+                      Migration-Related Information and Expectations*
                     </label>
                     <textarea
                       id="message"
@@ -424,19 +557,28 @@ export default function CloudMigrationPage() {
                       rows={4}
                       value={form.message}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm ${errors.message ? 'border-red-500 bg-red-50' : ''}`}
-                      placeholder="Mevcut Atlassian ürünleriniz ve cloud geçişi hakkındaki beklentileriniz"
+                      required
+                      className={`w-full px-4 py-3 rounded-xl border ${
+                        errors.message 
+                          ? 'border-red-400 bg-red-500/10' 
+                          : 'border-white/10 bg-white/5'
+                      } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                      placeholder="Your current Atlassian products and expectations regarding cloud migration"
                     ></textarea>
                   </div>
 
-                  {/* Gönder Butonu */}
+                  {/* Send Button */}
                   <div className="flex flex-col sm:flex-row justify-end gap-4">
                     <button
                       type="submit"
-                      className="w-full sm:w-auto px-10 py-3 bg-white text-blue-800 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
                       disabled={loading}
+                      className={`w-full sm:w-auto px-10 py-3 font-semibold rounded-xl transition-colors ${
+                        loading 
+                          ? 'bg-gray-400 text-gray-600 cursor-not-allowed' 
+                          : 'bg-white text-blue-800 hover:bg-blue-50'
+                      }`}
                     >
-                      {loading ? "Gönderiliyor..." : "Gönder"}
+                      {loading ? "Sending..." : "Submit Assessment Request"}
                     </button>
                   </div>
                 </form>
@@ -446,33 +588,39 @@ export default function CloudMigrationPage() {
         </div>
       </section>
 
-      {/* Bildirim Pop-up Modal */}
+      {/* Notification Pop-up Modal */}
       {showPopup && status && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
-          <div className={`relative w-full max-w-xs sm:max-w-md md:max-w-lg mx-4 sm:mx-0 rounded-2xl shadow-2xl border transition-all duration-300 animate-fade-in-up
-            ${status === "success"
-              ? "bg-gradient-to-br from-green-50 via-white to-green-100 border-green-200 text-green-800"
-              : "bg-gradient-to-br from-red-50 via-white to-red-100 border-red-200 text-red-800"}
-          `}>
-            <button
-              className="absolute top-3 right-3 p-1 rounded-full hover:bg-black/10 focus:outline-none"
-              onClick={() => { setShowPopup(false); setStatus(null); }}
-              aria-label="Kapat"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <div className="flex flex-col items-center gap-3 px-6 py-8 sm:py-10">
-              {status === "success" ? (
-                <CheckCircle className="w-10 h-10 text-green-500 mb-2" />
-              ) : (
-                <AlertTriangle className="w-10 h-10 text-red-500 mb-2" />
-              )}
-              <span className="font-semibold text-center text-base sm:text-lg">
-                {status === "success"
-                  ? "Mesajınız başarıyla iletildi. En kısa sürede sizinle iletişime geçeceğiz."
-                  : "Bir hata oluştu. info@virtualriddle.com adresine doğrudan e-posta gönderebilirsiniz."}
-              </span>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 transform transition-all">
+            <div className="p-8 text-center">
+              <div className="flex justify-center mb-4">
+                {status === "success" ? (
+                  <CheckCircle className="w-16 h-16 text-green-500" />
+                ) : (
+                  <AlertTriangle className="w-16 h-16 text-red-500" />
+                )}
+              </div>
+              <h3 className={`text-xl font-semibold mb-2 ${
+                status === "success" ? "text-green-800" : "text-red-800"
+              }`}>
+                {status === "success" ? "Success!" : "Error!"}
+              </h3>
+              <p className={`text-gray-600 ${
+                status === "success" ? "text-green-700" : "text-red-700"
+              }`}>
+                {status === "success" 
+                  ? "Your message has been successfully sent. We will contact you as soon as possible." 
+                  : "An error occurred. You can send an email directly to info@virtualriddle.com."
+                }
+              </p>
             </div>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Close popup"
+            >
+              <X className="w-6 h-6" />
+            </button>
           </div>
         </div>
       )}

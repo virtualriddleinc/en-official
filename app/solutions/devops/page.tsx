@@ -1,34 +1,210 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { CheckCircle, AlertTriangle, X } from "lucide-react";
+
+// Country codes with flags (sorted by popularity, Palestine first)
+const countryCodes = [
+  { code: "+970", flag: "🇵🇸", country: "Palestine" },
+  { code: "+1", flag: "🇺🇸", country: "United States" },
+  { code: "+90", flag: "🇹🇷", country: "Turkey" },
+  { code: "+44", flag: "🇬🇧", country: "United Kingdom" },
+  { code: "+49", flag: "🇩🇪", country: "Germany" },
+  { code: "+33", flag: "🇫🇷", country: "France" },
+  { code: "+39", flag: "🇮🇹", country: "Italy" },
+  { code: "+34", flag: "🇪🇸", country: "Spain" },
+  { code: "+31", flag: "🇳🇱", country: "Netherlands" },
+  { code: "+41", flag: "🇨🇭", country: "Switzerland" },
+  { code: "+32", flag: "🇧🇪", country: "Belgium" },
+  { code: "+43", flag: "🇦🇹", country: "Austria" },
+  { code: "+46", flag: "🇸🇪", country: "Sweden" },
+  { code: "+47", flag: "🇳🇴", country: "Norway" },
+  { code: "+45", flag: "🇩🇰", country: "Denmark" },
+  { code: "+358", flag: "🇫🇮", country: "Finland" },
+  { code: "+971", flag: "🇦🇪", country: "UAE" },
+  { code: "+966", flag: "🇸🇦", country: "Saudi Arabia" },
+  { code: "+974", flag: "🇶🇦", country: "Qatar" },
+  { code: "+81", flag: "🇯🇵", country: "Japan" },
+  { code: "+86", flag: "🇨🇳", country: "China" },
+  { code: "+91", flag: "🇮🇳", country: "India" },
+  { code: "+82", flag: "🇰🇷", country: "South Korea" },
+  { code: "+61", flag: "🇦🇺", country: "Australia" },
+  { code: "+64", flag: "🇳🇿", country: "New Zealand" },
+  { code: "+55", flag: "🇧🇷", country: "Brazil" },
+  { code: "+52", flag: "🇲🇽", country: "Mexico" },
+  { code: "+54", flag: "🇦🇷", country: "Argentina" },
+  { code: "+57", flag: "🇨🇴", country: "Colombia" },
+  { code: "+56", flag: "🇨🇱", country: "Chile" },
+  { code: "+7", flag: "🇷🇺", country: "Russia" },
+  { code: "+30", flag: "🇬🇷", country: "Greece" },
+  { code: "+48", flag: "🇵🇱", country: "Poland" },
+  { code: "+420", flag: "🇨🇿", country: "Czech Republic" },
+  { code: "+36", flag: "🇭🇺", country: "Hungary" },
+  { code: "+40", flag: "🇷🇴", country: "Romania" },
+  { code: "+351", flag: "🇵🇹", country: "Portugal" },
+  { code: "+27", flag: "🇿🇦", country: "South Africa" },
+];
 
 export default function DevOpsPage() {
-  // Form durumu için state tanımları
+  // Form state definitions
   const [formData, setFormData] = useState({
     fullName: "",
     companyName: "",
     email: "",
     phone: "",
+    countryCode: "+1",
     position: "",
     currentTools: "",
     challenges: "",
     message: ""
   });
 
-  // Form gönderim işleme
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form gönderildi:", formData);
-    // API'ye gönderme işlemi burada gerçekleştirilecek
-    alert("DevOps danışmanlık talebiniz başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz.");
+  const [status, setStatus] = useState<null | "success" | "error">(null);
+  const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const [countrySearch, setCountrySearch] = useState("");
+  const countryDropdownRef = useRef<HTMLDivElement>(null);
+  const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+  const [validationMsg, setValidationMsg] = useState("");
+
+  const requiredFields = ["fullName", "companyName", "email", "phone", "message"];
+
+  // Lambda-compatible field mapping function for AWS SES
+  function mapFormToLambda(form) {
+    return {
+      page: "/solutions/devops",
+      name: form.fullName || "",
+      company: form.companyName || "",
+      email: form.email || "",
+      phone: form.countryCode && form.phone ? form.countryCode + form.phone : form.phone || "",
+      countryCode: form.countryCode || "+1",
+      position: form.position || "",
+      currentTools: form.currentTools || "",
+      challenges: form.challenges || "",
+      message: form.message || ""
+    };
+  }
+
+  // Handle phone number input (only numbers)
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, ''); // Only get numbers
+    // Allow up to 15 digits for international phone numbers
+    if (value.length <= 15) {
+      setFormData({ ...formData, phone: value });
+    }
   };
 
-  // Input değişimlerini yakalama
+  // Handle country code selection
+  const handleCountryCodeChange = (countryCode: string) => {
+    setFormData({ ...formData, countryCode });
+    setShowCountryDropdown(false);
+    setCountrySearch("");
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (countryDropdownRef.current && !countryDropdownRef.current.contains(event.target as Node)) {
+        setShowCountryDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Form submission processing
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus(null);
+    setValidationMsg("");
+    
+    // Validation
+    const newErrors: { [key: string]: boolean } = {};
+    requiredFields.forEach((field) => {
+      if (!formData[field] || formData[field].trim() === "") {
+        newErrors[field] = true;
+      }
+    });
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      setValidationMsg("Please fill in the required fields.");
+      setLoading(false);
+      setTimeout(() => setValidationMsg(""), 3000);
+      return;
+    }
+
+    // Create Lambda-compatible payload
+    const payload = mapFormToLambda(formData);
+    try {
+      const res = await fetch("https://rvskttz2jh.execute-api.us-east-1.amazonaws.com/prod/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      
+      // Clear form
+      setFormData({
+        fullName: "",
+        companyName: "",
+        email: "",
+        phone: "",
+        countryCode: "+1",
+        position: "",
+        currentTools: "",
+        challenges: "",
+        message: ""
+      });
+      setErrors({});
+      setCountrySearch("");
+      
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      // Clear form
+      setFormData({
+        fullName: "",
+        companyName: "",
+        email: "",
+        phone: "",
+        countryCode: "+1",
+        position: "",
+        currentTools: "",
+        challenges: "",
+        message: ""
+      });
+      setErrors({});
+      setCountrySearch("");
+      setStatus("error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Capturing input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  useEffect(() => {
+    if (status) {
+      setShowPopup(true);
+      const timer = setTimeout(() => {
+        setShowPopup(false);
+        setStatus(null);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
 
   return (
     <main className="flex min-h-screen flex-col items-center pt-32">
@@ -42,22 +218,22 @@ export default function DevOpsPage() {
         
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6 text-white">DevOps Çözümleri</h1>
+            <h1 className="text-5xl font-bold mb-6 text-white">DevOps Solutions</h1>
             <p className="text-xl">
-              Modern DevOps pratikleri ile yazılım geliştirme ve operasyon süreçlerinizi otomatikleştirin.
-              CI/CD pipeline'ları, konteynerizasyon ve altyapı otomasyonu ile yazılım teslimatınızı hızlandırın.
+              Automate your software development and operations processes with modern DevOps practices.
+              Accelerate your software delivery with CI/CD pipelines, containerization, and infrastructure automation.
             </p>
           </div>
         </div>
       </section>
 
-      {/* DevOps Uygulama Alanları */}
+      {/* DevOps Application Areas */}
       <section className="w-full py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">DevOps Uygulama Alanları</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">DevOps Application Areas</h2>
             <p className="text-xl text-gray-600">
-              DevOps metodolojisi ile dönüştürebileceğimiz temel alanlar
+              Key areas we can transform with DevOps methodologies
             </p>
           </div>
 
@@ -68,9 +244,9 @@ export default function DevOpsPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                   </svg>
                 </div>
-              <h3 className="text-xl font-semibold text-blue-800 mb-4">Sürekli Entegrasyon</h3>
+              <h3 className="text-xl font-semibold text-blue-800 mb-4">Continuous Integration</h3>
               <p className="text-gray-600">
-                  Otomatik build ve test süreçleri ile kod kalitesini artırın ve hataları erkenden yakalayın.
+                  Increase code quality and catch errors early with automatic build and test processes.
                 </p>
               </div>
 
@@ -80,9 +256,9 @@ export default function DevOpsPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                   </svg>
                 </div>
-              <h3 className="text-xl font-semibold text-blue-800 mb-4">Sürekli Dağıtım</h3>
+              <h3 className="text-xl font-semibold text-blue-800 mb-4">Continuous Deployment</h3>
               <p className="text-gray-600">
-                  Güvenli ve otomatik deployment süreçleri ile uygulamalarınızı hızlıca yayına alın.
+                  Quickly deploy your applications with secure and automated deployment processes.
                 </p>
               </div>
 
@@ -92,27 +268,27 @@ export default function DevOpsPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                   </svg>
               </div>
-              <h3 className="text-xl font-semibold text-blue-800 mb-4">Konteynerizasyon</h3>
+              <h3 className="text-xl font-semibold text-blue-800 mb-4">Containerization</h3>
               <p className="text-gray-600">
-                Docker ve Kubernetes ile uygulamalarınızı konteynerize edin ve ölçeklendirin.
+                Containerize and scale your applications with Docker and Kubernetes.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* DevOps Araçları */}
+      {/* DevOps Tools */}
       <section className="w-full py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">DevOps Araç Seti</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">DevOps Toolset</h2>
             <p className="text-xl text-gray-600">
-              DevOps süreçlerinizi optimize etmek için kullandığımız araçlar
+              Tools we use to optimize your DevOps processes
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Araç 1 */}
+            {/* Tool 1 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="flex items-start gap-4">
                 <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 flex-shrink-0">
@@ -122,15 +298,15 @@ export default function DevOpsPage() {
                     </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Altyapı Otomasyonu</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Infrastructure Automation</h3>
                   <p className="text-gray-600">
-                    Terraform, Ansible, CloudFormation ve Pulumi ile altyapınızı kod olarak yönetin, manuel işlemleri ortadan kaldırın.
+                    Manage your infrastructure as code with Terraform, Ansible, CloudFormation and Pulumi, eliminating manual processes.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Araç 2 */}
+            {/* Tool 2 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="flex items-start gap-4">
                 <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 flex-shrink-0">
@@ -141,13 +317,13 @@ export default function DevOpsPage() {
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Monitoring & Observability</h3>
                   <p className="text-gray-600">
-                    Prometheus, Grafana, ELK Stack ve Datadog ile sistem performansını izleyin, logları analiz edin ve sorunları hızlıca tespit edin.
+                    Monitor system performance, analyze logs and quickly detect issues with Prometheus, Grafana, ELK Stack and Datadog.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Araç 3 */}
+            {/* Tool 3 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="flex items-start gap-4">
                 <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 flex-shrink-0">
@@ -156,15 +332,15 @@ export default function DevOpsPage() {
                     </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Güvenlik Otomasyonu</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Security Automation</h3>
                   <p className="text-gray-600">
-                    SonarQube, Snyk, OWASP ZAP ve Trivy ile CI/CD pipeline'larınıza entegre edilmiş güvenlik taramaları ve kod kalite kontrolleri.
+                    Integrated security scans and code quality controls in your CI/CD pipelines with SonarQube, Snyk, OWASP ZAP and Trivy.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Araç 4 */}
+            {/* Tool 4 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="flex items-start gap-4">
                 <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 flex-shrink-0">
@@ -175,7 +351,7 @@ export default function DevOpsPage() {
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">GitOps</h3>
                   <p className="text-gray-600">
-                    ArgoCD, Flux ve Jenkins X ile Kubernetes clusterlarınızı Git üzerinden yönetin, deklaratif yapılandırma ve otomatik eşitleme ile dağıtım süreçlerinizi basitleştirin.
+                    Manage your Kubernetes clusters via Git with ArgoCD, Flux and Jenkins X, simplifying your deployment processes with declarative configuration and automatic synchronization.
                   </p>
                 </div>
               </div>
@@ -184,24 +360,30 @@ export default function DevOpsPage() {
         </div>
       </section>
 
-      {/* DevOps Danışmanlık Talebi Formu */}
+      {/* DevOps Consulting Request Form */}
       <section className="w-full py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="bg-gradient-to-r from-blue-800 to-blue-950 rounded-3xl shadow-xl overflow-hidden">
               <div className="p-10 md:p-12">
-                <h2 className="text-3xl font-bold text-white mb-8">DevOps Danışmanlık Talebi</h2>
+                <h2 className="text-3xl font-bold text-white mb-8">DevOps Consulting Request</h2>
                 <p className="text-white/80 mb-10">
-                  DevOps dönüşüm yolculuğunuzda size yardımcı olmak için buradayız. Mevcut süreçlerinizi analiz ederek, 
-                  organizasyonunuza özel bir DevOps stratejisi ve yol haritası oluşturalım.
+                  We are here to help you on your DevOps transformation journey. Let's create a customized DevOps strategy and roadmap for your organization by analyzing your current processes.
                 </p>
 
+                {/* Validation message */}
+                {validationMsg && (
+                  <div className="bg-red-500/10 border border-red-400 text-red-200 px-4 py-3 rounded-xl mb-6">
+                    {validationMsg}
+                  </div>
+                )}
+
                 <form onSubmit={handleSubmit} className="space-y-8">
-                  {/* Kişisel ve Şirket Bilgileri */}
+                  {/* Personal and Company Information */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="fullName" className="block text-sm font-medium text-white/80 mb-2">
-                        Ad Soyad*
+                        Full Name*
                       </label>
                       <input
                         type="text"
@@ -210,13 +392,17 @@ export default function DevOpsPage() {
                         value={formData.fullName}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                        placeholder="Adınız ve soyadınız"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.fullName 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                        placeholder="Your first and last name"
                       />
                     </div>
                     <div>
                       <label htmlFor="companyName" className="block text-sm font-medium text-white/80 mb-2">
-                        Şirket Adı*
+                        Company Name*
                       </label>
                       <input
                         type="text"
@@ -225,13 +411,17 @@ export default function DevOpsPage() {
                         value={formData.companyName}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                        placeholder="Şirketinizin adı"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.companyName 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                        placeholder="Your company name"
                       />
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
-                        E-posta*
+                        Email*
                       </label>
                       <input
                         type="email"
@@ -240,28 +430,94 @@ export default function DevOpsPage() {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                        placeholder="ornek@sirket.com"
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.email 
+                            ? 'border-red-400 bg-red-500/10' 
+                            : 'border-white/10 bg-white/5'
+                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                        placeholder="example@company.com"
                       />
                     </div>
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
-                        Telefon*
+                        Phone*
                       </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                        placeholder="+90 (___) ___ __ __"
-                      />
+                      <div className="flex gap-2">
+                        {/* Country Code Selector */}
+                        <div className="relative" ref={countryDropdownRef}>
+                          <button
+                            type="button"
+                            onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                            className="px-3 py-3 rounded-xl border border-white/10 bg-white/5 text-white hover:bg-white/10 transition-colors flex items-center gap-2 min-w-[100px] justify-between"
+                          >
+                            <span className="flex items-center gap-2">
+                              <span>{countryCodes.find(c => c.code === formData.countryCode)?.flag || "🇺🇸"}</span>
+                              <span className="text-sm">{formData.countryCode}</span>
+                            </span>
+                            <svg className={`w-4 h-4 transition-transform ${showCountryDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
+                          
+                          {showCountryDropdown && (
+                            <div className="absolute top-full left-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 max-h-80 w-64">
+                              {/* Search Input */}
+                              <div className="p-3 border-b border-gray-200 sticky top-0 bg-white">
+                                <input
+                                  type="text"
+                                  placeholder="Search country..."
+                                  value={countrySearch}
+                                  onChange={(e) => setCountrySearch(e.target.value)}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                              </div>
+                              
+                              {/* Country List */}
+                              <div className="overflow-y-auto max-h-64">
+                                {countryCodes
+                                  .filter(country => 
+                                    country.country.toLowerCase().includes(countrySearch.toLowerCase()) ||
+                                    country.code.includes(countrySearch)
+                                  )
+                                  .map((country) => (
+                                    <button
+                                      key={country.code}
+                                      type="button"
+                                      onClick={() => handleCountryCodeChange(country.code)}
+                                      className={`w-full px-4 py-3 text-left hover:bg-blue-50 transition-colors flex items-center gap-3 ${
+                                        formData.countryCode === country.code ? 'bg-blue-100' : ''
+                                      }`}
+                                    >
+                                      <span className="text-xl">{country.flag}</span>
+                                      <span className="text-gray-900 text-sm font-medium">{country.country}</span>
+                                      <span className="text-gray-500 text-sm ml-auto">{country.code}</span>
+                                    </button>
+                                  ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Phone Number Input */}
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handlePhoneChange}
+                          required
+                          className={`flex-1 px-4 py-3 rounded-xl border ${
+                            errors.phone 
+                              ? 'border-red-400 bg-red-500/10' 
+                              : 'border-white/10 bg-white/5'
+                          } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                          placeholder="Phone number"
+                        />
+                      </div>
                     </div>
                     <div>
                       <label htmlFor="position" className="block text-sm font-medium text-white/80 mb-2">
-                        Pozisyon
+                        Position
                       </label>
                       <input
                         type="text"
@@ -270,12 +526,12 @@ export default function DevOpsPage() {
                         value={formData.position}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                        placeholder="Şirketteki pozisyonunuz"
+                        placeholder="Your position at the company"
                       />
                     </div>
                     <div>
                       <label htmlFor="currentTools" className="block text-sm font-medium text-white/80 mb-2">
-                        Mevcut Kullandığınız Araçlar
+                        Current Tools You Use
                       </label>
                       <input
                         type="text"
@@ -284,15 +540,15 @@ export default function DevOpsPage() {
                         value={formData.currentTools}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                        placeholder="Jenkins, GitLab, Docker, vb."
+                        placeholder="Jenkins, GitLab, Docker, etc."
                       />
                     </div>
                   </div>
 
-                  {/* DevOps Zorlukları */}
+                  {/* DevOps Challenges */}
                   <div>
                     <label htmlFor="challenges" className="block text-sm font-medium text-white/80 mb-2">
-                      DevOps ile Çözmek İstediğiniz Zorluklar
+                      Challenges You Want to Solve with DevOps
                     </label>
                     <textarea
                       id="challenges"
@@ -301,14 +557,14 @@ export default function DevOpsPage() {
                       value={formData.challenges}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                      placeholder="Mevcut geliştirme ve dağıtım süreçlerinizdeki zorluklar nelerdir?"
+                      placeholder="What are the challenges in your current development and deployment processes?"
                     ></textarea>
                   </div>
 
-                  {/* Ek Mesaj */}
+                  {/* Additional Message */}
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
-                      Ek Bilgiler ve Beklentileriniz
+                      Additional Information and Expectations*
                     </label>
                     <textarea
                       id="message"
@@ -316,19 +572,29 @@ export default function DevOpsPage() {
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                      placeholder="DevOps dönüşümünden beklentileriniz ve projeleriniz hakkında daha fazla bilgi"
+                      required
+                      className={`w-full px-4 py-3 rounded-xl border ${
+                        errors.message 
+                          ? 'border-red-400 bg-red-500/10' 
+                          : 'border-white/10 bg-white/5'
+                      } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                      placeholder="Your expectations from DevOps transformation and more information about your projects"
                     ></textarea>
                   </div>
 
-                  {/* Gönder Butonu */}
+                  {/* Send Button */}
                   <div className="flex flex-col sm:flex-row justify-end gap-4">
                     <button
                       type="submit"
-                      className="w-full sm:w-auto px-10 py-3 bg-white text-blue-800 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
+                      disabled={loading}
+                      className={`w-full sm:w-auto px-10 py-3 font-semibold rounded-xl transition-colors ${
+                        loading 
+                          ? 'bg-gray-400 text-gray-600 cursor-not-allowed' 
+                          : 'bg-white text-blue-800 hover:bg-blue-50'
+                      }`}
                     >
-                      Danışmanlık Talebi Gönder
-              </button>
+                      {loading ? "Sending..." : "Submit Consulting Request"}
+                    </button>
                   </div>
                 </form>
               </div>
@@ -336,6 +602,43 @@ export default function DevOpsPage() {
           </div>
         </div>
       </section>
+
+      {/* Notification Pop-up Modal */}
+      {showPopup && status && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 transform transition-all">
+            <div className="p-8 text-center">
+              <div className="flex justify-center mb-4">
+                {status === "success" ? (
+                  <CheckCircle className="w-16 h-16 text-green-500" />
+                ) : (
+                  <AlertTriangle className="w-16 h-16 text-red-500" />
+                )}
+              </div>
+              <h3 className={`text-xl font-semibold mb-2 ${
+                status === "success" ? "text-green-800" : "text-red-800"
+              }`}>
+                {status === "success" ? "Success!" : "Error!"}
+              </h3>
+              <p className={`text-gray-600 ${
+                status === "success" ? "text-green-700" : "text-red-700"
+              }`}>
+                {status === "success" 
+                  ? "Your DevOps consulting request has been successfully received. We will contact you as soon as possible." 
+                  : "An error occurred. You can send an email directly to info@virtualriddle.com."
+                }
+              </p>
+            </div>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Close popup"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 } 

@@ -1,7 +1,5 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
+export { generateMetadata } from './metadata';
 
 export default function ConfluencePage() {
   return (
@@ -17,17 +15,17 @@ export default function ConfluencePage() {
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold text-white mb-6">
-              Ekip bilgisi için tek kaynak
+              Single Source for Team Knowledge
             </h1>
             <p className="text-xl mb-8">
-              Confluence ile tüm ekip bilgilerinizi merkezi bir platformda toplayın, düzenleyin ve paylaşın. Yapay zeka destekli bilgi tabanı çözümüyle daha verimli çalışın.
+              Collect, organize, and share all your team information on a centralized platform with Confluence. Work more efficiently with AI-powered knowledge base solutions.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/free-discovery" 
                 className="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all w-full sm:w-auto text-center"
               >
-                Ücretsiz Dene
+                Try Free
               </Link>
               <Link
                 href="https://www.atlassian.com/software/confluence" 
@@ -35,7 +33,7 @@ export default function ConfluencePage() {
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
               >
-                Ürünü İncele
+                View Product
               </Link>
             </div>
           </div>
@@ -56,8 +54,8 @@ export default function ConfluencePage() {
                   <path d="M7 16H13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">Merkezi Bilgi Tabanı</h3>
-              <p className="text-blue-600/80">Tüm ekip bilgilerinizi, projelerinizi ve dökümanlarınızı tek bir yerde toplayın. Bilgilere hızlıca erişin ve paylaşın.</p>
+              <h3 className="text-2xl font-bold text-blue-600">Central Knowledge Base</h3>
+              <p className="text-blue-600/80">Collect all your team information, projects, and documents in one place. Quickly access and share knowledge.</p>
             </div>
 
             {/* Feature 2 */}
@@ -70,8 +68,8 @@ export default function ConfluencePage() {
                   <path d="M16 3.13a4 4 0 010 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">İş Birliği Alanları</h3>
-              <p className="text-blue-600/80">Ekip çalışması için özel alanlar oluşturun. Gerçek zamanlı düzenleme, yorum ve geri bildirim özellikleriyle verimli çalışın.</p>
+              <h3 className="text-2xl font-bold text-blue-600">Collaboration Spaces</h3>
+              <p className="text-blue-600/80">Create dedicated spaces for team collaboration. Work efficiently with real-time editing, commenting, and feedback features.</p>
             </div>
 
             {/* Feature 3 */}
@@ -82,8 +80,8 @@ export default function ConfluencePage() {
                   <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">Kesintisiz Entegrasyonlar</h3>
-              <p className="text-blue-600/80">Jira, Bitbucket ve diğer Atlassian ürünleriyle sorunsuz entegre olun. Proje bilgilerinizi ve dokümantasyonlarınızı birbirine bağlayın.</p>
+              <h3 className="text-2xl font-bold text-blue-600">Seamless Integrations</h3>
+              <p className="text-blue-600/80">Seamlessly integrate with Jira, Bitbucket, and other Atlassian products. Connect your project information and documentation.</p>
             </div>
           </div>
         </div>
@@ -93,33 +91,33 @@ export default function ConfluencePage() {
       <section className="py-24 bg-blue-600">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Yapay Zeka Destekli Dokümantasyon</h2>
-            <p className="text-xl text-white/80">Confluence'ın yapay zeka özellikleri sayesinde içerik oluşturma ve bilgi keşfi süreçlerini hızlandırın.</p>
+            <h2 className="text-4xl font-bold text-white mb-4">AI-Powered Documentation</h2>
+            <p className="text-xl text-white/80">Accelerate content creation and knowledge discovery processes with Confluence's artificial intelligence features.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* AI Feature 1 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2">İçerik Özeti</h3>
-              <p className="text-white/80">Uzun dokümanlarda otomatik özetler oluşturarak ekip üyelerinizin bilgiye hızlıca erişmesini sağlayın.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Content Summarization</h3>
+              <p className="text-white/80">Enable team members to quickly access knowledge by creating automatic summaries in long documents.</p>
             </div>
 
             {/* AI Feature 2 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2">Akıllı Arama</h3>
-              <p className="text-white/80">Yapay zeka destekli arama ile dokümanlarda tam olarak ihtiyacınız olan bilgiyi saniyeler içinde bulun.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Smart Search</h3>
+              <p className="text-white/80">Find the information you need in documents within seconds with AI-powered search.</p>
             </div>
 
             {/* AI Feature 3 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2">İçerik Asistanı</h3>
-              <p className="text-white/80">Yapay zeka asistanı ile dokümantasyon oluşturmayı hızlandırın ve yazım kalitesini artırın.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Content Assistant</h3>
+              <p className="text-white/80">Accelerate documentation creation and improve writing quality with an AI assistant.</p>
             </div>
 
             {/* AI Feature 4 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2">Bilgi İlişkilendirme</h3>
-              <p className="text-white/80">İlgili dokümantasyonları otomatik olarak ilişkilendirin ve bilgi siloları oluşmasını engelleyin.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Knowledge Linking</h3>
+              <p className="text-white/80">Automatically link related documentation and prevent knowledge silos from forming.</p>
             </div>
           </div>
         </div>
@@ -129,32 +127,32 @@ export default function ConfluencePage() {
       <section className="py-24 bg-blue-600/10">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-4xl font-bold text-blue-600 mb-4">Her Departman İçin Çözümler</h2>
-            <p className="text-xl text-blue-600/80">Confluence, organizasyonunuzun her bölümü için bilgi ve iş birliği çözümleri sunar.</p>
+            <h2 className="text-4xl font-bold text-blue-600 mb-4">Solutions for Every Department</h2>
+            <p className="text-xl text-blue-600/80">Confluence provides knowledge and collaboration solutions for every part of your organization.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-blue-600">Yazılım Geliştirme</h3>
-                <p className="text-blue-600/80">Teknik dokümantasyon, mimari kararlar ve geliştirme süreçlerinizi kayıt altına alın. Kod görünümleri ve diyagramlarla zenginleştirin.</p>
+                <h3 className="text-2xl font-semibold text-blue-600">Software Development</h3>
+                <p className="text-blue-600/80">Record your technical documentation, architectural decisions, and development processes. Enrich with code views and diagrams.</p>
                 </div>
 
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-blue-600">İnsan Kaynakları</h3>
-                <p className="text-blue-600/80">Şirket politikaları, onboarding belgeleri ve eğitim materyallerini merkezi bir şekilde yönetin. Çalışan el kitapları oluşturun.</p>
+                <h3 className="text-2xl font-semibold text-blue-600">Human Resources</h3>
+                <p className="text-blue-600/80">Manage company policies, onboarding documents, and training materials centrally. Create employee handbooks.</p>
               </div>
             </div>
 
             <div className="space-y-8">
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-blue-600">Pazarlama</h3>
-                <p className="text-blue-600/80">Pazarlama stratejileri, kampanya planları ve içerik takvimlerinizi yönetin. Ekip üyeleri arasında iş birliğini güçlendirin.</p>
+                <h3 className="text-2xl font-semibold text-blue-600">Marketing</h3>
+                <p className="text-blue-600/80">Manage marketing strategies, campaign plans, and content calendars. Strengthen collaboration among team members.</p>
             </div>
 
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-blue-600">Proje Yönetimi</h3>
-                <p className="text-blue-600/80">Proje planları, toplantı notları ve iş öğeleri için merkezi bir depo oluşturun. Jira ile entegre ederek proje izlenebilirliğini artırın.</p>
+                <h3 className="text-2xl font-semibold text-blue-600">Project Management</h3>
+                <p className="text-blue-600/80">Create a central repository for project plans, meeting notes, and work items. Increase project traceability by integrating with Jira.</p>
               </div>
             </div>
           </div>
@@ -165,20 +163,20 @@ export default function ConfluencePage() {
       <section className="py-24 bg-blue-600">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-white mb-6">Confluence'ı ücretsiz deneyin</h2>
-            <p className="text-xl text-white/80 mb-8">75.000'den fazla şirket Confluence ile bilgi yönetimini geliştiriyor. Siz de ekibe katılın.</p>
+            <h2 className="text-4xl font-bold text-white mb-6">Try Confluence for Free</h2>
+            <p className="text-xl text-white/80 mb-8">Over 75,000 companies are improving knowledge management with Confluence. Join the team.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
                 href="/free-discovery" 
                 className="px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-white/90 transition-all w-full sm:w-auto text-center"
               >
-                Ücretsiz Başlayın
+                Start Free
               </Link>
             <Link
                 href="/solutions/consulting" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
             >
-                Teklif İste
+                Request Quote
             </Link>
             </div>
           </div>

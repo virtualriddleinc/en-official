@@ -16,15 +16,15 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: {
     template: '%s | Virtual Riddle',
-    default: 'Virtual Riddle - Atlassian Danışmanlığı ve Modern Yazılım Çözümleri'
+    default: 'Virtual Riddle - Atlassian Consulting and Modern Software Solutions'
   },
-  description: 'Atlassian araçları ve modern yazılım çözümleri konusunda uzman danışmanlık hizmetleri',
+  description: 'Expert consulting services for Atlassian tools and modern software solutions',
   keywords: [
-    'Atlassian', 'Jira', 'Confluence', 'yazılım danışmanlığı', 'Türkiye',
-    'Claude AI', 'MCP entegrasyonu', 'yapay zeka', 'AI asistan',
-    'Atlassian danışmanlığı', 'Jira danışmanlığı', 'Confluence danışmanlığı',
-    'DevOps', 'Agile', 'proje yönetimi', 'kurumsal çözümler',
-    'Remote MCP Server', 'Anthropic Claude', 'AI iş akışları'
+    'Atlassian', 'Jira', 'Confluence', 'software consulting', 'Turkey',
+    'Claude AI', 'MCP integration', 'artificial intelligence', 'AI assistant',
+    'Atlassian consulting', 'Jira consulting', 'Confluence consulting',
+    'DevOps', 'Agile', 'project management', 'enterprise solutions',
+    'Remote MCP Server', 'Anthropic Claude', 'AI workflows'
   ],
   authors: [{ name: 'Virtual Riddle' }],
   creator: 'Virtual Riddle',
@@ -60,14 +60,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'tr_TR',
     url: 'https://virtualriddle.com',
-    title: 'Virtual Riddle - Atlassian Danışmanlığı ve Modern Yazılım Çözümleri',
-    description: 'Atlassian araçları ve modern yazılım çözümleri konusunda uzman danışmanlık hizmetleri',
+    title: 'Virtual Riddle - Atlassian Consulting and Modern Software Solutions',
+    description: 'Expert consulting services for Atlassian tools and modern software solutions',
     siteName: 'Virtual Riddle',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Virtual Riddle - Atlassian Danışmanlığı ve Modern Yazılım Çözümleri',
-    description: 'Atlassian araçları ve modern yazılım çözümleri konusunda uzman danışmanlık hizmetleri',
+    title: 'Virtual Riddle - Atlassian Consulting and Modern Software Solutions',
+    description: 'Expert consulting services for Atlassian tools and modern software solutions',
   },
   other: {
     'X-Content-Type-Options': 'nosniff',
@@ -115,9 +115,9 @@ export default function RootLayout({
         {/* Preload critical fonts */}
         <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLvoW5hJNmnEiuXDsMlGDkNCcPbmJQ31fygqt0.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         
-        {/* Critical CSS inline - Above the fold styles */}
+        {/* Critical CSS inline - Aboand the fold styles */}
         <style>{`
-          /* Critical above-the-fold styles - Optimized for LCP */
+          /* Critical aboand-the-fold styles */
           * { 
             box-sizing: border-box; 
           }
@@ -130,7 +130,7 @@ export default function RootLayout({
           body { 
             background: #fff; 
             color: #172B4D; 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans', 'Droid Sans', 'Helandtica Neue', sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
@@ -139,58 +139,12 @@ export default function RootLayout({
             -moz-osx-font-smoothing: grayscale;
           }
           
-          /* Critical header styles */
-          header {
-            position: fixed;
-            width: 100%;
-            background: #fff;
-            z-index: 50;
-            border-bottom: 1px solid #f3f4f6;
-          }
-          
-          nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-          }
-          
-          .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 5rem;
-          }
-          
-          /* Critical logo styles */
-          .logo {
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
-          }
-          
-          .logo img {
-            width: auto;
-            height: 3rem;
-          }
-          
-          /* Critical hero section styles */
+          /* Hero section critical styles */
           .hero-section { 
             background: linear-gradient(90deg, #004BB3, #0052CC, #004BB3);
             min-height: 100vh;
             position: relative;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          
-          .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            text-align: center;
-            position: relative;
-            z-index: 2;
           }
           
           /* Critical typography */
@@ -198,7 +152,7 @@ export default function RootLayout({
             font-size: 2.75rem; 
             font-weight: bold; 
             color: white; 
-            margin: 0 0 1.5rem 0;
+            margin: 0;
             line-height: 1.1;
             letter-spacing: -0.025em;
           }
@@ -212,11 +166,11 @@ export default function RootLayout({
             letter-spacing: -0.02em;
           }
           
-          .hero-subtitle {
-            font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            line-height: 1.5;
+          /* Critical layout */
+          .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 1rem; 
           }
           
           /* Critical button styles */
@@ -229,72 +183,13 @@ export default function RootLayout({
             display: inline-block;
             font-weight: 600;
             transition: background-color 0.2s;
-            margin: 0.5rem;
           }
           
-          .btn-primary:hover {
-            background: #f8fafc;
-            color: #003d99;
+          .btn-primary:ho {
+            background: #004BB3;
           }
           
-          .btn-secondary {
-            background: transparent;
-            color: white;
-            padding: 0.875rem 2rem;
-            border: 2px solid white;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: 600;
-            transition: all 0.2s;
-            margin: 0.5rem;
-          }
-          
-          .btn-secondary:hover {
-            background: white;
-            color: #004BB3;
-          }
-          
-          /* Critical layout utilities */
-          .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 0 1rem; 
-          }
-          
-          .text-center {
-            text-align: center;
-          }
-          
-          .flex {
-            display: flex;
-          }
-          
-          .items-center {
-            align-items: center;
-          }
-          
-          .justify-center {
-            justify-content: center;
-          }
-          
-          .space-x-4 > * + * {
-            margin-left: 1rem;
-          }
-          
-          /* Critical responsive */
-          @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .hero-subtitle { font-size: 1.125rem; }
-            .container { padding: 0 0.5rem; }
-            .btn-primary, .btn-secondary {
-              display: block;
-              width: 100%;
-              margin: 0.5rem 0;
-            }
-          }
-          
-          /* Critical loading states */
+          /* Loading states */
           .loading-skeleton { 
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); 
             background-size: 200% 100%; 
@@ -306,44 +201,16 @@ export default function RootLayout({
             100% { background-position: -200% 0; } 
           }
           
-          /* Critical image optimization */
-          img {
-            max-width: 100%;
-            height: auto;
-            loading: lazy;
-          }
-          
-          /* Critical performance optimizations */
-          .gpu-accelerated {
-            will-change: transform;
-            transform: translateZ(0);
-            backface-visibility: hidden;
+          /* Critical responsiand */
+          @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 0 0.5rem; }
           }
         `}</style>
         {/* rel="me" içeren doğrulama linki */}
         <link rel="me" href="https://sosyal.teknofest.app/@virtualriddle" />
         
-        {/* Defer non-critical CSS to prevent render blocking */}
-        <link
-          rel="preload"
-          href="/_next/static/css/app/globals.css"
-          as="style"
-          onLoad="this.onload=null;this.rel='stylesheet'"
-        />
-        <noscript>
-          <link rel="stylesheet" href="/_next/static/css/app/globals.css" />
-        </noscript>
-        
-        {/* Additional non-critical CSS files */}
-        <link
-          rel="preload"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          as="style"
-          onLoad="this.onload=null;this.rel='stylesheet'"
-        />
-        <noscript>
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-        </noscript>
+        {/* CSS is automatically loaded by Next.js */}
       </head>
       <body className="min-h-screen bg-white">
         <ClientLayout>{children}</ClientLayout>

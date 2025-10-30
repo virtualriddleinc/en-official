@@ -24,63 +24,71 @@ export default function KanbanBoardContent() {
   useEffect(() => {
     setIsMounted(true);
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      if (typeof window !== 'undefined') {
+        setIsMobile(window.innerWidth < 768);
+      }
     };
     
     checkMobile();
-    window.addEventListener('resize', checkMobile);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', checkMobile);
+    }
     
-    return () => window.removeEventListener('resize', checkMobile);
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', checkMobile);
+      }
+    };
   }, []);
 
   const [columns, setColumns] = useState<{ [key: string]: Column }>({
     backlog: {
       id: 'backlog',
-      title: 'Yapılacak',
+      title: 'To Do',
       issues: [
         {
           id: '1',
-          title: 'CI/CD Pipeline Optimizasyonu',
-          description: 'Jenkins pipeline\'ları optimize edilecek',
+          title: 'CI/CD Pipeline Optimization',
+          description: 'Optimize Jenkins pipelines',
           priority: 'high',
           type: 'task',
-          assignee: 'Ahmet Y.'
+          assignee: 'John D.'
         },
         {
           id: '2',
-          title: 'Kubernetes Cluster Hatası',
-          description: 'Pod scheduling sorunları giderilecek',
+          title: 'Kubernetes Cluster Issue',
+          description: 'Fix pod scheduling issues',
           priority: 'high',
           type: 'bug',
-          assignee: 'Mehmet K.'
+          assignee: 'Sarah M.'
         }
       ]
     },
     inProgress: {
       id: 'inProgress',
-      title: 'Devam Eden',
+      title: 'In Progress',
       issues: [
         {
           id: '3',
           title: 'AWS Cost Optimization',
-          description: 'Bulut maliyetlerinin optimize edilmesi',
+          description: 'Optimize cloud costs',
           priority: 'medium',
           type: 'task',
-          assignee: 'Zeynep D.'
+          assignee: 'Michael R.'
         }
       ]
     },
     done: {
       id: 'done',
-      title: 'Tamamlandı',
+      title: 'Done',
       issues: [
         {
           id: '4',
           title: 'Docker Containerization',
-          description: 'Mikroservislerin containerize edilmesi',
+          description: 'Containerize microservices',
           priority: 'low',
           type: 'task',
-          assignee: 'Ali M.'
+          assignee: 'Emily K.'
         }
       ]
     }
@@ -149,10 +157,10 @@ export default function KanbanBoardContent() {
   return (
     <div className="w-full max-w-7xl mx-auto p-6">
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Proje Yönetimi</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">Project Management</h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Projelerinizi kolayca takip edin ve ekip üyelerinizle işbirliği yapın. 
-          {isMobile ? ' Mobil cihazlarda görüntüleme modunda.' : ' Kartları sürükleyerek durumlarını güncelleyebilirsiniz.'}
+          Easily track your projects and collaborate with your team members. 
+          {isMobile ? ' View mode on mobile devices.' : ' You can update statuses by dragging cards.'}
         </p>
       </div>
 
@@ -189,7 +197,7 @@ export default function KanbanBoardContent() {
                       </h4>
                       <div className="flex items-center space-x-2 ml-2">
                         <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(issue.priority)}`}>
-                          {issue.priority === 'high' ? 'Yüksek' : issue.priority === 'medium' ? 'Orta' : 'Düşük'}
+                          {issue.priority === 'high' ? 'High' : issue.priority === 'medium' ? 'Medium' : 'Low'}
                         </span>
                         <div className="text-gray-400">
                           {getTypeIcon(issue.type)}
@@ -219,7 +227,7 @@ export default function KanbanBoardContent() {
                       <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
-                      <p className="text-sm">Henüz görev yok</p>
+                      <p className="text-sm">No tasks yet</p>
                     </div>
                   </div>
                 )}
@@ -236,10 +244,10 @@ export default function KanbanBoardContent() {
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
             </svg>
             <div>
-              <h4 className="text-sm font-medium text-blue-900 mb-1">Mobil Görünüm</h4>
+              <h4 className="text-sm font-medium text-blue-900 mb-1">Mobile View</h4>
               <p className="text-sm text-blue-700">
-                Sürükle-bırak özelliği mobil cihazlarda devre dışıdır. 
-                Desktop cihazlarda tam işlevsellik için lütfen masaüstü sürümünü kullanın.
+                Drag-and-drop is disabled on mobile devices.
+                For full functionality, please use the desktop version on desktop devices.
               </p>
             </div>
           </div>

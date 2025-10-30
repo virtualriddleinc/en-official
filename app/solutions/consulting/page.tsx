@@ -1,17 +1,60 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CheckCircle, AlertTriangle, X } from "lucide-react";
 import StructuredData from '../../components/StructuredData';
 
+// Country codes with flags (sorted by popularity, Palestine first)
+const countryCodes = [
+  { code: "+970", flag: "🇵🇸", country: "Palestine" },
+  { code: "+1", flag: "🇺🇸", country: "United States" },
+  { code: "+90", flag: "🇹🇷", country: "Turkey" },
+  { code: "+44", flag: "🇬🇧", country: "United Kingdom" },
+  { code: "+49", flag: "🇩🇪", country: "Germany" },
+  { code: "+33", flag: "🇫🇷", country: "France" },
+  { code: "+39", flag: "🇮🇹", country: "Italy" },
+  { code: "+34", flag: "🇪🇸", country: "Spain" },
+  { code: "+31", flag: "🇳🇱", country: "Netherlands" },
+  { code: "+41", flag: "🇨🇭", country: "Switzerland" },
+  { code: "+32", flag: "🇧🇪", country: "Belgium" },
+  { code: "+43", flag: "🇦🇹", country: "Austria" },
+  { code: "+46", flag: "🇸🇪", country: "Sweden" },
+  { code: "+47", flag: "🇳🇴", country: "Norway" },
+  { code: "+45", flag: "🇩🇰", country: "Denmark" },
+  { code: "+358", flag: "🇫🇮", country: "Finland" },
+  { code: "+971", flag: "🇦🇪", country: "UAE" },
+  { code: "+966", flag: "🇸🇦", country: "Saudi Arabia" },
+  { code: "+974", flag: "🇶🇦", country: "Qatar" },
+  { code: "+81", flag: "🇯🇵", country: "Japan" },
+  { code: "+86", flag: "🇨🇳", country: "China" },
+  { code: "+91", flag: "🇮🇳", country: "India" },
+  { code: "+82", flag: "🇰🇷", country: "South Korea" },
+  { code: "+61", flag: "🇦🇺", country: "Australia" },
+  { code: "+64", flag: "🇳🇿", country: "New Zealand" },
+  { code: "+55", flag: "🇧🇷", country: "Brazil" },
+  { code: "+52", flag: "🇲🇽", country: "Mexico" },
+  { code: "+54", flag: "🇦🇷", country: "Argentina" },
+  { code: "+57", flag: "🇨🇴", country: "Colombia" },
+  { code: "+56", flag: "🇨🇱", country: "Chile" },
+  { code: "+7", flag: "🇷🇺", country: "Russia" },
+  { code: "+30", flag: "🇬🇷", country: "Greece" },
+  { code: "+48", flag: "🇵🇱", country: "Poland" },
+  { code: "+420", flag: "🇨🇿", country: "Czech Republic" },
+  { code: "+36", flag: "🇭🇺", country: "Hungary" },
+  { code: "+40", flag: "🇷🇴", country: "Romania" },
+  { code: "+351", flag: "🇵🇹", country: "Portugal" },
+  { code: "+27", flag: "🇿🇦", country: "South Africa" },
+];
+
 export default function ConsultingPage() {
-  // Form durumu için state tanımları
+  // Form state definitions
   const [formData, setFormData] = useState({
     fullName: "",
     companyName: "",
     email: "",
     phone: "",
+    countryCode: "+1",
     position: "",
     teamSize: "",
     services: {
@@ -31,22 +74,25 @@ export default function ConsultingPage() {
   const [status, setStatus] = useState<null | "success" | "error">(null);
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const [countrySearch, setCountrySearch] = useState("");
+  const countryDropdownRef = useRef<HTMLDivElement>(null);
 
   const requiredFields = ["fullName", "companyName", "email", "phone", "message"];
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const [validationMsg, setValidationMsg] = useState("");
 
-  // Danışmanlık hizmetleri
+  // Consulting services
   const serviceList = [
-    { id: "processAnalysis", name: "Süreç Analizi", description: "Mevcut iş süreçlerinin analizi ve optimizasyonu" },
-    { id: "productConsulting", name: "Ürün Danışmanlığı", description: "Atlassian ürünlerinin yapılandırması ve optimizasyonu" },
-    { id: "projectManagement", name: "Proje Yönetimi", description: "Proje yönetimi süreçlerinin iyileştirilmesi" },
-    { id: "agileTransformation", name: "Agile Dönüşüm", description: "Çevik metodolojilere geçiş danışmanlığı" },
-    { id: "devopsConsulting", name: "DevOps Danışmanlığı", description: "DevOps süreçlerinin kurulması ve optimizasyonu" },
-    { id: "customConsulting", name: "Özel Danışmanlık", description: "Kurumunuza özel danışmanlık hizmetleri" }
+    { id: "processAnalysis", name: "Process Analysis", description: "Analysis and optimization of current business processes" },
+    { id: "productConsulting", name: "Product Consulting", description: "Configuration and optimization of Atlassian products" },
+    { id: "projectManagement", name: "Project Management", description: "Improvement of project management processes" },
+    { id: "agileTransformation", name: "Agile Transformation", description: "Consulting for transition to agile methodologies" },
+    { id: "devopsConsulting", name: "DevOps Consulting", description: "Establishment and optimization of DevOps processes" },
+    { id: "customConsulting", name: "Custom Consulting", description: "Custom consulting services for your organization" }
   ];
 
-  // Şirket büyüklükleri
+  // Company sizes
   const teamSizes = [
     "1-20",
     "21-100",
@@ -55,61 +101,94 @@ export default function ConsultingPage() {
     "1000+"
   ];
 
-  // Proje kapsamları
+  // Project scopes
   const projectScopes = [
-    "Küçük Ölçekli (1-3 ay)",
-    "Orta Ölçekli (3-6 ay)",
-    "Büyük Ölçekli (6-12 ay)",
-    "Kurumsal Dönüşüm (12+ ay)"
+    "Small Scale (1-3 months)",
+    "Medium Scale (3-6 months)",
+    "Large Scale (6-12 months)",
+    "Enterprise Transformation (12+ months)"
   ];
 
-  // Zaman çizelgeleri
+  // Timelines
   const timelines = [
-    "Acil (1 ay içinde)",
-    "Orta Vadeli (3 ay içinde)",
-    "Uzun Vadeli (6 ay içinde)",
-    "Planlama Aşamasında"
+    "Urgent (within 1 month)",
+    "Medium Term (within 3 months)",
+    "Long Term (within 6 months)",
+    "Planning Stage"
   ];
 
-  // Kullanıcıya görünen hizmet etiketleri
+  // Service labels visible to users
   const serviceLabels = {
-    processAnalysis: "Süreç Analizi",
-    productConsulting: "Ürün Danışmanlığı",
-    projectManagement: "Proje Yönetimi",
-    agileTransformation: "Agile Dönüşüm",
-    devopsConsulting: "DevOps Danışmanlığı",
-    customConsulting: "Özel Danışmanlık"
+    processAnalysis: "Process Analysis",
+    productConsulting: "Product Consulting",
+    projectManagement: "Project Management",
+    agileTransformation: "Agile Transformation",
+    devopsConsulting: "DevOps Consulting",
+    customConsulting: "Custom Consulting"
   };
 
-  // Lambda ile uyumlu field mapping fonksiyonu
+  // Lambda-compatible field mapping function for AWS SES
   function mapFormToLambda(form) {
+    const selectedServices = Object.entries(form.services)
+      .filter(([k, v]) => v)
+      .map(([k]) => serviceLabels[k] || k)
+      .join(", ");
+
     return {
       page: "/solutions/consulting",
-      name: form.fullName,
-      company: form.companyName,
-      email: form.email,
-      phone: form.phone,
-      position: form.position,
-      teamSize: form.teamSize,
-      consultingServices: Object.entries(form.services)
-        .filter(([k,v])=>v)
-        .map(([k])=>serviceLabels[k] || k)
-        .join(", "),
-      currentTools: form.currentTools,
-      projectScope: form.projectScope,
-      timeline: form.timeline,
-      message: form.message
+      name: form.fullName || "",
+      company: form.companyName || "",
+      email: form.email || "",
+      phone: form.countryCode && form.phone ? form.countryCode + form.phone : form.phone || "",
+      countryCode: form.countryCode || "+1",
+      position: form.position || "",
+      teamSize: form.teamSize || "",
+      consultingServices: selectedServices || "",
+      currentTools: form.currentTools || "",
+      projectScope: form.projectScope || "",
+      timeline: form.timeline || "",
+      message: form.message || ""
     };
   }
 
-  // Form gönderim işleme
+  // Handle phone number input (only numbers)
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, ''); // Only get numbers
+    // Allow up to 15 digits for international phone numbers
+    if (value.length <= 15) {
+      setFormData({ ...formData, phone: value });
+    }
+  };
+
+  // Handle country code selection
+  const handleCountryCodeChange = (countryCode: string) => {
+    setFormData({ ...formData, countryCode });
+    setShowCountryDropdown(false);
+    setCountrySearch("");
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (countryDropdownRef.current && !countryDropdownRef.current.contains(event.target as Node)) {
+        setShowCountryDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Form submission processing
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
     setValidationMsg("");
     
-    // Validasyon
+    // Validation
     const newErrors: { [key: string]: boolean } = {};
     requiredFields.forEach((field) => {
       if (!formData[field] || formData[field].trim() === "") {
@@ -118,13 +197,13 @@ export default function ConsultingPage() {
     });
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) {
-      setValidationMsg("Lütfen zorunlu alanları doldurun.");
+      setValidationMsg("Please fill in the required fields.");
       setLoading(false);
       setTimeout(() => setValidationMsg(""), 3000);
       return;
     }
 
-    // Lambda ile uyumlu payload oluştur
+    // Create Lambda-compatible payload
     const payload = mapFormToLambda(formData);
     
     try {
@@ -134,12 +213,13 @@ export default function ConsultingPage() {
         body: JSON.stringify(payload),
       });
       
-      // Form temizleme
+      // Clear form
       setFormData({
         fullName: "",
         companyName: "",
         email: "",
         phone: "",
+        countryCode: "+1",
         position: "",
         teamSize: "",
         services: {
@@ -156,6 +236,7 @@ export default function ConsultingPage() {
         message: ""
       });
       setErrors({});
+      setCountrySearch("");
       
       if (res.ok) {
         setStatus("success");
@@ -163,12 +244,13 @@ export default function ConsultingPage() {
         setStatus("error");
       }
     } catch {
-      // Form temizleme
+      // Clear form
       setFormData({
         fullName: "",
         companyName: "",
         email: "",
         phone: "",
+        countryCode: "+1",
         position: "",
         teamSize: "",
         services: {
@@ -185,19 +267,20 @@ export default function ConsultingPage() {
         message: ""
       });
       setErrors({});
+      setCountrySearch("");
       setStatus("error");
     } finally {
       setLoading(false);
     }
   };
 
-  // Input değişimlerini yakalama
+  // Capturing input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Hizmet seçimlerini yakalama
+  // Service selections capturing
   const handleServiceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     setFormData({
@@ -232,22 +315,22 @@ export default function ConsultingPage() {
         
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6 text-white">Atlassian Danışmanlığı</h1>
+            <h1 className="text-5xl font-bold mb-6 text-white">Atlassian Consulting</h1>
             <p className="text-xl">
-              Atlassian araçları hakkında uzman danışmanlık hizmetimizle, kurumsal süreçlerinizi optimize edin ve verimliliğinizi artırın.
-              Uzman ekibimiz, organizasyonunuza özel çözümler sunmak için yanınızda.
+              With our expert consulting services on Atlassian tools, optimize your corporate processes and increase your efficiency.
+              Our expert team is here to provide customized solutions for your organization.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Uzmanlık Alanları Bölümü */}
+      {/* Expertise Areas Section */}
       <section className="w-full py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Uzmanlık Alanlarımız</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Areas of Expertise</h2>
             <p className="text-xl text-gray-600">
-              Kurumsal ihtiyaçlarınıza yönelik kapsamlı Atlassian danışmanlık hizmetlerimiz
+              Comprehensive Atlassian consulting services tailored to your corporate needs
             </p>
           </div>
 
@@ -258,9 +341,9 @@ export default function ConsultingPage() {
                   <path d="M8 12H15M8 16H12M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-blue-800 mb-4">Süreç Analizi</h3>
+              <h3 className="text-xl font-semibold text-blue-800 mb-4">Process Analysis</h3>
               <p className="text-gray-600">
-                Mevcut iş süreçlerinizin detaylı analizi ve Atlassian araçlarıyla optimize edilmesi için öneriler sunuyoruz.
+                We offer detailed analysis of your current business processes and recommendations for optimization with Atlassian tools.
               </p>
             </div>
 
@@ -270,9 +353,9 @@ export default function ConsultingPage() {
                   <path d="M21 7V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V7C3 4 4.5 2 8 2H16C19.5 2 21 4 21 7Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-blue-800 mb-4">Ürün Danışmanlığı</h3>
+              <h3 className="text-xl font-semibold text-blue-800 mb-4">Product Consulting</h3>
               <p className="text-gray-600">
-                Jira, Confluence, Bitbucket ve diğer Atlassian ürünlerinin kurumunuza özel yapılandırması ve optimizasyonu.
+                Custom configuration and optimization of Jira, Confluence, Bitbucket and other Atlassian products for your organization.
               </p>
             </div>
 
@@ -282,53 +365,53 @@ export default function ConsultingPage() {
                   <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-blue-800 mb-4">Agile Dönüşüm</h3>
+              <h3 className="text-xl font-semibold text-blue-800 mb-4">Agile Transformation</h3>
               <p className="text-gray-600">
-                Organizasyonunuzun çevik metodolojilere geçişini hızlandırın ve verimliliğinizi artırın.
+                Accelerate your organization's transition to agile methodologies and increase your efficiency.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Faydalar Bölümü */}
+      {/* Benefits Section */}
       <section className="w-full py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Neden Atlassian Danışmanlığı?</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Atlassian Consulting?</h2>
             <p className="text-xl text-gray-600">
-              Danışmanlık hizmetlerimizle elde edeceğiniz kazanımlar
+              The gains you will achieve with our consulting services
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Fayda 1 */}
+            {/* Benefit 1 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Verimlilik Artışı</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Increased Efficiency</h3>
               <p className="text-gray-600">
-                Atlassian araçlarının doğru yapılandırılması ve kullanımı sayesinde ekip verimliliğinizi %40'a kadar artırabilirsiniz.
+                You can increase your team's efficiency by up to 40% through proper configuration and use of Atlassian tools.
               </p>
             </div>
 
-            {/* Fayda 2 */}
+            {/* Benefit 2 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">İş Birliği Gelişimi</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Business Agility Development</h3>
               <p className="text-gray-600">
-                Ekipler arası iletişim ve iş birliğini geliştirerek proje başarı oranınızı artırın.
+                Increase your project success rate by improving inter-team communication and collaboration.
               </p>
             </div>
 
-            {/* Fayda 3 */}
+            {/* Benefit 3 */}
             <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all">
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -336,33 +419,40 @@ export default function ConsultingPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">ROI Maksimizasyonu</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">ROI Maximization</h3>
               <p className="text-gray-600">
-                Atlassian araçlarına yaptığınız yatırımdan maksimum geri dönüş sağlayın.
+                Maximize the return on your investment in Atlassian tools.
             </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Danışmanlık Talebi Formu */}
+      {/* Consulting Request Form */}
       <section className="w-full py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="bg-gradient-to-r from-blue-800 to-blue-950 rounded-3xl shadow-xl overflow-hidden">
               <div className="p-10 md:p-12">
-                <h2 className="text-3xl font-bold text-white mb-8">Danışmanlık Talebi</h2>
+                <h2 className="text-3xl font-bold text-white mb-8">Consulting Request</h2>
                 <p className="text-white/80 mb-10">
-                  Kurumunuzun ihtiyaçlarını anlayarak size özel danışmanlık hizmeti sunmak için aşağıdaki formu doldurun.
-                  Uzman ekibimiz 24 saat içinde sizinle iletişime geçecektir.
+                  Fill out the form below to provide customized consulting services by understanding your organization's needs.
+                  Our expert team will contact you within 24 hours.
                 </p>
 
+                {/* Validation message */}
+                {validationMsg && (
+                  <div className="bg-red-500/10 border border-red-400 text-red-200 px-4 py-3 rounded-xl mb-6">
+                    {validationMsg}
+                  </div>
+                )}
+
                 <form onSubmit={handleSubmit} className="space-y-8">
-                  {/* Kişisel ve Şirket Bilgileri */}
+                  {/* Personal and Company Information */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="fullName" className="block text-sm font-medium text-white/80 mb-2">
-                        Ad Soyad*
+                        Full Name*
                       </label>
                       <input
                         type="text"
@@ -376,12 +466,12 @@ export default function ConsultingPage() {
                             ? 'border-red-400 bg-red-500/10' 
                             : 'border-white/10 bg-white/5'
                         } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
-                        placeholder="Adınız ve soyadınız"
+                        placeholder="Your first and last name"
                       />
                     </div>
                     <div>
                       <label htmlFor="companyName" className="block text-sm font-medium text-white/80 mb-2">
-                        Şirket Adı*
+                        Company Name*
                       </label>
                       <input
                         type="text"
@@ -395,12 +485,12 @@ export default function ConsultingPage() {
                             ? 'border-red-400 bg-red-500/10' 
                             : 'border-white/10 bg-white/5'
                         } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
-                        placeholder="Şirketinizin adı"
+                        placeholder="Your company name"
                       />
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
-                        E-posta*
+                        Email*
                       </label>
                       <input
                         type="email"
@@ -414,31 +504,89 @@ export default function ConsultingPage() {
                             ? 'border-red-400 bg-red-500/10' 
                             : 'border-white/10 bg-white/5'
                         } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
-                        placeholder="ornek@sirket.com"
+                        placeholder="example@company.com"
                       />
                     </div>
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
-                        Telefon*
+                        Phone*
                       </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        required
-                        className={`w-full px-4 py-3 rounded-xl border ${
-                          errors.phone 
-                            ? 'border-red-400 bg-red-500/10' 
-                            : 'border-white/10 bg-white/5'
-                        } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
-                        placeholder="+90 (___) ___ __ __"
-                      />
+                      <div className="flex gap-2">
+                        {/* Country Code Selector */}
+                        <div className="relative" ref={countryDropdownRef}>
+                          <button
+                            type="button"
+                            onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                            className="px-3 py-3 rounded-xl border border-white/10 bg-white/5 text-white hover:bg-white/10 transition-colors flex items-center gap-2 min-w-[100px] justify-between"
+                          >
+                            <span className="flex items-center gap-2">
+                              <span>{countryCodes.find(c => c.code === formData.countryCode)?.flag || "🇺🇸"}</span>
+                              <span className="text-sm">{formData.countryCode}</span>
+                            </span>
+                            <svg className={`w-4 h-4 transition-transform ${showCountryDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
+                          
+                          {showCountryDropdown && (
+                            <div className="absolute top-full left-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 max-h-80 w-64">
+                              {/* Search Input */}
+                              <div className="p-3 border-b border-gray-200 sticky top-0 bg-white">
+                                <input
+                                  type="text"
+                                  placeholder="Search country..."
+                                  value={countrySearch}
+                                  onChange={(e) => setCountrySearch(e.target.value)}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                              </div>
+                              
+                              {/* Country List */}
+                              <div className="overflow-y-auto max-h-64">
+                                {countryCodes
+                                  .filter(country => 
+                                    country.country.toLowerCase().includes(countrySearch.toLowerCase()) ||
+                                    country.code.includes(countrySearch)
+                                  )
+                                  .map((country) => (
+                                    <button
+                                      key={country.code}
+                                      type="button"
+                                      onClick={() => handleCountryCodeChange(country.code)}
+                                      className={`w-full px-4 py-3 text-left hover:bg-blue-50 transition-colors flex items-center gap-3 ${
+                                        formData.countryCode === country.code ? 'bg-blue-100' : ''
+                                      }`}
+                                    >
+                                      <span className="text-xl">{country.flag}</span>
+                                      <span className="text-gray-900 text-sm font-medium">{country.country}</span>
+                                      <span className="text-gray-500 text-sm ml-auto">{country.code}</span>
+                                    </button>
+                                  ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Phone Number Input */}
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handlePhoneChange}
+                          required
+                          className={`flex-1 px-4 py-3 rounded-xl border ${
+                            errors.phone 
+                              ? 'border-red-400 bg-red-500/10' 
+                              : 'border-white/10 bg-white/5'
+                          } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
+                          placeholder="Phone number"
+                        />
+                      </div>
                     </div>
                     <div>
                       <label htmlFor="position" className="block text-sm font-medium text-white/80 mb-2">
-                        Pozisyon
+                        Position
                       </label>
                       <input
                         type="text"
@@ -447,12 +595,12 @@ export default function ConsultingPage() {
                         value={formData.position}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                        placeholder="Şirketteki pozisyonunuz"
+                        placeholder="Your position at the company"
                       />
                     </div>
                     <div>
                       <label htmlFor="teamSize" className="block text-sm font-medium text-white/80 mb-2">
-                        Şirket Büyüklüğü
+                        Company Size
                       </label>
                       <select
                         id="teamSize"
@@ -461,7 +609,7 @@ export default function ConsultingPage() {
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
                       >
-                        <option value="" disabled>Çalışan sayısını seçin</option>
+                        <option value="" disabled>Select number of employees</option>
                         {teamSizes.map(size => (
                           <option key={size} value={size} className="bg-blue-900 text-white">{size}</option>
                         ))}
@@ -469,16 +617,9 @@ export default function ConsultingPage() {
                     </div>
                   </div>
 
-                  {/* Validation mesajı */}
-                  {validationMsg && (
-                    <div className="bg-red-500/10 border border-red-400 text-red-200 px-4 py-3 rounded-xl">
-                      {validationMsg}
-                    </div>
-                  )}
-
-                  {/* İhtiyaç Duyulan Danışmanlık Hizmetleri */}
+                  {/* Required Consulting Services */}
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-4">İhtiyaç Duyduğunuz Danışmanlık Hizmetleri</h3>
+                    <h3 className="text-lg font-semibold text-white mb-4">Consulting Services You Need</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {serviceList.map(service => (
                         <div key={service.id} className="flex items-start space-x-3 bg-white/5 p-4 rounded-xl hover:bg-white/10 transition-colors">
@@ -501,11 +642,11 @@ export default function ConsultingPage() {
                     </div>
                   </div>
 
-                  {/* Proje Detayları */}
+                  {/* Project Details */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="projectScope" className="block text-sm font-medium text-white/80 mb-2">
-                        Proje Kapsamı
+                        Project Scope
                       </label>
                       <select
                         id="projectScope"
@@ -514,7 +655,7 @@ export default function ConsultingPage() {
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
                       >
-                        <option value="" disabled>Proje kapsamını seçin</option>
+                        <option value="" disabled>Select project scope</option>
                         {projectScopes.map(scope => (
                           <option key={scope} value={scope} className="bg-blue-900 text-white">{scope}</option>
                         ))}
@@ -522,7 +663,7 @@ export default function ConsultingPage() {
                     </div>
                     <div>
                       <label htmlFor="timeline" className="block text-sm font-medium text-white/80 mb-2">
-                        Zaman Çizelgesi
+                        Timeline
                       </label>
                       <select
                         id="timeline"
@@ -531,7 +672,7 @@ export default function ConsultingPage() {
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
                       >
-                        <option value="" disabled>Zaman çizelgesini seçin</option>
+                        <option value="" disabled>Select timeline</option>
                         {timelines.map(timeline => (
                           <option key={timeline} value={timeline} className="bg-blue-900 text-white">{timeline}</option>
                         ))}
@@ -539,10 +680,10 @@ export default function ConsultingPage() {
                     </div>
                   </div>
 
-                  {/* Mevcut araçlar */}
+                  {/* Current tools */}
                   <div>
                     <label htmlFor="currentTools" className="block text-sm font-medium text-white/80 mb-2">
-                      Mevcut Kullandığınız Araçlar
+                      Current Tools You Use
                     </label>
                     <input
                       type="text"
@@ -551,14 +692,14 @@ export default function ConsultingPage() {
                       value={formData.currentTools}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
-                      placeholder="Şu anda kullandığınız araçlar ve sistemler"
+                      placeholder="Tools and systems you are currently using"
                     />
                   </div>
 
-                  {/* Ek Mesaj */}
+                  {/* Additional Message */}
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
-                      Danışmanlık İhtiyacınız ve Beklentileriniz*
+                      Your Consulting Needs and Expectations*
                     </label>
                     <textarea
                       id="message"
@@ -572,11 +713,11 @@ export default function ConsultingPage() {
                           ? 'border-red-400 bg-red-500/10' 
                           : 'border-white/10 bg-white/5'
                       } text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm`}
-                      placeholder="Danışmanlık ihtiyacınız, projeleriniz ve beklentileriniz hakkında detaylı bilgi verin"
+                      placeholder="Please provide detailed information about your consulting needs, projects and expectations"
                     ></textarea>
                   </div>
 
-                  {/* Gönder Butonu */}
+                  {/* Send Button */}
                   <div className="flex flex-col sm:flex-row justify-end gap-4">
                     <button
                       type="submit"
@@ -587,7 +728,7 @@ export default function ConsultingPage() {
                           : 'bg-white text-blue-800 hover:bg-blue-50'
                       }`}
                     >
-                      {loading ? 'Gönderiliyor...' : 'Danışmanlık Talebi Gönder'}
+                      {loading ? 'Sending...' : 'Submit Consulting Request'}
                     </button>
                   </div>
                 </form>
@@ -598,7 +739,7 @@ export default function ConsultingPage() {
       </section>
 
       {/* Pop-up Modal */}
-      {showPopup && (
+      {showPopup && status && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 transform transition-all">
             <div className="p-8 text-center">
@@ -612,21 +753,21 @@ export default function ConsultingPage() {
               <h3 className={`text-xl font-semibold mb-2 ${
                 status === "success" ? "text-green-800" : "text-red-800"
               }`}>
-                {status === "success" ? "Başarılı!" : "Hata!"}
+                {status === "success" ? "Success!" : "Error!"}
               </h3>
               <p className={`text-gray-600 ${
                 status === "success" ? "text-green-700" : "text-red-700"
               }`}>
                 {status === "success" 
-                  ? "Danışmanlık talebiniz başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz." 
-                  : "Bir hata oluştu. Lütfen tekrar deneyin."
+                  ? "Your consulting request has been successfully received. We will contact you as soon as possible." 
+                  : "An error occurred. Please try again."
                 }
               </p>
             </div>
             <button
               onClick={() => setShowPopup(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
-              aria-label="Popup'ı kapat"
+              aria-label="Close popup"
             >
               <X className="w-6 h-6" />
             </button>
@@ -638,9 +779,9 @@ export default function ConsultingPage() {
       <StructuredData
         type="breadcrumb"
         breadcrumbItems={[
-          { name: 'Ana Sayfa', item: 'https://virtualriddle.com' },
-          { name: 'Çözümler', item: 'https://virtualriddle.com/solutions' },
-          { name: 'Danışmanlık', item: 'https://virtualriddle.com/solutions/consulting' }
+          { name: 'Home', item: 'https://virtualriddle.com' },
+          { name: 'Solutions', item: 'https://virtualriddle.com/solutions' },
+          { name: 'Consulting', item: 'https://virtualriddle.com/solutions/consulting' }
         ]}
       />
       
@@ -648,16 +789,16 @@ export default function ConsultingPage() {
         type="faq"
         faqItems={[
           {
-            question: 'Atlassian danışmanlığı nedir?',
-            answer: 'Atlassian araçları ile kurumsal süreçlerinizi optimize etme danışmanlığıdır.'
+            question: 'What is Atlassian consulting?',
+            answer: 'Atlassian consulting is consulting to optimize your corporate processes with Atlassian tools.'
           },
           {
-            question: 'Hangi hizmetleri sunuyorsunuz?',
-            answer: 'Jira, Confluence, Bitbucket danışmanlığı, Agile dönüşüm, DevOps danışmanlığı ve özel çözümler sunuyoruz.'
+            question: 'What services do you offer?',
+            answer: 'We offer Jira, Confluence, Bitbucket consulting, Agile transformation, DevOps consulting and custom solutions.'
           },
           {
-            question: 'Danışmanlık süreci nasıl işler?',
-            answer: 'İlk görüşme, ihtiyaç analizi, çözüm önerisi, uygulama ve takip aşamalarından oluşur.'
+            question: 'How does the consulting process work?',
+            answer: 'It consists of initial meeting, needs analysis, solution proposal, implementation and follow-up phases.'
           }
         ]}
       />
@@ -665,21 +806,21 @@ export default function ConsultingPage() {
       <StructuredData
         type="service"
         serviceData={{
-          name: 'Virtual Riddle Atlassian Danışmanlığı',
-          description: 'Atlassian araçları hakkında uzman danışmanlık hizmetimizle, kurumsal süreçlerinizi optimize edin',
+          name: 'Virtual Riddle Atlassian Consulting',
+          description: 'With our expert consulting services on Atlassian tools, optimize your corporate processes',
           url: 'https://virtualriddle.com/solutions/consulting',
           offers: [
             {
-              name: 'Jira Danışmanlığı',
-              description: 'Jira kurulumu, yapılandırması ve optimizasyonu'
+              name: 'Jira Consulting',
+              description: 'Jira installation, configuration and optimization'
             },
             {
-              name: 'Confluence Danışmanlığı',
-              description: 'Confluence kurulumu ve içerik yönetimi'
+              name: 'Confluence Consulting',
+              description: 'Confluence installation and content management'
             },
             {
-              name: 'Agile Dönüşüm',
-              description: 'Çevik metodolojilere geçiş danışmanlığı'
+              name: 'Agile Transformation',
+              description: 'Consulting for transition to agile methodologies'
             }
           ]
         }}

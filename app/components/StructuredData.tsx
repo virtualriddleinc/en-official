@@ -76,9 +76,9 @@ export default function StructuredData({
       url: serviceData.url,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Maslak Mahallesi AOS 55. Sokak 42 Maslak B Blok No: 4/542',
+        streetAddress: 'Maslak Neighborhood, AOS 55. Street, 42 Maslak B Block, Unit 4/542',
         addressLocality: 'Sarıyer',
-        addressRegion: 'İstanbul',
+        addressRegion: 'Istanbul',
         postalCode: '34485',
         addressCountry: 'TR'
       },
@@ -87,15 +87,15 @@ export default function StructuredData({
         latitude: 41.1090,
         longitude: 29.0194
       },
-      serviceType: 'Yazılım Danışmanlığı',
+      serviceType: 'Software Consulting',
       areaServed: {
         '@type': 'Country',
-        name: 'Türkiye'
+        name: 'Turkey'
       },
       ...(serviceData.offers && {
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
-          name: `${serviceData.name} Hizmetleri`,
+          name: `${serviceData.name} Services`,
           itemListElement: serviceData.offers.map(offer => ({
             '@type': 'Offer',
             itemOffered: {

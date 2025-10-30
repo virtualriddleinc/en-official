@@ -3,10 +3,25 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true', // sadece ANALYZE=true ile çalışır
 });
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 const securityHeaders = [
   {
     key: 'Content-Security-Policy',
-    value: [
+    value: isDevelopment ? [
+      "default-src 'self';",
+      "script-src 'self' https://maps.googleapis.com 'unsafe-inline' 'unsafe-eval';",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://virtualriddle.com;",
+      "img-src 'self' data: https://virtualriddle.com https://maps.googleapis.com;",
+      "font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com data:;",
+      "connect-src 'self' https://rvskttz2jh.execute-api.us-east-1.amazonaws.com ws://localhost:*;",
+      "object-src 'none';",
+      "frame-src https://www.google.com https://maps.google.com https://www.google.com/maps/ https://maps.gstatic.com;",
+      "frame-ancestors 'none';",
+      "base-uri 'self';",
+      "form-action 'self';",
+      "report-uri /api/csp-violation;"
+    ].join(' ') : [
       "default-src 'self';",
       "script-src 'self' https://maps.googleapis.com 'unsafe-inline';",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://virtualriddle.com;",
@@ -58,7 +73,6 @@ const nextConfig = {
     optimizePackageImports: ['@heroicons/react', 'lucide-react', 'react', 'react-dom'],
     optimizeServerReact: true,
     scrollRestoration: true,
-    cssChunking: 'strict', // CSS chunking for better caching
   },
   turbopack: {
     rules: {
@@ -139,8 +153,6 @@ const nextConfig = {
       
       // Bundle analizi için
       config.optimization.minimize = true;
-      
-      // CSS optimization is handled by Next.js built-in optimizations
     }
     
     return config;

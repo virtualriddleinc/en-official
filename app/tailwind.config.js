@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Aydınlık tema renkleri
+        // Light theme colors
         'text-primary': 'var(--color-text-primary)',
         'text-secondary': 'var(--color-text-secondary)',
         'text-subtle': 'var(--color-text-subtle)',
@@ -18,7 +18,7 @@ module.exports = {
         'bg-subtle': 'var(--color-bg-subtle)',
         'bg-inverse': 'var(--color-bg-inverse)',
         
-        // Karanlık tema renkleri
+        // Dark theme colors
         'dark-text-primary': 'var(--color-dark-text-primary)',
         'dark-text-secondary': 'var(--color-dark-text-secondary)',
         'dark-text-subtle': 'var(--color-dark-text-subtle)',

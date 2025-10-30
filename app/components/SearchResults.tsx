@@ -28,7 +28,7 @@ export default function SearchResults({ results, isLoading }: SearchResultsProps
   if (results.length === 0) {
     return (
       <div className="mt-4 text-center text-gray-600 dark:text-gray-400">
-        Sonuç bulunamadı.
+        No results found.
       </div>
     );
   }

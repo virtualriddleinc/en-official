@@ -25,7 +25,9 @@ export default function CookieConsent() {
         setShowConsent(true);
       }
     } catch (error) {
-      console.error('Cookie consent error:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Cookie consent error:', error);
+      }
       setShowConsent(true);
     } finally {
       setIsLoading(false);
@@ -41,10 +43,14 @@ export default function CookieConsent() {
         setCookie("cookie-consent", consent);
         setCookie("cookie-analytics", analytics);
         setCookie("cookie-marketing", marketing);
-        console.log('Cookie preferences saved:', { consent, analytics, marketing });
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Cookie preferences saved:', { consent, analytics, marketing });
+        }
       }
     } catch (error) {
-      console.error('Error saving cookie preferences:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error saving cookie preferences:', error);
+      }
     }
     setShowConsent(false);
   };
@@ -84,16 +90,16 @@ export default function CookieConsent() {
                     <path d="M7.99451 12H8.00349" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <h2 className="text-lg font-bold text-gray-900">Çerez Tercihleri</h2>
+                <h2 className="text-lg font-bold text-gray-900">Cookie Preferences</h2>
               </div>
               
               <p className="text-gray-600 text-sm leading-relaxed max-w-2xl">
-                Bu web sitesi, deneyiminizi geliştirmek, içerik ve reklamları kişiselleştirmek ve site trafiğini analiz etmek için çerezleri kullanır. 
-                Sitemizi kullanarak çerezlerin kullanımını kabul etmiş olursunuz. Çerez tercihlerinizi dilediğiniz zaman değiştirebilirsiniz.
+                This website uses cookies to enhance your experience, personalize content and ads, and analyze site traffic. 
+                By using our site, you consent to the use of cookies. You can change your cookie preferences at any time.
               </p>
               
               <div className="mt-3 flex items-center gap-2 text-xs text-gray-500">
-                <a href="/privacy" className="underline hover:text-blue-600 transition-colors">Gizlilik Politikamız</a>
+                <a href="/privacy" className="underline hover:text-blue-600 transition-colors">Privacy Policy</a>
               </div>
             </div>
             
@@ -102,21 +108,21 @@ export default function CookieConsent() {
                 onClick={() => setShowDetails(true)}
                 className="px-6 py-3 bg-white border border-gray-300 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors text-sm"
               >
-                Çerez Ayarları
+                Cookie Settings
               </button>
               
               <button
                 onClick={acceptNecessaryCookies}
                 className="px-6 py-3 bg-gray-100 rounded-xl text-gray-700 font-medium hover:bg-gray-200 transition-colors text-sm"
               >
-                Sadece Zorunlu
+                Necessary Only
               </button>
               
               <button
                 onClick={acceptAllCookies}
                 className="px-6 py-3 bg-blue-600 rounded-xl text-white font-medium hover:bg-blue-700 transition-colors text-sm"
               >
-                Tümünü Kabul Et
+                Accept All
               </button>
             </div>
           </div>
@@ -133,12 +139,12 @@ export default function CookieConsent() {
                     <path d="M7.99451 12H8.00349" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <h2 className="text-lg font-bold text-gray-900">Çerez Ayarları</h2>
+                <h2 className="text-lg font-bold text-gray-900">Cookie Settings</h2>
               </div>
               <button 
                 onClick={() => setShowDetails(false)}
                 className="text-gray-500 hover:text-gray-700 transition-colors p-2 rounded-lg hover:bg-gray-100"
-                aria-label="Çerez ayarlarını kapat"
+                aria-label="Close cookie settings"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -149,21 +155,20 @@ export default function CookieConsent() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="p-4 border border-gray-200 rounded-xl bg-gray-50">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-base font-semibold text-gray-900">Zorunlu Çerezler</h3>
+                  <h3 className="text-base font-semibold text-gray-900">Necessary Cookies</h3>
                   <div className="w-10 h-5 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                    Aktif
+                    Active
                   </div>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  Bu çerezler web sitesinin düzgün çalışması için gereklidir ve sistemimizde devre dışı bırakılamazlar.
-                  Genellikle yalnızca sizin tarafınızdan gerçekleştirilen ve gizlilik tercihlerinizi ayarlama, form doldurma gibi 
-                  hizmet taleplerine karşılık olarak ayarlanırlar.
+                  These cookies are necessary for the website to function properly and cannot be disabled in our system. 
+                  They are usually set only in response to actions made by you such as setting privacy preferences, filling in forms.
                 </p>
               </div>
               
               <div className="p-4 border border-gray-200 rounded-xl">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-base font-semibold text-gray-900">Analitik Çerezler</h3>
+                  <h3 className="text-base font-semibold text-gray-900">Analytics Cookies</h3>
                   <label className="inline-flex items-center cursor-pointer">
                     <input 
                       type="checkbox" 
@@ -181,14 +186,14 @@ export default function CookieConsent() {
                   </label>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  Bu çerezler, ziyaretçilerin web sitemizi nasıl kullandığına dair bilgileri toplar. Bu bilgiler, sayfaların ziyaret 
-                  sayısı, ziyaretçilerin sitemize nereden geldiği ve sayfaları nasıl dolaştığı gibi anonim bilgileri içerir.
+                  These cookies collect information about how visitors use our website. This data includes anonymous information such as 
+                  page visit counts, where visitors came from, and how they navigated through pages.
                 </p>
               </div>
               
               <div className="p-4 border border-gray-200 rounded-xl">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-base font-semibold text-gray-900">Pazarlama Çerezleri</h3>
+                  <h3 className="text-base font-semibold text-gray-900">Marketing Cookies</h3>
                   <label className="inline-flex items-center cursor-pointer">
                     <input 
                       type="checkbox" 
@@ -206,15 +211,15 @@ export default function CookieConsent() {
                   </label>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  Bu çerezler, ziyaretçilere ilgi alanlarına göre hedeflenmiş reklamlar göstermek için kullanılır. 
-                  Bu çerezler, ziyaretçilerin web sitemizi tekrar ziyaret etmesini sağlayan bilgileri de toplar.
+                  These cookies are used to show visitors targeted advertisements based on their interests. 
+                  These cookies also collect information that enables visitors to revisit our website.
                 </p>
               </div>
             </div>
             
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-gray-200">
               <div className="flex items-center gap-2 text-xs text-gray-500">
-                <a href="/privacy" className="underline hover:text-blue-600 transition-colors">Gizlilik Politikamız</a>
+                <a href="/privacy" className="underline hover:text-blue-600 transition-colors">Privacy Policy</a>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
@@ -222,13 +227,13 @@ export default function CookieConsent() {
                   onClick={() => setShowDetails(false)}
                   className="px-6 py-3 bg-white border border-gray-300 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors text-sm"
                 >
-                  Geri
+                  Back
                 </button>
                 <button
                   onClick={savePreferences}
                   className="px-6 py-3 bg-blue-600 rounded-xl text-white font-medium hover:bg-blue-700 transition-colors text-sm"
                 >
-                  Tercihleri Kaydet
+                  Save Preferences
                 </button>
               </div>
             </div>

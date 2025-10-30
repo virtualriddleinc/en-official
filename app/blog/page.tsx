@@ -2,11 +2,11 @@
 import { useState } from "react";
 import { Link } from "../components/Link";
 
-// Türkçe ay adlarını destekleyen bir sıralama fonksiyonu ekle
-function parseTurkishDate(dateStr) {
+// Date parsing function
+function parseDate(dateStr) {
   const months = {
-    'Ocak': 0, 'Şubat': 1, 'Mart': 2, 'Nisan': 3, 'Mayıs': 4, 'Haziran': 5,
-    'Temmuz': 6, 'Ağustos': 7, 'Eylül': 8, 'Ekim': 9, 'Kasım': 10, 'Aralık': 11
+    'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
+    'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
   };
   const [day, month, year] = dateStr.split(' ');
   return new Date(Number(year), months[month], Number(day));
@@ -15,11 +15,11 @@ function parseTurkishDate(dateStr) {
 export const posts = [
   {
     href: "/blog/claude-atlassian-mcp-entegrasyonu",
-    category: "Yapay Zeka",
-    title: "Claude ile Atlassian'ı Bağlayarak Çalışmak: MCP Devrimi",
-    summary: "Atlassian'ın yeni Remote MCP Server'ı sayesinde Claude ile Jira ve Confluence verilerinize doğrudan erişebilir, AI destekli iş akışları oluşturabilirsiniz. Bu entegrasyon, ekip verimliliğini artırırken bilgi silolarını ortadan kaldırıyor.",
-    date: "1 Eylül 2025",
-    readingTime: "10 dk",
+    category: "Artificial Intelligence",
+    title: "Working with Claude Connected to Atlassian: The MCP Revolution",
+    summary: "Thanks to Atlassian's new Remote MCP Server, you can directly access your Jira and Confluence data with Claude and create AI-powered workflows. This integration increases team productivity while eliminating information silos.",
+    date: "1 September 2025",
+    readingTime: "10 min",
     color: "from-purple-600 to-blue-700",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,10 +32,10 @@ export const posts = [
   {
     href: "/blog/favori-wiki-aracimiz-confluence",
     category: "Confluence",
-    title: "Favori Wiki Aracımız: Confluence!",
-    summary: "Ekip içi bilgi paylaşımında neden Confluence'ı tercih ediyoruz? Avantajları, ipuçları ve entegrasyonlar...",
-    date: "5 Temmuz 2025",
-    readingTime: "4 dk",
+    title: "Our Favorite Wiki Tool: Confluence!",
+    summary: "Confluence is a powerful tool that facilitates internal knowledge sharing and keeps corporate memory digital. Learn about its advantages, features, and how it integrates with Jira to transform team collaboration.",
+    date: "5 July 2025",
+    readingTime: "4 min",
     color: "from-blue-400 to-blue-700",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,10 +49,10 @@ export const posts = [
   {
     href: "/blog/jira-software-nedir",
     category: "Jira",
-    title: "Nedir bu Jira Software?",
-    summary: "Jira Software nedir, ne işe yarar ve neden bu kadar popüler? Modern ekipler için avantajları ve ipuçları...",
-    date: "10 Haziran 2024",
-    readingTime: "4 dk",
+    title: "What is Jira Software?",
+    summary: "Discover what Jira Software is, what it does, and why it's so popular. Learn about its advantages, features, and best practices for modern development teams. From agile project management to sprint planning.",
+    date: "10 June 2024",
+    readingTime: "4 min",
     color: "from-yellow-400 to-yellow-600",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,10 +66,10 @@ export const posts = [
   {
     href: "/blog/cloud-native-performans",
     category: "Jira Service Management",
-    title: "Jira Service Management ile IT Operasyonlarınızı Devrim Niteliğinde Dönüştürün",
-    summary: "Jira Service Management (JSM), Atlassian'ın modern IT ekipleri için geliştirdiği kapsamlı ITSM platformudur. Otomatikleştirme özellikleri ile manuel işlemleri %60-70 oranında azaltır, AI destekli çözüm önerileri ile first-call resolution oranını %30-40 artırır.",
-    date: "7 Nisan 2024",
-    readingTime: "8 dk",
+    title: "Transform Your IT Operations Revolutionarily with Jira Service Management",
+    summary: "Jira Service Management (JSM) is Atlassian's comprehensive ITSM platform developed for modern IT teams. Automation features reduce manual processes by 60-70%, and AI-powered solution recommendations increase first-call resolution rates by 30-40%.",
+    date: "7 April 2024",
+    readingTime: "8 min",
     color: "from-blue-600 to-blue-700",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,11 +81,11 @@ export const posts = [
   },
   {
     href: "/blog/jira-danismanligi-avantajlari",
-    category: "Danışmanlık",
-    title: "Jira Danışmanlığı Almanın İşletmenize Sağlayacağı 8 Kritik Avantaj",
-    summary: "Jira danışmanlığı ile işletmenizin proje yönetimi süreçlerini optimize edin. %40-60 verimlilik artışı, maliyet tasarrufu ve sürekli iyileştirme avantajları.",
-    date: "15 Mart 2024",
-    readingTime: "4 dk",
+    category: "Consulting",
+    title: "8 Critical Advantages of Jira Consulting for Your Business",
+    summary: "Optimize your business's project management processes with Jira consulting. Discover how you can achieve 40-60% productivity increase, cost savings, and continuous improvement advantages for your team.",
+    date: "15 March 2024",
+    readingTime: "4 min",
     color: "from-blue-600 to-blue-800",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,10 +98,10 @@ export const posts = [
   {
     href: "/blog/2024-devops-trendleri",
     category: "DevOps & Cloud",
-    title: "2024 DevOps Trendleri",
-    summary: "Yapay zeka destekli DevOps araçları, GitOps ve Platform mühendisliğinin yükselişi...",
-    date: "5 Mart 2024",
-    readingTime: "6 dk",
+    title: "2024 DevOps Trends",
+    summary: "Explore the top DevOps trends for 2024: AI-powered DevOps tools, the rise of GitOps, Platform engineering, and how these technologies are transforming software development and IT operations.",
+    date: "5 March 2024",
+    readingTime: "6 min",
     color: "from-blue-600 to-blue-700",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,11 +113,11 @@ export const posts = [
   },
   {
     href: "/blog/basarili-dijital-donusum-stratejileri",
-    category: "Dijital Dönüşüm",
-    title: "Başarılı Dijital Dönüşüm Stratejileri",
-    summary: "Şirketlerin dijital dönüşüm yolculuğunda dikkat etmesi gereken kritik noktalar...",
-    date: "3 Mart 2024",
-    readingTime: "7 dk",
+    category: "Digital Transformation",
+    title: "Successful Digital Transformation Strategies",
+    summary: "Discover critical points that companies should pay attention to in their digital transformation journey. Learn best practices, common pitfalls, and strategies to successfully navigate your digital transformation initiatives.",
+    date: "3 March 2024",
+    readingTime: "7 min",
     color: "from-indigo-600 to-indigo-700",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,10 +130,10 @@ export const posts = [
   {
     href: "/blog/multi-cloud-stratejileri",
     category: "Cloud Computing",
-    title: "Multi-Cloud Stratejileri",
-    summary: "Farklı cloud sağlayıcılarını etkin kullanmanın yolları ve best practice'ler...",
-    date: "28 Şubat 2024",
-    readingTime: "6 dk",
+    title: "Multi-Cloud Strategies",
+    summary: "Learn effective ways to use different cloud providers and best practices for multi-cloud architectures. Discover how to optimize costs, improve reliability, and avoid vendor lock-in with smart multi-cloud strategies.",
+    date: "28 February 2024",
+    readingTime: "6 min",
     color: "from-green-600 to-green-700",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,11 +145,11 @@ export const posts = [
   },
   {
     href: "/blog/rovo-devrimi",
-    category: "Yapay Zeka",
-    title: "Rovo: Atlassian’ın GenAI ile Kurumsal Bilgiye Dokunma Devrimi",
-    summary: "Yeni nesil yapay zeka destekli kurumsal asistan, ekiplerin dağınık bilgi kaynaklarına hızlı ve anlamlı erişimini sağlıyor. Belgeler, notlar, sohbetler ve görev yönetim araçları tek bir noktada birleşiyor. Aranan bilgi doğal dil ile sorgulanabiliyor, özetleniyor ve kişiye özel hale geliyor. Ayrıca, tekrar eden görevleri otomatikleştirerek zaman kazandırıyor. Güvenlik ve gizlilik ilkelerine uygun şekilde çalışıyor. Verimliliği artırmak, bilgiye kolay ulaşmak ve iş yükünü azaltmak isteyen ekipler için etkili bir çözüm sunuyor.",
-    date: "8 Temmuz 2024",
-    readingTime: "6 dk",
+    category: "Artificial Intelligence",
+    title: "Rovo: Atlassian's GenAI Revolution Touching Corporate Knowledge",
+    summary: "The next-generation AI-powered enterprise assistant enables teams to quickly and meaningfully access scattered knowledge sources. Documents, notes, chats and task management tools converge at a single point. Sought information can be queried in natural language, summarized and personalized. It also saves time by automating repetitive tasks. It works in compliance with security and privacy principles. It offers an effective solution for teams who want to increase productivity, easily access information and reduce workload.",
+    date: "8 July 2024",
+    readingTime: "6 min",
     color: "from-purple-600 to-blue-700",
     icon: (
       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -159,7 +159,7 @@ export const posts = [
     categoryColor: "text-purple-700",
     hoverColor: "group-hover:text-purple-800"
   }
-].sort((a, b) => parseTurkishDate(b.date).getTime() - parseTurkishDate(a.date).getTime());
+].sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime());
 
 const POSTS_PER_PAGE = 9;
 
@@ -182,7 +182,7 @@ export default function BlogPage() {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold text-white mb-6">Blog</h1>
             <p className="text-xl">
-              Dijital dönüşüm ve teknoloji dünyasından en güncel haberler, makaleler ve analizler
+              Latest news, articles and analysis from the digital transformation and technology world
             </p>
           </div>
         </div>
@@ -246,7 +246,7 @@ export default function BlogPage() {
                       
                       {/* Read More */}
                       <span className={`${post.categoryColor} text-sm font-bold group-hover:underline ${post.hoverColor} transition-colors inline-flex items-center gap-1`}>
-                        Devamını Oku 
+                        Continue Reading 
                         <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                         </svg>

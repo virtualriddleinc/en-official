@@ -12,7 +12,7 @@ function SimpleGoogleMap() {
   const mapInstanceRef = useRef<any>(null);
 
   useEffect(() => {
-    // Google Maps JS yükle
+    // Load Google Maps JS
     const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyD_16pLyXZxeu-NhhKebjtLvo9Z6TDe6to&libraries=marker&v=weekly`;
     script.async = true;
@@ -40,7 +40,9 @@ function SimpleGoogleMap() {
           title: "42 Maslak",
         });
       } catch (error) {
-        console.error('Google Maps yüklenirken hata:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Error loading Google Maps:', error);
+        }
       }
     };
     
@@ -60,29 +62,76 @@ function SimpleGoogleMap() {
   );
 }
 
+// Country codes with flags (sorted by popularity, Palestine first)
+const countryCodes = [
+  { code: "+970", flag: "🇵🇸", country: "Palestine" },
+  { code: "+1", flag: "🇺🇸", country: "United States" },
+  { code: "+90", flag: "🇹🇷", country: "Turkey" },
+  { code: "+44", flag: "🇬🇧", country: "United Kingdom" },
+  { code: "+49", flag: "🇩🇪", country: "Germany" },
+  { code: "+33", flag: "🇫🇷", country: "France" },
+  { code: "+39", flag: "🇮🇹", country: "Italy" },
+  { code: "+34", flag: "🇪🇸", country: "Spain" },
+  { code: "+31", flag: "🇳🇱", country: "Netherlands" },
+  { code: "+41", flag: "🇨🇭", country: "Switzerland" },
+  { code: "+32", flag: "🇧🇪", country: "Belgium" },
+  { code: "+43", flag: "🇦🇹", country: "Austria" },
+  { code: "+46", flag: "🇸🇪", country: "Sweden" },
+  { code: "+47", flag: "🇳🇴", country: "Norway" },
+  { code: "+45", flag: "🇩🇰", country: "Denmark" },
+  { code: "+358", flag: "🇫🇮", country: "Finland" },
+  { code: "+971", flag: "🇦🇪", country: "UAE" },
+  { code: "+966", flag: "🇸🇦", country: "Saudi Arabia" },
+  { code: "+974", flag: "🇶🇦", country: "Qatar" },
+  { code: "+81", flag: "🇯🇵", country: "Japan" },
+  { code: "+86", flag: "🇨🇳", country: "China" },
+  { code: "+91", flag: "🇮🇳", country: "India" },
+  { code: "+82", flag: "🇰🇷", country: "South Korea" },
+  { code: "+61", flag: "🇦🇺", country: "Australia" },
+  { code: "+64", flag: "🇳🇿", country: "New Zealand" },
+  { code: "+55", flag: "🇧🇷", country: "Brazil" },
+  { code: "+52", flag: "🇲🇽", country: "Mexico" },
+  { code: "+54", flag: "🇦🇷", country: "Argentina" },
+  { code: "+57", flag: "🇨🇴", country: "Colombia" },
+  { code: "+56", flag: "🇨🇱", country: "Chile" },
+  { code: "+7", flag: "🇷🇺", country: "Russia" },
+  { code: "+30", flag: "🇬🇷", country: "Greece" },
+  { code: "+48", flag: "🇵🇱", country: "Poland" },
+  { code: "+420", flag: "🇨🇿", country: "Czech Republic" },
+  { code: "+36", flag: "🇭🇺", country: "Hungary" },
+  { code: "+40", flag: "🇷🇴", country: "Romania" },
+  { code: "+351", flag: "🇵🇹", country: "Portugal" },
+  { code: "+27", flag: "🇿🇦", country: "South Africa" },
+];
+
 export default function ContactPage() {
-  const initialForm = { name: "", email: "", subject: "", message: "", phone: "", preferPhone: false };
+  const initialForm = { name: "", email: "", subject: "", message: "", phone: "", countryCode: "+1" };
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState<null | "success" | "error">(null);
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const [countrySearch, setCountrySearch] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, ''); // Sadece sayıları al
-    if (value.length <= 10) { // 5xx xxx xx xx formatı için maksimum 10 karakter
+    const value = e.target.value.replace(/\D/g, ''); // Only get numbers
+    // Allow up to 15 digits for international phone numbers
+    if (value.length <= 15) {
       setForm({ ...form, phone: value });
     }
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, preferPhone: e.target.checked });
+  const handleCountryCodeChange = (countryCode: string) => {
+    setForm({ ...form, countryCode });
+    setShowCountryDropdown(false);
   };
 
-  // Lambda ile uyumlu field mapping fonksiyonu
+
+  // Lambda-compatible field mapping function
   function mapFormToLambda(form) {
     return {
       page: "/contact",
@@ -90,8 +139,8 @@ export default function ContactPage() {
       email: form.email,
       subject: form.subject,
       message: form.message,
-      phone: form.phone,
-      preferPhone: form.preferPhone
+      phone: form.countryCode + form.phone,
+      countryCode: form.countryCode
     };
   }
 
@@ -111,14 +160,14 @@ export default function ContactPage() {
     setLoading(true);
     setStatus(null);
     
-    // Validasyon
+    // Validation
     if (!form.name || !form.email || !form.subject || !form.phone || !form.message) {
       setStatus("error");
       setLoading(false);
       return;
     }
     
-    // Lambda ile uyumlu payload oluştur
+    // Create Lambda-compatible payload
     const payload = mapFormToLambda(form);
     
     try {
@@ -151,22 +200,22 @@ export default function ContactPage() {
       <section className="w-full py-20 bg-gradient-to-r from-blue-800 to-blue-950 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6 text-white">İletişim</h1>
+            <h1 className="text-5xl font-bold mb-6 text-white">Contact</h1>
             <p className="text-xl">
-              Dijital dönüşüm yolculuğunuza başlamak için bizimle iletişime geçin
+              Contact us to start your digital transformation journey
             </p>
           </div>
         </div>
       </section>
 
-      {/* İletişim Formu ve Bilgiler */}
+      {/* Contact Form and Information */}
       <section className="w-full py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {/* İletişim Formu */}
+              {/* Contact Form */}
               <div className="bg-white p-8 rounded-2xl shadow-lg">
-                {/* Uyarı Kutucuğu */}
+                {/* Warning Box */}
                 <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
@@ -176,28 +225,28 @@ export default function ContactPage() {
                     </div>
                     <div className="ml-3">
                       <p className="text-sm text-blue-800">
-                        <span className="font-medium">Danışmanlık taleplerinizi</span>{' '}
+                        <span className="font-medium">For consulting requests,</span>{' '}
                         <a href="/solutions/consulting" className="text-blue-600 hover:text-blue-800 underline font-semibold">
-                          Atlassian Danışmanlığı
+                          Atlassian Consulting
                         </a>{' '}
-                        sayfamızdan oluşturabilirsiniz
+                        page to submit your request
                       </p>
                     </div>
                   </div>
                 </div>
                 
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Bize Ulaşın</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-8">Contact Us</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Ad Soyad <span className="text-red-500">*</span>
+                      Full Name <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       id="name"
                       name="name"
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                      placeholder="Adınız ve soyadınız"
+                      placeholder="Your first and last name"
                       value={form.name}
                       onChange={handleChange}
                       required
@@ -205,14 +254,14 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      E-posta
+                      Email
                     </label>
                     <input
                       type="email"
                       id="email"
                       name="email"
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                      placeholder="ornek@sirket.com"
+                      placeholder="example@company.com"
                       value={form.email}
                       onChange={handleChange}
                       required
@@ -221,72 +270,129 @@ export default function ContactPage() {
                   
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Telefon <span className="text-red-500">*</span>
+                      Phone <span className="text-red-500">*</span>
                     </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="text-gray-500 text-sm font-medium">+90</span>
-                      </div>
+                      <div className="relative">
+                      {/* Country Code Selector */}
+                      <button
+                        type="button"
+                        onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                        className="absolute inset-y-0 left-0 pl-3 pr-2 flex items-center border-r border-gray-300 hover:bg-gray-50 rounded-l-lg transition-colors bg-white"
+                        aria-label="Select country code"
+                      >
+                        <span className="text-base mr-1.5">
+                          {countryCodes.find(c => c.code === form.countryCode)?.flag || "🇺🇸"}
+                        </span>
+                        <span className="text-gray-700 text-sm font-medium whitespace-nowrap">
+                          {form.countryCode}
+                        </span>
+                        <svg className={`w-4 h-4 ml-1 text-gray-500 transition-transform ${showCountryDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      
+                      {/* Country Dropdown */}
+                      {showCountryDropdown && (
+                        <>
+                          <div 
+                            className="fixed inset-0 z-10" 
+                            onClick={() => {
+                              setShowCountryDropdown(false);
+                              setCountrySearch("");
+                            }}
+                          ></div>
+                          <div className="absolute left-0 top-full mt-1 w-72 bg-white border border-gray-300 rounded-lg shadow-lg z-20 max-h-64 overflow-y-auto">
+                            <div className="p-2">
+                              <input
+                                type="text"
+                                placeholder="Search country..."
+                                className="w-full px-3 py-2 mb-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                                value={countrySearch}
+                                onClick={(e) => e.stopPropagation()}
+                                onChange={(e) => setCountrySearch(e.target.value)}
+                              />
+                              <div className="space-y-1 max-h-48 overflow-y-auto">
+                                {countryCodes
+                                  .filter((country) => {
+                                    if (!countrySearch) return true;
+                                    const search = countrySearch.toLowerCase();
+                                    return (
+                                      country.country.toLowerCase().includes(search) ||
+                                      country.code.includes(search) ||
+                                      country.flag.includes(search)
+                                    );
+                                  })
+                                  .map((country) => (
+                                    <button
+                                      key={country.code}
+                                      type="button"
+                                      onClick={() => {
+                                        handleCountryCodeChange(country.code);
+                                        setCountrySearch("");
+                                      }}
+                                      className={`w-full flex items-center px-3 py-2 text-sm rounded-md hover:bg-blue-50 transition-colors ${
+                                        form.countryCode === country.code ? 'bg-blue-100' : ''
+                                      }`}
+                                    >
+                                      <span className="text-lg mr-3">{country.flag}</span>
+                                      <span className="font-medium text-gray-900 mr-2">{country.code}</span>
+                                      <span className="text-gray-600 flex-1 text-left">{country.country}</span>
+                                      {form.countryCode === country.code && (
+                                        <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                      )}
+                                    </button>
+                                  ))}
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      )}
+                      
                       <input
                         type="tel"
                         id="phone"
                         name="phone"
-                        className="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                        placeholder="5xx xxx xx xx"
+                        className="w-full pl-24 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                        placeholder="Phone number"
                         value={form.phone}
                         onChange={handlePhoneChange}
                         required
-                        maxLength={10}
-                        pattern="[0-9]{10}"
+                        maxLength={15}
+                        pattern="[0-9]{7,15}"
                       />
                     </div>
                     <p className="mt-1 text-xs text-gray-500">
-                      Format: 5xx xxx xx xx (sadece rakam)
+                      Enter your phone number (numbers only, 7-15 digits)
                     </p>
                   </div>
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                      Konu <span className="text-red-500">*</span>
+                      Subject <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       id="subject"
                       name="subject"
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-transparent"
-                      placeholder="Konu başlığı"
+                      placeholder="Subject title"
                       value={form.subject}
                       onChange={handleChange}
                       required
                     />
                   </div>
                   
-                  <div className="flex items-start">
-                    <div className="flex items-center h-5">
-                      <input
-                        id="preferPhone"
-                        name="preferPhone"
-                        type="checkbox"
-                        checked={form.preferPhone}
-                        onChange={handleCheckboxChange}
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                      />
-                    </div>
-                    <div className="ml-3 text-sm">
-                      <label htmlFor="preferPhone" className="font-medium text-gray-700 cursor-pointer">
-                        Öncelikli iletişim kanalı olarak telefon ile görüşmeyi tercih ediyorum
-                      </label>
-                    </div>
-                  </div>
                   <div>
                     <label htmlFor="message" className="block text-medium text-gray-700 mb-2">
-                      Mesaj <span className="text-red-500">*</span>
+                      Message <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       rows={4}
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                      placeholder="Mesajınız..."
+                      placeholder="Your message..."
                       value={form.message}
                       onChange={handleChange}
                       required
@@ -297,7 +403,7 @@ export default function ContactPage() {
                     className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                     disabled={loading}
                   >
-                    {loading ? "Gönderiliyor..." : "Gönder"}
+                    {loading ? "Sending..." : "Send"}
                   </button>
                 </form>
                 {/* Bildirim Pop-up Modal */}
@@ -311,7 +417,7 @@ export default function ContactPage() {
                       <button
                         className="absolute top-3 right-3 p-1 rounded-full hover:bg-black/10 focus:outline-none"
                         onClick={() => { setShowPopup(false); setStatus(null); }}
-                        aria-label="Kapat"
+                        aria-label="Close"
                       >
                         <X className="w-5 h-5" />
                       </button>
@@ -323,8 +429,8 @@ export default function ContactPage() {
                         )}
                         <span className="font-semibold text-center text-base sm:text-lg">
                           {status === "success"
-                            ? "Mesajınız başarıyla iletildi. En kısa sürede sizinle iletişime geçeceğiz."
-                            : "Bir hata oluştu. info@virtualriddle.com adresine doğrudan e-posta gönderebilirsiniz."}
+                            ? "Your message has been sent successfully. We will contact you as soon as possible."
+                            : "An error occurred. You can send an email directly to info@virtualriddle.com."}
                         </span>
                       </div>
                     </div>
@@ -332,10 +438,10 @@ export default function ContactPage() {
                 )}
               </div>
 
-              {/* İletişim Bilgileri */}
+              {/* Contact Information */}
               <div>
                 <div className="bg-white p-8 rounded-2xl shadow-lg mb-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-8">İletişim Bilgileri</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-8">Contact Information</h2>
                   <div className="space-y-6">
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
@@ -346,7 +452,7 @@ export default function ContactPage() {
                         </div>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900">E-posta</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">Email</h3>
                         <p className="text-gray-600">info@virtualriddle.com</p>
                       </div>
                     </div>
@@ -360,31 +466,33 @@ export default function ContactPage() {
                         </div>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900">Adres</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">Address</h3>
                         <p className="text-gray-600">
-                          Maslak Mah. AOS 55. Sok. 42 Maslak B Blok No:4/542<br />
-                          Sarıyer/İSTANBUL
+                          Maslak Neighborhood, AOS 55. Street<br />
+                          42 Maslak B Block, Unit 4/542<br />
+                          Sarıyer, Istanbul<br />
+                          TURKEY
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Çalışma Saatleri */}
+                {/* Working Hours */}
                 <div className="bg-white p-8 rounded-2xl shadow-lg">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-8">Çalışma Saatleri</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-8">Working Hours</h2>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Pazartesi - Cuma</span>
+                      <span className="text-gray-600">Monday - Friday</span>
                       <span className="text-gray-900 font-semibold">09:00 - 18:00</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Cumartesi</span>
+                      <span className="text-gray-600">Saturday</span>
                       <span className="text-gray-900 font-semibold">10:00 - 14:00</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Pazar</span>
-                      <span className="text-gray-900 font-semibold">Kapalı</span>
+                      <span className="text-gray-600">Sunday</span>
+                      <span className="text-gray-900 font-semibold">Closed</span>
                     </div>
                   </div>
                 </div>
@@ -396,13 +504,13 @@ export default function ContactPage() {
 
       {/* Google Maps */}
       <div className="mt-6 mb-16 flex flex-col items-center gap-4 w-full">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">Bizi Ziyaret Edin</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">Visit Us</h2>
         <div className="w-full max-w-6xl mx-auto rounded-xl overflow-hidden shadow-lg">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3005.953863185987!2d29.018368075781428!3d41.113698671335946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab55922b60eef%3A0x3091fdd92dc97d43!2sVirtual%20Riddle%20Teknoloji%20A.%C5%9E.!5e0!3m2!1str!2str!4v1752847175795!5m2!1str!2str"
             width="100%"
             height="450"
-            style={{ border: 0 }}
+            className="border-0"
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer"
@@ -414,8 +522,8 @@ export default function ContactPage() {
       <StructuredData
         type="breadcrumb"
         breadcrumbItems={[
-          { name: 'Ana Sayfa', item: 'https://virtualriddle.com' },
-          { name: 'İletişim', item: 'https://virtualriddle.com/contact' }
+          { name: 'Home', item: 'https://virtualriddle.com' },
+          { name: 'Contact', item: 'https://virtualriddle.com/contact' }
         ]}
       />
       
@@ -423,20 +531,20 @@ export default function ContactPage() {
         type="faq"
         faqItems={[
           {
-            question: 'Virtual Riddle ile nasıl iletişime geçebilirim?',
-            answer: 'Virtual Riddle ile iletişime geçmek için info@virtualriddle.com adresine e-posta gönderebilir veya web sitemizdeki iletişim formunu kullanabilirsiniz.'
+            question: 'How can I contact Virtual Riddle?',
+            answer: 'To contact Virtual Riddle, you can send an email to info@virtualriddle.com or use the contact form on our website.'
           },
           {
-            question: 'Virtual Riddle\'ın adresi nedir?',
-            answer: 'Virtual Riddle, İstanbul\'un Maslak bölgesinde Maslak Mahallesi AOS 55. Sokak 42 Maslak B Blok No: 4/542 adresinde bulunmaktadır.'
+            question: 'What is Virtual Riddle\'s address?',
+            answer: 'Virtual Riddle is located at Maslak Neighborhood, AOS 55. Street, 42 Maslak B Block, Unit 4/542, Sarıyer, Istanbul, TURKEY.'
           },
           {
-            question: 'Çalışma saatleri nedir?',
-            answer: 'Pazartesi-Cuma 09:00-18:00, Cumartesi 10:00-14:00 saatleri arasında hizmet vermekteyiz.'
+            question: 'What are the working hours?',
+            answer: 'We provide services Monday-Friday 09:00-18:00, Saturday 10:00-14:00.'
           },
           {
-            question: 'Hangi hizmetler için iletişime geçebilirim?',
-            answer: 'Atlassian danışmanlığı, Jira kurulumu, Confluence danışmanlığı, dijital dönüşüm projeleri ve teknoloji çözümleri için iletişime geçebilirsiniz.'
+            question: 'What services can I contact you for?',
+            answer: 'You can contact us for Atlassian consulting, Jira setup, Confluence consulting, digital transformation projects and technology solutions.'
           }
         ]}
       />

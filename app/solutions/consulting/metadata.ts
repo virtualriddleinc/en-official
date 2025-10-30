@@ -3,9 +3,9 @@ import { Metadata } from 'next';
 // Metadata generation function
 async function getConsultingData() {
   return {
-    title: 'Atlassian Danışmanlığı',
-    description: 'Atlassian araçları hakkında uzman danışmanlık hizmetimizle, kurumsal süreçlerinizi optimize edin ve verimliliğinizi %40\'a kadar artırın',
-    services: ['Jira', 'Confluence', 'Bitbucket', 'Agile Dönüşüm']
+    title: 'Atlassian Consulting Services',
+    description: 'With our expert consulting services for Atlassian tools, optimize your corporate processes and increase your efficiency by up to 40%',
+    services: ['Jira', 'Confluence', 'Bitbucket', 'Agile Transformation']
   }
 }
 
@@ -16,15 +16,15 @@ export async function generateMetadata(): Promise<Metadata> {
     title: data.title,
     description: data.description,
     keywords: [
-      'Atlassian danışmanlığı',
-      'Jira danışmanlığı',
-      'Confluence danışmanlığı',
-      'Agile dönüşüm',
-      'Scrum danışmanlığı',
-      'Atlassian Türkiye',
-      'yazılım süreç danışmanlığı',
-      'kurumsal verimlilik',
-      'proje yönetimi danışmanlığı'
+      'Atlassian consulting',
+      'Jira consulting',
+      'Confluence consulting',
+      'Agile transformation',
+      'Scrum consulting',
+      'Atlassian Turkey',
+      'software process consulting',
+      'corporate efficiency',
+      'project management consulting'
     ],
     alternates: {
       canonical: '/solutions/consulting'
@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
       follow: true
     },
     other: {
-      'article:section': 'Danışmanlık',
+      'article:section': 'Consulting',
       'article:tag': data.services.join(', ')
     }
   }

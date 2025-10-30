@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function SitemapPage() {
   const [searchTerm, setSearchTerm] = useState("");
   
-  // Kategori ikonları
+  // Category icons
   const CategoryIcon = ({ name }: { name: string }) => {
     switch (name) {
       case "ana":
@@ -15,13 +15,13 @@ export default function SitemapPage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
           </svg>
         );
-      case "ürünler":
+      case "products":
         return (
           <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
           </svg>
         );
-      case "çözümler":
+      case "solutions":
         return (
           <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
@@ -38,22 +38,22 @@ export default function SitemapPage() {
     }
   };
   
-  // Alt kategori ikonları
+  // Subcategory icons
   const SubcategoryIcon = ({ name }: { name: string }) => {
     switch (name) {
-      case "işbirliği":
+      case "collaboration":
         return (
           <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
         );
-      case "kod":
+      case "code":
         return (
           <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
           </svg>
         );
-      case "servis":
+      case "service":
         return (
           <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -82,25 +82,25 @@ export default function SitemapPage() {
     }
   };
 
-  // Sayfa grupları
+  // Page groups
   const pages = {
     ana: [
-      { title: "Ana Sayfa", path: "/" },
-      { title: "Hakkımızda", path: "/about" },
-      { title: "Kariyer", path: "/career" },
-      { title: "İletişim", path: "/contact" },
+      { title: "Home", path: "/" },
+      { title: "About Us", path: "/about" },
+      { title: "Career", path: "/career" },
+      { title: "Contact", path: "/contact" },
       { title: "Blog", path: "/blog" },
-      { title: "Site Haritası", path: "/sitemap" },
+      { title: "Sitemap", path: "/sitemap" },
     ],
-    ürünler: {
-      işbirliği: [
+    products: {
+      collaboration: [
         { title: "Jira Software", path: "/products/jira-software" },
         { title: "Confluence", path: "/products/confluence" },
       ],
-      kod: [
+      code: [
         { title: "Bitbucket", path: "/products/bitbucket" },
       ],
-      servis: [
+      service: [
         { title: "Jira Service Management", path: "/products/jira-service-management" },
         { title: "Opsgenie", path: "/products/opsgenie" },
       ],
@@ -111,36 +111,35 @@ export default function SitemapPage() {
       ai: [
         { title: "Atlassian Rovo", path: "/products/rovo" },
       ],
-      diğer: [
+      other: [
         { title: "Jira Work Management", path: "/products/jira-work-management" },
-        { title: "Atlas", path: "/products/atlas" },
       ],
     },
-    çözümler: [
-      { title: "Atlassian Danışmanlığı", path: "/solutions/consulting" },
+    solutions: [
+      { title: "Atlassian Consulting", path: "/solutions/consulting" },
       { title: "Cloud Migration", path: "/solutions/cloud-migration" },
-      { title: "Eğitim & Sertifikasyon", path: "/solutions/training" },
-      { title: "IT Destek", path: "/solutions/it-support" },
+      { title: "Training & Certification", path: "/solutions/training" },
+      { title: "IT Support", path: "/solutions/it-support" },
       { title: "DevOps", path: "/solutions/devops" },
       { title: "Agile", path: "/solutions/agile" },
       { title: "Cloud", path: "/solutions/cloud" },
-      { title: "Ücretsiz Keşif", path: "/free-discovery" },
+      { title: "Free Discovery", path: "/free-discovery" },
     ],
-    yasal: [
-      { title: "Gizlilik Politikası", path: "/privacy" },
-      { title: "Kullanım Koşulları", path: "/terms" },
+    legal: [
+      { title: "Privacy Policy", path: "/privacy" },
+      { title: "Terms of Service", path: "/terms" },
     ],
   };
 
-  // Tüm linkleri düzleştir (arama için)
+  // Flatten all links (for search)
   const allLinks = [
     ...pages.ana,
-    ...Object.values(pages.ürünler).flat(),
-    ...pages.çözümler,
-    ...pages.yasal,
+    ...Object.values(pages.products).flat(),
+    ...pages.solutions,
+    ...pages.legal,
   ];
 
-  // Arama filtreleme fonksiyonu
+  // Search filtering function
   const filteredLinks = searchTerm
     ? allLinks.filter(link => 
         link.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -153,20 +152,20 @@ export default function SitemapPage() {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-blue-600 mb-4">Site Haritası</h1>
+            <h1 className="text-4xl font-bold text-blue-600 mb-4">Sitemap</h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Virtual Riddle'ın tüm bölümlerine kolayca erişin. Sayfamızdaki tüm bağlantıların kategorik ve düzenli listesi.
+              Easily access all sections of Virtual Riddle. A categorical and organized list of all links on our website.
             </p>
           </div>
           
-          {/* Arama */}
+          {/* Search */}
           <div className="mb-12">
             <div className="max-w-xl mx-auto relative">
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Sayfa ara..."
+                placeholder="Search pages..."
                 className="w-full px-4 py-3 pl-12 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
               <svg 
@@ -190,13 +189,13 @@ export default function SitemapPage() {
             </div>
           </div>
           
-          {/* Arama Sonuçları */}
+          {/* Search Results */}
           {searchTerm && (
             <div className="mb-12 bg-blue-50 rounded-2xl p-6 shadow-sm">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
                 {filteredLinks.length > 0 
-                  ? `"${searchTerm}" için arama sonuçları (${filteredLinks.length})` 
-                  : `"${searchTerm}" için sonuç bulunamadı`}
+                  ? `Search results for "${searchTerm}" (${filteredLinks.length})` 
+                  : `No results found for "${searchTerm}"`}
               </h2>
               
               {filteredLinks.length > 0 && (
@@ -219,10 +218,10 @@ export default function SitemapPage() {
             </div>
           )}
           
-          {/* Site Haritası İçeriği */}
+          {/* Sitemap Content */}
           {!searchTerm && (
             <div className="space-y-12">
-              {/* Hızlı Erişim */}
+              {/* Quick Access */}
               <div className="mb-10">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
                   <span className="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-lg mr-2">
@@ -230,16 +229,16 @@ export default function SitemapPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </span>
-                  Hızlı Erişim
+                  Quick Access
                 </h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
                   {[
-                    { title: "Ana Sayfa", path: "/", icon: "home" },
-                    { title: "Hakkımızda", path: "/about", icon: "info" },
-                    { title: "Kariyer", path: "/career", icon: "career" },
-                    { title: "İletişim", path: "/contact", icon: "contact" },
+                    { title: "Home", path: "/", icon: "home" },
+                    { title: "About Us", path: "/about", icon: "info" },
+                    { title: "Career", path: "/career", icon: "career" },
+                    { title: "Contact", path: "/contact", icon: "contact" },
                     { title: "Blog", path: "/blog", icon: "blog" },
-                    { title: "Ürünler", path: "/products", icon: "products" },
+                    { title: "Products", path: "/products", icon: "products" },
                   ].map((item, index) => (
                     <Link 
                       key={index}
@@ -253,11 +252,11 @@ export default function SitemapPage() {
                 </div>
               </div>
               
-              {/* Ana Sayfalar */}
+              {/* Main Pages */}
               <div className="bg-white rounded-2xl p-6 shadow border border-gray-100">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
                   <CategoryIcon name="ana" />
-                  <span className="ml-2">Ana Sayfalar</span>
+                  <span className="ml-2">Main Pages</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
                   {pages.ana.map((link, index) => (
@@ -277,22 +276,22 @@ export default function SitemapPage() {
                 </div>
               </div>
               
-              {/* Ürünler */}
+              {/* Products */}
               <div className="bg-white rounded-2xl p-6 shadow border border-gray-100">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-                  <CategoryIcon name="ürünler" />
-                  <span className="ml-2">Ürünler</span>
+                  <CategoryIcon name="products" />
+                  <span className="ml-2">Products</span>
                 </h2>
                 
                 <div className="space-y-8">
-                  {Object.entries(pages.ürünler).map(([category, links], idx) => {
+                  {Object.entries(pages.products).map(([category, links], idx) => {
                     const categoryLabels: Record<string, string> = {
-                      işbirliği: "İş Birliği & Güvenlik",
-                      kod: "Kod Yönetimi",
-                      servis: "Servis Yönetimi",
+                      collaboration: "Collaboration & Security",
+                      code: "Code Management",
+                      service: "Service Management",
                       agile: "Agile & DevOps",
-                      ai: "AI Destekli Ürünler",
-                      diğer: "Diğer Ürünler"
+                      ai: "AI-Powered Products",
+                      other: "Other Products"
                     };
                     
                     return (
@@ -321,14 +320,14 @@ export default function SitemapPage() {
                 </div>
               </div>
               
-              {/* Çözümler */}
+              {/* Solutions */}
               <div className="bg-white rounded-2xl p-6 shadow border border-gray-100">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-                  <CategoryIcon name="çözümler" />
-                  <span className="ml-2">Çözümler</span>
+                  <CategoryIcon name="solutions" />
+                  <span className="ml-2">Solutions</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {pages.çözümler.map((link, index) => (
+                  {pages.solutions.map((link, index) => (
                     <Link 
                       key={index} 
                       href={link.path} 
@@ -342,21 +341,21 @@ export default function SitemapPage() {
                         <svg className="w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                         </svg>
-                        Sertifikalı Uzman Kadro
+                        Certified Expert Team
                       </div>
                     </Link>
                   ))}
                 </div>
               </div>
               
-              {/* Yasal & Diğer */}
+              {/* Legal & Other */}
               <div className="bg-white rounded-2xl p-6 shadow border border-gray-100">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-                  <CategoryIcon name="yasal" />
-                  <span className="ml-2">Yasal & Diğer</span>
+                  <CategoryIcon name="legal" />
+                  <span className="ml-2">Legal & Other</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-4">
-                  {pages.yasal.map((link, index) => (
+                  {pages.legal.map((link, index) => (
                     <Link 
                       key={index} 
                       href={link.path} 
@@ -378,7 +377,7 @@ export default function SitemapPage() {
   );
 }
 
-// Hızlı erişim ikonları
+// Quick access icons
 function IconForQuickLinks({ name }: { name: string }) {
   switch (name) {
     case "home":
@@ -442,7 +441,7 @@ function IconForQuickLinks({ name }: { name: string }) {
   }
 }
 
-// Çözüm ikonları
+// Solution icons
 function SolutionIcon({ index }: { index: number }) {
   const icons = [
     <svg key={0} className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -476,7 +475,7 @@ function SolutionIcon({ index }: { index: number }) {
   return icons[index] || icons[0];
 }
 
-// Yasal ikonlar
+// Legal icons
 function LegalIcon({ index }: { index: number }) {
   const icons = [
     <svg key={0} className="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">

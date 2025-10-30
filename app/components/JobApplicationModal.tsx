@@ -9,45 +9,45 @@ interface JobApplicationModalProps {
 }
 
 const steps = [
-  { label: "Ad Soyad" },
-  { label: "E-posta" },
-  { label: "Ön Yazı (Opsiyonel)" },
-  { label: "CV Yükle" },
-  { label: "Özet & Gönder" },
+  { label: "Full Name" },
+  { label: "Email" },
+  { label: "Cover Letter (Optional)" },
+  { label: "CV Upload" },
+  { label: "Summary & Submit" },
 ];
 
 function validateName(name: string) {
-  if (!name) return "Ad soyad zorunludur.";
-  if (name.length < 3) return "En az 3 karakter olmalı.";
-  if (!/^[a-zA-ZçÇğĞıİöÖşŞüÜ\s'-]+$/.test(name)) return "Geçerli bir ad girin.";
+  if (!name) return "Full name is required.";
+  if (name.length < 3) return "Must be at least 3 characters.";
+  if (!/^[a-zA-ZçÇğĞıİöÖşŞüÜ\s'-]+$/.test(name)) return "Please enter a valid name.";
   return "";
 }
 function validateEmail(email: string) {
-  if (!email) return "E-posta zorunludur.";
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return "Geçerli bir e-posta girin.";
+  if (!email) return "Email is required.";
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return "Please enter a valid email address.";
   return "";
 }
-function validateCover(cover: string) {
-  if (cover && cover.length < 10) return "En az 10 karakter olmalı veya boş bırakın.";
+function validateCo(co: string) {
+  if (co && co.length < 10) return "Must be at least 10 characters or leave empty.";
   return "";
 }
 
 export default function JobApplicationModal({ open, onClose, position }: JobApplicationModalProps) {
-  const initialForm = { name: "", email: "", cover: "" };
+  const initialForm = { name: "", email: "", co: "" };
   const [form, setForm] = useState(initialForm);
-  const [file, setFile] = useState<File | null>(null);
-  const [fileError, setFileError] = useState("");
+  const [fe, setFe] = useState<Fe | null>(null);
+  const [feError, setFeError] = useState("");
   const [status, setStatus] = useState<null | "success" | "error">(null);
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [step, setStep] = useState(0);
   const [touched, setTouched] = useState<{[k: string]: boolean}>({});
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const feInputRef = useRef<HTMLInputElement>(null);
 
   // Validasyonlar
   const nameError = touched.name ? validateName(form.name) : "";
   const emailError = touched.email ? validateEmail(form.email) : "";
-  const coverError = touched.cover ? validateCover(form.cover) : "";
+  const coError = touched.co ? validateCo(form.co) : "";
 
   useEffect(() => {
     if (status) {
@@ -64,8 +64,8 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
   useEffect(() => {
     if (!open) {
       setForm(initialForm);
-      setFile(null);
-      setFileError("");
+      setFe(null);
+      setFeError("");
       setStep(0);
       setTouched({});
     }
@@ -80,29 +80,29 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
     setTouched({ ...touched, [e.target.name]: true });
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
+  const handleFeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.fes?.[0];
     if (!f) return;
     const allowed = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
     if (!allowed.includes(f.type)) {
-      setFileError("Sadece PDF, DOC veya DOCX dosyası yükleyebilirsiniz.");
-      setFile(null);
+      setFeError("You can only upload PDF, DOC or DOCX files.");
+      setFe(null);
       return;
     }
     if (f.size > 5 * 1024 * 1024) {
-      setFileError("Dosya boyutu 5MB'dan büyük olamaz.");
-      setFile(null);
+      setFeError("File size cannot be larger than 5MB.");
+      setFe(null);
       return;
     }
-    setFileError("");
-    setFile(f);
+    setFeError("");
+    setFe(f);
   };
 
   const handleNext = () => {
     if (step === 0 && validateName(form.name)) { setTouched(t => ({...t, name:true})); return; }
     if (step === 1 && validateEmail(form.email)) { setTouched(t => ({...t, email:true})); return; }
-    if (step === 2 && validateCover(form.cover)) { setTouched(t => ({...t, cover:true})); return; }
-    if (step === 3 && !file) { setFileError("Lütfen CV'nizi yükleyin."); return; }
+    if (step === 2 && validateCo(form.co)) { setTouched(t => ({...t, co:true})); return; }
+    if (step === 3 && !fe) { setFeError("Please upload your CV."); return; }
     setStep((s) => Math.min(s + 1, steps.length - 1));
   };
 
@@ -112,7 +112,7 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
 
   const handleSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (!file) { setFileError("Lütfen CV'nizi yükleyin."); setStep(3); return; }
+    if (!fe) { setFeError("Please upload your CV."); setStep(3); return; }
     setLoading(true);
     setStatus(null);
     try {
@@ -120,9 +120,9 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
       formData.append("page", "/career");
       formData.append("name", form.name);
       formData.append("email", form.email);
-      formData.append("cover", form.cover);
+      formData.append("co", form.co);
       formData.append("position", position);
-      formData.append("cv", file);
+      formData.append("cv", fe);
       
       const res = await fetch("https://rvskttz2jh.execute-api.us-east-1.amazonaws.com/prod/contact", {
         method: "POST",
@@ -130,8 +130,8 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
       });
       
       setForm(initialForm);
-      setFile(null);
-      if (fileInputRef.current) fileInputRef.current.value = "";
+      setFe(null);
+      if (feInputRef.current) feInputRef.current.value = "";
       
       if (res.ok) {
         setStatus("success");
@@ -140,7 +140,7 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
       }
     } catch {
       setForm(initialForm);
-      setFile(null);
+      setFe(null);
       setStatus("error");
     } finally {
       setLoading(false);
@@ -155,7 +155,7 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
         <button
           className="absolute top-4 right-4 p-2 rounded-full hover:bg-black/10 focus:outline-none"
           onClick={onClose}
-          aria-label="Kapat"
+          aria-label="Close"
         >
           <X className="w-6 h-6" />
         </button>
@@ -178,13 +178,13 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
           <form onSubmit={handleSubmit} encType="multipart/form-data">
             {step === 0 && (
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2">Ad Soyad <span className="text-red-500 text-lg">*</span></h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2">Full Name <span className="text-red-500 text-lg">*</span></h2>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   className={`w-full px-6 py-4 rounded-xl border text-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all ${nameError ? "border-red-400 bg-red-50" : "border-gray-300"}`}
-                  placeholder="Adınız ve soyadınız"
+                  placeholder="Your first and last name"
                   value={form.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -196,7 +196,7 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
             )}
             {step === 1 && (
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2">E-posta <span className="text-red-500 text-lg">*</span></h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2">Email <span className="text-red-500 text-lg">*</span></h2>
                 <input
                   type="email"
                   id="email"
@@ -215,53 +215,53 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
             {step === 2 && (
               <div className="space-y-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <h2 className="text-2xl font-bold text-gray-900">Ön Yazı</h2>
-                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Opsiyonel</span>
+                  <h2 className="text-2xl font-bold text-gray-900">Cover Letter</h2>
+                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Optional</span>
                 </div>
                 <textarea
-                  id="cover"
-                  name="cover"
+                  id="co"
+                  name="co"
                   rows={5}
-                  className={`w-full px-6 py-4 rounded-xl border text-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all ${coverError ? "border-yellow-400 bg-yellow-50" : "border-gray-300"}`}
-                  placeholder="Kendinizden ve neden başvurduğunuzdan bahsedin... (En az 10 karakter veya boş bırakın)"
-                  value={form.cover}
+                  className={`w-full px-6 py-4 rounded-xl border text-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all ${coError ? "border-yellow-400 bg-yellow-50" : "border-gray-300"}`}
+                  placeholder="Tell us about yourself and why you're applying... (Minimum 10 characters or leave empty)"
+                  value={form.co}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   autoFocus
                 ></textarea>
-                {coverError && <div className="flex items-center gap-2 text-yellow-700 text-sm mt-1"><Info className="w-4 h-4" />{coverError}</div>}
+                {coError && <div className="flex items-center gap-2 text-yellow-700 text-sm mt-1"><Info className="w-4 h-4" />{coError}</div>}
               </div>
             )}
             {step === 3 && (
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2">CV Yükle <span className="text-red-500 text-lg">*</span></h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2">CV Upload <span className="text-red-500 text-lg">*</span></h2>
                 <label htmlFor="cv" className="block text-lg font-medium text-gray-700 mb-2">CV (PDF, DOC, DOCX, max 5MB)</label>
                 <div className="flex items-center gap-4">
                   <input
-                    type="file"
+                    type="fe"
                     id="cv"
                     name="cv"
                     accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                    className={`flex-1 px-4 py-3 rounded-xl border focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white transition-all ${fileError ? "border-red-400 bg-red-50" : "border-gray-300"}`}
-                    onChange={handleFileChange}
-                    ref={fileInputRef}
+                    className={`flex-1 px-4 py-3 rounded-xl border focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white transition-all ${feError ? "border-red-400 bg-red-50" : "border-gray-300"}`}
+                    onChange={handleFeChange}
+                    ref={feInputRef}
                     required
                   />
                   <UploadCloud className="w-8 h-8 text-blue-600" />
                 </div>
-                {fileError && <div className="flex items-center gap-2 text-red-600 text-sm mt-1"><Info className="w-4 h-4" />{fileError}</div>}
-                {file && <p className="text-green-700 text-base mt-2">{file.name}</p>}
+                {feError && <div className="flex items-center gap-2 text-red-600 text-sm mt-1"><Info className="w-4 h-4" />{feError}</div>}
+                {fe && <p className="text-green-700 text-base mt-2">{fe.name}</p>}
               </div>
             )}
             {step === 4 && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Özet & Gönder</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Summary & Submit</h2>
                 <div className="bg-gray-50 rounded-xl p-6 space-y-3">
-                  <div><span className="font-semibold">Ad Soyad:</span> {form.name}</div>
-                  <div><span className="font-semibold">E-posta:</span> {form.email}</div>
-                  <div><span className="font-semibold">Pozisyon:</span> {position}</div>
-                  <div><span className="font-semibold">Ön Yazı:</span> <span className="whitespace-pre-line">{form.cover || <span className='text-gray-400'>(Boş)</span>}</span></div>
-                  <div><span className="font-semibold">CV:</span> {file?.name}</div>
+                  <div><span className="font-semibold">Full Name:</span> {form.name}</div>
+                  <div><span className="font-semibold">Email:</span> {form.email}</div>
+                  <div><span className="font-semibold">Position:</span> {position}</div>
+                  <div><span className="font-semibold">Cover Letter:</span> <span className="whitespace-pre-line">{form.co || <span className='text-gray-400'>(Empty)</span>}</span></div>
+                  <div><span className="font-semibold">CV:</span> {fe?.name}</div>
                 </div>
               </div>
             )}
@@ -274,7 +274,7 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
                 onClick={handlePrev}
                 disabled={step === 0}
               >
-                <ArrowLeft className="w-5 h-5" /> Geri
+                <ArrowLeft className="w-5 h-5" /> Back
               </button>
               {step < steps.length - 1 && (
                 <button
@@ -282,7 +282,7 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
                   className="flex items-center gap-2 px-8 py-3 rounded-xl font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-md"
                   onClick={handleNext}
                 >
-                  İleri <ArrowRight className="w-5 h-5" />
+                  Next <ArrowRight className="w-5 h-5" />
                 </button>
               )}
               {step === steps.length - 1 && (
@@ -291,7 +291,7 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
                   className="flex items-center gap-2 px-8 py-3 rounded-xl font-semibold bg-green-600 text-white hover:bg-green-700 transition-colors shadow-md"
                   disabled={loading}
                 >
-                  {loading ? "Gönderiliyor..." : "Başvuruyu Gönder"}
+                  {loading ? "Submitting..." : "Submit Application"}
                 </button>
               )}
             </div>
@@ -308,7 +308,7 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
               <button
                 className="absolute top-3 right-3 p-1 rounded-full hover:bg-black/10 focus:outline-none"
                 onClick={() => { setShowPopup(false); setStatus(null); }}
-                aria-label="Kapat"
+                aria-label="Close"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -320,8 +320,8 @@ export default function JobApplicationModal({ open, onClose, position }: JobAppl
                 )}
                 <span className="font-semibold text-center text-base sm:text-lg">
                   {status === "success"
-                    ? "Başvurunuz başarıyla iletildi. En kısa sürede sizinle iletişime geçeceğiz."
-                    : "Bir hata oluştu. info@virtualriddle.com adresine doğrudan e-posta gönderebilirsiniz."}
+                    ? "Your application has been successfully submitted. We will contact you as soon as possible."
+                    : "An error occurred. You can send an email directly to info@virtualriddle.com."}
                 </span>
               </div>
             </div>

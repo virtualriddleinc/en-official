@@ -13,10 +13,10 @@ export default function NotFound() {
           </div>
         </div>
         
-        <h1 className="text-3xl md:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Sayfa Bulunamadı</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Page Not Found</h1>
         
         <p className="text-lg text-gray-300 mb-8 max-w-lg mx-auto">
-          Aradığınız sayfaya ulaşılamıyor. Sayfa kaldırılmış, adı değiştirilmiş veya geçici olarak erişilemiyor olabilir.
+          The page you are looking for cannot be reached. The page may have been removed, renamed, or is temporarily unavailable.
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -24,13 +24,17 @@ export default function NotFound() {
             href="/" 
             className="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all w-full sm:w-auto text-center"
           >
-            Ana Sayfaya Dön
+            Return to Home
           </Link>
           <button
-            onClick={() => window.history.back()}
+            onClick={() => {
+              if (typeof window !== 'undefined') {
+                window.history.back();
+              }
+            }}
             className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
           >
-            Geri Git
+            Go Back
           </button>
         </div>
         
@@ -39,7 +43,7 @@ export default function NotFound() {
         </div>
       </div>
       
-      {/* Dekoratif elementler */}
+      {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute h-full w-full bg-[url('/noise.png')] opacity-5"></div>
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-600 rounded-full filter blur-3xl opacity-10"></div>

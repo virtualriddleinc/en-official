@@ -1,7 +1,5 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
+export { generateMetadata } from './metadata';
 
 export default function JiraWorkManagementPage() {
   return (
@@ -17,17 +15,17 @@ export default function JiraWorkManagementPage() {
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold text-white mb-6">
-              Tüm iş akışlarınız için tek platform
+              Single Platform for All Your Workflows
             </h1>
             <p className="text-xl mb-8">
-              Jira Work Management ile pazarlama, İK, finans ve diğer tüm iş ekipleriniz için güçlü ve özelleştirilebilir iş yönetim çözümü. İş birimleriniz arasındaki koordinasyonu artırın.
+              Powerful and customizable work management solution with Jira Work Management for marketing, HR, finance, and all your business teams. Increase coordination between business units.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/free-discovery" 
                 className="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all w-full sm:w-auto text-center"
               >
-                Ücretsiz Dene
+                Try Free
               </Link>
               <Link
                 href="https://www.atlassian.com/software/jira" 
@@ -35,7 +33,7 @@ export default function JiraWorkManagementPage() {
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
               >
-                Ürünü İncele
+                View Product
               </Link>
             </div>
           </div>
@@ -54,8 +52,8 @@ export default function JiraWorkManagementPage() {
                   <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">Zamandan Tasarruf</h3>
-              <p className="text-blue-600/80">Hazır şablonlar ve otomasyon ile iş akışlarınızı hızlandırın. Manuel görevleri otomatikleştirerek zamandan tasarruf edin.</p>
+              <h3 className="text-2xl font-bold text-blue-600">Save Time</h3>
+              <p className="text-blue-600/80">Accelerate your workflows with ready-made templates and automation. Save time by automating manual tasks.</p>
             </div>
 
             {/* Feature 2 */}
@@ -68,8 +66,8 @@ export default function JiraWorkManagementPage() {
                   <path d="M16 3.13a4 4 0 010 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">Departmanlar Arası İş Birliği</h3>
-              <p className="text-blue-600/80">Pazarlama, İK, finans ve BT ekipleri arasında kesintisiz iş birliği sağlayın. Tüm departmanlar tek platformda çalışsın.</p>
+              <h3 className="text-2xl font-bold text-blue-600">Cross-Department Collaboration</h3>
+              <p className="text-blue-600/80">Enable seamless collaboration between marketing, HR, finance, and IT teams. All departments work on a single platform.</p>
             </div>
 
             {/* Feature 3 */}
@@ -81,8 +79,8 @@ export default function JiraWorkManagementPage() {
                   <path d="M3 9h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-blue-600">Esnek Görünümler</h3>
-              <p className="text-blue-600/80">Liste, takvim, zaman çizelgesi, kanban ve daha fazlası. Her ekibin kendi tercihine göre özelleştirilebilen görünümler sunun.</p>
+              <h3 className="text-2xl font-bold text-blue-600">Flexible Views</h3>
+              <p className="text-blue-600/80">List, calendar, timeline, kanban, and more. Provide customizable views according to each team's preference.</p>
             </div>
           </div>
         </div>
@@ -92,33 +90,33 @@ export default function JiraWorkManagementPage() {
       <section className="py-24 bg-blue-600">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Yapay Zeka ile İş Akışı Optimizasyonu</h2>
-            <p className="text-xl text-white/80">Jira Work Management'in yapay zeka özellikleriyle iş süreçlerinizi analiz edin ve optimize edin.</p>
+            <h2 className="text-4xl font-bold text-white mb-4">AI-Powered Workflow Optimization</h2>
+            <p className="text-xl text-white/80">Analyze and optimize your business processes with Jira Work Management's artificial intelligence features.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* AI Feature 1 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2">Akıllı Önceliklendirme</h3>
-              <p className="text-white/80">Yapay zeka iş önceliklerinizi analiz ederek en kritik görevleri belirlemenize yardımcı olur.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Smart Prioritization</h3>
+              <p className="text-white/80">Artificial intelligence helps you identify the most critical tasks by analyzing your work priorities.</p>
             </div>
 
             {/* AI Feature 2 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2">İş Akışı Önerileri</h3>
-              <p className="text-white/80">Mevcut iş akışlarınızı analiz eden AI, verimliliği artırmak için iyileştirme önerileri sunar.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Workflow Recommendations</h3>
+              <p className="text-white/80">AI that analyzes your existing workflows provides improvement recommendations to increase efficiency.</p>
             </div>
 
             {/* AI Feature 3 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2">Otomatik Görev Oluşturma</h3>
-              <p className="text-white/80">Yapay zeka, ekip ihtiyaçlarını anlayarak gerekli görevleri otomatik olarak oluşturur ve atar.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Automatic Task Creation</h3>
+              <p className="text-white/80">Artificial intelligence automatically creates and assigns necessary tasks by understanding team needs.</p>
             </div>
 
             {/* AI Feature 4 */}
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl hover:bg-white/20 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2">Performans Tahminleri</h3>
-              <p className="text-white/80">Geçmiş verilere dayalı performans tahminleri ile proje tamamlanma sürelerini daha doğru hesaplayın.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Performance Predictions</h3>
+              <p className="text-white/80">Calculate project completion times more accurately with performance predictions based on historical data.</p>
             </div>
           </div>
         </div>
@@ -128,32 +126,32 @@ export default function JiraWorkManagementPage() {
       <section className="py-24 bg-blue-600/10">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-4xl font-bold text-blue-600 mb-4">Her Departman İçin Uygun Çözümler</h2>
-            <p className="text-xl text-blue-600/80">Jira Work Management ile farklı iş birimlerinin ihtiyaçlarına özel çözümler sunun.</p>
+            <h2 className="text-4xl font-bold text-blue-600 mb-4">Solutions Suitable for Every Department</h2>
+            <p className="text-xl text-blue-600/80">Provide customized solutions for different business units with Jira Work Management.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-blue-600">Pazarlama Ekipleri</h3>
-                <p className="text-blue-600/80">Kampanya planlaması, içerik takvimi ve lansman etkinliklerini tek bir platformda yönetin. Dijital varlıkları organize edin.</p>
+                <h3 className="text-2xl font-semibold text-blue-600">Marketing Teams</h3>
+                <p className="text-blue-600/80">Manage campaign planning, content calendars, and launch events on a single platform. Organize digital assets.</p>
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-blue-600">İnsan Kaynakları</h3>
-                <p className="text-blue-600/80">İşe alım süreçlerini, çalışan onboarding, performans değerlendirmeleri ve izin takibini basitleştirin.</p>
+                <h3 className="text-2xl font-semibold text-blue-600">Human Resources</h3>
+                <p className="text-blue-600/80">Simplify recruitment processes, employee onboarding, performance reviews, and leave tracking.</p>
               </div>
             </div>
 
             <div className="space-y-8">
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-blue-600">Finans</h3>
-                <p className="text-blue-600/80">Bütçe planlama, fatura yönetimi ve finansal raporlama süreçlerini standartlaştırın ve takip edin.</p>
+                <h3 className="text-2xl font-semibold text-blue-600">Finance</h3>
+                <p className="text-blue-600/80">Standardize and track budget planning, invoice management, and financial reporting processes.</p>
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-blue-600">Operasyon Ekipleri</h3>
-                <p className="text-blue-600/80">Proje planlama, kaynak tahsisi ve süreç iyileştirme çalışmalarınızı optimize edin ve takip edin.</p>
+                <h3 className="text-2xl font-semibold text-blue-600">Operations Teams</h3>
+                <p className="text-blue-600/80">Optimize and track project planning, resource allocation, and process improvement activities.</p>
               </div>
             </div>
           </div>
@@ -164,20 +162,20 @@ export default function JiraWorkManagementPage() {
       <section className="py-24 bg-blue-600">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-white mb-6">Jira Work Management'ı ücretsiz deneyin</h2>
-            <p className="text-xl text-white/80 mb-8">50.000'den fazla şirket Jira Work Management ile iş süreçlerini yönetiyor. Siz de ekibe katılın.</p>
+            <h2 className="text-4xl font-bold text-white mb-6">Try Jira Work Management for Free</h2>
+            <p className="text-xl text-white/80 mb-8">Over 50,000 companies manage their business processes with Jira Work Management. Join the team.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
                 href="/free-discovery" 
                 className="px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-white/90 transition-all w-full sm:w-auto text-center"
               >
-                Ücretsiz Başlayın
+                Start Free
               </Link>
             <Link
                 href="/solutions/consulting" 
                 className="px-8 py-4 bg-white/10 text-white rounded-xl font-semibold hover:bg-white/20 transition-all w-full sm:w-auto text-center backdrop-blur-sm"
             >
-                Teklif İste
+                Request Quote
             </Link>
             </div>
           </div>

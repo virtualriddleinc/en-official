@@ -2,12 +2,12 @@
 
 export default function Footer() {
   const products = {
-    'Proje & İş Yönetimi': [
+    'Project & Work Management': [
       { name: 'Jira Software', href: '/products/jira-software' },
       { name: 'Jira Work Management', href: '/products/jira-work-management' },
       { name: 'Jira Service Management', href: '/products/jira-service-management' },
     ],
-    'Doküman & İşbirliği': [
+    'Documentation & Collaboration': [
       { name: 'Confluence', href: '/products/confluence' },
     ],
     'DevOps & Code': [
@@ -29,16 +29,16 @@ export default function Footer() {
   return (
     <footer className="bg-[#0F172A] text-white py-16">
       <div className="container mx-auto px-4">
-        {/* Logo ve Açıklama */}
+        {/* Logo and Description */}
         <div className="flex flex-col items-center mb-12">
           <img src="/logo-footer.svg" alt="Virtual Riddle Logo" className="w-16 h-16 mx-auto" />
         </div>
 
-        {/* Ana İçerik Grid */}
+        {/* Main Content Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {/* Ürünler */}
+          {/* Products */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">Ürünler</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white">Products</h3>
             <div className="space-y-4">
               {Object.entries(products).map(([category, items]) => (
                 <div key={category}>
@@ -58,9 +58,9 @@ export default function Footer() {
                 </div>
               ))}
               
-              {/* Keşfet */}
+              {/* Explore */}
               <div>
-                <h4 className="text-sm font-medium text-gray-300 mb-2">Keşfet</h4>
+                <h4 className="text-sm font-medium text-gray-300 mb-2">Explore</h4>
                 <ul className="space-y-1">
                   {exploreProducts.map((item) => (
                     <li key={item.name}>
@@ -77,43 +77,43 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Çözümler */}
+          {/* Solutions */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">Çözümler</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white">Solutions</h3>
             <ul className="space-y-2">
-              <li><a href="/solutions/consulting" className="text-gray-400 hover:text-white transition-colors text-sm">Atlassian Danışmanlığı</a></li>
+              <li><a href="/solutions/consulting" className="text-gray-400 hover:text-white transition-colors text-sm">Atlassian Consulting</a></li>
               <li><a href="/solutions/cloud-migration" className="text-gray-400 hover:text-white transition-colors text-sm">Cloud Migration</a></li>
-              <li><a href="/solutions/training" className="text-gray-400 hover:text-white transition-colors text-sm">Eğitim & Sertifikasyon</a></li>
-              <li><a href="/solutions/devops" className="text-gray-400 hover:text-white transition-colors text-sm">AI Altyapısı</a></li>
-              <li><a href="/solutions/it-support" className="text-gray-400 hover:text-white transition-colors text-sm">IT Destek</a></li>
+              <li><a href="/solutions/training" className="text-gray-400 hover:text-white transition-colors text-sm">Training & Certification</a></li>
+              <li><a href="/solutions/devops" className="text-gray-400 hover:text-white transition-colors text-sm">DevOps</a></li>
+              <li><a href="/solutions/it-support" className="text-gray-400 hover:text-white transition-colors text-sm">IT Support</a></li>
             </ul>
           </div>
 
-          {/* Şirket */}
+          {/* Company */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">Şirket</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white">Company</h3>
             <ul className="space-y-2">
-              <li><a href="/about" className="text-gray-400 hover:text-white transition-colors text-sm">Hakkımızda</a></li>
-              <li><a href="/career" className="text-gray-400 hover:text-white transition-colors text-sm">Kariyer</a></li>
-              <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors text-sm">İletişim</a></li>
+              <li><a href="/about" className="text-gray-400 hover:text-white transition-colors text-sm">About</a></li>
+              <li><a href="/career" className="text-gray-400 hover:text-white transition-colors text-sm">Career</a></li>
+              <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li>
               <li><a href="/blog" className="text-gray-400 hover:text-white transition-colors text-sm">Blog</a></li>
             </ul>
           </div>
 
-          {/* Destek */}
+          {/* Support */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">Destek</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white">Support</h3>
             <ul className="space-y-2">
-              <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors text-sm">Teknik Destek</a></li>
-              <li><a href="/free-discovery" className="text-gray-400 hover:text-white transition-colors text-sm">Ücretsiz Keşif</a></li>
-              <li><a href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm">Gizlilik Politikası</a></li>
-              <li><a href="/terms" className="text-gray-400 hover:text-white transition-colors text-sm">Kullanım Şartları</a></li>
-              <li><a href="/sitemap" className="text-gray-400 hover:text-white transition-colors text-sm">Site Haritası</a></li>
+              <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors text-sm">Technical Support</a></li>
+              <li><a href="/free-discovery" className="text-gray-400 hover:text-white transition-colors text-sm">Free Discovery</a></li>
+              <li><a href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</a></li>
+              <li><a href="/terms" className="text-gray-400 hover:text-white transition-colors text-sm">Terms of Use</a></li>
+              <li><a href="/sitemap" className="text-gray-400 hover:text-white transition-colors text-sm">Sitemap</a></li>
             </ul>
           </div>
         </div>
 
-        {/* Sosyal Medya */}
+        {/* Social Media */}
         <div className="flex justify-center gap-6 mb-12">
           <a 
             href="https://facebook.com" 
@@ -146,7 +146,7 @@ export default function Footer() {
             </svg>
           </a>
           <a 
-            href="https://linkedin.com" 
+            href="https://linkdo.com" 
             target="_blank" 
             rel="noopener noreferrer"
             className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-colors"
@@ -170,9 +170,9 @@ export default function Footer() {
           </a>
         </div>
 
-        {/* Telif Hakkı */}
+        {/* Copyright */}
         <div className="text-center text-gray-500">
-          <p>© 2024 Virtual Riddle. Tüm hakları saklıdır.</p>
+          <p>© 2024 Virtual Riddle. All rights reserved.</p>
         </div>
       </div>
     </footer>

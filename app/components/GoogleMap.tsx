@@ -8,7 +8,7 @@ interface GoogleMapProps {
 }
 
 const DEFAULT_CENTER = { lat: 41.1140246, lng: 29.0209027 }; // Kolektif House Maslak
-const DEFAULT_NAME = "Virtual Riddle Teknoloji A.Ş.";
+const DEFAULT_NAME = "Virtual Riddle Technology Inc.";
 
 export default function GoogleMap({ address, apiKey }: GoogleMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -17,10 +17,10 @@ export default function GoogleMap({ address, apiKey }: GoogleMapProps) {
 
   useEffect(() => {
     if (!apiKey) {
-      setError('Google Maps API anahtarı eksik.');
+      setError('Google Maps API key is missing.');
       return;
     }
-    // Script daha önce yüklendi mi kontrol et
+    // Check if script is already loaded
     const existingScript = document.querySelector('script[src^="https://maps.googleapis.com/maps/api/js"]');
     if (existingScript) {
       if ((window as any).google && (window as any).google.maps) {
@@ -30,13 +30,13 @@ export default function GoogleMap({ address, apiKey }: GoogleMapProps) {
       }
       return;
     }
-    // Google Maps API'sini yükle
+    // Load Google Maps API
       const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
       script.async = true;
       script.defer = true;
     script.onload = initializeMap;
-    script.onerror = () => setError('Google Maps yüklenemedi. API anahtarı yanlış veya bağlantı sorunu olabilir.');
+    script.onerror = () => setError('Google Maps could not be loaded. The API key may be incorrect or there may be a connection issue.');
       document.head.appendChild(script);
 
     function initializeMap() {
@@ -81,7 +81,7 @@ export default function GoogleMap({ address, apiKey }: GoogleMapProps) {
         const pos = marker.getPosition();
         if (!pos) return;
         map.setCenter(pos);
-        // Adres güncellemesi için reverse geocode
+        // Reverse geocode for address update
         const geocoder = new google.maps.Geocoder();
         geocoder.geocode({ location: pos }, (results: any, status: string) => {
           if (status === 'OK' && results && results[0]) {
@@ -108,7 +108,7 @@ export default function GoogleMap({ address, apiKey }: GoogleMapProps) {
         <input
           ref={inputRef}
           type="text"
-          placeholder="Adres veya mekan ara..."
+          placeholder="Search address or location..."
           className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
           defaultValue={address}
         />
@@ -120,8 +120,7 @@ export default function GoogleMap({ address, apiKey }: GoogleMapProps) {
       ) : (
     <div 
       ref={mapRef} 
-      className="w-full h-[400px] rounded-xl shadow-lg overflow-hidden"
-      style={{ filter: 'grayscale(20%) contrast(110%)' }}
+      className="w-full h-[400px] rounded-xl shadow-lg overflow-hidden [filter:grayscale(20%)_contrast(110%)]"
     />
       )}
     </div>

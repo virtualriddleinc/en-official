@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
 
-// About sayfası metadata generation function
+// About page metadata generation function
 async function getAboutData() {
   return {
-    title: 'Hakkımızda - Virtual Riddle Teknoloji A.Ş.',
-    description: 'Virtual Riddle Teknoloji A.Ş., Atlassian sertifikalı uzmanlardan oluşan deneyimli ekibimizle Türkiye\'nin önde gelen şirketlerine Atlassian danışmanlığı hizmeti sunuyor.',
-    company: 'Virtual Riddle Teknoloji A.Ş.',
-    location: 'Maslak 42, İstanbul'
+    title: 'About Us - Virtual Riddle',
+    description: 'Virtual Riddle Technology Inc. provides Atlassian consulting services to leading Turkish companies with our experienced team of Atlassian-certified experts.',
+    company: 'Virtual Riddle Technology Inc.',
+    location: 'Maslak 42, Istanbul'
   }
 }
 
@@ -18,15 +18,15 @@ export async function generateMetadata(): Promise<Metadata> {
     description: data.description,
     keywords: [
       'Virtual Riddle',
-      'Atlassian danışmanlığı',
-      'Jira danışmanlığı',
-      'Confluence danışmanlığı',
-      'yazılım danışmanlığı',
-      'Türkiye teknoloji şirketi',
-      'Maslak teknoloji',
-      'dijital dönüşüm',
-      'Atlassian Türkiye',
-      'kurumsal çözümler'
+      'Atlassian consulting',
+      'Jira consulting',
+      'Confluence consulting',
+      'software consulting',
+      'Turkey technology company',
+      'Maslak technology',
+      'digital transformation',
+      'Atlassian Turkey',
+      'enterprise solutions'
     ],
     alternates: {
       canonical: '/about'
@@ -36,8 +36,8 @@ export async function generateMetadata(): Promise<Metadata> {
       follow: true
     },
     other: {
-      'article:section': 'Kurumsal',
-      'article:tag': 'Virtual Riddle, Atlassian, Danışmanlık'
+      'article:section': 'Corporate',
+      'article:tag': 'Virtual Riddle, Atlassian, Consulting'
     }
   }
 } 

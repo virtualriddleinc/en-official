@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CloudPage() {
   return (
     <main className="flex min-h-screen flex-col items-center pt-32">
@@ -5,15 +7,15 @@ export default function CloudPage() {
       <section className="w-full py-20 bg-gradient-to-r from-blue-800 to-blue-950 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">Cloud Çözümleri</h1>
+            <h1 className="text-5xl font-bold mb-6">Cloud Solutions</h1>
             <p className="text-xl">
-              Modern cloud teknolojileri ile işletmenizi geleceğe taşıyın
+              Move your business to the future with modern cloud technologies
             </p>
           </div>
         </div>
       </section>
 
-      {/* Özellikler */}
+      {/* Features */}
       <section className="w-full py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -26,7 +28,7 @@ export default function CloudPage() {
                 </div>
                 <h2 className="text-xl font-bold text-gray-900 mb-4">Cloud Migration</h2>
                 <p className="text-gray-700">
-                  Mevcut sistemlerinizi güvenli ve kesintisiz bir şekilde cloud ortamına taşıyın.
+                  Migrate your existing systems to the cloud securely and seamlessly.
                 </p>
               </div>
               <div className="bg-white p-8 rounded-2xl shadow-lg">
@@ -37,7 +39,7 @@ export default function CloudPage() {
                 </div>
                 <h2 className="text-xl font-bold text-gray-900 mb-4">Cloud Native</h2>
                 <p className="text-gray-700">
-                  Modern mikroservis mimarileri ile ölçeklenebilir uygulamalar geliştirin.
+                  Develop modern microservice architectures and scalable applications.
                 </p>
               </div>
               <div className="bg-white p-8 rounded-2xl shadow-lg">
@@ -48,7 +50,7 @@ export default function CloudPage() {
                 </div>
                 <h2 className="text-xl font-bold text-gray-900 mb-4">Cloud Security</h2>
                 <p className="text-gray-700">
-                  En iyi güvenlik pratikleri ile cloud altyapınızı koruyun.
+                  Protect your cloud infrastructure with the best security practices.
                 </p>
               </div>
             </div>
@@ -56,11 +58,11 @@ export default function CloudPage() {
         </div>
       </section>
 
-      {/* Cloud Platformları */}
+      {/* Supported Cloud Platforms */}
       <section className="w-full py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Desteklenen Cloud Platformları</h2>
+            <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Supported Cloud Platforms</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
                 <div className="w-24 h-24 bg-[#FF9900] rounded-xl flex items-center justify-center mx-auto mb-6">
@@ -68,7 +70,7 @@ export default function CloudPage() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Amazon Web Services</h3>
                 <p className="text-gray-700">
-                  EC2, S3, RDS, Lambda ve diğer AWS servisleri ile ölçeklenebilir çözümler.
+                  Scalable solutions with EC2, S3, RDS, Lambda and other AWS services.
                 </p>
               </div>
               <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
@@ -77,7 +79,7 @@ export default function CloudPage() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Microsoft Azure</h3>
                 <p className="text-gray-700">
-                  Azure VM, App Service, SQL Database ve Azure Functions ile enterprise çözümler.
+                  Enterprise solutions with Azure VM, App Service, SQL Database and Azure Functions.
                 </p>
               </div>
               <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
@@ -86,7 +88,7 @@ export default function CloudPage() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Google Cloud Platform</h3>
                 <p className="text-gray-700">
-                  Compute Engine, Cloud Storage, BigQuery ve Cloud Run ile yenilikçi çözümler.
+                  Innovative solutions with Compute Engine, Cloud Storage, BigQuery and Cloud Run.
                 </p>
               </div>
             </div>
@@ -94,11 +96,11 @@ export default function CloudPage() {
         </div>
       </section>
 
-      {/* Öne Çıkan Özellikler */}
+      {/* Featured Services */}
       <section className="w-full py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Cloud Hizmetlerimiz</h2>
+            <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Our Cloud Services</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div className="flex gap-6">
                 <div className="flex-shrink-0">
@@ -109,9 +111,9 @@ export default function CloudPage() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Cloud Strateji Danışmanlığı</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Cloud Strategy Consulting</h3>
                   <p className="text-gray-700">
-                    İşletmeniz için en uygun cloud stratejisini belirleyin ve dönüşüm yol haritanızı oluşturun.
+                    Determine the most suitable cloud strategy for your business and create your transformation roadmap.
                   </p>
                 </div>
               </div>
@@ -124,9 +126,9 @@ export default function CloudPage() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Cloud Güvenlik ve Uyumluluk</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Cloud Security and Compliance</h3>
                   <p className="text-gray-700">
-                    Cloud altyapınızı güvenlik standartlarına uygun şekilde yapılandırın ve yönetin.
+                    Configure and manage your cloud infrastructure in compliance with security standards.
                   </p>
                 </div>
               </div>
@@ -139,9 +141,9 @@ export default function CloudPage() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Cloud Optimizasyonu</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Cloud Optimization</h3>
                   <p className="text-gray-700">
-                    Maliyet optimizasyonu ve performans iyileştirmeleri ile cloud yatırımınızdan maksimum fayda sağlayın.
+                    Maximize the return on your cloud investment with cost optimization and performance improvements.
                   </p>
                 </div>
               </div>
@@ -156,7 +158,7 @@ export default function CloudPage() {
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Managed Cloud Services</h3>
                   <p className="text-gray-700">
-                    7/24 izleme ve yönetim hizmetleri ile cloud altyapınızı profesyonel ekibimize emanet edin.
+                    Entrust your cloud infrastructure to our professional team with 24/7 monitoring and management services.
                   </p>
                 </div>
               </div>
@@ -169,17 +171,17 @@ export default function CloudPage() {
       <section className="w-full py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-gray-900 mb-8">Cloud Yolculuğunuza Başlayın</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">Start Your Cloud Journey</h2>
             <p className="text-xl text-gray-600 mb-12">
-              İşletmenizi cloud'a taşımak için ilk adımı atın
+              Take the first step to move your business to the cloud
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                Ücretsiz Keşif Görüşmesi
-              </button>
-              <button className="bg-gray-100 text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
-                Vaka Çalışmalarımız
-              </button>
+              <Link href="/free-discovery" className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-center">
+                Free Discovery Consultation
+              </Link>
+              <Link href="/solutions/cloud-migration" className="bg-gray-100 text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-200 transition-colors text-center">
+                Our Case Studies
+              </Link>
             </div>
           </div>
         </div>

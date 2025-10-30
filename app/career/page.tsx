@@ -10,15 +10,15 @@ export default function CareerPage() {
   const positions = [
     {
       title: "Jira Administrator (Remote)",
-      tags: ["Tam Zamanlı", "Remote", "Türkiye"]
+      tags: ["Full Time", "Remote", "Turkey"]
     },
     {
       title: "Atlassian Expert (Remote)",
-      tags: ["Tam Zamanlı", "Remote", "Türkiye"]
+      tags: ["Full Time", "Remote", "Turkey"]
     },
     {
       title: "Jr. Atlassian Consultant (Remote)",
-      tags: ["Yarı Zamanlı", "Remote", "Türkiye"]
+      tags: ["Part Time", "Remote", "Turkey"]
     }
   ];
 
@@ -33,34 +33,34 @@ export default function CareerPage() {
       <section className="w-full py-20 bg-gradient-to-r from-blue-800 to-blue-950 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6 text-white">Kariyer</h1>
+            <h1 className="text-5xl font-bold mb-6 text-white">Career</h1>
             <p className="text-xl">
-              Geleceğin teknolojilerini bizimle şekillendirin
+              Shape the technologies of the future with us
             </p>
           </div>
         </div>
       </section>
 
-      {/* Kariyer Fırsatları */}
+      {/* Career Opportunities */}
       <section className="w-full py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* Görsel */}
+            {/* Image */}
             <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100">
               <img
                 src="/images/office-illustration.jpeg"
-                alt="Ofis ve Ekip Çalışması İllustrasyonu"
+                alt="Office and Team Work Illustration"
                 className="object-cover w-full h-full"
               />
             </div>
 
-            {/* İçerik */}
+            {/* Content */}
             <div className="space-y-8">
               <h2 className="text-4xl font-bold text-gray-900">
-                Ekibimize Katılın
+                Join Our Team
               </h2>
               <p className="text-lg text-gray-600">
-                Virtual Riddle'da çalışmak, geleceğin teknolojilerini şekillendirmek ve sürekli öğrenmek demektir. Dinamik ekibimizin bir parçası olun, birlikte büyüyelim.
+                Working at Virtual Riddle means shaping the technologies of the future and continuous learning. Become part of our dynamic team, let's grow together.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
@@ -70,8 +70,8 @@ export default function CareerPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900">Sürekli Gelişim</h3>
-                    <p className="text-gray-600">Eğitim ve gelişim programlarıyla kariyerinizi ileriye taşıyın</p>
+                    <h3 className="text-xl font-semibold text-gray-900">Continuous Development</h3>
+                    <p className="text-gray-600">Advance your career through training and development programs</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -81,8 +81,8 @@ export default function CareerPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900">Harika Ekip</h3>
-                    <p className="text-gray-600">Yetenekli ve tutkulu profesyonellerle çalışın</p>
+                    <h3 className="text-xl font-semibold text-gray-900">Great Team</h3>
+                    <p className="text-gray-600">Work with talented and passionate professionals</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -92,14 +92,14 @@ export default function CareerPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900">Esnek Çalışma</h3>
-                    <p className="text-gray-600">İş-yaşam dengenizi koruyun</p>
+                    <h3 className="text-xl font-semibold text-gray-900">Flexible Working</h3>
+                    <p className="text-gray-600">Maintain your work-life balance</p>
                   </div>
                 </div>
               </div>
               <div className="mt-8">
-                <a href="#acik-pozisyonlar" className="inline-block px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors">
-                Açık Pozisyonlar
+                <a href="#open-positions" className="inline-block px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors">
+                Open Positions
                 </a>
               </div>
             </div>
@@ -107,54 +107,54 @@ export default function CareerPage() {
         </div>
       </section>
 
-      {/* Neden Biz? */}
+      {/* Why Us? */}
       <section className="w-full py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16 text-blue-900 flex items-center justify-center gap-3">
-              <span>✨</span> Neden Virtual Riddle? <span>🚀</span>
+              <span>✨</span> Why Virtual Riddle? <span>🚀</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-white p-8 rounded-2xl shadow-lg text-center border border-blue-100 hover:shadow-2xl transition-all">
                 <div className="text-4xl mb-4">📚</div>
-                <h3 className="text-xl font-bold text-blue-800 mb-2">Kişisel ve Profesyonel Gelişim</h3>
-                <p className="text-gray-700">Sürekli eğitim, sertifika ve konferans desteğiyle hem teknik hem kişisel gelişiminiz için yatırım yapıyoruz.</p>
+                <h3 className="text-xl font-bold text-blue-800 mb-2">Personal and Professional Development</h3>
+                <p className="text-gray-700">We invest in both your technical and personal development through continuous training, certification and conference support.</p>
               </div>
               <div className="bg-white p-8 rounded-2xl shadow-lg text-center border border-blue-100 hover:shadow-2xl transition-all">
                 <div className="text-4xl mb-4">🏡</div>
-                <h3 className="text-xl font-bold text-blue-800 mb-2">Remote & Hibrit Çalışma</h3>
-                <p className="text-gray-700">Dilediğiniz yerden, esnek saatlerle çalışabilir; iş-yaşam dengenizi koruyabilirsiniz.</p>
+                <h3 className="text-xl font-bold text-blue-800 mb-2">Remote & Hybrid Work</h3>
+                <p className="text-gray-700">You can work from where you want, with flexible hours; maintain your work-life balance.</p>
               </div>
               <div className="bg-white p-8 rounded-2xl shadow-lg text-center border border-blue-100 hover:shadow-2xl transition-all">
                 <div className="text-4xl mb-4">💙</div>
-                <h3 className="text-xl font-bold text-blue-800 mb-2">Çalışana Saygı & Destek</h3>
-                <p className="text-gray-700">Hayatınıza ve özel zamanlarınıza saygı duyan, sağlıklı iş yükü ve psikolojik güvenlik sunan bir ortam.</p>
+                <h3 className="text-xl font-bold text-blue-800 mb-2">Respect & Support for Employees</h3>
+                <p className="text-gray-700">An environment that respects your life and personal time, offering a healthy workload and psychological safety.</p>
               </div>
               <div className="bg-white p-8 rounded-2xl shadow-lg text-center border border-blue-100 hover:shadow-2xl transition-all">
                 <div className="text-4xl mb-4">🤝</div>
-                <h3 className="text-xl font-bold text-blue-800 mb-2">Takım Ruhu & Birlikte Başarma</h3>
-                <p className="text-gray-700">Açık iletişim, destekleyici ekip ve birlikte öğrenme kültürüyle başarıya birlikte ulaşırız.</p>
+                <h3 className="text-xl font-bold text-blue-800 mb-2">Team Spirit & Collaborative Success</h3>
+                <p className="text-gray-700">We achieve success together through open communication, supportive team and a culture of learning together.</p>
               </div>
               <div className="bg-white p-8 rounded-2xl shadow-lg text-center border border-blue-100 hover:shadow-2xl transition-all">
                 <div className="text-4xl mb-4">🎁</div>
-                <h3 className="text-xl font-bold text-blue-800 mb-2">Yan Haklar & Avantajlar</h3>
-                <p className="text-gray-700">Özel sağlık sigortası, yemek kartı, ekipman desteği ve sürpriz ödüllerle motivasyonunuzu artırıyoruz.</p>
+                <h3 className="text-xl font-bold text-blue-800 mb-2">Benefits & Advantages</h3>
+                <p className="text-gray-700">We increase your motivation with private health insurance, meal card, equipment support and surprise rewards.</p>
               </div>
               <div className="bg-white p-8 rounded-2xl shadow-lg text-center border border-blue-100 hover:shadow-2xl transition-all">
                 <div className="text-4xl mb-4">🌱</div>
-                <h3 className="text-xl font-bold text-blue-800 mb-2">Çeşitlilik & Kapsayıcılık</h3>
-                <p className="text-gray-700">Farklılıklara değer veren, kapsayıcı ve eşitlikçi bir iş ortamı sunuyoruz.</p>
+                <h3 className="text-xl font-bold text-blue-800 mb-2">Diversity & Inclusion</h3>
+                <p className="text-gray-700">We offer an inclusive and egalitarian work environment that values differences.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Açık Pozisyonlar */}
-      <section id="acik-pozisyonlar" className="w-full py-20 bg-gray-50">
+      {/* Open Positions */}
+      <section id="open-positions" className="w-full py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Açık Pozisyonlar</h2>
+            <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Open Positions</h2>
             <div className="space-y-6">
               {positions.map((pos) => (
                 <div key={pos.title} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
@@ -163,7 +163,7 @@ export default function CareerPage() {
                       <h3 className="text-2xl font-bold text-gray-900 mb-2">{pos.title}</h3>
                       <div className="flex flex-wrap gap-2">
                         {pos.tags.map((tag) => (
-                          <span key={tag} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">{tag}</span>
+                          <span key={tag} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">{tag === "Türkiye" ? "Turkey" : tag}</span>
                         ))}
                       </div>
                     </div>
@@ -171,7 +171,7 @@ export default function CareerPage() {
                       className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                       onClick={() => handleApply(pos.title)}
                     >
-                      Başvur
+                      Apply
                     </button>
                   </div>
                 </div>
@@ -181,46 +181,46 @@ export default function CareerPage() {
         </div>
       </section>
 
-      {/* Başvuru Süreci */}
+      {/* Application Process */}
       <section className="w-full py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Başvuru Süreci</h2>
+            <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Application Process</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-2xl font-bold text-blue-600">1</span>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Başvuru</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Application</h3>
                 <p className="text-gray-700">
-                  İlgilendiğiniz pozisyona online başvurunuzu yapın.
+                  Submit your online application for the position you are interested in.
                 </p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-2xl font-bold text-blue-600">2</span>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">İlk Görüşme</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Initial Interview</h3>
                 <p className="text-gray-700">
-                  İK ekibimiz ile online bir görüşme gerçekleştirin.
+                  Conduct an online interview with our HR team.
                 </p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-2xl font-bold text-blue-600">3</span>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Teknik Görüşme</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Technical Interview</h3>
                 <p className="text-gray-700">
-                  Teknik ekibimiz ile detaylı bir değerlendirme yapın.
+                  Conduct a detailed evaluation with our technical team.
                 </p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-2xl font-bold text-blue-600">4</span>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Teklif</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Offer</h3>
                 <p className="text-gray-700">
-                  Olumlu değerlendirme sonrası iş teklifini alın.
+                  Receive the job offer after positive evaluation.
                 </p>
               </div>
             </div>

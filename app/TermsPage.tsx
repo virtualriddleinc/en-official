@@ -1,9 +1,9 @@
 {/* Hero Section */}
 <div className="bg-gradient-to-br from-slate-50 via-indigo-50 to-white py-16 px-4 sm:px-6 lg:px-8">
   <div className="max-w-7xl mx-auto">
-    <h1 className="text-slate-900 mb-4">Kullanım Koşulları</h1>
+    <h1 className="text-slate-900 mb-4">Terms of Use</h1>
     <p className="subtitle text-slate-700 max-w-3xl">
-      Virtual Riddle hizmetlerini kullanırken uymanız gereken kurallar ve koşullar.
+      Rules and conditions you must follow when using Virtual Riddle services.
     </p>
   </div>
 </div>
@@ -12,89 +12,89 @@
 <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
   <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-8">
     <nav className="mb-8 p-4 bg-slate-50 rounded-lg">
-      <h2 className="text-slate-900 mb-4 text-lg font-medium">Hızlı Gezinme</h2>
+      <h2 className="text-slate-900 mb-4 text-lg font-medium">Quick Navigation</h2>
       <ul className="space-y-2">
         <li>
-          <a href="#hizmet-kullanimi" className="text-blue-700 hover:text-blue-800 hover:underline">
-            Hizmet Kullanımı
+          <a href="#service-usage" className="text-blue-700 hover:text-blue-800 hover:underline">
+            Service Usage
           </a>
         </li>
         <li>
-          <a href="#fikri-mulkiyet" className="text-blue-700 hover:text-blue-800 hover:underline">
-            Fikri Mülkiyet
+          <a href="#intellectual-property" className="text-blue-700 hover:text-blue-800 hover:underline">
+            Intellectual Property
           </a>
         </li>
         <li>
-          <a href="#sorumluluk" className="text-blue-700 hover:text-blue-800 hover:underline">
-            Sorumluluk Sınırları
+          <a href="#liability" className="text-blue-700 hover:text-blue-800 hover:underline">
+            Limitation of Liability
           </a>
         </li>
         <li>
-          <a href="#hesap-guvenligi" className="text-blue-700 hover:text-blue-800 hover:underline">
-            Hesap Güvenliği
+          <a href="#account-security" className="text-blue-700 hover:text-blue-800 hover:underline">
+            Account Security
           </a>
         </li>
         <li>
-          <a href="#odeme-kosullari" className="text-blue-700 hover:text-blue-800 hover:underline">
-            Ödeme Koşulları
+          <a href="#payment-terms" className="text-blue-700 hover:text-blue-800 hover:underline">
+            Payment Terms
           </a>
         </li>
       </ul>
     </nav>
 
     <div className="prose prose-slate max-w-none">
-      <section id="hizmet-kullanimi" className="mb-12">
-        <h2 className="text-slate-900">Hizmet Kullanımı</h2>
+      <section id="service-usage" className="mb-12">
+        <h2 className="text-slate-900">Service Usage</h2>
         <div className="bg-slate-50 rounded-lg p-4 mb-6">
-          <h3 className="text-slate-800 mb-2">Temel Kurallar:</h3>
+          <h3 className="text-slate-800 mb-2">Basic Rules:</h3>
           <ul className="list-disc pl-5 space-y-2 text-slate-700">
-            <li>Hizmetlerimizi yasal amaçlar için kullanmalısınız</li>
-            <li>Diğer kullanıcıların haklarına saygı göstermelisiniz</li>
-            <li>Sistemin güvenliğini tehlikeye atacak eylemlerden kaçınmalısınız</li>
+            <li>You must use our services for legal purposes</li>
+            <li>You must respect other users' rights</li>
+            <li>You should avoid actions that will endanger the security of the system</li>
           </ul>
         </div>
       </section>
 
-      <section id="fikri-mulkiyet" className="mb-12">
-        <h2 className="text-slate-900">Fikri Mülkiyet</h2>
+      <section id="intellectual-property" className="mb-12">
+        <h2 className="text-slate-900">Intellectual Property</h2>
         <div className="bg-slate-50 rounded-lg p-4 mb-6">
           <p className="text-slate-700">
-            Tüm içerik, logo ve markalar Virtual Riddle'ın fikri mülkiyetidir ve izinsiz kullanılamaz.
+            All content, logos and trademarks are the intellectual property of Virtual Riddle and cannot be used without permission.
           </p>
         </div>
       </section>
 
-      <section id="sorumluluk" className="mb-12">
-        <h2 className="text-slate-900">Sorumluluk Sınırları</h2>
+      <section id="liability" className="mb-12">
+        <h2 className="text-slate-900">Limitation of Liability</h2>
         <div className="bg-slate-50 rounded-lg p-4 mb-6">
           <p className="text-slate-700">
-            Hizmetlerimizin kullanımından doğabilecek doğrudan veya dolaylı zararlardan sorumlu değiliz.
+            We are not responsible for any direct or indirect damages that may arise from the use of our services.
           </p>
         </div>
       </section>
 
-      <section id="hesap-guvenligi" className="mb-12">
-        <h2 className="text-slate-900">Hesap Güvenliği</h2>
+      <section id="account-security" className="mb-12">
+        <h2 className="text-slate-900">Account Security</h2>
         <div className="bg-slate-50 rounded-lg p-4 mb-6">
           <p className="text-slate-700">
-            Hesabınızın güvenliğinden siz sorumlusunuz. Şüpheli bir durum fark ederseniz hemen bize bildirin.
+            You are responsible for the security of your account. If you notice any suspicious activity, please notify us immediately.
           </p>
         </div>
       </section>
 
-      <section id="odeme-kosullari" className="mb-12">
-        <h2 className="text-slate-900">Ödeme Koşulları</h2>
+      <section id="payment-terms" className="mb-12">
+        <h2 className="text-slate-900">Payment Terms</h2>
         <div className="bg-slate-50 rounded-lg p-4 mb-6">
           <p className="text-slate-700">
-            Ödeme planları ve koşulları hakkında detaylı bilgi için fiyatlandırma sayfamızı ziyaret edin.
+            For detailed information about payment plans and conditions, visit our pricing page.
           </p>
         </div>
       </section>
 
       <section className="bg-indigo-50 rounded-lg p-6 mb-8">
-        <h2 className="text-slate-900 mb-4">Sorularınız mı var?</h2>
+        <h2 className="text-slate-900 mb-4">Have Questions?</h2>
         <p className="text-slate-700 mb-6">
-          Kullanım koşullarımızla ilgili sorularınız için bize ulaşın:
+          Contact us for questions about our terms of use:
         </p>
         <a
           href="mailto:info@virtualriddle.com"
@@ -113,12 +113,12 @@
               d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
             />
           </svg>
-          E-posta Gönder
+          Send Email
         </a>
       </section>
 
       <div className="text-sm text-slate-500">
-        Son güncelleme: 01.01.2024
+        Last updated: January 1, 2024
       </div>
     </div>
   </div>

@@ -47,7 +47,7 @@ export default function CloudMigrationPage() {
     "2000+"
   ];
 
-  const requiredFields = ["fullName", "companyName", "email", "phone", "currentEnvironment", "usersCount", "message"];
+  const requiredFields = ["fullName", "companyName", "email", "currentEnvironment", "usersCount", "message"];
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const [validationMsg, setValidationMsg] = useState("");
 

@@ -31,7 +31,7 @@ export default function DevOpsPage() {
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const [validationMsg, setValidationMsg] = useState("");
 
-  const requiredFields = ["fullName", "companyName", "email", "phone", "message"];
+  const requiredFields = ["fullName", "companyName", "email", "message"];
 
   // Lambda-compatible field mapping function for AWS SES
   function mapFormToLambda(form) {

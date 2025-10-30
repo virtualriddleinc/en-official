@@ -122,7 +122,7 @@ export default function ContactPage() {
     setStatus(null);
     
     // Validation
-    if (!form.name || !form.email || !form.subject || !form.phone || !form.message) {
+    if (!form.name || !form.email || !form.subject || !form.message) {
       setStatus("error");
       setLoading(false);
       return;

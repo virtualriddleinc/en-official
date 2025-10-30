@@ -40,7 +40,7 @@ export default function ConsultingPage() {
   const [countrySearch, setCountrySearch] = useState("");
   const countryDropdownRef = useRef<HTMLDivElement>(null);
 
-  const requiredFields = ["fullName", "companyName", "email", "phone", "message"];
+  const requiredFields = ["fullName", "companyName", "email", "message"];
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const [validationMsg, setValidationMsg] = useState("");
 

@@ -10,15 +10,15 @@ export default function CareerPage() {
   const positions = [
     {
       title: "Jira Administrator (Remote)",
-      tags: ["Full Time", "Remote", "Turkey"]
+      tags: ["Full Time", "Remote", "Global"]
     },
     {
       title: "Atlassian Expert (Remote)",
-      tags: ["Full Time", "Remote", "Turkey"]
+      tags: ["Full Time", "Remote", "Global"]
     },
     {
       title: "Jr. Atlassian Consultant (Remote)",
-      tags: ["Part Time", "Remote", "Turkey"]
+      tags: ["Part Time", "Remote", "Global"]
     }
   ];
 

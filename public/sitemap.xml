@@ -213,16 +213,16 @@
   <!-- Utility Pages -->
   <url>
     <loc>https://virtualriddle.com/search</loc>
-    <lastmod>2025-07-01</lastmod>
+    <lastmod>2025-10-30</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://virtualriddle.com/sitemap</loc>
-    <lastmod>2025-07-10</lastmod>
+    <lastmod>2025-10-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.2</priority>
   </url>
   
   <!-- Legal Pages -->

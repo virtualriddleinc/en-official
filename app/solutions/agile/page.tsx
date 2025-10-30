@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { CheckCircle, AlertTriangle, X } from "lucide-react";
-import { getSortedCountryCodes } from "../lib/countryCodes";
+import { getSortedCountryCodes } from "../../lib/countryCodes";
 
 // Country codes with flags (sorted by popularity, Palestine first)
 const countryCodes = getSortedCountryCodes();

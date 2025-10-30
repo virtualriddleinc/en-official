@@ -503,7 +503,7 @@ export default function ClientLayout({
                         <span className="text-sm text-blue-400">Search...</span>
                   </div>
                     <div className="flex items-center space-x-1.5 text-xs text-blue-400">
-                        <kbd className="px-2 py-1 bg-blue-100/50 rounded-lg">{isMac ? '⌘' : 'Ctrl'}</kbd>
+                        <kbd suppressHydrationWarning className="px-2 py-1 bg-blue-100/50 rounded-lg">{isMac ? '⌘' : 'Ctrl'}</kbd>
                         <span>+</span>
                         <kbd className="px-2 py-1 bg-blue-100/50 rounded-lg">K</kbd>
                 </div>
@@ -574,7 +574,7 @@ export default function ClientLayout({
                         </div>
                       </div>
                       <div className="flex items-center space-x-1 text-xs text-blue-400">
-                        <kbd className="px-2 py-1 bg-blue-100/20 rounded-lg">{isMac ? '⌘' : 'Ctrl'}</kbd>
+                        <kbd suppressHydrationWarning className="px-2 py-1 bg-blue-100/20 rounded-lg">{isMac ? '⌘' : 'Ctrl'}</kbd>
                         <span>+</span>
                         <kbd className="px-2 py-1 bg-blue-100/20 rounded-lg">K</kbd>
                       </div>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { CheckCircle, AlertTriangle, X } from "lucide-react";
 import StructuredData from '../components/StructuredData';
+import { getSortedCountryCodes } from "../lib/countryCodes";
 import dynamic from 'next/dynamic';
 
 const GoogleMap = dynamic(() => import('../components/GoogleMap'), { ssr: false });
@@ -62,47 +63,7 @@ function SimpleGoogleMap() {
   );
 }
 
-// Country codes with flags (sorted by popularity, Palestine first)
-const countryCodes = [
-  { code: "+970", flag: "🇵🇸", country: "Palestine" },
-  { code: "+1", flag: "🇺🇸", country: "United States" },
-  { code: "+90", flag: "🇹🇷", country: "Turkey" },
-  { code: "+44", flag: "🇬🇧", country: "United Kingdom" },
-  { code: "+49", flag: "🇩🇪", country: "Germany" },
-  { code: "+33", flag: "🇫🇷", country: "France" },
-  { code: "+39", flag: "🇮🇹", country: "Italy" },
-  { code: "+34", flag: "🇪🇸", country: "Spain" },
-  { code: "+31", flag: "🇳🇱", country: "Netherlands" },
-  { code: "+41", flag: "🇨🇭", country: "Switzerland" },
-  { code: "+32", flag: "🇧🇪", country: "Belgium" },
-  { code: "+43", flag: "🇦🇹", country: "Austria" },
-  { code: "+46", flag: "🇸🇪", country: "Sweden" },
-  { code: "+47", flag: "🇳🇴", country: "Norway" },
-  { code: "+45", flag: "🇩🇰", country: "Denmark" },
-  { code: "+358", flag: "🇫🇮", country: "Finland" },
-  { code: "+971", flag: "🇦🇪", country: "UAE" },
-  { code: "+966", flag: "🇸🇦", country: "Saudi Arabia" },
-  { code: "+974", flag: "🇶🇦", country: "Qatar" },
-  { code: "+81", flag: "🇯🇵", country: "Japan" },
-  { code: "+86", flag: "🇨🇳", country: "China" },
-  { code: "+91", flag: "🇮🇳", country: "India" },
-  { code: "+82", flag: "🇰🇷", country: "South Korea" },
-  { code: "+61", flag: "🇦🇺", country: "Australia" },
-  { code: "+64", flag: "🇳🇿", country: "New Zealand" },
-  { code: "+55", flag: "🇧🇷", country: "Brazil" },
-  { code: "+52", flag: "🇲🇽", country: "Mexico" },
-  { code: "+54", flag: "🇦🇷", country: "Argentina" },
-  { code: "+57", flag: "🇨🇴", country: "Colombia" },
-  { code: "+56", flag: "🇨🇱", country: "Chile" },
-  { code: "+7", flag: "🇷🇺", country: "Russia" },
-  { code: "+30", flag: "🇬🇷", country: "Greece" },
-  { code: "+48", flag: "🇵🇱", country: "Poland" },
-  { code: "+420", flag: "🇨🇿", country: "Czech Republic" },
-  { code: "+36", flag: "🇭🇺", country: "Hungary" },
-  { code: "+40", flag: "🇷🇴", country: "Romania" },
-  { code: "+351", flag: "🇵🇹", country: "Portugal" },
-  { code: "+27", flag: "🇿🇦", country: "South Africa" },
-];
+const countryCodes = getSortedCountryCodes();
 
 export default function ContactPage() {
   const initialForm = { name: "", email: "", subject: "", message: "", phone: "", countryCode: "+1" };
@@ -328,6 +289,7 @@ export default function ContactPage() {
                                       type="button"
                                       onClick={() => {
                                         handleCountryCodeChange(country.code);
+                                        setShowCountryDropdown(false);
                                         setCountrySearch("");
                                       }}
                                       className={`w-full flex items-center px-3 py-2 text-sm rounded-md hover:bg-blue-50 transition-colors ${

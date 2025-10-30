@@ -3,48 +3,10 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { CheckCircle, AlertTriangle, X } from "lucide-react";
+import { getSortedCountryCodes } from "../lib/countryCodes";
 
 // Country codes with flags (sorted by popularity, Palestine first)
-const countryCodes = [
-  { code: "+970", flag: "🇵🇸", country: "Palestine" },
-  { code: "+1", flag: "🇺🇸", country: "United States" },
-  { code: "+90", flag: "🇹🇷", country: "Turkey" },
-  { code: "+44", flag: "🇬🇧", country: "United Kingdom" },
-  { code: "+49", flag: "🇩🇪", country: "Germany" },
-  { code: "+33", flag: "🇫🇷", country: "France" },
-  { code: "+39", flag: "🇮🇹", country: "Italy" },
-  { code: "+34", flag: "🇪🇸", country: "Spain" },
-  { code: "+31", flag: "🇳🇱", country: "Netherlands" },
-  { code: "+41", flag: "🇨🇭", country: "Switzerland" },
-  { code: "+32", flag: "🇧🇪", country: "Belgium" },
-  { code: "+43", flag: "🇦🇹", country: "Austria" },
-  { code: "+46", flag: "🇸🇪", country: "Sweden" },
-  { code: "+47", flag: "🇳🇴", country: "Norway" },
-  { code: "+45", flag: "🇩🇰", country: "Denmark" },
-  { code: "+358", flag: "🇫🇮", country: "Finland" },
-  { code: "+971", flag: "🇦🇪", country: "UAE" },
-  { code: "+966", flag: "🇸🇦", country: "Saudi Arabia" },
-  { code: "+974", flag: "🇶🇦", country: "Qatar" },
-  { code: "+81", flag: "🇯🇵", country: "Japan" },
-  { code: "+86", flag: "🇨🇳", country: "China" },
-  { code: "+91", flag: "🇮🇳", country: "India" },
-  { code: "+82", flag: "🇰🇷", country: "South Korea" },
-  { code: "+61", flag: "🇦🇺", country: "Australia" },
-  { code: "+64", flag: "🇳🇿", country: "New Zealand" },
-  { code: "+55", flag: "🇧🇷", country: "Brazil" },
-  { code: "+52", flag: "🇲🇽", country: "Mexico" },
-  { code: "+54", flag: "🇦🇷", country: "Argentina" },
-  { code: "+57", flag: "🇨🇴", country: "Colombia" },
-  { code: "+56", flag: "🇨🇱", country: "Chile" },
-  { code: "+7", flag: "🇷🇺", country: "Russia" },
-  { code: "+30", flag: "🇬🇷", country: "Greece" },
-  { code: "+48", flag: "🇵🇱", country: "Poland" },
-  { code: "+420", flag: "🇨🇿", country: "Czech Republic" },
-  { code: "+36", flag: "🇭🇺", country: "Hungary" },
-  { code: "+40", flag: "🇷🇴", country: "Romania" },
-  { code: "+351", flag: "🇵🇹", country: "Portugal" },
-  { code: "+27", flag: "🇿🇦", country: "South Africa" },
-];
+const countryCodes = getSortedCountryCodes();
 
 export default function FreeDiscoveryPage() {
   // Form state definitions
@@ -514,22 +476,36 @@ export default function FreeDiscoveryPage() {
                               {/* Country List */}
                               <div className="overflow-y-auto max-h-64">
                                 {countryCodes
-                                  .filter(country => 
-                                    country.country.toLowerCase().includes(countrySearch.toLowerCase()) ||
-                                    country.code.includes(countrySearch)
-                                  )
+                                  .filter((country) => {
+                                    if (!countrySearch) return true;
+                                    const search = countrySearch.toLowerCase();
+                                    return (
+                                      country.country.toLowerCase().includes(search) ||
+                                      country.code.includes(search) ||
+                                      country.flag.includes(search)
+                                    );
+                                  })
                                   .map((country) => (
                                     <button
                                       key={country.code}
                                       type="button"
-                                      onClick={() => handleCountryCodeChange(country.code)}
-                                      className={`w-full px-4 py-3 text-left hover:bg-blue-50 transition-colors flex items-center gap-3 ${
+                                      onClick={() => {
+                                        handleCountryCodeChange(country.code);
+                                        setShowCountryDropdown(false);
+                                        setCountrySearch("");
+                                      }}
+                                      className={`w-full flex items-center px-3 py-2 text-sm rounded-md hover:bg-blue-50 transition-colors ${
                                         formData.countryCode === country.code ? 'bg-blue-100' : ''
                                       }`}
                                     >
-                                      <span className="text-xl">{country.flag}</span>
-                                      <span className="text-gray-900 text-sm font-medium">{country.country}</span>
-                                      <span className="text-gray-500 text-sm ml-auto">{country.code}</span>
+                                      <span className="text-lg mr-3">{country.flag}</span>
+                                      <span className="font-medium text-gray-900 mr-2">{country.code}</span>
+                                      <span className="text-gray-600 flex-1 text-left">{country.country}</span>
+                                      {formData.countryCode === country.code && (
+                                        <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                      )}
                                     </button>
                                   ))}
                               </div>

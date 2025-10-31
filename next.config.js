@@ -3,50 +3,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true', // sadece ANALYZE=true ile çalışır
 });
 
-const isDevelopment = process.env.NODE_ENV === 'development';
-
-// Get CloudFront domain(s) from environment variable
-// Can be a single domain or comma-separated list: "d1234567890.cloudfront.net,d0987654321.cloudfront.net"
-// If not set, CloudFront domains won't be added to CSP
-const cloudFrontDomains = process.env.CLOUDFRONT_DOMAINS ? 
-  process.env.CLOUDFRONT_DOMAINS.split(',').map(d => d.trim()) : 
-  [];
-
-// Build CloudFront domain string for CSP (space-separated)
-const cloudFrontDomainStr = cloudFrontDomains.length > 0 ? 
-  ' https://' + cloudFrontDomains.join(' https://') : '';
-
 const securityHeaders = [
-  {
-    key: 'Content-Security-Policy',
-    value: isDevelopment ? [
-      "default-src 'self'" + cloudFrontDomainStr + ";",
-      "script-src 'self' https://maps.googleapis.com" + cloudFrontDomainStr + " 'unsafe-inline' 'unsafe-eval';",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://virtualriddle.com" + cloudFrontDomainStr + ";",
-      "img-src 'self' data: https://virtualriddle.com https://maps.googleapis.com" + cloudFrontDomainStr + ";",
-      "font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com" + cloudFrontDomainStr + " data:;",
-      "connect-src 'self' https://rvskttz2jh.execute-api.us-east-1.amazonaws.com" + cloudFrontDomainStr + " ws://localhost:*;",
-      "object-src 'none';",
-      "frame-src https://www.google.com https://maps.google.com https://www.google.com/maps/ https://maps.gstatic.com" + cloudFrontDomainStr + ";",
-      "frame-ancestors " + (cloudFrontDomains.length > 0 ? "'self'" + cloudFrontDomainStr : "'none'") + ";",
-      "base-uri 'self';",
-      "form-action 'self';",
-      "report-uri /api/csp-violation;"
-    ].join(' ') : [
-      "default-src 'self'" + cloudFrontDomainStr + ";",
-      "script-src 'self' https://maps.googleapis.com" + cloudFrontDomainStr + " 'unsafe-inline';",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://virtualriddle.com" + cloudFrontDomainStr + ";",
-      "img-src 'self' data: https://virtualriddle.com https://maps.googleapis.com" + cloudFrontDomainStr + ";",
-      "font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com" + cloudFrontDomainStr + " data:;",
-      "connect-src 'self' https://rvskttz2jh.execute-api.us-east-1.amazonaws.com" + cloudFrontDomainStr + ";",
-      "object-src 'none';",
-      "frame-src https://www.google.com https://maps.google.com https://www.google.com/maps/ https://maps.gstatic.com" + cloudFrontDomainStr + ";",
-      "frame-ancestors " + (cloudFrontDomains.length > 0 ? "'self'" + cloudFrontDomainStr : "'none'") + ";",
-      "base-uri 'self';",
-      "form-action 'self';",
-      "report-uri /api/csp-violation;"
-    ].join(' ')
-  },
   {
     key: 'Strict-Transport-Security',
     value: 'max-age=31536000; includeSubDomains; preload'
@@ -71,7 +28,6 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   eslint: {
     ignoreDuringBuilds: true,

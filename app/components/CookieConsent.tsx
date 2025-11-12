@@ -2,24 +2,78 @@
 
 import { useState, useEffect } from "react";
 
+declare global {
+  interface Window {
+    dataLayer?: any[];
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 function setCookie(name: string, value: string, days = 365) {
   const expires = new Date(Date.now() + days * 864e5).toUTCString();
   document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
 }
 
+type ConsentState = {
+  ad_storage: "granted" | "denied";
+  analytics_storage: "granted" | "denied";
+  ad_user_data: "granted" | "denied";
+  ad_personalization: "granted" | "denied";
+};
+
+function pushToDataLayer(args: any[]) {
+  if (typeof window === "undefined") return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(args);
+}
+
+function updateGtagConsent(state: ConsentState) {
+  if (typeof window === "undefined") return;
+
+  if (typeof window.gtag === "function") {
+    window.gtag("consent", "update", state);
+    window.gtag("set", "ads_data_redaction", state.ad_storage === "denied");
+  } else {
+    pushToDataLayer(["consent", "update", state]);
+    pushToDataLayer(["set", "ads_data_redaction", state.ad_storage === "denied"]);
+  }
+}
+
 export default function CookieConsent() {
   const [showConsent, setShowConsent] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
-  const [analyticsEnabled, setAnalyticsEnabled] = useState(true);
-  const [marketingEnabled, setMarketingEnabled] = useState(true);
+  const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
+  const [marketingEnabled, setMarketingEnabled] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     try {
       if (typeof window !== 'undefined' && window.localStorage) {
         const cookieConsent = localStorage.getItem("cookie-consent");
+        const analyticsPreference = localStorage.getItem("cookie-analytics");
+        const marketingPreference = localStorage.getItem("cookie-marketing");
+
         if (!cookieConsent) {
           setShowConsent(true);
+          updateGtagConsent({
+            ad_storage: "denied",
+            analytics_storage: "denied",
+            ad_user_data: "denied",
+            ad_personalization: "denied",
+          });
+        } else {
+          const analyticsAllowed = analyticsPreference === "true";
+          const marketingAllowed = marketingPreference === "true";
+
+          setAnalyticsEnabled(analyticsAllowed);
+          setMarketingEnabled(marketingAllowed);
+
+          updateGtagConsent({
+            ad_storage: marketingAllowed ? "granted" : "denied",
+            analytics_storage: analyticsAllowed ? "granted" : "denied",
+            ad_user_data: marketingAllowed ? "granted" : "denied",
+            ad_personalization: marketingAllowed ? "granted" : "denied",
+          });
         }
       } else {
         setShowConsent(true);
@@ -34,7 +88,7 @@ export default function CookieConsent() {
     }
   }, []);
 
-  const saveCookiePreference = (consent: string, analytics: string, marketing: string) => {
+  const persistConsent = (consent: string, analytics: string, marketing: string) => {
     try {
       if (typeof window !== 'undefined' && window.localStorage) {
         localStorage.setItem("cookie-consent", consent);
@@ -52,6 +106,21 @@ export default function CookieConsent() {
         console.error('Error saving cookie preferences:', error);
       }
     }
+  };
+
+  const saveCookiePreference = (consent: string, analytics: string, marketing: string) => {
+    persistConsent(consent, analytics, marketing);
+
+    const analyticsAllowed = analytics === "true";
+    const marketingAllowed = marketing === "true";
+
+    updateGtagConsent({
+      ad_storage: marketingAllowed ? "granted" : "denied",
+      analytics_storage: analyticsAllowed ? "granted" : "denied",
+      ad_user_data: marketingAllowed ? "granted" : "denied",
+      ad_personalization: marketingAllowed ? "granted" : "denied",
+    });
+
     setShowConsent(false);
   };
 

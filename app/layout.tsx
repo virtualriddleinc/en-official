@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import ClientLayout from './ClientLayout'
 import Head from 'next/head'
@@ -90,6 +91,30 @@ export default function RootLayout({
   return (
     <html lang="tr" className={inter.className}>
       <head>
+        <Script id="gtag-consent-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              'ad_storage': 'denied',
+              'analytics_storage': 'denied',
+              'ad_user_data': 'denied',
+              'ad_personalization': 'denied',
+              'wait_for_update': 500
+            });
+            gtag('set', 'ads_data_redaction', true);
+          `}
+        </Script>
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17724325290"
+        />
+        <Script id="google-ads-tag" strategy="afterInteractive">
+          {`
+            gtag('js', new Date());
+            gtag('config', 'AW-17724325290');
+          `}
+        </Script>
         
         {/* DNS Prefetch for external domains */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />

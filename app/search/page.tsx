@@ -226,22 +226,22 @@ function SearchPageComponent() {
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3, delay: index * 0.05 }}
                   >
-                    <Link href={item.url} legacyBehavior>
-                      <a className="block p-5 bg-white dark:bg-gray-800/70 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-1">
-                        <div className="flex items-center mb-2">
-                          <span className="text-xs font-semibold uppercase text-blue-600 dark:text-blue-400">{item.category}</span>
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">{item.title}</h3>
-                        <p className="text-gray-600 dark:text-gray-300 mb-4">{item.description}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {item.tags.map((tag, tagIndex) => (
-                            <span key={`${tag}-${tagIndex}`} className="flex items-center text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-full">
-                              <Tag className="h-3 w-3 mr-1.5" />
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </a>
+                    <Link href={item.url} className="block p-5 bg-white dark:bg-gray-800/70 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-1">
+
+                      <div className="flex items-center mb-2">
+                        <span className="text-xs font-semibold uppercase text-blue-600 dark:text-blue-400">{item.category}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">{item.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4">{item.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {item.tags.map((tag, tagIndex) => (
+                          <span key={`${tag}-${tagIndex}`} className="flex items-center text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-full">
+                            <Tag className="h-3 w-3 mr-1.5" />
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
                     </Link>
                   </motion.div>
                 ))

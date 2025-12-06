@@ -525,7 +525,6 @@ export default function ClientLayout({
           </div>
         </nav>
       </header>
-
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
@@ -735,12 +734,10 @@ export default function ClientLayout({
           </>
         )}
       </AnimatePresence>
-
       {/* Main Content */}
       <main className={pathname === '/search' ? 'pt-20' : ''}>
         {children}
       </main>
-
       <AnimatePresence>
         {isSearchOpen && (
           <>
@@ -796,24 +793,24 @@ export default function ClientLayout({
                     <ul className="p-2">
                       {searchResults.map(({ item }, index) => (
                         <li key={item.id} data-index={index}>
-                          <Link href={item.url} legacyBehavior>
-                            <a 
-                              onClick={handleResultClick} 
-                              className={`flex justify-between items-center p-3 my-1 rounded-lg cursor-pointer transition-colors ${
-                                selectedIndex === index
-                                  ? 'bg-blue-600/10 dark:bg-blue-500/20'
-                                  : 'hover:bg-gray-100 dark:hover:bg-gray-700/50'
-                              }`}
-                            >
-                              <div className="flex items-center space-x-4">
-                                <CategoryIcon category={item.category} className={`h-6 w-6 transition-transform group-hover:scale-110 ${selectedIndex === index ? 'text-blue-600 dark:text-blue-400' : ''}`} />
-                                <div>
-                                  <p className={`font-semibold text-base ${selectedIndex === index ? 'text-blue-700 dark:text-blue-300' : 'text-gray-800 dark:text-gray-200'}`}>{item.title}</p>
-              </div>
-              </div>
-                              <ChevronRight className={`h-5 w-5 ${selectedIndex === index ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400'}`} />
-                            </a>
-                      </Link>
+                          <Link
+                            href={item.url}
+                            onClick={handleResultClick}
+                            className={`flex justify-between items-center p-3 my-1 rounded-lg cursor-pointer transition-colors ${
+                              selectedIndex === index
+                                ? 'bg-blue-600/10 dark:bg-blue-500/20'
+                                : 'hover:bg-gray-100 dark:hover:bg-gray-700/50'
+                            }`}>
+
+                            <div className="flex items-center space-x-4">
+                              <CategoryIcon category={item.category} className={`h-6 w-6 transition-transform group-hover:scale-110 ${selectedIndex === index ? 'text-blue-600 dark:text-blue-400' : ''}`} />
+                              <div>
+                                <p className={`font-semibold text-base ${selectedIndex === index ? 'text-blue-700 dark:text-blue-300' : 'text-gray-800 dark:text-gray-200'}`}>{item.title}</p>
+            </div>
+            </div>
+                            <ChevronRight className={`h-5 w-5 ${selectedIndex === index ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400'}`} />
+
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -838,17 +835,17 @@ export default function ClientLayout({
                   </div>
                 {searchResults.length > 0 && (
                   <div data-index={searchResults.length} className="border-t border-gray-200 dark:border-gray-700/50">
-                    <Link href={`/search?q=${encodeURIComponent(searchText.trim())}`} legacyBehavior>
-                      <a 
-                        onClick={handleResultClick} 
-                        className={`block w-full text-left p-4 text-base font-semibold transition-colors ${
-                          selectedIndex === searchResults.length
-                            ? 'bg-blue-600/10 text-blue-700 dark:bg-blue-500/20 dark:text-blue-400'
-                            : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50'
-                        }`}
-                      >
-                        <span className="flex items-center"><Search className="h-5 w-5 mr-3" /> View all results for &quot;{searchText}&quot;</span>
-                      </a>
+                    <Link
+                      href={`/search?q=${encodeURIComponent(searchText.trim())}`}
+                      onClick={handleResultClick}
+                      className={`block w-full text-left p-4 text-base font-semibold transition-colors ${
+                        selectedIndex === searchResults.length
+                          ? 'bg-blue-600/10 text-blue-700 dark:bg-blue-500/20 dark:text-blue-400'
+                          : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50'
+                      }`}>
+
+                      <span className="flex items-center"><Search className="h-5 w-5 mr-3" /> View all results for &quot;{searchText}&quot;</span>
+
                     </Link>
                   </div>
                 )}
@@ -857,7 +854,6 @@ export default function ClientLayout({
           </>
         )}
       </AnimatePresence>
-
       {/* Footer */}
       <footer className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 py-20">
         <div className="container mx-auto px-4">
@@ -980,7 +976,6 @@ export default function ClientLayout({
           </div>
         </div>
       </footer>
-
       <CookieConsent />
     </PerformanceOptimizer>
   );

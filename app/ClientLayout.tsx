@@ -5,22 +5,23 @@ const ThemeToggle = dynamic(() => import("./components/ThemeToggle"), { ssr: fal
 import { useState, useEffect, useMemo, useRef, useCallback, memo } from "react";
 import Link from "next/link";
 import CookieConsent from "./components/CookieConsent";
+import LanguageSelector from "./components/LanguageSelector";
 import PerformanceOptimizer from "./components/PerformanceOptimizer";
 import { useRouter, usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search, X, FileText, ChevronRight, Package, Zap, Building, Scale, BookText, ChevronDown, ChevronUp, Building2, DollarSign, Mail, BarChart, Users, MessageSquare } from "lucide-react";
 import Fuse, { IFuseOptions, FuseResult } from 'fuse.js';
 import { searchData } from "./lib/searchData";
-import { 
-    JiraSoftwareIcon, 
-    JiraServiceManagementIcon, 
-    JiraWorkManagementIcon, 
-    ConfluenceIcon,
-    BitbucketIcon,
-    ConsultingIcon,
-    CloudMigrationIcon,
-    TrainingIcon,
-    DiscoveryIcon
+import {
+  JiraSoftwareIcon,
+  JiraServiceManagementIcon,
+  JiraWorkManagementIcon,
+  ConfluenceIcon,
+  BitbucketIcon,
+  ConsultingIcon,
+  CloudMigrationIcon,
+  TrainingIcon,
+  DiscoveryIcon
 } from "./components/MenuIcons";
 
 // Type definitions for search data
@@ -136,7 +137,7 @@ export default function ClientLayout({
     }
     setSelectedIndex(-1);
   }, [searchText]);
-  
+
   useEffect(() => {
     if (selectedIndex < 0 || !listContainerRef.current) return;
     const selectedElement = listContainerRef.current.querySelector(`[data-index='${selectedIndex}']`);
@@ -200,7 +201,7 @@ export default function ClientLayout({
       }
     }
   }, [searchResults, searchText, selectedIndex, router]);
-  
+
   const handleResultClick = useCallback(() => {
     setIsSearchOpen(false);
   }, []);
@@ -233,14 +234,14 @@ export default function ClientLayout({
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center space-x-1">
-              <Link 
-                href="/about" 
+              <Link
+                href="/about"
                 className="px-4 py-2 text-base text-gray-800 hover:text-blue-600 font-semibold rounded-xl transition-all duration-200"
               >
                 About
               </Link>
 
-              <div 
+              <div
                 className="relative group"
                 onMouseEnter={handleProductsMouseEnter}
                 onMouseLeave={handleProductsMouseLeave}
@@ -272,28 +273,28 @@ export default function ClientLayout({
                                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500/30 to-blue-600/30 rounded-lg flex items-center justify-center border border-blue-500/30 group-hover:border-blue-400/50 group-hover:scale-110 transition-all duration-300">
                                     <JiraSoftwareIcon className="w-5 h-5 text-blue-300 group-hover:text-blue-200" />
                                   </div>
-                          <div>
+                                  <div>
                                     <h4 className="text-white text-sm font-bold group-hover:text-blue-200 transition-colors duration-300">Jira Software</h4>
                                     <p className="text-gray-400 text-xs leading-tight mt-1">Agile project management</p>
-                              </div>
+                                  </div>
                                 </div>
                               </Link>
                             </div>
-                            
+
                             <div className="group relative overflow-hidden bg-gradient-to-br from-purple-500/10 via-purple-600/5 to-transparent rounded-lg p-3 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:scale-[1.02]">
                               <Link href="/products/jira-service-management" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
                                 <div className="flex flex-col items-center text-center space-y-2">
                                   <div className="w-10 h-10 bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-lg flex items-center justify-center border border-purple-500/30 group-hover:border-purple-400/50 group-hover:scale-110 transition-all duration-300">
                                     <JiraServiceManagementIcon className="w-5 h-5 text-purple-300 group-hover:text-purple-200" />
                                   </div>
-                            <div>
+                                  <div>
                                     <h4 className="text-white text-sm font-bold group-hover:text-purple-200 transition-colors duration-300">Jira Service Management</h4>
                                     <p className="text-gray-400 text-xs leading-tight mt-1">IT service management</p>
-                      </div>
-                      </div>
+                                  </div>
+                                </div>
                               </Link>
-                    </div>
-                            
+                            </div>
+
                             <div className="group relative overflow-hidden bg-gradient-to-br from-emerald-500/10 via-emerald-600/5 to-transparent rounded-lg p-3 border border-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/20 hover:scale-[1.02]">
                               <Link href="/products/jira-work-management" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
                                 <div className="flex flex-col items-center text-center space-y-2">
@@ -307,7 +308,7 @@ export default function ClientLayout({
                                 </div>
                               </Link>
                             </div>
-                            
+
                             <div className="group relative overflow-hidden bg-gradient-to-br from-indigo-500/10 via-indigo-600/5 to-transparent rounded-lg p-3 border border-indigo-500/20 hover:border-indigo-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 hover:scale-[1.02]">
                               <Link href="/products/confluence" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
                                 <div className="flex flex-col items-center text-center space-y-2">
@@ -323,7 +324,7 @@ export default function ClientLayout({
                             </div>
                           </div>
                         </div>
-                        
+
                         {/* All Products Section */}
                         <div className="border-t border-white/10 pt-4">
                           <div className="flex items-center justify-between mb-2.5">
@@ -348,7 +349,7 @@ export default function ClientLayout({
                                 </div>
                               </Link>
                             </div>
-                            
+
                             <div className="group relative overflow-hidden bg-gradient-to-br from-teal-500/10 via-teal-600/5 to-transparent rounded-lg p-2.5 border border-teal-500/20 hover:border-teal-400/40 transition-all duration-300 hover:shadow-md hover:shadow-teal-500/20 hover:scale-[1.02]">
                               <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               <Link href="/products/trello" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
@@ -362,7 +363,7 @@ export default function ClientLayout({
                                 </div>
                               </Link>
                             </div>
-                            
+
                             <div className="group relative overflow-hidden bg-gradient-to-br from-indigo-500/10 via-indigo-600/5 to-transparent rounded-lg p-2.5 border border-indigo-500/20 hover:border-indigo-400/40 transition-all duration-300 hover:shadow-md hover:shadow-indigo-500/20 hover:scale-[1.02]">
                               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               <Link href="/products/statuspage" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
@@ -376,7 +377,7 @@ export default function ClientLayout({
                                 </div>
                               </Link>
                             </div>
-                            
+
                             <div className="group relative overflow-hidden bg-gradient-to-br from-purple-500/10 via-purple-600/5 to-transparent rounded-lg p-2.5 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 hover:shadow-md hover:shadow-purple-500/20 hover:scale-[1.02]">
                               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               <Link href="/products/opsgenie" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
@@ -391,14 +392,14 @@ export default function ClientLayout({
                               </Link>
                             </div>
                           </div>
-                  </div>
-                </div>
+                        </div>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
-              
-              <div 
+
+              <div
                 className="relative group"
                 onMouseEnter={handleSolutionsMouseEnter}
                 onMouseLeave={handleSolutionsMouseLeave}
@@ -432,7 +433,7 @@ export default function ClientLayout({
                               </div>
                             </Link>
                           </div>
-                          
+
                           <div className="group relative overflow-hidden bg-gradient-to-br from-sky-500/10 via-sky-600/5 to-transparent rounded-xl p-3 border border-sky-500/20 hover:border-sky-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-sky-500/20 hover:scale-[1.02]">
                             <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <Link href="/solutions/cloud-migration" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
@@ -447,7 +448,7 @@ export default function ClientLayout({
                               </div>
                             </Link>
                           </div>
-                          
+
                           <div className="group relative overflow-hidden bg-gradient-to-br from-amber-500/10 via-amber-600/5 to-transparent rounded-xl p-3 border border-amber-500/20 hover:border-amber-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20 hover:scale-[1.02]">
                             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <Link href="/solutions/training" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
@@ -462,7 +463,7 @@ export default function ClientLayout({
                               </div>
                             </Link>
                           </div>
-                          
+
                           <div className="group relative overflow-hidden bg-gradient-to-br from-teal-500/10 via-teal-600/5 to-transparent rounded-xl p-3 border border-teal-500/20 hover:border-teal-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/20 hover:scale-[1.02]">
                             <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <Link href="/free-discovery" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
@@ -478,13 +479,13 @@ export default function ClientLayout({
                             </Link>
                           </div>
                         </div>
-                        </div>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
-              <Link 
-                href="/contact" 
+              <Link
+                href="/contact"
                 className="px-4 py-2 text-base text-gray-800 hover:text-blue-600 font-semibold rounded-xl transition-all duration-200"
               >
                 Contact
@@ -494,19 +495,22 @@ export default function ClientLayout({
             {/* Search Butonu and Mobil Menu */}
             <div className="flex items-center space-x-4">
               <div className="hidden lg:block">
-                    <button
-                    onClick={() => setIsSearchOpen(true)}
-                    className="flex items-center justify-between w-72 p-2.5 pl-4 bg-blue-50 rounded-xl border border-blue-100 hover:bg-blue-100/50 transition-colors"
-                  >
-                    <div className="flex items-center space-x-3">
-                        <Search className="w-5 h-5 text-blue-400" />
-                        <span className="text-sm text-blue-400">Search...</span>
+                <LanguageSelector />
+              </div>
+              <div className="hidden lg:block">
+                <button
+                  onClick={() => setIsSearchOpen(true)}
+                  className="flex items-center justify-between w-72 p-2.5 pl-4 bg-blue-50 rounded-xl border border-blue-100 hover:bg-blue-100/50 transition-colors"
+                >
+                  <div className="flex items-center space-x-3">
+                    <Search className="w-5 h-5 text-blue-400" />
+                    <span className="text-sm text-blue-400">Search...</span>
                   </div>
-                    <div className="flex items-center space-x-1.5 text-xs text-blue-400">
-                        <kbd suppressHydrationWarning className="px-2 py-1 bg-blue-100/50 rounded-lg">{isMac ? '⌘' : 'Ctrl'}</kbd>
-                        <span>+</span>
-                        <kbd className="px-2 py-1 bg-blue-100/50 rounded-lg">K</kbd>
-                </div>
+                  <div className="flex items-center space-x-1.5 text-xs text-blue-400">
+                    <kbd suppressHydrationWarning className="px-2 py-1 bg-blue-100/50 rounded-lg">{isMac ? '⌘' : 'Ctrl'}</kbd>
+                    <span>+</span>
+                    <kbd className="px-2 py-1 bg-blue-100/50 rounded-lg">K</kbd>
+                  </div>
                 </button>
               </div>
 
@@ -558,8 +562,8 @@ export default function ClientLayout({
 
                 <div className="flex-grow overflow-y-auto -mr-6 pr-6">
                   <div className="px-2 space-y-2">
-                  <button 
-                    onClick={() => { setIsMobileMenuOpen(false); setIsSearchOpen(true); }}
+                    <button
+                      onClick={() => { setIsMobileMenuOpen(false); setIsSearchOpen(true); }}
                       className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-blue-500/10 via-blue-600/5 to-transparent rounded-xl text-left mb-3 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300"
                       aria-label="Search"
                     >
@@ -577,15 +581,15 @@ export default function ClientLayout({
                         <span>+</span>
                         <kbd className="px-2 py-1 bg-blue-100/20 rounded-lg">K</kbd>
                       </div>
-                  </button>
+                    </button>
 
                     <div className="border-b border-white/10">
-                        <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white hover:bg-white/5 rounded-xl transition-all duration-200">
-                            About
-                        </Link>
+                      <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white hover:bg-white/5 rounded-xl transition-all duration-200">
+                        About
+                      </Link>
                     </div>
 
-                  <MobileAccordion title="Products">
+                    <MobileAccordion title="Products">
                       <div className="pt-2 pb-4 px-2">
                         {/* Featured Section */}
                         <div className="mb-4">
@@ -607,7 +611,7 @@ export default function ClientLayout({
                                 </div>
                               </Link>
                             </div>
-                            
+
                             <div className="group relative overflow-hidden bg-gradient-to-br from-purple-500/10 via-purple-600/5 to-transparent rounded-lg p-3 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:scale-[1.02]">
                               <Link href="/products/jira-service-management" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
                                 <div className="flex flex-col items-center text-center space-y-2">
@@ -621,7 +625,7 @@ export default function ClientLayout({
                                 </div>
                               </Link>
                             </div>
-                            
+
                             <div className="group relative overflow-hidden bg-gradient-to-br from-emerald-500/10 via-emerald-600/5 to-transparent rounded-lg p-3 border border-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/20 hover:scale-[1.02]">
                               <Link href="/products/jira-work-management" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
                                 <div className="flex flex-col items-center text-center space-y-2">
@@ -635,7 +639,7 @@ export default function ClientLayout({
                                 </div>
                               </Link>
                             </div>
-                            
+
                             <div className="group relative overflow-hidden bg-gradient-to-br from-indigo-500/10 via-indigo-600/5 to-transparent rounded-lg p-3 border border-indigo-500/20 hover:border-indigo-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 hover:scale-[1.02]">
                               <Link href="/products/confluence" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
                                 <div className="flex flex-col items-center text-center space-y-2">
@@ -651,7 +655,7 @@ export default function ClientLayout({
                             </div>
                           </div>
                         </div>
-                        
+
                         {/* All Products Section */}
                         <div className="border-t border-white/10 pt-3">
                           <div className="flex items-center justify-between mb-2">
@@ -673,7 +677,7 @@ export default function ClientLayout({
                                 </div>
                               </Link>
                             </div>
-                            
+
                             <div className="group relative overflow-hidden bg-gradient-to-br from-teal-500/10 via-teal-600/5 to-transparent rounded-md p-2 border border-teal-500/20 hover:border-teal-400/40 transition-all duration-300">
                               <Link href="/products/trello" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
                                 <div className="flex flex-col items-center text-center space-y-1">
@@ -684,7 +688,7 @@ export default function ClientLayout({
                                 </div>
                               </Link>
                             </div>
-                            
+
                             <div className="group relative overflow-hidden bg-gradient-to-br from-indigo-500/10 via-indigo-600/5 to-transparent rounded-md p-2 border border-indigo-500/20 hover:border-indigo-400/40 transition-all duration-300">
                               <Link href="/products/statuspage" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
                                 <div className="flex flex-col items-center text-center space-y-1">
@@ -695,7 +699,7 @@ export default function ClientLayout({
                                 </div>
                               </Link>
                             </div>
-                            
+
                             <div className="group relative overflow-hidden bg-gradient-to-br from-purple-500/10 via-purple-600/5 to-transparent rounded-md p-2 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300">
                               <Link href="/products/opsgenie" onClick={() => setIsMobileMenuOpen(false)} className="relative block">
                                 <div className="flex flex-col items-center text-center space-y-1">
@@ -709,23 +713,23 @@ export default function ClientLayout({
                           </div>
                         </div>
                       </div>
-                  </MobileAccordion>
+                    </MobileAccordion>
 
-                  <MobileAccordion title="Solutions">
+                    <MobileAccordion title="Solutions">
                       <div className="pt-2 pb-4 px-2">
                         <ul className="space-y-1">
-                      {solutionLinks.map(link => (
+                          {solutionLinks.map(link => (
                             <MenuItem key={link.href} {...link} onClick={() => setIsMobileMenuOpen(false)} />
-                      ))}
-                    </ul>
+                          ))}
+                        </ul>
                       </div>
-                  </MobileAccordion>
+                    </MobileAccordion>
 
 
                     <div className="border-b border-white/10">
-                        <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white hover:bg-white/5 rounded-xl transition-all duration-200">
-                            Contact
-                        </Link>
+                      <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="w-full flex items-center p-4 font-semibold text-lg text-white hover:bg-white/5 rounded-xl transition-all duration-200">
+                        Contact
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -780,15 +784,15 @@ export default function ClientLayout({
                     autoComplete="off"
                   />
                   {searchText && (
-                     <button onClick={handleClearSearch} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1 rounded-full">
-                       <X className="h-5 w-5" />
-                     </button>
+                    <button onClick={handleClearSearch} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1 rounded-full">
+                      <X className="h-5 w-5" />
+                    </button>
                   )}
                 </div>
-                
+
                 <div ref={listContainerRef} className="max-h-[45vh] overflow-y-auto">
                   {searchResults.length > 0 && <p className="pt-2 px-4 text-xs text-blue-600 dark:text-blue-400 font-semibold uppercase">Pages</p>}
-                  
+
                   {searchResults.length > 0 ? (
                     <ul className="p-2">
                       {searchResults.map(({ item }, index) => (
@@ -796,18 +800,17 @@ export default function ClientLayout({
                           <Link
                             href={item.url}
                             onClick={handleResultClick}
-                            className={`flex justify-between items-center p-3 my-1 rounded-lg cursor-pointer transition-colors ${
-                              selectedIndex === index
+                            className={`flex justify-between items-center p-3 my-1 rounded-lg cursor-pointer transition-colors ${selectedIndex === index
                                 ? 'bg-blue-600/10 dark:bg-blue-500/20'
                                 : 'hover:bg-gray-100 dark:hover:bg-gray-700/50'
-                            }`}>
+                              }`}>
 
                             <div className="flex items-center space-x-4">
                               <CategoryIcon category={item.category} className={`h-6 w-6 transition-transform group-hover:scale-110 ${selectedIndex === index ? 'text-blue-600 dark:text-blue-400' : ''}`} />
                               <div>
                                 <p className={`font-semibold text-base ${selectedIndex === index ? 'text-blue-700 dark:text-blue-300' : 'text-gray-800 dark:text-gray-200'}`}>{item.title}</p>
-            </div>
-            </div>
+                              </div>
+                            </div>
                             <ChevronRight className={`h-5 w-5 ${selectedIndex === index ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400'}`} />
 
                           </Link>
@@ -825,24 +828,23 @@ export default function ClientLayout({
                       </div>
                     )
                   )}
-                   {searchText.trim().length <= 1 && searchResults.length === 0 && (
-                     <div className="p-10 text-center">
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                          Enter at least 2 characters to start searching.
-                        </p>
-                  </div>
-                   )}
-                  </div>
+                  {searchText.trim().length <= 1 && searchResults.length === 0 && (
+                    <div className="p-10 text-center">
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Enter at least 2 characters to start searching.
+                      </p>
+                    </div>
+                  )}
+                </div>
                 {searchResults.length > 0 && (
                   <div data-index={searchResults.length} className="border-t border-gray-200 dark:border-gray-700/50">
                     <Link
                       href={`/search?q=${encodeURIComponent(searchText.trim())}`}
                       onClick={handleResultClick}
-                      className={`block w-full text-left p-4 text-base font-semibold transition-colors ${
-                        selectedIndex === searchResults.length
+                      className={`block w-full text-left p-4 text-base font-semibold transition-colors ${selectedIndex === searchResults.length
                           ? 'bg-blue-600/10 text-blue-700 dark:bg-blue-500/20 dark:text-blue-400'
                           : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50'
-                      }`}>
+                        }`}>
 
                       <span className="flex items-center"><Search className="h-5 w-5 mr-3" /> View all results for &quot;{searchText}&quot;</span>
 
@@ -863,33 +865,33 @@ export default function ClientLayout({
               <img src="/logo-footer.svg" alt="Virtual Riddle Logo" className="w-72 h-auto max-h-[18rem]" />
               <p className="text-gray-400">We're with you on your digital transformation journey. Take your business to the next level with modern solutions.</p>
               <div className="flex items-center space-x-4">
-                  {/* Instagram */}
-                  <a href="https://www.instagram.com/virtual.riddle" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all" aria-label="Visit Virtual Riddle Instagram page - Follow our social media content">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                    </svg>
-                  </a>
-                  {/* YouTube */}
-                  <a href="https://www.youtube.com/@VirtualRiddle" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all" aria-label="Visit Virtual Riddle YouTube channel - Watch our video content">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M23.498 6.186a2.994 2.994 0 0 0-2.112-2.117C19.458 3.5 12 3.5 12 3.5s-7.458 0-9.386.569A2.994 2.994 0 0 0 .502 6.186C0 8.124 0 12 0 12s0 3.876.502 5.814a2.994 2.994 0 0 0 2.112 2.117C4.542 20.5 12 20.5 12 20.5s7.458 0 9.386-.569a2.994 2.994 0 0 0 2.112-2.117C24 15.876 24 12 24 12s0-3.876-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                    </svg>
-                  </a>
-                  {/* LinkedIn */}
-                  <a href="https://www.linkedin.com/company/virtualriddle/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all" aria-label="Visit Virtual Riddle LinkedIn company page - Join our professional network">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                  </a>
-                  {/* Next - Teknofest Sosyal */}
-                  <a href="https://sosyal.teknofest.app/@virtualriddle" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all" aria-label="Visit Virtual Riddle Teknofest Social profile - Our Next social media account">
-                    <svg xmlns="//v6s.cnnturk.com/images/favicon/next-button.svg" width="14" height="14" viewBox="0 0 16 16" fill="none" className="w-8 h-8">
-                      <path d="M4.77139 0.0125732H0.00012207V15.9997H4.77139V0.0125732Z" fill="currentColor"></path>
-                      <path d="M10.2404 15.9871C9.08771 15.9871 8.0582 15.3922 7.67872 14.5067L5.32297 8.38192L2.12354 0H7.77092L11.1035 8.68911L13.9783 15.9871H10.2404Z" fill="currentColor"></path>
-                      <path d="M11.354 9.57871C11.271 9.34492 11.2288 9.34462 11.2288 9.09744V0.0131836H16.0001V13.7914C16.0001 14.9291 15.1134 15.8686 13.9785 15.9871L11.354 9.57871Z" fill="currentColor"></path>
-                    </svg>
-                  </a>
-                </div>
+                {/* Instagram */}
+                <a href="https://www.instagram.com/virtual.riddle" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all" aria-label="Visit Virtual Riddle Instagram page - Follow our social media content">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
+                </a>
+                {/* YouTube */}
+                <a href="https://www.youtube.com/@VirtualRiddle" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all" aria-label="Visit Virtual Riddle YouTube channel - Watch our video content">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M23.498 6.186a2.994 2.994 0 0 0-2.112-2.117C19.458 3.5 12 3.5 12 3.5s-7.458 0-9.386.569A2.994 2.994 0 0 0 .502 6.186C0 8.124 0 12 0 12s0 3.876.502 5.814a2.994 2.994 0 0 0 2.112 2.117C4.542 20.5 12 20.5 12 20.5s7.458 0 9.386-.569a2.994 2.994 0 0 0 2.112-2.117C24 15.876 24 12 24 12s0-3.876-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                  </svg>
+                </a>
+                {/* LinkedIn */}
+                <a href="https://www.linkedin.com/company/virtualriddle/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all" aria-label="Visit Virtual Riddle LinkedIn company page - Join our professional network">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </a>
+                {/* Next - Teknofest Sosyal */}
+                <a href="https://sosyal.teknofest.app/@virtualriddle" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all" aria-label="Visit Virtual Riddle Teknofest Social profile - Our Next social media account">
+                  <svg xmlns="//v6s.cnnturk.com/images/favicon/next-button.svg" width="14" height="14" viewBox="0 0 16 16" fill="none" className="w-8 h-8">
+                    <path d="M4.77139 0.0125732H0.00012207V15.9997H4.77139V0.0125732Z" fill="currentColor"></path>
+                    <path d="M10.2404 15.9871C9.08771 15.9871 8.0582 15.3922 7.67872 14.5067L5.32297 8.38192L2.12354 0H7.77092L11.1035 8.68911L13.9783 15.9871H10.2404Z" fill="currentColor"></path>
+                    <path d="M11.354 9.57871C11.271 9.34492 11.2288 9.34462 11.2288 9.09744V0.0131836H16.0001V13.7914C16.0001 14.9291 15.1134 15.8686 13.9785 15.9871L11.354 9.57871Z" fill="currentColor"></path>
+                  </svg>
+                </a>
+              </div>
             </div>
 
             {/* Products */}
@@ -950,8 +952,8 @@ export default function ClientLayout({
               <h3 className="text-lg font-semibold text-white mb-6">Contact Us</h3>
               <div className="space-y-4">
                 <p className="text-gray-400">Contact us for your questions, we're happy to help you.</p>
-                <Link 
-                  href="/contact" 
+                <Link
+                  href="/contact"
                   className="inline-flex items-center px-6 py-3 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all space-x-2"
                 >
                   <span>Contact Us</span>
@@ -979,64 +981,64 @@ export default function ClientLayout({
       <CookieConsent />
     </PerformanceOptimizer>
   );
-} 
+}
 
 const colorClasses = {
-    blue: {
-        bg: 'bg-gradient-to-br from-blue-500/20 to-blue-600/20 border-blue-500/20',
-        text: 'text-blue-400',
-        hoverText: 'group-hover/item:text-blue-300'
-    },
-    purple: {
-        bg: 'bg-gradient-to-br from-purple-500/20 to-purple-600/20 border-purple-500/20',
-        text: 'text-purple-400',
-        hoText: 'group-ho/item:text-purple-300'
-    },
-    indigo: {
-        bg: 'bg-gradient-to-br from-indigo-500/20 to-indigo-600/20 border-indigo-500/20',
-        text: 'text-indigo-400',
-        hoText: 'group-ho/item:text-indigo-300'
-    },
-    emerald: {
-        bg: 'bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 border-emerald-500/20',
-        text: 'text-emerald-400',
-        hoText: 'group-ho/item:text-emerald-300'
-    },
-    sky: {
-        bg: 'bg-gradient-to-br from-sky-500/20 to-sky-600/20 border-sky-500/20',
-        text: 'text-sky-400',
-        hoText: 'group-ho/item:text-sky-300'
-    },
-    amber: {
-        bg: 'bg-gradient-to-br from-amber-500/20 to-amber-600/20 border-amber-500/20',
-        text: 'text-amber-400',
-        hoText: 'group-ho/item:text-amber-300'
-    },
-    teal: {
-        bg: 'bg-gradient-to-br from-teal-500/20 to-teal-600/20 border-teal-500/20',
-        text: 'text-teal-400',
-        hoText: 'group-ho/item:text-teal-300'
-    }
+  blue: {
+    bg: 'bg-gradient-to-br from-blue-500/20 to-blue-600/20 border-blue-500/20',
+    text: 'text-blue-400',
+    hoverText: 'group-hover/item:text-blue-300'
+  },
+  purple: {
+    bg: 'bg-gradient-to-br from-purple-500/20 to-purple-600/20 border-purple-500/20',
+    text: 'text-purple-400',
+    hoText: 'group-ho/item:text-purple-300'
+  },
+  indigo: {
+    bg: 'bg-gradient-to-br from-indigo-500/20 to-indigo-600/20 border-indigo-500/20',
+    text: 'text-indigo-400',
+    hoText: 'group-ho/item:text-indigo-300'
+  },
+  emerald: {
+    bg: 'bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 border-emerald-500/20',
+    text: 'text-emerald-400',
+    hoText: 'group-ho/item:text-emerald-300'
+  },
+  sky: {
+    bg: 'bg-gradient-to-br from-sky-500/20 to-sky-600/20 border-sky-500/20',
+    text: 'text-sky-400',
+    hoText: 'group-ho/item:text-sky-300'
+  },
+  amber: {
+    bg: 'bg-gradient-to-br from-amber-500/20 to-amber-600/20 border-amber-500/20',
+    text: 'text-amber-400',
+    hoText: 'group-ho/item:text-amber-300'
+  },
+  teal: {
+    bg: 'bg-gradient-to-br from-teal-500/20 to-teal-600/20 border-teal-500/20',
+    text: 'text-teal-400',
+    hoText: 'group-ho/item:text-teal-300'
+  }
 };
 
 type Color = keyof typeof colorClasses;
 
 const MenuItem = ({ href, icon: Icon, title, description, color, onClick }: { href: string, icon: React.ElementType, title: string, description: string, color: Color, onClick?: () => void }) => {
-    const classes = colorClasses[color];
+  const classes = colorClasses[color];
 
-    return (
-        <li>
-            <Link href={href} onClick={onClick} className="group/item flex items-start p-2.5 rounded-2xl hover:bg-white/5 transition-all">
-                <div className={`shrink-0 w-11 h-11 ${classes.bg} rounded-2xl flex items-center justify-center border group-hover/item:scale-95 transition-transform`}>
-                    <Icon className={`w-6 h-6 ${classes.text}`} />
-                </div>
-                <div className="ml-3">
-                    <h5 className={`font-semibold text-white text-[16px] mb-1`}>{title}</h5>
-                    <p className="text-[14px] text-gray-300 leading-snug">{description}</p>
-                </div>
-            </Link>
-        </li>
-    );
+  return (
+    <li>
+      <Link href={href} onClick={onClick} className="group/item flex items-start p-2.5 rounded-2xl hover:bg-white/5 transition-all">
+        <div className={`shrink-0 w-11 h-11 ${classes.bg} rounded-2xl flex items-center justify-center border group-hover/item:scale-95 transition-transform`}>
+          <Icon className={`w-6 h-6 ${classes.text}`} />
+        </div>
+        <div className="ml-3">
+          <h5 className={`font-semibold text-white text-[16px] mb-1`}>{title}</h5>
+          <p className="text-[14px] text-gray-300 leading-snug">{description}</p>
+        </div>
+      </Link>
+    </li>
+  );
 };
 
 const MobileAccordion = ({ title, children }: { title: string, children: React.ReactNode }) => {

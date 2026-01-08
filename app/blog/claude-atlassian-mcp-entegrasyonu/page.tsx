@@ -43,23 +43,26 @@ export default function ClaudeAtlassianMCPIntegration() {
   return (
     <>
       <StructuredData data={structuredData} />
-      <main className="flex min-h-screen flex-col items-center pt-32 bg-gray-50">
-        <article className="w-full max-w-4xl bg-white rounded-2xl shadow-lg p-8 mx-auto mt-8">
-        <header className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
+      <main className="flex min-h-screen flex-col items-center pt-32 bg-gray-50 px-4">
+        {/* New Card Section */}
+        <section className="max-w-4xl w-full bg-white rounded-2xl shadow-lg px-4 md:px-8 py-6 md:py-8 mx-auto mt-8 mb-4">
+          <div className="flex flex-wrap items-center gap-3 mb-4">
             <span className="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-semibold">Artificial Intelligence</span>
             <span className="text-xs text-gray-400">1 September 2025</span>
             <span className="text-xs text-gray-400">• 10 min read</span>
           </div>
-          <h1 className="text-4xl font-bold text-blue-900 mb-4">Working with Claude Connected to Atlassian: The MCP Revolution</h1>
+          <h1 className="text-2xl md:text-4xl font-bold text-blue-900 mb-4 break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Working with Claude Connected to Atlassian: The MCP Revolution</h1>
           <div className="text-gray-600 text-base mb-4">Author: <span className="font-semibold">Virtual Riddle Blog Team</span></div>
-          <div className="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-xl mb-6">
+          <div className="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-xl break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
             <div className="font-semibold text-purple-700 mb-1">TL;DR - Summary</div>
-            <p className="text-purple-900 text-sm leading-relaxed">
+            <p className="text-purple-900 text-sm leading-relaxed break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
               Thanks to Atlassian's new Remote MCP Server, you can now directly access your Jira and Confluence data with Claude and create AI-powered workflows. This integration increases team efficiency while eliminating knowledge silos and fundamentally transforms the work experience with artificial intelligence.
             </p>
           </div>
-        </header>
+        </section>
+        
+        {/* Article - Content Only */}
+        <article className="max-w-4xl w-full bg-white rounded-2xl shadow-lg px-4 md:px-8 py-6 md:py-8 mx-auto mb-8 overflow-hidden">
         <section className="prose prose-lg max-w-none text-gray-900">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Atlassian in the AI Age: A New Era Begins with MCP 🤖</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">

@@ -31,23 +31,31 @@ export const metadata: Metadata = {
 
 export default function RovoRevolutionPage() {
   return (
-    <article className="prose prose-lg max-w-3xl mx-auto py-16 px-4">
-      <header>
-        <h1 className="text-4xl font-bold mb-4 text-blue-900">Rovo: Atlassian's GenAI Revolution Touching Corporate Knowledge</h1>
+    <main className="flex min-h-screen flex-col items-center pt-32 bg-gray-50 px-4">
+      {/* New Card Section */}
+      <section className="max-w-4xl w-full bg-white rounded-2xl shadow-lg px-4 md:px-8 py-6 md:py-8 mx-auto mt-8 mb-4">
         <div className="flex flex-wrap gap-2 mb-4">
           <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">Artificial Intelligence</span>
           <span className="inline-block bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Atlassian</span>
           <span className="inline-block bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full">Rovo</span>
         </div>
-        <div className="flex items-center gap-4 text-sm text-gray-500 mb-8">
+        <h1 className="text-2xl md:text-4xl font-bold mb-4 text-blue-900 break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Rovo: Atlassian's GenAI Revolution Touching Corporate Knowledge</h1>
+        <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
           <span>Publication Date: 8 July 2024</span>
           <span>•</span>
           <span>Reading Time: 6 min</span>
         </div>
-        <p className="text-lg text-gray-700 font-medium bg-gray-50 border-l-4 border-blue-500 pl-4 py-2 mb-8">
-          <strong>TL;DR;</strong> The next-generation AI-powered enterprise assistant enables teams to quickly and meaningfully access scattered knowledge sources. Documents, notes, chats and task management tools converge at a single point. Sought information can be queried in natural language, summarized and personalized. It also saves time by automating repetitive tasks. It works in compliance with security and privacy principles. It offers an effective solution for teams who want to increase productivity, easily access information and reduce workload.
-        </p>
-      </header>
+        <div className="text-gray-600 text-base mb-4">Author: <span className="font-semibold">Virtual Riddle Blog Team</span></div>
+        <div className="bg-gray-50 border-l-4 border-blue-500 p-4 rounded-xl break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+          <div className="font-semibold text-blue-700 mb-1">TL;DR - Summary</div>
+          <p className="text-gray-700 text-sm leading-relaxed break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+            The next-generation AI-powered enterprise assistant enables teams to quickly and meaningfully access scattered knowledge sources. Documents, notes, chats and task management tools converge at a single point. Sought information can be queried in natural language, summarized and personalized. It also saves time by automating repetitive tasks. It works in compliance with security and privacy principles. It offers an effective solution for teams who want to increase productivity, easily access information and reduce workload.
+          </p>
+        </div>
+      </section>
+      
+      {/* Article - Content Only */}
+      <article className="max-w-4xl w-full bg-white rounded-2xl shadow-lg px-4 md:px-8 py-6 md:py-8 mx-auto mb-8 overflow-hidden">
       <section className="space-y-8">
         <h2 className="text-2xl font-bold mt-8 mb-4">📌 End to Knowledge Fragmentation: Next-Generation AI-Powered Assistant</h2>
         <p>In today's business world, accessing knowledge is sometimes more difficult than creating it. Documents are in one place, chat history is somewhere else, task lists are in completely different systems... Everyone knows but no one says the real thing: "I'm working to find what I'm looking for, not to work."</p>
@@ -91,6 +99,7 @@ export default function RovoRevolutionPage() {
         <p>Artificial intelligence is now entering our lives not only in individual use but also as a business partner that strengthens teams' collective memory. Thanks to this new system, using information, not searching for knowledge, comes to the forefront. Teams learn faster, make better decisions and work more efficiently.</p>
         <p>This solution is not just a technological tool; it's also a step that transforms work culture. If you're still opening dozens of tabs to access knowledge, I'd say give this new AI assistant a chance. Ready to work with you without tiring you out.</p>
       </section>
-    </article>
+      </article>
+    </main>
   );
 } 

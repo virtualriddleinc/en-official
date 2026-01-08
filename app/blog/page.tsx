@@ -144,6 +144,22 @@ export const posts = [
     hoverColor: "group-hover:text-blue-900"
   },
   {
+    href: "/blog/atlassian-datacenter-alternatives",
+    category: "Digital Transformation",
+    title: "Atlassian Datacenter End of Life Alternatives: A Guide for Defense Industry and Security-Focused Companies",
+    summary: "Jira and Confluence alternatives for defense industry and security-focused companies that cannot migrate to Cloud after Atlassian Datacenter end of life. Detailed analysis of XWiki, BlueSpice, Wiki.js, MediaWiki and more.",
+    date: "7 January 2026",
+    readingTime: "20 min",
+    color: "from-blue-600 to-indigo-700",
+    icon: (
+      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    ),
+    categoryColor: "text-blue-700",
+    hoverColor: "group-hover:text-blue-800"
+  },
+  {
     href: "/blog/rovo-devrimi",
     category: "Artificial Intelligence",
     title: "Rovo: Atlassian's GenAI Revolution Touching Corporate Knowledge",

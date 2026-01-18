@@ -6,20 +6,20 @@ export default function MultiCloudStrategies() {
       {/* New Card Section */}
       <section className="max-w-4xl w-full bg-white rounded-2xl shadow-lg px-4 md:px-8 py-6 md:py-8 mx-auto mt-8 mb-4">
         <div className="flex flex-wrap items-center gap-3 mb-4">
-          <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">Cloud Computing</span>
-          <span className="text-xs text-gray-400">28 February 2024</span>
-          <span className="text-xs text-gray-400">• 6 min read</span>
-        </div>
+            <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">Cloud Computing</span>
+            <span className="text-xs text-gray-400">28 February 2024</span>
+            <span className="text-xs text-gray-400">• 6 min read</span>
+          </div>
         <h1 className="text-2xl md:text-4xl font-bold text-green-900 mb-4 break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Multi-Cloud Strategies</h1>
-        <div className="text-gray-600 text-base mb-4">Author: <span className="font-semibold">Virtual Riddle Blog Team</span></div>
+          <div className="text-gray-600 text-base mb-4">Author: <span className="font-semibold">Virtual Riddle Blog Team</span></div>
         <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded-xl break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
-          <div className="font-semibold text-green-700 mb-1">TL;DR - Summary</div>
+            <div className="font-semibold text-green-700 mb-1">TL;DR - Summary</div>
           <ul className="list-disc pl-5 text-green-900 text-sm space-y-1 break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
-            <li>Multi-cloud usage provides flexibility and redundancy.</li>
-            <li>The right tools should be chosen for integration and management.</li>
-            <li>Security and cost optimization are critical.</li>
-          </ul>
-        </div>
+              <li>Multi-cloud usage provides flexibility and redundancy.</li>
+              <li>The right tools should be chosen for integration and management.</li>
+              <li>Security and cost optimization are critical.</li>
+            </ul>
+          </div>
       </section>
       
       {/* Article - Content Only */}

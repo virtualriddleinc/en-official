@@ -50,7 +50,7 @@ export default function RovoRevolutionPage() {
           <div className="font-semibold text-blue-700 mb-1">TL;DR - Summary</div>
           <p className="text-gray-700 text-sm leading-relaxed break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
             The next-generation AI-powered enterprise assistant enables teams to quickly and meaningfully access scattered knowledge sources. Documents, notes, chats and task management tools converge at a single point. Sought information can be queried in natural language, summarized and personalized. It also saves time by automating repetitive tasks. It works in compliance with security and privacy principles. It offers an effective solution for teams who want to increase productivity, easily access information and reduce workload.
-          </p>
+        </p>
         </div>
       </section>
       
@@ -99,7 +99,7 @@ export default function RovoRevolutionPage() {
         <p>Artificial intelligence is now entering our lives not only in individual use but also as a business partner that strengthens teams' collective memory. Thanks to this new system, using information, not searching for knowledge, comes to the forefront. Teams learn faster, make better decisions and work more efficiently.</p>
         <p>This solution is not just a technological tool; it's also a step that transforms work culture. If you're still opening dozens of tabs to access knowledge, I'd say give this new AI assistant a chance. Ready to work with you without tiring you out.</p>
       </section>
-      </article>
+    </article>
     </main>
   );
 } 

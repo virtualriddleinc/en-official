@@ -6,18 +6,18 @@ export default function JiraServiceManagement() {
       {/* New Card Section */}
       <section className="max-w-4xl w-full bg-white rounded-2xl shadow-lg px-4 md:px-8 py-6 md:py-8 mx-auto mt-8 mb-4">
         <div className="flex flex-wrap items-center gap-3 mb-4">
-          <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold">Jira Service Management</span>
-          <span className="text-xs text-gray-400">7 April 2024</span>
-          <span className="text-xs text-gray-400">• 8 min read</span>
-        </div>
+            <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold">Jira Service Management</span>
+            <span className="text-xs text-gray-400">7 April 2024</span>
+            <span className="text-xs text-gray-400">• 8 min read</span>
+          </div>
         <h1 className="text-2xl md:text-4xl font-bold text-blue-900 mb-4 break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Transform Your IT Operations Revolutionarily with Jira Service Management</h1>
-        <div className="text-gray-600 text-base mb-4">Author: <span className="font-semibold">Virtual Riddle Blog Team</span></div>
+          <div className="text-gray-600 text-base mb-4">Author: <span className="font-semibold">Virtual Riddle Blog Team</span></div>
         <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-xl break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
-          <div className="font-semibold text-blue-700 mb-1">TL;DR - Summary</div>
+            <div className="font-semibold text-blue-700 mb-1">TL;DR - Summary</div>
           <p className="text-blue-900 text-sm leading-relaxed break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
-            Jira Service Management (JSM) is Atlassian's comprehensive ITSM platform developed for modern IT teams. Automation features reduce manual processes by 60-70%, and AI-powered solution recommendations increase first-call resolution rates by 30-40%. Cloud and Data Center deployment options are suitable for organizations of all sizes, and REST API integration works seamlessly with third-party systems.
-          </p>
-        </div>
+              Jira Service Management (JSM) is Atlassian's comprehensive ITSM platform developed for modern IT teams. Automation features reduce manual processes by 60-70%, and AI-powered solution recommendations increase first-call resolution rates by 30-40%. Cloud and Data Center deployment options are suitable for organizations of all sizes, and REST API integration works seamlessly with third-party systems.
+            </p>
+          </div>
       </section>
       
       {/* Article - Content Only */}

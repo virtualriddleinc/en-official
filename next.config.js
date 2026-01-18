@@ -3,20 +3,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true', // sadece ANALYZE=true ile çalışır
 });
 
-const securityHeaders = [
-  {
-    key: 'Strict-Transport-Security',
-    value: 'max-age=31536000; includeSubDomains; preload'
-  },
-  {
-    key: 'Cross-Origin-Opener-Policy',
-    value: 'same-origin'
-  },
-  {
-    key: 'X-Frame-Options',
-    value: 'DENY'
-  }
-];
+// CSP header'ı artık middleware.ts'de dinamik olarak nonce ile oluşturuluyor
+// Not: CSP, Strict-Transport-Security, Cross-Origin-Opener-Policy ve X-Frame-Options
+// middleware.ts'de dinamik olarak set ediliyor
 
 const nextConfig = {
   output: 'standalone',
@@ -125,15 +114,11 @@ const nextConfig = {
     }
     
     return config;
-  },
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: securityHeaders,
-      },
-    ];
-  },
+  }
+  // Headers artık middleware.ts'de set ediliyor
+  // async headers() {
+  //   return [];
+  // },
 }
 
 module.exports = withBundleAnalyzer(nextConfig) 

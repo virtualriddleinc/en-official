@@ -1,9 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
-import Script from 'next/script'
 import './globals.css'
 import ClientLayout from './ClientLayout'
-import Head from 'next/head'
+import { headers, cookies } from 'next/headers'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -59,7 +58,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'tr_TR',
+    locale: 'en_US',
     url: 'https://virtualriddle.com',
     title: 'Virtual Riddle - Atlassian Consulting and Modern Software Solutions',
     description: 'Expert consulting services for Atlassian tools and modern software solutions',
@@ -83,38 +82,105 @@ export const viewport: Viewport = {
   themeColor: '#004CFF',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  // Middleware'den nonce'u request header'dan al (öncelikli)
+  // Eğer header'da yoksa cookie'den al (fallback)
+  // Bu sayede server-side render ve client-side hydration aynı nonce'u kullanır
+  const headersList = await headers();
+  const cookieStore = await cookies();
+  const nonce = headersList.get('x-nonce') || cookieStore.get('x-nonce')?.value || '';
+  
   return (
-    <html lang="tr" className={inter.className}>
+    <html lang="en" className={inter.className} data-scroll-behavior="smooth">
       <head>
-        <Script id="gtag-consent-default" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){window.dataLayer.push(arguments);}
-            gtag('consent', 'default', {
-              'ad_storage': 'denied',
-              'analytics_storage': 'denied',
-              'ad_user_data': 'denied',
-              'ad_personalization': 'denied',
-              'wait_for_update': 500
-            });
-            gtag('set', 'ads_data_redaction', true);
-          `}
-        </Script>
-        <Script
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=AW-17724325290"
-        />
-        <Script id="google-ads-tag" strategy="afterInteractive">
-          {`
-            gtag('js', new Date());
-            gtag('config', 'AW-17724325290');
-          `}
-        </Script>
+        {/* Google Ads Consent Manager - suppressHydrationWarning ile hydration mismatch'i önle */}
+        {nonce && (
+          <>
+            <script
+              id="google-ads-consent-manager"
+              nonce={nonce}
+              suppressHydrationWarning
+              dangerouslySetInnerHTML={{
+                __html: `
+                  (function () {
+                    if (typeof window === 'undefined') return;
+                    const dataLayer = window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    window.gtag = window.gtag || gtag;
+                    
+                    // Prefer beacon transport to avoid no-cors fetch opaque errors
+                    window.gtag('set', 'transport_type', 'beacon');
+
+                    const applyConsent = (analyticsAllowed, marketingAllowed) => {
+                      gtag('consent', 'update', {
+                        analytics_storage: analyticsAllowed ? 'granted' : 'denied',
+                        ad_storage: marketingAllowed ? 'granted' : 'denied',
+                        ad_user_data: marketingAllowed ? 'granted' : 'denied',
+                        ad_personalization: marketingAllowed ? 'granted' : 'denied'
+                      });
+                    };
+
+                    const readStoredConsent = () => {
+                      try {
+                        const consent = localStorage.getItem('cookie-consent');
+                        const analytics = localStorage.getItem('cookie-analytics');
+                        const marketing = localStorage.getItem('cookie-marketing');
+
+                        const analyticsAllowed = consent === 'all' || (consent === 'custom' && analytics === 'true');
+                        const marketingAllowed = consent === 'all' || (consent === 'custom' && marketing === 'true');
+
+                        return { analyticsAllowed, marketingAllowed };
+                      } catch (error) {
+                        return { analyticsAllowed: false, marketingAllowed: false };
+                      }
+                    };
+
+                    gtag('consent', 'default', {
+                      analytics_storage: 'denied',
+                      ad_storage: 'denied',
+                      ad_user_data: 'denied',
+                      ad_personalization: 'denied',
+                      wait_for_update: 500
+                    });
+                    gtag('set', 'ads_data_redaction', true);
+
+                    const storedConsent = readStoredConsent();
+                    if (storedConsent.analyticsAllowed || storedConsent.marketingAllowed) {
+                      applyConsent(storedConsent.analyticsAllowed, storedConsent.marketingAllowed);
+                    }
+
+                    window.addEventListener('cookie-consent-updated', function (event) {
+                      const detail = event.detail || {};
+                      applyConsent(!!detail.analytics, !!detail.marketing);
+                    });
+                  })();
+                `,
+              }}
+            />
+            <script
+              id="google-ads-script"
+              nonce={nonce}
+              suppressHydrationWarning
+              src="https://www.googletagmanager.com/gtag/js?id=AW-17724325290"
+              async
+            />
+            <script
+              id="google-ads-config"
+              nonce={nonce}
+              suppressHydrationWarning
+              dangerouslySetInnerHTML={{
+                __html: `
+                  gtag('js', new Date());
+                  gtag('config', 'AW-17724325290');
+                `,
+              }}
+            />
+          </>
+        )}
         
         {/* DNS Prefetch for external domains */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -128,21 +194,12 @@ export default function RootLayout({
         
         {/* CSS is automatically loaded by Next.js */}
         
-        {/* Preload critical resources to reduce network dependency chain */}
-        <link rel="preload" href="/contact" as="fetch" crossOrigin="anonymous" />
-        <link rel="preload" href="/free-discovery" as="fetch" crossOrigin="anonymous" />
+        {/* Preload critical resources - KALDIRILDI: Gereksiz preload'lar performansı düşürüyor */}
+        {/* Next.js otomatik olarak kritik kaynakları optimize ediyor */}
         
-        {/* Preload critical images */}
-        <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
-        <link rel="preload" href="/vr-showcase/solutions-1.svg" as="image" type="image/svg+xml" />
-        
-        
-        {/* Preload critical fonts */}
-        <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLvoW5hJNmnEiuXDsMlGDkNCcPbmJQ31fygqt0.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        
-        {/* Critical CSS inline - Aboand the fold styles */}
+        {/* Critical CSS inline - Above the fold styles */}
         <style>{`
-          /* Critical aboand-the-fold styles */
+          /* Critical above-the-fold styles - Optimized for LCP */
           * { 
             box-sizing: border-box; 
           }
@@ -155,7 +212,7 @@ export default function RootLayout({
           body { 
             background: #fff; 
             color: #172B4D; 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans', 'Droid Sans', 'Helandtica Neue', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
@@ -164,12 +221,58 @@ export default function RootLayout({
             -moz-osx-font-smoothing: grayscale;
           }
           
-          /* Hero section critical styles */
+          /* Critical header styles */
+          header {
+            position: fixed;
+            width: 100%;
+            background: #fff;
+            z-index: 50;
+            border-bottom: 1px solid #f3f4f6;
+          }
+          
+          nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+          }
+          
+          .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 5rem;
+          }
+          
+          /* Critical logo styles */
+          .logo {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+          }
+          
+          .logo img {
+            width: auto;
+            height: 3rem;
+          }
+          
+          /* Critical hero section styles */
           .hero-section { 
             background: linear-gradient(90deg, #004BB3, #0052CC, #004BB3);
             min-height: 100vh;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          
+          .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
           }
           
           /* Critical typography */
@@ -177,7 +280,7 @@ export default function RootLayout({
             font-size: 2.75rem; 
             font-weight: bold; 
             color: white; 
-            margin: 0;
+            margin: 0 0 1.5rem 0;
             line-height: 1.1;
             letter-spacing: -0.025em;
           }
@@ -191,11 +294,11 @@ export default function RootLayout({
             letter-spacing: -0.02em;
           }
           
-          /* Critical layout */
-          .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 0 1rem; 
+          .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.5;
           }
           
           /* Critical button styles */
@@ -208,13 +311,72 @@ export default function RootLayout({
             display: inline-block;
             font-weight: 600;
             transition: background-color 0.2s;
+            margin: 0.5rem;
           }
           
-          .btn-primary:ho {
-            background: #004BB3;
+          .btn-primary:hover {
+            background: #f8fafc;
+            color: #003d99;
           }
           
-          /* Loading states */
+          .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 0.875rem 2rem;
+            border: 2px solid white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin: 0.5rem;
+          }
+          
+          .btn-secondary:hover {
+            background: white;
+            color: #004BB3;
+          }
+          
+          /* Critical layout utilities */
+          .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 1rem; 
+          }
+          
+          .text-center {
+            text-align: center;
+          }
+          
+          .flex {
+            display: flex;
+          }
+          
+          .items-center {
+            align-items: center;
+          }
+          
+          .justify-center {
+            justify-content: center;
+          }
+          
+          .space-x-4 > * + * {
+            margin-left: 1rem;
+          }
+          
+          /* Critical responsive */
+          @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .hero-subtitle { font-size: 1.125rem; }
+            .container { padding: 0 0.5rem; }
+            .btn-primary, .btn-secondary {
+              display: block;
+              width: 100%;
+              margin: 0.5rem 0;
+            }
+          }
+          
+          /* Critical loading states */
           .loading-skeleton { 
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); 
             background-size: 200% 100%; 
@@ -226,16 +388,24 @@ export default function RootLayout({
             100% { background-position: -200% 0; } 
           }
           
-          /* Critical responsiand */
-          @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .container { padding: 0 0.5rem; }
+          /* Critical image optimization */
+          img {
+            max-width: 100%;
+            height: auto;
+            loading: lazy;
+          }
+          
+          /* Critical performance optimizations */
+          .gpu-accelerated {
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
           }
         `}</style>
         {/* rel="me" içeren doğrulama linki */}
         <link rel="me" href="https://sosyal.teknofest.app/@virtualriddle" />
         
-        {/* CSS is automatically loaded by Next.js */}
+        {/* CSS will be loaded automatically by Next.js */}
       </head>
       <body className="min-h-screen bg-white">
         <ClientLayout>{children}</ClientLayout>

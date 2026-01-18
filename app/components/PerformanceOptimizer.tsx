@@ -42,13 +42,21 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
 
   useEffect(() => {
     // Defer non-critical CSS loading
+    // NOT: globals.css Next.js tarafından otomatik olarak yüklenir, manuel yükleme gereksiz
+    // Font CSS'i de Next.js font optimization tarafından yüklenir
     const loadNonCriticalCSS = () => {
-      const nonCriticalCSS = [
-        '/_next/static/css/app/globals.css',
-        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
-      ];
+      // Sadece gerçekten gerekli external CSS'leri yükle
+      // globals.css ve font CSS'i Next.js tarafından otomatik yüklenir
+      const nonCriticalCSS: string[] = [];
+      
+      // Eğer external CSS yüklenecekse buraya ekle
+      // nonCriticalCSS.push('https://example.com/external.css');
 
       nonCriticalCSS.forEach((href) => {
+        // CSS zaten yüklenmiş mi kontrol et
+        const existingLink = document.querySelector(`link[href="${href}"]`);
+        if (existingLink) return;
+
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = href;
@@ -67,22 +75,9 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
       window.addEventListener('load', loadNonCriticalCSS);
     }
 
-    // Preload critical resources
-    const preloadLinks = [
-      { href: '/contact', as: 'fetch' },
-      { href: '/free-discovery', as: 'fetch' },
-      { href: '/about', as: 'fetch' },
-      { href: '/manifest.json', as: 'manifest' },
-    ];
-
-    preloadLinks.forEach(({ href, as }) => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.href = href;
-      link.as = as as any;
-      link.crossOrigin = 'anonymous';
-      document.head.appendChild(link);
-    });
+    // Preload critical resources - KALDIRILDI: Gereksiz preload'lar performansı düşürüyor
+    // Next.js otomatik olarak kritik kaynakları optimize ediyor
+    // Route preload'ları Next.js Link component'i tarafından otomatik yapılıyor
 
     // Service Worker registration for caching
     if ('serviceWorker' in navigator) {
@@ -91,36 +86,16 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
           scope: '/',
           updateViaCache: 'none'
         }).then((registration) => {
-          if (process.env.NODE_ENV === 'development') {
-            console.log('SW registered: ', registration);
-          }
+          // Service Worker registered
         }).catch((registrationError) => {
-          if (process.env.NODE_ENV === 'development') {
-            console.log('SW registration failed: ', registrationError);
-          }
+          // Service Worker registration failed
         });
       });
     }
 
-    // Preload critical images
-    const criticalImages = [
-      '/vr-showcase/solutions-1.svg',
-      '/vr-showcase/solutions-2.png',
-      '/vr-showcase/solutions-3.png',
-      '/logo.svg',
-      '/logo-footer.svg'
-    ];
-
-    criticalImages.forEach((src) => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.href = src;
-      link.as = 'image';
-      if (src.endsWith('.svg')) {
-        link.type = 'image/svg+xml';
-      }
-      document.head.appendChild(link);
-    });
+    // Preload critical images - KALDIRILDI: Gereksiz preload'lar performansı düşürüyor
+    // Next.js Image component'i otomatik olarak kritik görselleri optimize ediyor
+    // Sadece gerçekten above-the-fold kritik görselleri preload etmek gerekir
 
     // Cleanup
     return () => {

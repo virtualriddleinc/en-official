@@ -122,6 +122,21 @@ export default function CookieConsent() {
     });
 
     setShowConsent(false);
+
+    if (typeof window !== 'undefined') {
+      try {
+        const detail = {
+          consent,
+          analytics: analyticsAllowed,
+          marketing: marketingAllowed,
+        };
+        window.dispatchEvent(new CustomEvent("cookie-consent-updated", { detail }));
+      } catch (eventError) {
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Error dispatching cookie consent event:', eventError);
+        }
+      }
+    }
   };
 
   const acceptAllCookies = () => {

@@ -15,10 +15,8 @@ const KanbanBoard = dynamic(() => import('./components/KanbanBoard'), {
 export default function Home() {
   return (
     <main>
-      {/* Preload critical resources */}
-      <link rel="preload" href="/app/globals.css" as="style" />
-      <link rel="preload" href="/contact" as="fetch" crossOrigin="anonymous" />
-      <link rel="preload" href="/free-discovery" as="fetch" crossOrigin="anonymous" />
+      {/* Preload critical resources - KALDIRILDI: Gereksiz preload'lar performansı düşürüyor */}
+      {/* Next.js otomatik olarak kritik kaynakları optimize ediyor */}
       
       {/* 1. Hero Section */}
       <section className="relative min-h-screen bg-[#004BB3] overflow-hidden">

@@ -6,20 +6,20 @@ export default function DevOpsTrends2024() {
       {/* New Card Section */}
       <section className="max-w-4xl w-full bg-white rounded-2xl shadow-lg px-4 md:px-8 py-6 md:py-8 mx-auto mt-8 mb-4">
         <div className="flex flex-wrap items-center gap-3 mb-4">
-          <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold">DevOps & Cloud</span>
-          <span className="text-xs text-gray-400">5 March 2024</span>
-          <span className="text-xs text-gray-400">• 6 min read</span>
-        </div>
+            <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold">DevOps & Cloud</span>
+            <span className="text-xs text-gray-400">5 March 2024</span>
+            <span className="text-xs text-gray-400">• 6 min read</span>
+          </div>
         <h1 className="text-2xl md:text-4xl font-bold text-blue-900 mb-4 break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>2024 DevOps Trends</h1>
-        <div className="text-gray-600 text-base mb-4">Author: <span className="font-semibold">Virtual Riddle Blog Team</span></div>
+          <div className="text-gray-600 text-base mb-4">Author: <span className="font-semibold">Virtual Riddle Blog Team</span></div>
         <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-xl break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
-          <div className="font-semibold text-blue-700 mb-1">TL;DR - Summary</div>
+            <div className="font-semibold text-blue-700 mb-1">TL;DR - Summary</div>
           <ul className="list-disc pl-5 text-blue-900 text-sm space-y-1 break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
-            <li>AI-powered DevOps tools are on the rise.</li>
-            <li>GitOps and Platform engineering are becoming mainstream.</li>
-            <li>Automation, security, and cloud-native approaches are prominent.</li>
-          </ul>
-        </div>
+              <li>AI-powered DevOps tools are on the rise.</li>
+              <li>GitOps and Platform engineering are becoming mainstream.</li>
+              <li>Automation, security, and cloud-native approaches are prominent.</li>
+            </ul>
+          </div>
       </section>
       
       {/* Article - Content Only */}

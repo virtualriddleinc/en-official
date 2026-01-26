@@ -885,7 +885,7 @@ export default function ClientLayout({
                 </a>
                 {/* Next - Teknofest Sosyal */}
                 <a href="https://sosyal.teknofest.app/@virtualriddle" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all" aria-label="Visit Virtual Riddle Teknofest Social profile - Our Next social media account">
-                  <svg xmlns="//v6s.cnnturk.com/images/favicon/next-button.svg" width="14" height="14" viewBox="0 0 16 16" fill="none" className="w-8 h-8">
+                  <svg xmlns="//v6s.cnnturk.com/images/favicon/next-button.svg" width="14" height="14" viewBox="0 0 16 16" fill="none" className="w-5 h-5">
                     <path d="M4.77139 0.0125732H0.00012207V15.9997H4.77139V0.0125732Z" fill="currentColor"></path>
                     <path d="M10.2404 15.9871C9.08771 15.9871 8.0582 15.3922 7.67872 14.5067L5.32297 8.38192L2.12354 0H7.77092L11.1035 8.68911L13.9783 15.9871H10.2404Z" fill="currentColor"></path>
                     <path d="M11.354 9.57871C11.271 9.34492 11.2288 9.34462 11.2288 9.09744V0.0131836H16.0001V13.7914C16.0001 14.9291 15.1134 15.8686 13.9785 15.9871L11.354 9.57871Z" fill="currentColor"></path>
@@ -965,12 +965,28 @@ export default function ClientLayout({
             </div>
           </div>
 
-          {/* Footer Bottom */}
+          {/* Payment Methods */}
           <div className="mt-16 pt-8 border-t border-gray-800">
+            <div className="flex flex-col items-center">
+              <h4 className="text-sm font-medium text-gray-400 mb-4">Payment Methods</h4>
+              <div className="flex items-center justify-center w-full">
+                <img 
+                  src="/logo_band_colored.svg" 
+                  alt="Payment methods: Visa, Mastercard, American Express, Troy, iyzico" 
+                  className="h-8 w-auto max-w-full opacity-90 hover:opacity-100 transition-opacity"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Footer Bottom */}
+          <div className="mt-8 pt-8 border-t border-gray-800">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <p className="text-gray-400 text-sm">© 2024 Virtual Riddle. All rights reserved.</p>
               <div className="flex items-center space-x-6">
                 <Link href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</Link>
+                <Link href="/distance-sales-contract" className="text-gray-400 hover:text-white text-sm transition-colors">Distance Sales Contract</Link>
                 <Link href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">Terms of Use</Link>
                 <Link href="/sitemap" className="text-gray-400 hover:text-white text-sm transition-colors">Sitemap</Link>
               </div>

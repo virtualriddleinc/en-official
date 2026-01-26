@@ -127,6 +127,7 @@ export default function SitemapPage() {
     ],
     legal: [
       { title: "Privacy Policy", path: "/privacy" },
+      { title: "Distance Sales Contract", path: "/distance-sales-contract" },
       { title: "Terms of Service", path: "/terms" },
     ],
   };
